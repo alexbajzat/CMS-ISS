@@ -19,7 +19,7 @@ public class AppConfig {
     public DataSource dataSource() throws DataBaseException {
         Properties properties = new Properties();
         MysqlDataSource dataSource = null;
-        InputStream inputStream = AppConfig.class.getResourceAsStream("/mysql_db.properties");
+        InputStream inputStream = AppConfig.class.getResourceAsStream("/mysql_db.config");
         try {
             properties.load(inputStream);
             String check = properties.getProperty("db");
