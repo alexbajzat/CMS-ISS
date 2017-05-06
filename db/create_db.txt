@@ -1,0 +1,578 @@
+-- MySQL dump 10.16  Distrib 10.1.21-MariaDB, for Win32 (AMD64)
+--
+-- Host: localhost    Database: localhost
+-- ------------------------------------------------------
+-- Server version	10.1.21-MariaDB
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `accepted_proposal`
+--
+
+DROP TABLE IF EXISTS `accepted_proposal`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `accepted_proposal` (
+  `id_proposal` int(11) NOT NULL,
+  PRIMARY KEY (`id_proposal`),
+  CONSTRAINT `accepted_proposal_ibfk_1` FOREIGN KEY (`id_proposal`) REFERENCES `proposal` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `accepted_proposal`
+--
+
+LOCK TABLES `accepted_proposal` WRITE;
+/*!40000 ALTER TABLE `accepted_proposal` DISABLE KEYS */;
+INSERT INTO `accepted_proposal` VALUES (1);
+/*!40000 ALTER TABLE `accepted_proposal` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `admin`
+--
+
+DROP TABLE IF EXISTS `admin`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `admin` (
+  `id_user` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id_user`),
+  CONSTRAINT `admin_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user_app` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `admin`
+--
+
+LOCK TABLES `admin` WRITE;
+/*!40000 ALTER TABLE `admin` DISABLE KEYS */;
+INSERT INTO `admin` VALUES (1),(2);
+/*!40000 ALTER TABLE `admin` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `author`
+--
+
+DROP TABLE IF EXISTS `author`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `author` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `affiliation` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `id_user` int(11) DEFAULT NULL,
+  `id_conference_edition` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_a_columns` (`id_user`,`id_conference_edition`),
+  KEY `id_conference_edition` (`id_conference_edition`),
+  CONSTRAINT `author_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user_app` (`id`),
+  CONSTRAINT `author_ibfk_2` FOREIGN KEY (`id_conference_edition`) REFERENCES `conference_edition` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `author`
+--
+
+LOCK TABLES `author` WRITE;
+/*!40000 ALTER TABLE `author` DISABLE KEYS */;
+INSERT INTO `author` VALUES (1,'UBB Matematica-Informatica','andreica_eric@yahoo.com',4,1),(2,'UBB Matematica-Informatica','cameliadaniela97@gmail.com',3,1);
+/*!40000 ALTER TABLE `author` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `author_proposal`
+--
+
+DROP TABLE IF EXISTS `author_proposal`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `author_proposal` (
+  `id_author` int(11) NOT NULL,
+  `id_proposal` int(11) NOT NULL,
+  PRIMARY KEY (`id_author`,`id_proposal`),
+  KEY `id_proposal` (`id_proposal`),
+  CONSTRAINT `author_proposal_ibfk_1` FOREIGN KEY (`id_author`) REFERENCES `author` (`id`),
+  CONSTRAINT `author_proposal_ibfk_2` FOREIGN KEY (`id_proposal`) REFERENCES `proposal` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `author_proposal`
+--
+
+LOCK TABLES `author_proposal` WRITE;
+/*!40000 ALTER TABLE `author_proposal` DISABLE KEYS */;
+INSERT INTO `author_proposal` VALUES (1,1),(1,2),(2,1);
+/*!40000 ALTER TABLE `author_proposal` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `bid_proposal`
+--
+
+DROP TABLE IF EXISTS `bid_proposal`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bid_proposal` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_program_committee_member` int(11) DEFAULT NULL,
+  `id_proposal` int(11) DEFAULT NULL,
+  `bid_result` enum('pleased to review','could review','refuse to review') DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_bid_columns` (`id_program_committee_member`,`id_proposal`),
+  KEY `id_proposal` (`id_proposal`),
+  CONSTRAINT `bid_proposal_ibfk_1` FOREIGN KEY (`id_program_committee_member`) REFERENCES `program_committee_member` (`id`),
+  CONSTRAINT `bid_proposal_ibfk_2` FOREIGN KEY (`id_proposal`) REFERENCES `proposal` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bid_proposal`
+--
+
+LOCK TABLES `bid_proposal` WRITE;
+/*!40000 ALTER TABLE `bid_proposal` DISABLE KEYS */;
+INSERT INTO `bid_proposal` VALUES (3,1,1,'pleased to review'),(4,1,2,'refuse to review');
+/*!40000 ALTER TABLE `bid_proposal` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `conference`
+--
+
+DROP TABLE IF EXISTS `conference`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `conference` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `website` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `conference`
+--
+
+LOCK TABLES `conference` WRITE;
+/*!40000 ALTER TABLE `conference` DISABLE KEYS */;
+INSERT INTO `conference` VALUES (1,'Conferinta Internationala de Informatica','http://szamokt.emt.ro/ro/');
+/*!40000 ALTER TABLE `conference` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `conference_edition`
+--
+
+DROP TABLE IF EXISTS `conference_edition`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `conference_edition` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `conference_start_date` date DEFAULT NULL,
+  `conference_end_date` date DEFAULT NULL,
+  `abstracts_deadline` date DEFAULT NULL,
+  `full_papers_deadline` date DEFAULT NULL,
+  `bidding_deadline` date DEFAULT NULL,
+  `evaluation_ceadline` date DEFAULT NULL,
+  `id_conference` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_conference` (`id_conference`),
+  CONSTRAINT `conference_edition_ibfk_1` FOREIGN KEY (`id_conference`) REFERENCES `conference` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `conference_edition`
+--
+
+LOCK TABLES `conference_edition` WRITE;
+/*!40000 ALTER TABLE `conference_edition` DISABLE KEYS */;
+INSERT INTO `conference_edition` VALUES (1,'Editia I','2017-05-01','2017-05-07','2017-04-02','2017-04-08','2017-04-15','2017-04-29',1);
+/*!40000 ALTER TABLE `conference_edition` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `conference_session`
+--
+
+DROP TABLE IF EXISTS `conference_session`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `conference_session` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_conference_edition` int(11) DEFAULT NULL,
+  `date` date DEFAULT NULL,
+  `am_pm` enum('AM','PM') DEFAULT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_conference_edition` (`id_conference_edition`),
+  CONSTRAINT `conference_session_ibfk_1` FOREIGN KEY (`id_conference_edition`) REFERENCES `conference_edition` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `conference_session`
+--
+
+LOCK TABLES `conference_session` WRITE;
+/*!40000 ALTER TABLE `conference_session` DISABLE KEYS */;
+INSERT INTO `conference_session` VALUES (1,1,'2017-05-01','AM','Algoritmica'),(2,1,'2017-05-01','PM','Structuri de date si algoritmi');
+/*!40000 ALTER TABLE `conference_session` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `evaluate_proposal`
+--
+
+DROP TABLE IF EXISTS `evaluate_proposal`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `evaluate_proposal` (
+  `id_bid` int(11) NOT NULL,
+  `qualifier` enum('strong accept','accept','weak accept','borderline paper','weak reject','reject','strong reject') DEFAULT NULL,
+  `recommendation` varchar(500) DEFAULT NULL,
+  PRIMARY KEY (`id_bid`),
+  CONSTRAINT `evaluate_proposal_ibfk_1` FOREIGN KEY (`id_bid`) REFERENCES `bid_proposal` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `evaluate_proposal`
+--
+
+LOCK TABLES `evaluate_proposal` WRITE;
+/*!40000 ALTER TABLE `evaluate_proposal` DISABLE KEYS */;
+INSERT INTO `evaluate_proposal` VALUES (3,'accept','As adauga cate ceva si despre complexitate si o comparatie cu alti algoritmi.');
+/*!40000 ALTER TABLE `evaluate_proposal` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `keyword`
+--
+
+DROP TABLE IF EXISTS `keyword`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `keyword` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `keyword`
+--
+
+LOCK TABLES `keyword` WRITE;
+/*!40000 ALTER TABLE `keyword` DISABLE KEYS */;
+INSERT INTO `keyword` VALUES (1,'algoritm'),(2,'performanta');
+/*!40000 ALTER TABLE `keyword` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `listen`
+--
+
+DROP TABLE IF EXISTS `listen`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `listen` (
+  `id_user` int(11) NOT NULL,
+  `id_conference_session` int(11) NOT NULL,
+  PRIMARY KEY (`id_user`,`id_conference_session`),
+  KEY `id_conference_session` (`id_conference_session`),
+  CONSTRAINT `listen_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user_app` (`id`),
+  CONSTRAINT `listen_ibfk_2` FOREIGN KEY (`id_conference_session`) REFERENCES `conference_session` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `listen`
+--
+
+LOCK TABLES `listen` WRITE;
+/*!40000 ALTER TABLE `listen` DISABLE KEYS */;
+INSERT INTO `listen` VALUES (2,2);
+/*!40000 ALTER TABLE `listen` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `presentation`
+--
+
+DROP TABLE IF EXISTS `presentation`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `presentation` (
+  `id_proposal` int(11) NOT NULL,
+  `id_author` int(11) DEFAULT NULL,
+  `id_conference_session` int(11) DEFAULT NULL,
+  `start_hour` time DEFAULT NULL,
+  PRIMARY KEY (`id_proposal`),
+  KEY `id_author` (`id_author`),
+  KEY `id_conference_session` (`id_conference_session`),
+  CONSTRAINT `presentation_ibfk_1` FOREIGN KEY (`id_proposal`) REFERENCES `accepted_proposal` (`id_proposal`),
+  CONSTRAINT `presentation_ibfk_2` FOREIGN KEY (`id_author`) REFERENCES `author` (`id`),
+  CONSTRAINT `presentation_ibfk_3` FOREIGN KEY (`id_conference_session`) REFERENCES `conference_session` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `presentation`
+--
+
+LOCK TABLES `presentation` WRITE;
+/*!40000 ALTER TABLE `presentation` DISABLE KEYS */;
+INSERT INTO `presentation` VALUES (1,1,2,'08:30:00');
+/*!40000 ALTER TABLE `presentation` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `program_committee_member`
+--
+
+DROP TABLE IF EXISTS `program_committee_member`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `program_committee_member` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `affiliation` varchar(50) DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `webpage` varchar(100) DEFAULT NULL,
+  `id_user` int(11) DEFAULT NULL,
+  `id_conference_edition` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_pc_columns` (`id_user`,`id_conference_edition`),
+  KEY `id_conference_edition` (`id_conference_edition`),
+  CONSTRAINT `program_committee_member_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user_app` (`id`),
+  CONSTRAINT `program_committee_member_ibfk_2` FOREIGN KEY (`id_conference_edition`) REFERENCES `conference_edition` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `program_committee_member`
+--
+
+LOCK TABLES `program_committee_member` WRITE;
+/*!40000 ALTER TABLE `program_committee_member` DISABLE KEYS */;
+INSERT INTO `program_committee_member` VALUES (1,'UBB Matematica-Informatica','adam97corina@gmail.com','http://www.scs.ubbcluj.ro/~acir2000/',1,1);
+/*!40000 ALTER TABLE `program_committee_member` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `proposal`
+--
+
+DROP TABLE IF EXISTS `proposal`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `proposal` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(100) NOT NULL,
+  `abstract` varchar(100) DEFAULT NULL,
+  `full_paper` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `proposal`
+--
+
+LOCK TABLES `proposal` WRITE;
+/*!40000 ALTER TABLE `proposal` DISABLE KEYS */;
+INSERT INTO `proposal` VALUES (1,'Algoritmul Bellman-Ford','/abstracts/AlgoritmulBellmanFord.txt','/papers/AlgoritmulBellmanFord.txt'),(2,'Coada cu prioritati','/abstracts/CoadaCuPrioritati.txt','/papers/CoadaCuPrioritati.txt');
+/*!40000 ALTER TABLE `proposal` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `proposal_keyword`
+--
+
+DROP TABLE IF EXISTS `proposal_keyword`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `proposal_keyword` (
+  `id_proposal` int(11) NOT NULL,
+  `id_keyword` int(11) NOT NULL,
+  PRIMARY KEY (`id_proposal`,`id_keyword`),
+  KEY `id_keyword` (`id_keyword`),
+  CONSTRAINT `proposal_keyword_ibfk_1` FOREIGN KEY (`id_proposal`) REFERENCES `proposal` (`id`),
+  CONSTRAINT `proposal_keyword_ibfk_2` FOREIGN KEY (`id_keyword`) REFERENCES `keyword` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `proposal_keyword`
+--
+
+LOCK TABLES `proposal_keyword` WRITE;
+/*!40000 ALTER TABLE `proposal_keyword` DISABLE KEYS */;
+INSERT INTO `proposal_keyword` VALUES (1,1),(2,2);
+/*!40000 ALTER TABLE `proposal_keyword` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `proposal_topic`
+--
+
+DROP TABLE IF EXISTS `proposal_topic`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `proposal_topic` (
+  `id_proposal` int(11) NOT NULL,
+  `id_topic` int(11) NOT NULL,
+  PRIMARY KEY (`id_proposal`,`id_topic`),
+  KEY `id_topic` (`id_topic`),
+  CONSTRAINT `proposal_topic_ibfk_1` FOREIGN KEY (`id_proposal`) REFERENCES `proposal` (`id`),
+  CONSTRAINT `proposal_topic_ibfk_2` FOREIGN KEY (`id_topic`) REFERENCES `topic` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `proposal_topic`
+--
+
+LOCK TABLES `proposal_topic` WRITE;
+/*!40000 ALTER TABLE `proposal_topic` DISABLE KEYS */;
+INSERT INTO `proposal_topic` VALUES (2,1);
+/*!40000 ALTER TABLE `proposal_topic` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `session_chair`
+--
+
+DROP TABLE IF EXISTS `session_chair`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `session_chair` (
+  `id_program_committee_member` int(11) NOT NULL,
+  `id_conference_session` int(11) NOT NULL,
+  PRIMARY KEY (`id_program_committee_member`,`id_conference_session`),
+  KEY `id_conference_session` (`id_conference_session`),
+  CONSTRAINT `session_chair_ibfk_1` FOREIGN KEY (`id_program_committee_member`) REFERENCES `program_committee_member` (`id`),
+  CONSTRAINT `session_chair_ibfk_2` FOREIGN KEY (`id_conference_session`) REFERENCES `conference_session` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `session_chair`
+--
+
+LOCK TABLES `session_chair` WRITE;
+/*!40000 ALTER TABLE `session_chair` DISABLE KEYS */;
+INSERT INTO `session_chair` VALUES (1,1),(1,2);
+/*!40000 ALTER TABLE `session_chair` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `steering_committee_member`
+--
+
+DROP TABLE IF EXISTS `steering_committee_member`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `steering_committee_member` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `rank` enum('normal','chair','co-chair') DEFAULT NULL,
+  `id_user` int(11) DEFAULT NULL,
+  `id_conference_edition` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_sc_columns` (`id_user`,`id_conference_edition`),
+  KEY `id_conference_edition` (`id_conference_edition`),
+  CONSTRAINT `steering_committee_member_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user_app` (`id`),
+  CONSTRAINT `steering_committee_member_ibfk_2` FOREIGN KEY (`id_conference_edition`) REFERENCES `conference_edition` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `steering_committee_member`
+--
+
+LOCK TABLES `steering_committee_member` WRITE;
+/*!40000 ALTER TABLE `steering_committee_member` DISABLE KEYS */;
+INSERT INTO `steering_committee_member` VALUES (1,'chair',2,1);
+/*!40000 ALTER TABLE `steering_committee_member` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `topic`
+--
+
+DROP TABLE IF EXISTS `topic`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `topic` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `topic`
+--
+
+LOCK TABLES `topic` WRITE;
+/*!40000 ALTER TABLE `topic` DISABLE KEYS */;
+INSERT INTO `topic` VALUES (1,'structuri de date');
+/*!40000 ALTER TABLE `topic` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `user_app`
+--
+
+DROP TABLE IF EXISTS `user_app`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `user_app` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `username` varchar(20) NOT NULL,
+  `password` varchar(20) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_user_columns` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user_app`
+--
+
+LOCK TABLES `user_app` WRITE;
+/*!40000 ALTER TABLE `user_app` DISABLE KEYS */;
+INSERT INTO `user_app` VALUES (1,'Adam Corina','adamcorina','1234'),(2,'Bajzat Alexandru','bajzatalex','1234'),(3,'Crisan Camelia','crisancamelia','1234'),(4,'Andreica Eric','andreicaeric','1234');
+/*!40000 ALTER TABLE `user_app` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2017-05-06 20:20:08
