@@ -4,6 +4,7 @@ import com.mysql.cj.jdbc.MysqlDataSource;
 import exception.DataBaseException;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
 import java.io.IOException;
@@ -16,7 +17,7 @@ import java.util.Properties;
 @Configuration
 public class AppConfig {
     @Bean
-    public DataSource dataSource() throws DataBaseException {
+    public DataSource dataSource() {
         Properties properties = new Properties();
         MysqlDataSource dataSource = null;
         InputStream inputStream = AppConfig.class.getResourceAsStream("/mysql_db.config");
@@ -32,5 +33,14 @@ public class AppConfig {
             throw new DataBaseException("Cannot read db properties!" + e);
         }
         return dataSource;
+    }
+
+    @Bean
+    public JdbcTemplate jdbcTemplate() {
+        try {
+            return new JdbcTemplate(dataSource());
+        } catch (DataBaseException e) {
+            throw new DataBaseException("Cannot create jdbcTemplate!" + e);
+        }
     }
 }
