@@ -6,7 +6,8 @@ package view.controllers;
 public class TestController extends BaseController {
 
     public void start() {
-        showDialog(getData().get("info").toString(), "Checheraut alea alea");
+        String info = getData().get("info").toString();
+        showDialog(info, "Checheraut alea alea");
     }
 
 }
