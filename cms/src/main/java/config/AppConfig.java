@@ -5,6 +5,7 @@ import exception.DataBaseException;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
+import repository.mysql_db.UserRepositoryDB;
 
 import javax.sql.DataSource;
 import java.io.IOException;
@@ -42,5 +43,10 @@ public class AppConfig {
         } catch (DataBaseException e) {
             throw new DataBaseException("Cannot create jdbcTemplate!" + e);
         }
+    }
+
+    @Bean
+    public UserRepositoryDB userRepositoryDB(){
+        return new UserRepositoryDB();
     }
 }
