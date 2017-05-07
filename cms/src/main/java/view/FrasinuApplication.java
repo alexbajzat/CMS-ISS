@@ -14,7 +14,7 @@ import java.util.HashMap;
 /**
  * Created by Paul on 5/7/17.
  */
-public class Frapplication extends Application {
+public class FrasinuApplication extends Application {
 
     private static Stage primaryStage;
 
@@ -46,7 +46,7 @@ public class Frapplication extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Frapplication.primaryStage = primaryStage;
+        FrasinuApplication.primaryStage = primaryStage;
         changeScreen(Screen.ABOUT);
     }
 }
