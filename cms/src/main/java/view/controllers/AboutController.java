@@ -3,7 +3,7 @@ package view.controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import view.Frapplication;
+import view.FrasinuApplication;
 import view.Screen;
 
 import java.util.HashMap;
@@ -19,6 +19,6 @@ public class AboutController extends BaseController {
     public void magicClicked(ActionEvent actionEvent) {
         HashMap<String, Object> data = new HashMap<>();
         data.put("info", "Passing info between screens like a boss");
-        Frapplication.changeScreen(Screen.TEST, data);
+        FrasinuApplication.changeScreen(Screen.TEST, data);
     }
 }
