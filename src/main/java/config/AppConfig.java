@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
 import repository.mysql_db.UserRepositoryDB;
+import service.UserService;
 
 import javax.sql.DataSource;
 import java.io.IOException;
@@ -46,7 +47,12 @@ public class AppConfig {
     }
 
     @Bean
-    public UserRepositoryDB userRepositoryDB(){
+    public UserRepositoryDB userRepositoryDB() {
         return new UserRepositoryDB();
+    }
+
+    @Bean
+    public UserService userService() {
+        return new UserService();
     }
 }
