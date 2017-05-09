@@ -8,8 +8,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="background" stylesheets="@tbl.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="background" stylesheets="@stylelayout.css" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <TableView editable="true" layoutX="-5.0" layoutY="35.0" prefHeight="314.0" prefWidth="606.0">
         <columns>
@@ -21,12 +20,11 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Button layoutX="103.0" layoutY="349.0" mnemonicParsing="false" text="Sign up" />
       <MenuBar prefHeight="35.0" prefWidth="606.0">
         <menus>
           <Menu mnemonicParsing="false" text="History">
             <items>
-              <MenuItem mnemonicParsing="false" text="Vizualizare Istoric" />
+              <MenuItem mnemonicParsing="false" text="View historic" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
@@ -34,9 +32,8 @@
               <MenuItem mnemonicParsing="false" text="About" />
             </items>
           </Menu>
-            <Menu mnemonicParsing="false" text="Exit" />
         </menus>
       </MenuBar>
-      <Button layoutX="26.0" layoutY="349.0" mnemonicParsing="false" text="Log in" />
+      <Button layoutX="197.0" layoutY="349.0" mnemonicParsing="false" text="Conference informations" />
    </children>
 </AnchorPane>
