@@ -5,7 +5,10 @@ package view;
  */
 public enum Screen {
     ABOUT("about.fxml", "About this app"),
-    TEST("test.fxml", "Test");
+    TEST("test.fxml", "Test"),
+    LOGIN("login.fxml", "Login"),
+    REGISTER("register.fxml", "Register"),
+    CONFERENCE("conference.fxml", "Conference");
 
     private final String name;
     private final String title;

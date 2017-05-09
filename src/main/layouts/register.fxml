@@ -9,7 +9,8 @@
 <?import javafx.scene.layout.RowConstraints?>
 
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="background" stylesheets="@tbl.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<?import javafx.scene.control.Button?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="background" stylesheets="@tbl.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.controllers.RegisterController">
    <children>
       <GridPane layoutX="169.0" layoutY="91.0" prefHeight="183.0" prefWidth="261.0">
         <columnConstraints>
@@ -24,7 +25,9 @@
          <children>
             <Label text="Username:" />
             <Label text="Password:" GridPane.rowIndex="1" />
-            <Label text="Retype password:" GridPane.rowIndex="2" />
+             <Label text="Retype password:" GridPane.rowIndex="2" />
+             <Button text="Back to login" GridPane.rowIndex="3" onAction="#goToLogin"/>
+             <Button text="Register" GridPane.rowIndex="4" />
             <TextField GridPane.columnIndex="1" />
             <PasswordField GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <PasswordField GridPane.columnIndex="1" GridPane.rowIndex="2" />
