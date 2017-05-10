@@ -35,6 +35,9 @@ public class FrasinuApplication extends Application {
             FileInputStream fxmlStream = new FileInputStream(fxmlDocPath);
             Parent root = loader.load(fxmlStream);
             BaseController baseController = loader.getController();
+            if (baseController == null) {
+                throw new IllegalArgumentException("The " + name + " layout doesn't have a controller!");
+            }
             baseController.setData(data);
             baseController.start();
             return new Scene(root);
@@ -47,6 +50,6 @@ public class FrasinuApplication extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         FrasinuApplication.primaryStage = primaryStage;
-        changeScreen(Screen.ABOUT);
+        changeScreen(Screen.LOGIN);
     }
 }
