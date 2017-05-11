@@ -35,12 +35,12 @@ public class FrasinuApplication extends Application {
             InputStream fxmlStream = FrasinuApplication.class.getResourceAsStream("/layouts/" + name);
 
             Parent root = loader.load(fxmlStream);
-//            BaseController baseController = loader.getController();
-//            if (baseController == null) {
-//                throw new IllegalArgumentException("The " + name + " layout doesn't have a controller!");
-//            }
-//            baseController.setData(data);
-//            baseController.start();
+            BaseController baseController = loader.getController();
+            if (baseController == null) {
+                throw new IllegalArgumentException("The " + name + " layout doesn't have a controller!");
+            }
+            baseController.setData(data);
+            baseController.start();
             return new Scene(root);
         } catch (IOException e) {
             e.printStackTrace();
