@@ -9,6 +9,7 @@ import view.controllers.BaseController;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 
 /**
@@ -31,15 +32,15 @@ public class FrasinuApplication extends Application {
     private static Scene createSceneFromFXML(String name, HashMap<String, Object> data) {
         try {
             FXMLLoader loader = new FXMLLoader();
-            String fxmlDocPath = "src/main/layouts/" + name;
-            FileInputStream fxmlStream = new FileInputStream(fxmlDocPath);
+            InputStream fxmlStream = FrasinuApplication.class.getResourceAsStream("/layouts/" + name);
+
             Parent root = loader.load(fxmlStream);
-            BaseController baseController = loader.getController();
-            if (baseController == null) {
-                throw new IllegalArgumentException("The " + name + " layout doesn't have a controller!");
-            }
-            baseController.setData(data);
-            baseController.start();
+//            BaseController baseController = loader.getController();
+//            if (baseController == null) {
+//                throw new IllegalArgumentException("The " + name + " layout doesn't have a controller!");
+//            }
+//            baseController.setData(data);
+//            baseController.start();
             return new Scene(root);
         } catch (IOException e) {
             e.printStackTrace();
