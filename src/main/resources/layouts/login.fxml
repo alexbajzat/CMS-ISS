@@ -28,10 +28,10 @@
             <PasswordField GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
-      <HBox layoutX="108.0" layoutY="153.0" prefHeight="37.0" prefWidth="153.0">
+      <HBox layoutX="77.0" layoutY="153.0" prefHeight="37.0" prefWidth="276.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#goToRegister" text="Sign up" />
-            <Button mnemonicParsing="false" text="Log in" />
+            <Button mnemonicParsing="false" onAction="#goToRegister" prefHeight="37.0" prefWidth="101.0" text="Sign up" />
+            <Button mnemonicParsing="false" prefHeight="37.0" prefWidth="95.0" text="Log in" />
          </children>
       </HBox>
       <Button layoutX="-64.0" layoutY="-54.0" mnemonicParsing="false" text="Button" />

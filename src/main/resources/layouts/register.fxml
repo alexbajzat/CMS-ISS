@@ -38,8 +38,8 @@
         <Label layoutX="-59.0" layoutY="50.0" text="Label" />
         <HBox layoutX="14.0" layoutY="200.0" prefHeight="37.0" prefWidth="261.0">
             <children>
-                <Button text="Register" />
-                <Button onAction="#goToLogin" text="Back to login" />
+                <Button prefHeight="37.0" prefWidth="98.0" text="Register" />
+                <Button onAction="#goToLogin" prefHeight="37.0" prefWidth="137.0" text="Back to login" />
             </children>
         </HBox>
     </children>
