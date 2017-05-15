@@ -8,12 +8,14 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 /**
  * Created by Ericqw on 15.05.2017.
  */
+@Repository
 public class AuthorRepository implements IAuthorRepository {
     private final SessionFactory factory;
 
