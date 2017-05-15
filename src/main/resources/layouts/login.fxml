@@ -10,9 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane fx:controller="view.controllers.LoginController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-            prefHeight="238.0" prefWidth="390.0" styleClass="background" stylesheets="@/layouts/stylelayout.css"
-            xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="238.0" prefWidth="390.0" styleClass="background" stylesheets="@/layouts/stylelayout.css" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.controllers.LoginController">
    <children>
       <GridPane layoutX="74.0" layoutY="43.0" prefHeight="104.0" prefWidth="230.0">
         <columnConstraints>
@@ -30,12 +28,10 @@
             <PasswordField GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
-      <HBox layoutX="71.0" layoutY="153.0" prefHeight="71.0" prefWidth="239.0">
+      <HBox layoutX="77.0" layoutY="153.0" prefHeight="37.0" prefWidth="276.0">
          <children>
-            <Button mnemonicParsing="false" text="Sign up"
-                  onAction="#goToRegister"  />
-            <Button mnemonicParsing="false" text="Log in" />
-            <Button mnemonicParsing="false" text="Cancel" />
+            <Button mnemonicParsing="false" onAction="#goToRegister" prefHeight="37.0" prefWidth="101.0" text="Sign up" />
+            <Button mnemonicParsing="false" prefHeight="37.0" prefWidth="95.0" text="Log in" />
          </children>
       </HBox>
       <Button layoutX="-64.0" layoutY="-54.0" mnemonicParsing="false" text="Button" />
