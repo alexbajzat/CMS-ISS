@@ -7,10 +7,14 @@ import com.frasinu.service.service_requests.AddAuthorRequest;
 import com.frasinu.service.service_requests.DeleteAuthorRequest;
 import com.frasinu.service.service_requests.UpdateAuthorRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * Created by Ericqw on 15.05.2017.
  */
+@Service
 public class AuthorService implements IAuthorService {
     private AuthorRepository authorRepository;
     @Autowired
@@ -48,5 +52,10 @@ public class AuthorService implements IAuthorService {
                 .build();
 
         return authorRepository.update(author);
+    }
+
+    @Override
+    public List<Author> getAuthors() {
+        return authorRepository.getAll();
     }
 }

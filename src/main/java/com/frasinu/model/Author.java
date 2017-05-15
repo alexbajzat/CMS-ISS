@@ -19,6 +19,12 @@ public class Author {
     private final String email;
 
 
+    public Author(){
+        this.id = 0;
+        this.email = "";
+        this.affiliation = "";
+    }
+
     public static AuthorBuilder builder() {
         return new AuthorBuilder();
     }
