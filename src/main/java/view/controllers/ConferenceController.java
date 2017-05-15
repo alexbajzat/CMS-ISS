@@ -1,7 +1,7 @@
 package view.controllers;
 
 /**
- * Created by Paul on 5/9/17.
+ * Created by Ericqw on 15.05.2017.
  */
 public class ConferenceController extends BaseController{
 }
