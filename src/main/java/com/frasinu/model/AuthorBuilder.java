@@ -15,7 +15,7 @@ public class AuthorBuilder {
         return new Author(id, affiliation, email);
     }
 
-    AuthorBuilder setId(Integer id) {
+    public AuthorBuilder setId(Integer id) {
         this.id = id;
         return this;
     }
