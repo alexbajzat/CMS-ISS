@@ -19,6 +19,13 @@ public class User {
     @Column(name = "password")
     private final String password;
 
+    public User(){
+        this.id = 0;
+        this.name = "";
+        this.username = "";
+        this.password = "";
+    }
+
     public static UserBuilder builder() {
         return new UserBuilder();
     }
@@ -44,5 +51,15 @@ public class User {
 
     public String getPassword() {
         return password;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 }

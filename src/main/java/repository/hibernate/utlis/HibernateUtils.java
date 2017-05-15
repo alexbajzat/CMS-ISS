@@ -1,4 +1,4 @@
-package repository.hibernate;
+package repository.hibernate.utlis;
 
 import model.User;
 import org.hibernate.SessionFactory;

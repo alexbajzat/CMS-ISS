@@ -5,6 +5,7 @@ import exception.DataBaseException;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
+import repository.hibernate.implementation.UserRepositoryHibernate;
 import repository.mysql_db.UserRepositoryDB;
 import service.UserService;
 
@@ -55,4 +56,7 @@ public class AppConfig {
     public UserService userService() {
         return new UserService();
     }
+
+    @Bean
+    public UserRepositoryHibernate userRepositoryHibernate(){return new UserRepositoryHibernate();}
 }
