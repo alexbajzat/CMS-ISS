@@ -17,7 +17,7 @@ public class LoginController extends BaseController {
 
     // autowired with setter because FXML`s controllers must have default no-args constructor
     @Autowired
-    public void  setUserService(UserService userService) {
+    public void setUserService(UserService userService) {
         this.userService = userService;
     }
 
