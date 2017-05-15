@@ -1,9 +1,12 @@
 package com.frasinu.view.controllers;
 
+import com.frasinu.exception.LoginException;
 import com.frasinu.service.UserService;
+import com.frasinu.service.service_requests.LoginUserRequest;
 import javafx.event.ActionEvent;
 import com.frasinu.view.FrasinuApplication;
 import com.frasinu.view.Screen;
+import javafx.scene.control.Label;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -13,9 +16,11 @@ import org.springframework.stereotype.Controller;
 
 @Controller
 public class LoginController extends BaseController {
+    public Label username;
+    public Label password;
+
     private UserService userService;
 
-    // autowired with setter because FXML`s controllers must have default no-args constructor
     @Autowired
     public void setUserService(UserService userService) {
         this.userService = userService;
@@ -23,5 +28,16 @@ public class LoginController extends BaseController {
 
     public void goToRegister(ActionEvent actionEvent) {
         FrasinuApplication.changeScreen(Screen.REGISTER);
+    }
+
+    public void login(ActionEvent actionEvent) {
+        // TODO fix userService, currently is null
+//        try {
+//            userService.checkLogin(new LoginUserRequest(username.getText(), username.getText()));
+//            showDialog("Logged in with success!", "Great!");
+//            FrasinuApplication.changeScreen(Screen.CONFERENCES);
+//        } catch (LoginException e) {
+//            showDialog("Invalid login!", "Ooops!");
+//        }
     }
 }

@@ -1,6 +1,7 @@
 package com.frasinu.service;
 
 import com.frasinu.exception.InexistentException;
+import com.frasinu.exception.LoginException;
 import com.frasinu.model.User;
 import com.frasinu.repository.mysql_db.UserRepository;
 import com.frasinu.service.service_requests.LoginUserRequest;
@@ -63,7 +64,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public void checkLogin(LoginUserRequest loginUserRequest) {
+    public void checkLogin(LoginUserRequest loginUserRequest) throws LoginException {
         //todo if username and password mismatch , throw a LoginException
         // todo hash the password with md5 , hardcode the salt
         //todo create a LoginException (Exception not Runtime)
