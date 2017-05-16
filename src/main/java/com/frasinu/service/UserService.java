@@ -65,16 +65,8 @@ public class UserService implements IUserService {
 
     @Override
     public void checkLogin(LoginUserRequest loginUserRequest) throws LoginException {
-        String username = loginUserRequest.getUsername();
-        String password = loginUserRequest.getPassword();
-
-        try {
-            User user = userRepositoryDB.findByUsername(username);
-            if (!user.getPassword().equals(password))
-                throw new LoginException("The password is incorrect");
-        }catch(InexistentException e){
-            throw new LoginException("The username is incorrect");
-        }
+        //todo if username and password mismatch , throw a LoginException
         // todo hash the password with md5 , hardcode the salt
+        //todo create a LoginException (Exception not Runtime)
     }
 }

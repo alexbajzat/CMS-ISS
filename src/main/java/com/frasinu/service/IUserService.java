@@ -1,5 +1,6 @@
 package com.frasinu.service;
 
+import com.frasinu.exception.LoginException;
 import com.frasinu.model.User;
 import com.frasinu.service.service_requests.LoginUserRequest;
 import com.frasinu.service.service_requests.RegisterUserRequest;
@@ -16,5 +17,5 @@ public interface IUserService {
 
     User updateUser(UpdateUserRequest updateUserRequest);
 
-    void checkLogin(LoginUserRequest loginUserRequest);
+    void checkLogin(LoginUserRequest loginUserRequest) throws LoginException;
 }

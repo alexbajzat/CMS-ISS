@@ -8,35 +8,36 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-            prefHeight="400.0" prefWidth="600.0" styleClass="background" stylesheets="@/layouts/stylelayout.css"
-            fx:controller="view.controllers.ConferenceController"
-            xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <TableView editable="true" layoutX="-5.0" layoutY="35.0" prefHeight="314.0" prefWidth="606.0">
-        <columns>
-          <TableColumn prefWidth="326.0" resizable="false" text="Conference Name" />
-          <TableColumn prefWidth="127.0" resizable="false" text="Edition" />
-            <TableColumn prefWidth="142.0" resizable="false" text="Date" />
-        </columns>
-         <columnResizePolicy>
-            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-         </columnResizePolicy>
-      </TableView>
-      <MenuBar prefHeight="35.0" prefWidth="606.0">
-        <menus>
-          <Menu mnemonicParsing="false" text="History">
-            <items>
-              <MenuItem mnemonicParsing="false" text="View historic" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
-      <Button layoutX="197.0" layoutY="349.0" mnemonicParsing="false" text="Conference informations" />
-   </children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+            prefWidth="600.0" styleClass="background"  stylesheets="@/layouts/stylelayout.css"
+            xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.frasinu.view.controllers.ConferencesController">
+    <children>
+        <TableView editable="true" layoutX="-5.0" layoutY="35.0" prefHeight="314.0" prefWidth="606.0">
+            <columns>
+                <TableColumn prefWidth="245.0" resizable="false" text="Conference Name"/>
+                <TableColumn prefWidth="98.0" resizable="false" text="Edition"/>
+                <TableColumn prefWidth="131.0" resizable="false" text="Start Date"/>
+                <TableColumn prefWidth="180.0" text="End Date"/>
+            </columns>
+            <columnResizePolicy>
+                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+            </columnResizePolicy>
+        </TableView>
+        <MenuBar prefHeight="35.0" prefWidth="606.0">
+            <menus>
+                <Menu mnemonicParsing="false" text="History">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="View historic"/>
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="About"/>
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <Button layoutX="228.0" layoutY="349.0" mnemonicParsing="false" text="Conference info"/>
+    </children>
 </AnchorPane>

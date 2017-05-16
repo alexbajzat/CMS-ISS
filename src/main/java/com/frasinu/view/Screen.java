@@ -8,7 +8,8 @@ public enum Screen {
     TEST("test.fxml", "Test"),
     LOGIN("login.fxml", "Login"),
     REGISTER("register.fxml", "Register"),
-    CONFERENCE("conferences.fxml", "Conference");
+    CONFERENCE("conference.fxml", "Conference"),
+    CONFERENCES("conferences.fxml", "Conferences");
 
     private final String name;
     private final String title;

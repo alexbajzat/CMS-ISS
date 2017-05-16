@@ -1,10 +1,10 @@
 package com.frasinu.exception;
 
 /**
- * Created by cory_ on 16-May-17.
+ * Created by bjz on 5/5/2017.
  */
-public class LoginException extends RuntimeException {
-    public LoginException(String message) {
-        super(message);
+public class LoginException extends Exception {
+    public LoginException() {
+        super("Invalid login!");
     }
 }
