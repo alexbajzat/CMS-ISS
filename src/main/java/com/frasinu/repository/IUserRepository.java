@@ -18,4 +18,6 @@ public interface IUserRepository {
     List<User> getAll();
 
     User findById(int id) throws InexistentException;
+
+    User findByUsername(String username) throws InexistentException;
 }

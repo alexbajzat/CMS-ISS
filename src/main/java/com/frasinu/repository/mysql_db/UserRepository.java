@@ -121,4 +121,28 @@ public class UserRepository implements IUserRepository {
         }
         return user;
     }
+
+    @Override
+    public User findByUsername(String username){
+        Session session = factory.openSession();
+
+        List<User> users=null;
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            users = session.createQuery("from User where username = ?", User.class)
+                    .setParameter(0, username)
+                    .list();
+            if(users.size()==0)
+                throw new InexistentException("User cannot be found!");
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) tx.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return users.get(0);
+    }
+
 }

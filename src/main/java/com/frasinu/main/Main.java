@@ -23,6 +23,9 @@ public class Main {
                 .setUsername("dadsa")
                 .setName("sdasd")
                 .build());
+        userRepository.findByUsername(("dadsa"));
         userRepository.delete(user.getId());
+
+
     }
 }
