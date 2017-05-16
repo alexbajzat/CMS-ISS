@@ -2,7 +2,8 @@ package com.frasinu.repository.mysql_db;
 
 import com.frasinu.exception.InexistentException;
 import com.frasinu.model.Conference;
-import com.frasinu.model.User;
+import com.frasinu.model.ConferenceEdition;
+import com.frasinu.repository.IConferenceEditionRepository;
 import com.frasinu.repository.IConferenceRepository;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -17,21 +18,21 @@ import java.util.List;
  * Created by cory_ on 16-May-17.
  */
 @Repository
-public class ConferenceRepository implements IConferenceRepository {
+public class ConferenceEditionRepository implements IConferenceEditionRepository {
     private final SessionFactory factory;
 
     @Autowired
-    public ConferenceRepository(SessionFactory sessionFactory) {
+    public ConferenceEditionRepository(SessionFactory sessionFactory) {
         factory = sessionFactory;
     }
 
     @Override
-    public Conference create(Conference conference) {
+    public ConferenceEdition create(ConferenceEdition conferenceEdition) {
         Session session = factory.openSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            session.save(conference);
+            session.save(conferenceEdition);
             tx.commit();
         } catch (HibernateException e) {
             if (tx != null) tx.rollback();
@@ -39,7 +40,7 @@ public class ConferenceRepository implements IConferenceRepository {
         } finally {
             session.close();
         }
-        return conference;
+        return conferenceEdition;
     }
 
     @Override
@@ -49,11 +50,11 @@ public class ConferenceRepository implements IConferenceRepository {
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            Conference conference= (Conference) session.get(Conference.class, id);
-            if (conference.getId() == null)
-                throw new InexistentException("Conference cannot be found!");
+            ConferenceEdition conferenceEdition= (ConferenceEdition) session.get(ConferenceEdition.class, id);
+            if (conferenceEdition.getId() == null)
+                throw new InexistentException("Conference edition cannot be found!");
 
-            session.delete(conference);
+            session.delete(conferenceEdition);
             tx.commit();
         } catch (HibernateException e) {
             if (tx != null) tx.rollback();
@@ -64,15 +65,15 @@ public class ConferenceRepository implements IConferenceRepository {
     }
 
     @Override
-    public Conference update(Conference conf) throws InexistentException {
+    public ConferenceEdition update(ConferenceEdition conferenceEdition) throws InexistentException {
         Session session = factory.openSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            Conference conferenceToUpdate = (Conference) session.get(Conference.class, conf.getId());
-            if (conferenceToUpdate == null)
-                throw new InexistentException("Conference cannot be found!");
-            session.merge(conf);
+            ConferenceEdition conferenceEditionToUpdate = (ConferenceEdition) session.get(ConferenceEdition.class, conferenceEdition.getId());
+            if (conferenceEditionToUpdate == null)
+                throw new InexistentException("Conference edition cannot be found!");
+            session.merge(conferenceEdition);
             tx.commit();
         } catch (HibernateException e) {
             if (tx != null) tx.rollback();
@@ -80,18 +81,18 @@ public class ConferenceRepository implements IConferenceRepository {
         } finally {
             session.close();
         }
-        return conf;
+        return conferenceEdition;
     }
 
     @Override
-    public List<Conference> getAll() {
+    public List<ConferenceEdition> getAll() {
         Session session = factory.openSession();
 
-        List conferences = null;
+        List conferenceEditions = null;
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            conferences = session.createQuery("FROM Conference").list();
+            conferenceEditions = session.createQuery("FROM ConferenceEdition").list();
             tx.commit();
         } catch (HibernateException e) {
             if (tx != null) tx.rollback();
@@ -99,20 +100,20 @@ public class ConferenceRepository implements IConferenceRepository {
         } finally {
             session.close();
         }
-        return conferences;
+        return conferenceEditions;
     }
 
     @Override
-    public Conference findById(int id) throws InexistentException {
+    public ConferenceEdition findById(int id) throws InexistentException {
         Session session = factory.openSession();
 
-        Conference conf = null;
+        ConferenceEdition conferenceEdition = null;
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            conf = session.get(Conference.class, id);
-            if(conf==null)
-                throw new InexistentException("Conference cannot be found!");
+            conferenceEdition = session.get(ConferenceEdition.class, id);
+            if(conferenceEdition==null)
+                throw new InexistentException("Conference edition cannot be found!");
             tx.commit();
         } catch (HibernateException e) {
             if (tx != null) tx.rollback();
@@ -120,6 +121,6 @@ public class ConferenceRepository implements IConferenceRepository {
         } finally {
             session.close();
         }
-        return conf;
+        return conferenceEdition;
     }
 }
