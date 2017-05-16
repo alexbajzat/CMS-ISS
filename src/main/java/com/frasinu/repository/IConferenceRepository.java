@@ -9,11 +9,11 @@ import java.util.List;
  * Created by cory_ on 16-May-17.
  */
 public interface IConferenceRepository {
-    Conference create(Conference user);
+    Conference create(Conference conference);
 
     void delete(int id) throws InexistentException;
 
-    Conference update(Conference user) throws InexistentException;
+    Conference update(Conference conference) throws InexistentException;
 
     List<Conference> getAll();
 
