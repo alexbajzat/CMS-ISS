@@ -111,6 +111,8 @@ public class ConferenceRepository implements IConferenceRepository {
         try {
             tx = session.beginTransaction();
             conf = session.get(Conference.class, id);
+            if(conf==null)
+                throw new InexistentException("User cannot be found!");
             tx.commit();
         } catch (HibernateException e) {
             if (tx != null) tx.rollback();

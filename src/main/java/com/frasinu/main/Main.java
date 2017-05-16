@@ -43,9 +43,14 @@ public class Main {
 //            e.printStackTrace();
 //        }
         ConferenceRepository conferenceRepository=applicationContext.getBean(ConferenceRepository.class);
-        conferenceRepository.create(Conference.builder()
-        .setName("Conferinta aviatorilor")
-        .setWebpage("www.da.com").build());
+//        conferenceRepository.delete(2);
+//        Conference conf=conferenceRepository.create(Conference.builder()
+//        .setName("Conferinta aviatorilor")
+//        .setWebpage("www.da.com").build());
+//        conferenceRepository.update(Conference.builder()
+//                .setId(conf.getId())
+//                .setName("Conferinta aviatorilor")
+//                .setWebpage("www.da1.com").build());
 
 
 
