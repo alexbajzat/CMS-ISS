@@ -31,13 +31,12 @@ public class LoginController extends BaseController {
     }
 
     public void login(ActionEvent actionEvent) {
-        // TODO fix userService, currently is null
-//        try {
-//            userService.checkLogin(new LoginUserRequest(username.getText(), username.getText()));
-//            showDialog("Logged in with success!", "Great!");
-//            FrasinuApplication.changeScreen(Screen.CONFERENCES);
-//        } catch (LoginException e) {
-//            showDialog("Invalid login!", "Ooops!");
-//        }
+        try {
+            userService.checkLogin(new LoginUserRequest(username.getText(), username.getText()));
+            showDialog("Logged in with success!", "Great!");
+            FrasinuApplication.changeScreen(Screen.CONFERENCES);
+        } catch (LoginException e) {
+            showDialog("Invalid login!", "Ooops!");
+        }
     }
 }
