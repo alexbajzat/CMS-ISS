@@ -69,11 +69,11 @@ public class UserService implements IUserService {
         String password=loginUserRequest.getPassword();
         try{
             User user=userRepositoryDB.findByUsername(username);
-            if(user.getPassword().equals(password))
-                throw new LoginException();
+            if(!user.getPassword().equals(password))
+                throw new LoginException("Invalid password");
 
         }catch(InexistentException e){
-            throw new LoginException();
+            throw new LoginException("Invalid username");
         }
         // todo hash the password with md5 , hardcode the salt
     }

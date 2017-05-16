@@ -36,7 +36,7 @@ public class LoginController extends BaseController {
             showDialog("Logged in with success!", "Great!");
             FrasinuApplication.changeScreen(Screen.CONFERENCES);
         } catch (LoginException e) {
-            showDialog("Invalid login!", "Ooops!");
+            showDialog(e.getMessage(), "Ooops!");
         }
     }
 }
