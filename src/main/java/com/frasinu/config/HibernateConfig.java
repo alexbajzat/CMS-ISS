@@ -1,5 +1,6 @@
 package com.frasinu.config;
 
+import com.frasinu.model.Conference;
 import com.frasinu.model.User;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -29,7 +30,8 @@ public class HibernateConfig {
                 .setProperty("hibernate.connection.username", dbProps.getProperty("user"))
                 .setProperty("hibernate.connection.password", dbProps.getProperty("password"))
                 .setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect")
-                .addAnnotatedClass(User.class);
+                .addAnnotatedClass(User.class)
+                .addAnnotatedClass(Conference.class);
 
 
         ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties())

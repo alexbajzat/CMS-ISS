@@ -1,37 +1,37 @@
 package com.frasinu.repository.mysql_db;
 
 import com.frasinu.exception.InexistentException;
+import com.frasinu.model.Conference;
 import com.frasinu.model.User;
+import com.frasinu.repository.IConferenceRepository;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.frasinu.repository.IUserRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 /**
- * Created by aaaa on 15-May-17.
+ * Created by cory_ on 16-May-17.
  */
-
 @Repository
-public class UserRepository implements IUserRepository {
+public class ConferenceRepository implements IConferenceRepository {
     private final SessionFactory factory;
 
     @Autowired
-    public UserRepository(SessionFactory sessionFactory) {
+    public ConferenceRepository(SessionFactory sessionFactory) {
         factory = sessionFactory;
     }
 
     @Override
-    public User create(User user) {
+    public Conference create(Conference conference) {
         Session session = factory.openSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            session.save(user);
+            session.save(conference);
             tx.commit();
         } catch (HibernateException e) {
             if (tx != null) tx.rollback();
@@ -39,7 +39,7 @@ public class UserRepository implements IUserRepository {
         } finally {
             session.close();
         }
-        return user;
+        return conference;
     }
 
     @Override
@@ -49,11 +49,11 @@ public class UserRepository implements IUserRepository {
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            User user = (User) session.get(User.class, id);
-            if (user.getId() == null)
-                throw new InexistentException("User cannot be found!");
+            Conference conference= (Conference) session.get(Conference.class, id);
+            if (conference.getId() == null)
+                throw new InexistentException("Conference cannot be found!");
 
-            session.delete(user);
+            session.delete(conference);
             tx.commit();
         } catch (HibernateException e) {
             if (tx != null) tx.rollback();
@@ -64,16 +64,15 @@ public class UserRepository implements IUserRepository {
     }
 
     @Override
-    public User update(User user) throws InexistentException {
+    public Conference update(Conference conf) throws InexistentException {
         Session session = factory.openSession();
         Transaction tx = null;
-        String username = user.getUsername();
         try {
             tx = session.beginTransaction();
-            User userToUpdate = (User) session.get(User.class, user.getId());
-            if (userToUpdate == null)
-                throw new InexistentException("User cannot be found!");
-            session.merge(user);
+            Conference conferenceToUpdate = (Conference) session.get(Conference.class, conf.getId());
+            if (conferenceToUpdate == null)
+                throw new InexistentException("Conference cannot be found!");
+            session.merge(conf);
             tx.commit();
         } catch (HibernateException e) {
             if (tx != null) tx.rollback();
@@ -81,18 +80,18 @@ public class UserRepository implements IUserRepository {
         } finally {
             session.close();
         }
-        return user;
+        return conf;
     }
 
     @Override
-    public List<User> getAll() {
+    public List<Conference> getAll() {
         Session session = factory.openSession();
 
-        List users = null;
+        List conferences = null;
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            users = session.createQuery("FROM User").list();
+            conferences = session.createQuery("FROM Conference").list();
             tx.commit();
         } catch (HibernateException e) {
             if (tx != null) tx.rollback();
@@ -100,20 +99,18 @@ public class UserRepository implements IUserRepository {
         } finally {
             session.close();
         }
-        return users;
+        return conferences;
     }
 
     @Override
-    public User findById(int id) throws InexistentException {
+    public Conference findById(int id) throws InexistentException {
         Session session = factory.openSession();
 
-        User user = null;
+        Conference conf = null;
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            user = session.get(User.class, id);
-            if(user==null)
-                throw new InexistentException("User cannot be found!");
+            conf = session.get(Conference.class, id);
             tx.commit();
         } catch (HibernateException e) {
             if (tx != null) tx.rollback();
@@ -121,30 +118,6 @@ public class UserRepository implements IUserRepository {
         } finally {
             session.close();
         }
-        return user;
+        return conf;
     }
-
-    @Override
-    public User findByUsername(String username){
-        Session session = factory.openSession();
-
-        List<User> users=null;
-        Transaction tx = null;
-        try {
-            tx = session.beginTransaction();
-            users = session.createQuery("from User where username = ?", User.class)
-                    .setParameter(0, username)
-                    .list();
-            if(users.size()==0)
-                throw new InexistentException("User cannot be found!");
-            tx.commit();
-        } catch (HibernateException e) {
-            if (tx != null) tx.rollback();
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-        return users.get(0);
-    }
-
 }
