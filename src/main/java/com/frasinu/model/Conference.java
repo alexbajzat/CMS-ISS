@@ -44,4 +44,13 @@ public class Conference {
     public String getWebpage() {
         return webpage;
     }
+
+    @Override
+    public String toString() {
+        return "Conference{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", webpage='" + webpage + '\'' +
+                '}';
+    }
 }
