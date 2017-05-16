@@ -1,12 +1,27 @@
 package com.frasinu.model;
 
+import javax.persistence.*;
+
 /**
  * Created by bjz on 5/9/2017.
  */
+@Entity
+@Table(name = "conference")
 public class Conference {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private final Integer id;
+    @Column(name = "name")
     private final String name;
+    @Column(name = "website")
     private final String webpage;
+
+    public Conference() {
+        this.id = 0;
+        this.name = "";
+        this.webpage = "";
+    }
 
     Conference(Integer id, String name, String webpage) {
         this.id = id;
