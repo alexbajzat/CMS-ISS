@@ -32,7 +32,7 @@ public class LoginController extends BaseController {
 
     public void login(ActionEvent actionEvent) {
         try {
-            userService.checkLogin(new LoginUserRequest(username.getText(), username.getText()));
+            userService.checkLogin(new LoginUserRequest(username.getText(), password.getText()));
             showDialog("Logged in with success!", "Great!");
             FrasinuApplication.changeScreen(Screen.CONFERENCES);
         } catch (LoginException e) {
