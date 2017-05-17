@@ -1,13 +1,11 @@
-package validator;
+package com.frasinu.validator;
 
 import com.frasinu.model.User;
-import com.frasinu.validator.UserValidator;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import javax.xml.bind.ValidationException;
 
-import static org.junit.Assert.*;
 
 /**
  * Created by bjz on 5/11/2017.
