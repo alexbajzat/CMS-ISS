@@ -13,4 +13,6 @@ public interface IAuthorService {
 
     List<Author> getAll();
 
+    Author findByUserId(Integer userId);
+
 }

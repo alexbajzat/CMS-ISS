@@ -11,6 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public interface AuthorRepository extends JpaRepository<Author, Integer> {
-    @Query(value = "select a from author a where a.id_user = :id" , nativeQuery = true)
+    @Query(value = "select * from author a where a.id_user = :id" , nativeQuery = true)
     Author findByUserId(@Param("id") Integer userId);
 }

@@ -1,5 +1,6 @@
 package com.frasinu.service;
 
+import com.frasinu.exception.DuplicatedValueException;
 import com.frasinu.exception.InexistentException;
 import com.frasinu.exception.LoginException;
 import com.frasinu.persistance.model.User;
@@ -8,6 +9,7 @@ import com.frasinu.service.service_requests.user.LoginUserRequest;
 import com.frasinu.service.service_requests.user.RegisterUserRequest;
 import com.frasinu.service.service_requests.user.DeleteUserRequest;
 import com.frasinu.service.service_requests.user.UpdateUserRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -15,11 +17,11 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class UserService implements IUserService {
-    private UserRepository userRepositoryDB;
+    private UserRepository userRepository;
 
-//    @Autowired
-    public void setUserRepositoryDB(UserRepository userRepositoryDB) {
-        this.userRepositoryDB = userRepositoryDB;
+    @Autowired
+    public void setUserRepository(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -34,13 +36,16 @@ public class UserService implements IUserService {
                 .setPassword(password)
                 .build();
 
-        return userRepositoryDB.create(user);
+        if (userRepository.findByUsername(username) != null) {
+            throw new DuplicatedValueException("User already exists!");
+        }
+        return userRepository.save(user);
     }
 
     @Override
     public void deleteUser(DeleteUserRequest deleteUserRequest) throws InexistentException {
         int id = deleteUserRequest.getId();
-        userRepositoryDB.delete(id);
+        userRepository.delete(id);
     }
 
     @Override
@@ -56,8 +61,10 @@ public class UserService implements IUserService {
                 .setUsername(username)
                 .setPassword(password)
                 .build();
-
-        return userRepositoryDB.update(user);
+        if (userRepository.findOne(id) == null) {
+            throw new InexistentException("No such user!");
+        }
+        return userRepository.save(user);
     }
 
     @Override
