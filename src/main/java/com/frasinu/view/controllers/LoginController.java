@@ -1,6 +1,7 @@
 package com.frasinu.view.controllers;
 
 import com.frasinu.exception.LoginException;
+import com.frasinu.service.IService;
 import com.frasinu.service.UserService;
 import com.frasinu.service.service_requests.LoginUserRequest;
 import javafx.event.ActionEvent;
@@ -17,17 +18,16 @@ import org.springframework.stereotype.Controller;
  * Created by Paul on 5/9/17.
  */
 
-@Controller
 public class LoginController extends BaseController {
     @FXML TextField username;
     @FXML PasswordField password;
 
     private UserService userService;
 
-    @Autowired
-    public void setUserService(UserService userService) {
-        this.userService = userService;
+    public LoginController(){
+        userService=getAppContext().getBean(UserService.class);
     }
+
 
     public void goToRegister(ActionEvent actionEvent) {
         FrasinuApplication.changeScreen(Screen.REGISTER);

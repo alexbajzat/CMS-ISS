@@ -10,7 +10,7 @@ import com.frasinu.service.service_requests.UpdateUserRequest;
 /**
  * Created by bjz on 5/7/2017.
  */
-public interface IUserService {
+public interface IUserService extends IService{
     User registerUser(RegisterUserRequest registerUserRequest);
 
     void deleteUser(DeleteUserRequest deleteUserRequest);

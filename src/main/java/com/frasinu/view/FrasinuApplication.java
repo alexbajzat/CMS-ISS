@@ -1,16 +1,13 @@
 package com.frasinu.view;
 
-import com.frasinu.main.Main;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import com.frasinu.view.controllers.BaseController;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -35,9 +32,12 @@ public class FrasinuApplication extends Application {
 
     private static Scene createSceneFromFXML(String name, HashMap<String, Object> data) {
         try {
+
             FXMLLoader loader = new FXMLLoader();
             InputStream fxmlStream = FrasinuApplication.class.getResourceAsStream("/layouts/" + name);
+
             Parent root = loader.load(fxmlStream);
+
             BaseController baseController = loader.getController();
             if (baseController == null) {
                 throw new IllegalArgumentException("The " + name + " layout doesn't have a controller!");
@@ -55,5 +55,9 @@ public class FrasinuApplication extends Application {
     public void start(Stage primaryStage) throws Exception {
         FrasinuApplication.primaryStage = primaryStage;
         changeScreen(Screen.LOGIN);
+    }
+
+    public static void main(String[] args) {
+        launch(args);
     }
 }
