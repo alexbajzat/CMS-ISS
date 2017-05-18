@@ -4,10 +4,10 @@ import com.frasinu.exception.InexistentException;
 import com.frasinu.exception.LoginException;
 import com.frasinu.model.User;
 import com.frasinu.repository.UserRepository;
-import com.frasinu.service.service_requests.LoginUserRequest;
-import com.frasinu.service.service_requests.RegisterUserRequest;
-import com.frasinu.service.service_requests.DeleteUserRequest;
-import com.frasinu.service.service_requests.UpdateUserRequest;
+import com.frasinu.service.service_requests.user.LoginUserRequest;
+import com.frasinu.service.service_requests.user.RegisterUserRequest;
+import com.frasinu.service.service_requests.user.DeleteUserRequest;
+import com.frasinu.service.service_requests.user.UpdateUserRequest;
 import org.springframework.stereotype.Service;
 
 /**

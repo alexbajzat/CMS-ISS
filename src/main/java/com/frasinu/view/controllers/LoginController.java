@@ -1,8 +1,6 @@
 package com.frasinu.view.controllers;
 
-import com.frasinu.exception.LoginException;
 import com.frasinu.service.UserService;
-import com.frasinu.service.service_requests.LoginUserRequest;
 import javafx.event.ActionEvent;
 import com.frasinu.view.FrasinuApplication;
 import com.frasinu.view.Screen;
