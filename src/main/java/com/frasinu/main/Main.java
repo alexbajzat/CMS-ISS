@@ -28,8 +28,8 @@ import java.util.List;
 public class Main {
     public static void main(String args[]) {
         ApplicationContext applicationContext = new AnnotationConfigApplicationContext(Main.class);
-        UserRepository userRepository = applicationContext.getBean(UserRepository.class);
-        UserService userService=applicationContext.getBean(UserService.class,userRepository);
+        //UserRepository userRepository = applicationContext.getBean(UserRepository.class);
+        UserService userService=applicationContext.getBean(UserService.class);
 //        List<User> userList = userRepository.getAll();
 //        User user = userRepository.create(User.builder()
 //                .setPassword("test")
@@ -45,7 +45,7 @@ public class Main {
 //        } catch (LoginException e) {
 //            e.printStackTrace();
 //        }
-        ConferenceRepository conferenceRepository=applicationContext.getBean(ConferenceRepository.class);
+        //ConferenceRepository conferenceRepository=applicationContext.getBean(ConferenceRepository.class);
 //        Conference conf=conferenceRepository.create(Conference.builder()
 //        .setName("Conferinta aviatorilor")
 //        .setWebpage("www.da.com").build());

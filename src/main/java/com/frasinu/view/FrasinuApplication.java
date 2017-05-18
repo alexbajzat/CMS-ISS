@@ -1,11 +1,14 @@
 package com.frasinu.view;
 
+import com.frasinu.main.Main;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import com.frasinu.view.controllers.BaseController;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -18,6 +21,7 @@ import java.util.HashMap;
 public class FrasinuApplication extends Application {
 
     private static Stage primaryStage;
+
 
     public static void changeScreen(Screen screen) {
         changeScreen(screen, null);
@@ -33,7 +37,6 @@ public class FrasinuApplication extends Application {
         try {
             FXMLLoader loader = new FXMLLoader();
             InputStream fxmlStream = FrasinuApplication.class.getResourceAsStream("/layouts/" + name);
-
             Parent root = loader.load(fxmlStream);
             BaseController baseController = loader.getController();
             if (baseController == null) {

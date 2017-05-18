@@ -6,7 +6,10 @@ import com.frasinu.service.service_requests.LoginUserRequest;
 import javafx.event.ActionEvent;
 import com.frasinu.view.FrasinuApplication;
 import com.frasinu.view.Screen;
+import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -16,8 +19,8 @@ import org.springframework.stereotype.Controller;
 
 @Controller
 public class LoginController extends BaseController {
-    public Label username;
-    public Label password;
+    @FXML TextField username;
+    @FXML PasswordField password;
 
     private UserService userService;
 
