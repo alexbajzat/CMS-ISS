@@ -2,15 +2,18 @@ package com.frasinu.service;
 
 import com.frasinu.exception.InexistentException;
 import com.frasinu.exception.LoginException;
+import com.frasinu.exception.ValidateException;
 import com.frasinu.model.User;
 import com.frasinu.repository.mysql_db.UserRepository;
 import com.frasinu.service.service_requests.LoginUserRequest;
+import com.frasinu.validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.frasinu.service.service_requests.RegisterUserRequest;
 import com.frasinu.service.service_requests.DeleteUserRequest;
 import com.frasinu.service.service_requests.UpdateUserRequest;
 import org.springframework.stereotype.Service;
 
+import javax.xml.bind.ValidationException;
 import java.util.List;
 
 /**
@@ -19,14 +22,20 @@ import java.util.List;
 @Service
 public class UserService implements IUserService {
     private UserRepository userRepositoryDB;
+    private UserValidator userValidator;
 
     @Autowired
     public void setUserRepositoryDB(UserRepository userRepositoryDB) {
         this.userRepositoryDB = userRepositoryDB;
     }
 
+    @Autowired
+    public void setUserValidator(UserValidator userValidator){
+        this.userValidator=userValidator;
+    }
+
     @Override
-    public User registerUser(RegisterUserRequest registerUserRequest) {
+    public User registerUser(RegisterUserRequest registerUserRequest) throws ValidateException {
         String name = registerUserRequest.getName();
         String username = registerUserRequest.getUsername();
         String password = registerUserRequest.getPassword();
@@ -36,7 +45,7 @@ public class UserService implements IUserService {
                 .setUsername(username)
                 .setPassword(password)
                 .build();
-
+        userValidator.validare(user);
         return userRepositoryDB.create(user);
     }
 
@@ -47,7 +56,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public User updateUser(UpdateUserRequest updateUserRequest) throws InexistentException {
+    public User updateUser(UpdateUserRequest updateUserRequest) throws InexistentException, ValidateException {
         int id = updateUserRequest.getIdOfUserToUpdate();
         String name = updateUserRequest.getNewName();
         String username = updateUserRequest.getNewUsername();
@@ -59,7 +68,7 @@ public class UserService implements IUserService {
                 .setUsername(username)
                 .setPassword(password)
                 .build();
-
+        userValidator.validare(user);
         return userRepositoryDB.update(user);
     }
 

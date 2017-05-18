@@ -1,5 +1,6 @@
 package validator;
 
+import com.frasinu.exception.ValidateException;
 import com.frasinu.model.User;
 import com.frasinu.validator.UserValidator;
 import org.junit.BeforeClass;
@@ -21,7 +22,7 @@ public class UserValidatorTest {
     }
 
     @Test
-    public void testValidate() throws ValidationException {
+    public void testValidate() throws ValidateException {
         userValidator.validare(User.builder()
                 .setId(12)
                 .setName("ok")
@@ -30,8 +31,8 @@ public class UserValidatorTest {
                 .build());
     }
 
-    @Test(expected = ValidationException.class)
-    public void digitUserNameValidateShouldThrowException() throws ValidationException {
+    @Test(expected = ValidateException.class)
+    public void digitUserNameValidateShouldThrowException() throws ValidateException {
         userValidator.validare(User.builder()
                 .setId(12)
                 .setName("ok12")
@@ -40,8 +41,8 @@ public class UserValidatorTest {
                 .build());
     }
 
-    @Test(expected = ValidationException.class)
-    public void userPasswordLessThanValidateShouldThrowException() throws ValidationException {
+    @Test(expected = ValidateException.class)
+    public void userPasswordLessThanValidateShouldThrowException() throws ValidateException {
         userValidator.validare(User.builder()
                 .setId(12)
                 .setName("ok")
