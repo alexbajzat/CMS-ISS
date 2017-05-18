@@ -1,16 +1,31 @@
 package com.frasinu.model;
 
+import com.frasinu.model.ProgramCommitteeMemberBuilder;
+
+import javax.persistence.*;
+
 /**
  * Created by bjz on 5/9/2017.
  */
+@Entity
+@Table(name = "program_committee_member")
 public class ProgramCommitteeMember {
-    private final Integer id;
-    private final String affiliation;
-    private final String email;
-    private final String webpage;
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    @Column(name = "affiliation")
+    private String affiliation;
+    @Column(name = "email")
+    private String email;
+    @Column(name = "webpage")
+    private String webpage;
 
     public static ProgramCommitteeMemberBuilder builder() {
         return new ProgramCommitteeMemberBuilder();
+    }
+
+    public ProgramCommitteeMember() {
     }
 
     ProgramCommitteeMember(Integer id, String affiliation, String email, String webpage) {

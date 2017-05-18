@@ -1,13 +1,24 @@
 package com.frasinu.model;
 
+import javax.persistence.*;
+
 /**
  * Created by bjz on 5/9/2017.
  */
+@Entity
+@Table(name = "author")
 public class Author {
-    private final Integer id;
-    private final String affiliation;
-    private final String email;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
+    @Column(name ="affiliation")
+    private String affiliation;
+    @Column(name ="email")
+    private String email;
 
+    Author() {
+    }
 
     public static AuthorBuilder builder() {
         return new AuthorBuilder();

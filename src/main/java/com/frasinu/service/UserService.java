@@ -3,15 +3,12 @@ package com.frasinu.service;
 import com.frasinu.exception.InexistentException;
 import com.frasinu.exception.LoginException;
 import com.frasinu.model.User;
-import com.frasinu.repository.mysql_db.UserRepository;
+import com.frasinu.repository.UserRepository;
 import com.frasinu.service.service_requests.LoginUserRequest;
-import org.springframework.beans.factory.annotation.Autowired;
 import com.frasinu.service.service_requests.RegisterUserRequest;
 import com.frasinu.service.service_requests.DeleteUserRequest;
 import com.frasinu.service.service_requests.UpdateUserRequest;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * Created by bjz on 5/7/2017.
@@ -20,7 +17,7 @@ import java.util.List;
 public class UserService implements IUserService {
     private UserRepository userRepositoryDB;
 
-    @Autowired
+//    @Autowired
     public void setUserRepositoryDB(UserRepository userRepositoryDB) {
         this.userRepositoryDB = userRepositoryDB;
     }

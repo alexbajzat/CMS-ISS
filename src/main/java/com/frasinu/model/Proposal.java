@@ -1,13 +1,27 @@
 package com.frasinu.model;
 
+
+import javax.persistence.*;
+
 /**
  * Created by bjz on 5/9/2017.
  */
+@Entity
+@Table(name = "proposal")
 public class Proposal {
-    private final Integer id;
-    private final String title;
-    private final String abstractPaper;
-    private final String fullPaper;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
+    @Column(name = "title")
+    private String title;
+    @Column(name = "abstract")
+    private String abstractPaper;
+    @Column(name = "full_paper")
+    private String fullPaper;
+
+    Proposal() {
+    }
 
     public static ProposalBuilder builder() {
         return new ProposalBuilder();
