@@ -1,18 +1,19 @@
-package com.frasinu.service.service_requests.pcmember;
+package com.frasinu.service.service_requests.proposal;
 
 /**
  * Created by bjz on 5/18/2017.
  */
-public class AddPCMRequest {
+public class CreateProposalRequest {
     private String title;
     private String abstractPaper;
     private String fullPaper;
 
-    public AddPCMRequest(String title, String abstractPaper, String fullPaper) {
+    public CreateProposalRequest(String title, String abstractPaper, String fullPaper) {
         this.title = title;
         this.abstractPaper = abstractPaper;
         this.fullPaper = fullPaper;
     }
+
 
     public String getTitle() {
         return title;

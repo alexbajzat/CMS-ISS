@@ -1,7 +1,7 @@
 package com.frasinu.service;
 
 import com.frasinu.exception.LoginException;
-import com.frasinu.model.User;
+import com.frasinu.persistance.model.User;
 import com.frasinu.service.service_requests.user.LoginUserRequest;
 import com.frasinu.service.service_requests.user.RegisterUserRequest;
 import com.frasinu.service.service_requests.user.DeleteUserRequest;

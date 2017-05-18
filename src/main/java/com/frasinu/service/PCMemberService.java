@@ -1,8 +1,7 @@
 package com.frasinu.service;
 
-import com.frasinu.model.ProgramCommitteeMember;
-import com.frasinu.repository.PCMemberRepository;
-import com.frasinu.service.IPCMemberService;
+import com.frasinu.persistance.model.ProgramCommitteeMember;
+import com.frasinu.persistance.repository.PCMemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;

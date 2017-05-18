@@ -24,7 +24,7 @@ import java.util.Properties;
  * Created by bjz on 5/5/2017.
  */
 @Configuration
-@EnableJpaRepositories(basePackages = "com.frasinu.repository")
+@EnableJpaRepositories(basePackages = "com.frasinu.persistance.repository")
 @EnableTransactionManagement
 public class AppConfig {
     @Bean
@@ -58,7 +58,7 @@ public class AppConfig {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(dataSource());
-        em.setPackagesToScan(new String[]{"com.frasinu.model"});
+        em.setPackagesToScan(new String[]{"com.frasinu.persistance.model"});
 
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);

@@ -1,7 +1,6 @@
 package com.frasinu.validator;
 
-import com.frasinu.model.User;
-import org.springframework.util.StringUtils;
+import com.frasinu.persistance.model.User;
 
 import javax.xml.bind.ValidationException;
 

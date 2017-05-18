@@ -1,13 +1,7 @@
-package com.frasinu.repository;
+package com.frasinu.persistance.repository;
 
 import com.frasinu.exception.InexistentException;
-import com.frasinu.model.User;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.springframework.beans.factory.annotation.Autowired;
-import com.frasinu.repository.IUserRepository;
+import com.frasinu.persistance.model.User;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

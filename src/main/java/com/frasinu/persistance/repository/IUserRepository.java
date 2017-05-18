@@ -1,7 +1,7 @@
-package com.frasinu.repository;
+package com.frasinu.persistance.repository;
 
 import com.frasinu.exception.InexistentException;
-import com.frasinu.model.User;
+import com.frasinu.persistance.model.User;
 
 import java.util.List;
 

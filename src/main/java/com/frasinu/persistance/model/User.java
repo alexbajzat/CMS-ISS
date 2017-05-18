@@ -1,4 +1,4 @@
-package com.frasinu.model;
+package com.frasinu.persistance.model;
 
 import javax.persistence.*;
 

@@ -1,6 +1,4 @@
-package com.frasinu.model;
-
-import com.frasinu.model.ProgramCommitteeMemberBuilder;
+package com.frasinu.persistance.model;
 
 import javax.persistence.*;
 
