@@ -32,17 +32,17 @@
                 <Label text="Username:" />
                 <Label text="Password:" GridPane.rowIndex="1" />
                 <Label text="Retype password:" GridPane.rowIndex="2" />
-                <TextField GridPane.columnIndex="1" />
-                <PasswordField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                <PasswordField GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <TextField fx:id="username" GridPane.columnIndex="1" />
+                <PasswordField fx:id="password" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <PasswordField fx:id="password1" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                 <Label text="Name:" GridPane.rowIndex="3" />
-                <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <TextField fx:id="name" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             </children>
         </GridPane>
         <Label layoutX="-59.0" layoutY="50.0" text="Label" />
         <HBox layoutX="14.0" layoutY="200.0" prefHeight="37.0" prefWidth="261.0">
             <children>
-                <Button prefHeight="37.0" prefWidth="98.0" text="Register" />
+                <Button onAction="#register" prefHeight="37.0" prefWidth="98.0" text="Register" />
                 <Button onAction="#goToLogin" prefHeight="37.0" prefWidth="137.0" text="Back to login" />
             </children>
         </HBox>

@@ -4,6 +4,7 @@ import com.frasinu.exception.LoginException;
 import com.frasinu.service.IService;
 import com.frasinu.service.UserService;
 import com.frasinu.service.service_requests.LoginUserRequest;
+import com.frasinu.validator.UserValidator;
 import javafx.event.ActionEvent;
 import com.frasinu.view.FrasinuApplication;
 import com.frasinu.view.Screen;
