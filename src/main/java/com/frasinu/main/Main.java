@@ -1,9 +1,9 @@
 package com.frasinu.main;
 
 import com.frasinu.exception.LoginException;
-import com.frasinu.persistance.model.Author;
-import com.frasinu.persistance.model.Proposal;
-import com.frasinu.persistance.model.User;
+import com.frasinu.persistance.model.*;
+import com.frasinu.persistance.repository.ConferenceEditionRepository;
+import com.frasinu.persistance.repository.ConferenceRepository;
 import com.frasinu.service.AuthorService;
 import com.frasinu.service.ProposalService;
 import com.frasinu.service.UserService;
@@ -16,6 +16,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 
+import java.sql.Date;
 import java.util.List;
 
 /**
@@ -32,5 +33,13 @@ public class Main {
 //        Author author = authorService.addAuthor(new CreateAuthorRequest("test_add", "email_test", user.getId()));
 //        Proposal proposal = proposalService.createProposal(new CreateProposalRequest("test_title", "test_abstract", "test_Full"));
 //        Author found = authorService.findByUserId(author.getUserId());
+
+        ConferenceRepository conferenceRepository=applicationContext.getBean(ConferenceRepository.class);
+        Conference conference=Conference.builder().setName("Conferinta de pasari").setWebpage("").build();
+        conferenceRepository.save(conference);
+        ConferenceEditionRepository conferenceEditionRepository=applicationContext.getBean(ConferenceEditionRepository.class);
+        conferenceEditionRepository.save(ConferenceEdition.builder().setName("Editia I").setConferenceStartDate(new Date(2017,01,01)).setConferenceEndDate(new Date(2017,01,01))
+                .setAbstractsDeadline(new Date(2017,01,01)).setFullPapersDeadline(new Date(2017,01,01)).setBiddingDeadline(new Date(2017,01,01))
+                .setEvaluationDeadline(new Date(2017,01,01)).setConference(conference).build());
     }
 }

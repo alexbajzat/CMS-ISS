@@ -1,5 +1,8 @@
 package com.frasinu.persistance.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by bjz on 5/9/2017.
  */
@@ -7,6 +10,7 @@ public class ConferenceBuilder {
     private Integer id;
     private String name;
     private String webpage;
+    private List<ConferenceEdition> conferenceEditions = new ArrayList<>();
 
     ConferenceBuilder() {
     }
@@ -28,5 +32,9 @@ public class ConferenceBuilder {
     public ConferenceBuilder setWebpage(String webpage) {
         this.webpage = webpage;
         return this;
+    }
+
+    public void setConferenceEditions(List<ConferenceEdition> conferenceEditions) {
+        this.conferenceEditions = conferenceEditions;
     }
 }
