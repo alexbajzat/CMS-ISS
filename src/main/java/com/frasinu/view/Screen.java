@@ -1,17 +1,17 @@
 package com.frasinu.view;
 
-import com.frasinu.view.controllers.BaseController;
-
 /**
  * Created by Paul on 5/7/17.
  */
 public enum Screen {
     ABOUT("about.fxml", "About this app","com.frasinu.view.controllers.AboutController"),
-    TEST("test.fxml", "Test","com.frasinu.view.controllers.TestController"),
-    LOGIN("login.fxml", "Login","com.frasinu.view.controllers.LoginController"),
-    REGISTER("register.fxml", "Register","com.frasinu.view.controllers.RegisterController"),
+    ATTEND("attend.fxml","Attend to a conference","com.frasinu.view.controllers.AttendController"),
     CONFERENCE("conference.fxml", "Conference","com.frasinu.view.controllers.ConferenceController"),
-    CONFERENCES("conferences.fxml", "Conferences","com.frasinu.view.controllers.ConferencesController");
+    CONFERENCES("conferences.fxml", "Conferences","com.frasinu.view.controllers.ConferencesController"),
+    LOGIN("login.fxml", "Login","com.frasinu.view.controllers.LoginController"),
+    PAPER("papers.fxml","Papers","com.frasinu.view.controllers.PaperController"),
+    REGISTER("register.fxml", "Register","com.frasinu.view.controllers.RegisterController"),
+    TEST("test.fxml", "Test","com.frasinu.view.controllers.TestController");
 
     private final String name;
     private final String title;

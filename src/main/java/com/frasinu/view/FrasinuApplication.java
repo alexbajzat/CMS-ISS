@@ -22,6 +22,7 @@ import java.util.HashMap;
 public class FrasinuApplication extends Application {
 
     private static Stage primaryStage;
+    private static ApplicationContext applicationContext = new AnnotationConfigApplicationContext(Main.class);
 
     public static void changeScreen(Screen screen) {
         changeScreen(screen, null);
@@ -36,7 +37,7 @@ public class FrasinuApplication extends Application {
     private static Scene createSceneFromFXML(String name, HashMap<String, Object> data, String classController) {
         try {
             FXMLLoader loader = new FXMLLoader(FrasinuApplication.class.getResource("/layouts/" + name));
-            ApplicationContext applicationContext = new AnnotationConfigApplicationContext(Main.class);
+
             BaseController baseController= null;
             try {
                 baseController = (BaseController)applicationContext.getBean(Class.forName(classController));
