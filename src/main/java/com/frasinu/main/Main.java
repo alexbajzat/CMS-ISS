@@ -26,9 +26,5 @@ public class Main {
         AuthorService authorService = applicationContext.getBean(AuthorService.class);
         ProposalService proposalService = applicationContext.getBean(ProposalService.class);
         UserService userService = applicationContext.getBean(UserService.class);
-        User user = userService.registerUser(new RegisterUserRequest("test", "boss_test", "boss_parola"));
-        Author author = authorService.addAuthor(new CreateAuthorRequest("test_add", "email_test", user.getId()));
-        Proposal proposal = proposalService.createProposal(new CreateProposalRequest("test_title", "test_abstract", "test_Full"));
-        Author found = authorService.findByUserId(author.getUserId());
     }
 }
