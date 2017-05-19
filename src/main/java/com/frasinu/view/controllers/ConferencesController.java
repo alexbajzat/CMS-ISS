@@ -32,9 +32,6 @@ public class ConferencesController extends BaseController {
         this.conferencesService=conferencesService;
     }
 
-    public void goToSchedule(ActionEvent actionEvent) {
-        FrasinuApplication.changeScreen(Screen.CONFERENCE);
-    }
 
     public void init(){
 
