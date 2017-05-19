@@ -7,13 +7,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
-            minHeight="-Infinity" minWidth="-Infinity" prefHeight="258.0"
-            prefWidth="289.0" styleClass="background" stylesheets="@/layouts/stylelayout.css"
-            xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="258.0" prefWidth="289.0" styleClass="background" stylesheets="@/layouts/stylelayout.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <GridPane layoutX="14.0" layoutY="14.0" prefHeight="183.0" prefWidth="261.0">
             <columnConstraints>
@@ -39,11 +35,7 @@
             </children>
         </GridPane>
         <Label layoutX="-59.0" layoutY="50.0" text="Label" />
-        <HBox layoutX="14.0" layoutY="200.0" prefHeight="37.0" prefWidth="261.0">
-            <children>
-                <Button onAction="#register" prefHeight="37.0" prefWidth="98.0" text="Register" />
-                <Button onAction="#goToLogin" prefHeight="37.0" prefWidth="137.0" text="Back to login" />
-            </children>
-        </HBox>
+          <Button layoutX="14.0" layoutY="207.0" onAction="#register" prefHeight="37.0" prefWidth="98.0" text="Register" />
+          <Button layoutX="154.0" layoutY="207.0" onAction="#goToLogin" prefHeight="37.0" prefWidth="108.0" text="Back" />
     </children>
 </AnchorPane>

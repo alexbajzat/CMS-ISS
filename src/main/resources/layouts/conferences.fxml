@@ -8,7 +8,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="415.0" prefWidth="763.0" styleClass="background" stylesheets="@stylelayout.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="445.0" prefWidth="763.0" styleClass="background" stylesheets="@stylelayout.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <TableView fx:id="conferences" editable="true" layoutX="-5.0" layoutY="35.0" prefHeight="314.0" prefWidth="297.0">
             <columns>
@@ -32,14 +32,14 @@
                 </Menu>
             </menus>
         </MenuBar>
-        <Button layoutX="563.0" layoutY="349.0" mnemonicParsing="false" text="Go To Conference" />
-      <TableView fx:id="conferenceEditions" layoutX="342.0" layoutY="35.0" prefHeight="314.0" prefWidth="442.0">
+        <Button layoutX="566.0" layoutY="377.0" mnemonicParsing="false" text="Go To Conference" />
+      <TableView fx:id="conferenceEditions" layoutX="342.0" layoutY="35.0" prefHeight="314.0" prefWidth="421.0">
         <columns>
             <TableColumn prefWidth="98.0" resizable="false" text="Edition" />
             <TableColumn prefWidth="131.0" resizable="false" text="Start Date" />
             <TableColumn prefWidth="180.0" text="End Date" />
         </columns>
       </TableView>
-      <Button fx:id="viewSchedule" layoutX="44.0" layoutY="349.0" mnemonicParsing="false" onAction="#goToSchedule" text="View Schedule" />
+      <Button fx:id="viewSchedule" layoutX="46.0" layoutY="377.0" mnemonicParsing="false" onAction="#goToSchedule" text="View Schedule" />
     </children>
 </AnchorPane>
