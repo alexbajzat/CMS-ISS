@@ -15666,7 +15666,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFb2Zt2Yoeqcis="
 							},
-							"name": "idUser",
+							"name": "user",
 							"visibility": "private",
 							"isStatic": false,
 							"isLeaf": false,
