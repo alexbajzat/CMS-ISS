@@ -1,12 +1,8 @@
-package com.frasinu.view.controllers;
+package com.frasinu.iss.view.controllers;
 
-import com.frasinu.persistance.model.Conference;
-import com.frasinu.persistance.model.ConferenceEdition;
-import com.frasinu.service.ConferenceService;
-import com.frasinu.service.UserService;
-import com.frasinu.view.FrasinuApplication;
-import com.frasinu.view.Screen;
-import javafx.event.ActionEvent;
+import com.frasinu.iss.persistance.model.Conference;
+import com.frasinu.iss.persistance.model.ConferenceEdition;
+import com.frasinu.iss.service.ConferenceService;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableView;
 import org.springframework.beans.factory.annotation.Autowired;

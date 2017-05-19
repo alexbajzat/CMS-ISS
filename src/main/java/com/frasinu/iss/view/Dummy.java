@@ -1,4 +1,4 @@
-package com.frasinu.view;
+package com.frasinu.iss.view;
 
 /**
  * Created by bjz on 5/5/2017.

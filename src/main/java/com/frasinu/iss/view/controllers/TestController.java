@@ -1,4 +1,4 @@
-package com.frasinu.view.controllers;
+package com.frasinu.iss.view.controllers;
 
 /**
  * Created by Paul on 5/7/17.

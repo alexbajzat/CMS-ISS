@@ -1,10 +1,10 @@
-package com.frasinu.view.controllers;
+package com.frasinu.iss.view.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import com.frasinu.view.FrasinuApplication;
-import com.frasinu.view.Screen;
+import com.frasinu.iss.view.FrasinuApplication;
+import com.frasinu.iss.view.Screen;
 
 import java.util.HashMap;
 

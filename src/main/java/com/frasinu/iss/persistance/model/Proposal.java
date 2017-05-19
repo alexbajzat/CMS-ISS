@@ -1,7 +1,8 @@
-package com.frasinu.persistance.model;
+package com.frasinu.iss.persistance.model;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by bjz on 5/9/2017.
@@ -20,6 +21,13 @@ public class Proposal {
     @Column(name = "full_paper")
     private String fullPaper;
 
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "author_proposal",
+            joinColumns = {@JoinColumn(name = "proposal_id", nullable = false, updatable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "author_id", nullable = false, updatable = false)})
+    private List<Author> authors;
+
+
     Proposal() {
     }
 
@@ -27,11 +35,12 @@ public class Proposal {
         return new ProposalBuilder();
     }
 
-    Proposal(Integer id, String title, String abstractPaper, String fullPaper) {
+    Proposal(Integer id, String title, String abstractPaper, String fullPaper, List<Author> authors) {
         this.id = id;
         this.title = title;
         this.abstractPaper = abstractPaper;
         this.fullPaper = fullPaper;
+        this.authors = authors;
     }
 
     public Integer getId() {
@@ -48,5 +57,9 @@ public class Proposal {
 
     public String getFullPaper() {
         return fullPaper;
+    }
+
+    public List<Author> getAuthors() {
+        return authors;
     }
 }

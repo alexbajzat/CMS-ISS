@@ -1,9 +1,7 @@
-package com.frasinu.service;
+package com.frasinu.iss.service;
 
-import com.frasinu.persistance.model.Conference;
-import com.frasinu.persistance.model.Proposal;
-import com.frasinu.persistance.repository.ConferenceRepository;
-import com.frasinu.persistance.repository.ProposalRepository;
+import com.frasinu.iss.persistance.model.Conference;
+import com.frasinu.iss.persistance.repository.ConferenceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

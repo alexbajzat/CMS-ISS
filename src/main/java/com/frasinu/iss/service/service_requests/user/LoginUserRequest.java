@@ -1,4 +1,4 @@
-package com.frasinu.service.service_requests.user;
+package com.frasinu.iss.service.service_requests.user;
 
 /**
  * Created by bjz on 5/15/2017.

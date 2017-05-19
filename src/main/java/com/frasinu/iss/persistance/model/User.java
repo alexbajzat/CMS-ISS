@@ -1,6 +1,7 @@
-package com.frasinu.persistance.model;
+package com.frasinu.iss.persistance.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by bjz on 5/7/2017.
@@ -19,7 +20,10 @@ public class User {
     @Column(name = "password")
     private final String password;
 
-    public User(){
+    @OneToMany(mappedBy = "user")
+    private List<Author> authors;
+
+    public User() {
         this.id = 0;
         this.name = "";
         this.username = "";
@@ -30,11 +34,12 @@ public class User {
         return new UserBuilder();
     }
 
-    User(Integer id, String name, String username, String password) {
+    User(Integer id, String name, String username, String password, List<Author> authors) {
         this.id = id;
         this.name = name;
         this.username = username;
         this.password = password;
+        this.authors = authors;
     }
 
     public Integer getId() {
@@ -53,13 +58,7 @@ public class User {
         return password;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                '}';
+    public List<Author> getAuthors() {
+        return authors;
     }
 }

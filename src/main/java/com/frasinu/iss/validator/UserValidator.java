@@ -1,6 +1,6 @@
-package com.frasinu.validator;
+package com.frasinu.iss.validator;
 
-import com.frasinu.persistance.model.User;
+import com.frasinu.iss.persistance.model.User;
 
 import javax.xml.bind.ValidationException;
 

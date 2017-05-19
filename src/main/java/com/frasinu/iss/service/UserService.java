@@ -1,16 +1,15 @@
-package com.frasinu.service;
+package com.frasinu.iss.service;
 
-import com.frasinu.exception.DuplicatedValueException;
-import com.frasinu.exception.InexistentException;
-import com.frasinu.exception.LoginException;
-import com.frasinu.exception.RegisterException;
-import com.frasinu.persistance.model.User;
-import com.frasinu.persistance.repository.UserRepository;
-import com.frasinu.service.service_requests.user.LoginUserRequest;
-import com.frasinu.service.service_requests.user.RegisterUserRequest;
-import com.frasinu.service.service_requests.user.DeleteUserRequest;
-import com.frasinu.service.service_requests.user.UpdateUserRequest;
-import com.frasinu.validator.UserValidator;
+import com.frasinu.iss.exception.InexistentException;
+import com.frasinu.iss.exception.LoginException;
+import com.frasinu.iss.exception.RegisterException;
+import com.frasinu.iss.persistance.repository.UserRepository;
+import com.frasinu.iss.persistance.model.User;
+import com.frasinu.iss.service.service_requests.user.LoginUserRequest;
+import com.frasinu.iss.service.service_requests.user.RegisterUserRequest;
+import com.frasinu.iss.service.service_requests.user.DeleteUserRequest;
+import com.frasinu.iss.service.service_requests.user.UpdateUserRequest;
+import com.frasinu.iss.validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.providers.encoding.Md5PasswordEncoder;
 import org.springframework.security.providers.encoding.PasswordEncoder;

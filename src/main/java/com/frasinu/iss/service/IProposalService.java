@@ -1,9 +1,9 @@
-package com.frasinu.service;
+package com.frasinu.iss.service;
 
-import com.frasinu.persistance.model.Proposal;
-import com.frasinu.service.service_requests.pcmember.AddPCMRequest;
-import com.frasinu.service.service_requests.proposal.CreateProposalForAuthorRequest;
-import com.frasinu.service.service_requests.proposal.CreateProposalRequest;
+import com.frasinu.iss.persistance.model.Proposal;
+import com.frasinu.iss.service.service_requests.proposal.CreateProposalForAuthorRequest;
+import com.frasinu.iss.service.service_requests.proposal.CreateProposalRequest;
+import com.frasinu.iss.service.service_requests.proposal.FindForAuthorRequest;
 
 import java.util.List;
 
@@ -13,13 +13,9 @@ import java.util.List;
 public interface IProposalService {
     List<Proposal> getAll();
 
-    List<Proposal> findAllAccepted();
-
-    List<Proposal> findForTopic(String topic);
-
-    List<Proposal> findForKeywords(List<String> keywords);
-
     Proposal createProposal(CreateProposalRequest createProposalRequest);
 
     Proposal addProposalForAuthor(CreateProposalForAuthorRequest createProposalForAuthorRequest);
+
+    List<Proposal> findForAuthor(FindForAuthorRequest findForAuthorRequest);
 }

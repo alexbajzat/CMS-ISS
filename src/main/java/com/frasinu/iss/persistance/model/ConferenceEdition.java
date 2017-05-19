@@ -1,7 +1,8 @@
-package com.frasinu.persistance.model;
+package com.frasinu.iss.persistance.model;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.time.LocalDate;
 
 /**
  * Created by cory_ on 19-May-17.
@@ -12,48 +13,40 @@ public class ConferenceEdition {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private final Integer id;
+    private Integer id;
     @Column(name = "name")
-    private final String name;
+    private String name;
     @Column(name = "conference_start_date")
-    private final Date conferenceStartDate;
+    private LocalDate conferenceStartDate;
     @Column(name = "conference_end_date")
-    private final Date conferenceEndDate;
+    private LocalDate conferenceEndDate;
     @Column(name = "abstracts_deadline")
-    private final Date abstractsDeadline;
+    private LocalDate abstractsDeadline;
     @Column(name = "full_papers_deadline")
-    private final Date fullPapersDeadline;
+    private LocalDate fullPapersDeadline;
     @Column(name = "bidding_deadline")
-    private final Date biddingDeadline;
+    private LocalDate biddingDeadline;
     @Column(name = "evaluation_ceadline")
-    private final Date evaluationDeadline;
+    private LocalDate evaluationDeadline;
     @ManyToOne
     @JoinColumn(name = "id_conference")
     private Conference conference;
 
 
     public ConferenceEdition() {
-        this.id = 0;
-        this.name = "";
-        this.conferenceStartDate = new Date(2017,01,01);
-        this.conferenceEndDate = new Date(2017,01,01);
-        this.abstractsDeadline = new Date(2017,01,01);
-        this.fullPapersDeadline=new Date(2017,01,01);
-        this.biddingDeadline=new Date(2017,01,01);
-        this.evaluationDeadline=new Date(2017,01,01);
-
     }
 
-    ConferenceEdition(Integer id, String name, Date conferenceStartDate,Date conferenceEndDate, Date abstractsDeadline, Date fullPapersDeadline, Date biddingDeadline,Date evaluationDeadline,Conference conference) {
+    ConferenceEdition(Integer id, String name, LocalDate conferenceStartDate, LocalDate conferenceEndDate
+            , LocalDate abstractsDeadline, LocalDate fullPapersDeadline, LocalDate biddingDeadline, LocalDate evaluationDeadline, Conference conference) {
         this.id = id;
         this.name = name;
-        this.conferenceStartDate=conferenceStartDate;
-        this.conferenceEndDate=conferenceEndDate;
-        this.abstractsDeadline=abstractsDeadline;
-        this.fullPapersDeadline=fullPapersDeadline;
-        this.biddingDeadline=biddingDeadline;
-        this.evaluationDeadline=evaluationDeadline;
-        this.conference=conference;
+        this.conferenceStartDate = conferenceStartDate;
+        this.conferenceEndDate = conferenceEndDate;
+        this.abstractsDeadline = abstractsDeadline;
+        this.fullPapersDeadline = fullPapersDeadline;
+        this.biddingDeadline = biddingDeadline;
+        this.evaluationDeadline = evaluationDeadline;
+        this.conference = conference;
     }
 
     public static ConferenceEditionBuilder builder() {
@@ -68,49 +61,33 @@ public class ConferenceEdition {
         return name;
     }
 
-    public Date getConferenceStartDate() {
+    public LocalDate getConferenceStartDate() {
         return conferenceStartDate;
     }
 
-    public Date getConferenceEndDate() {
+    public LocalDate getConferenceEndDate() {
         return conferenceEndDate;
     }
 
-    public Date getAbstractsDeadline() {
+    public LocalDate getAbstractsDeadline() {
         return abstractsDeadline;
     }
 
-    public Date getFullPapersDeadline() {
+    public LocalDate getFullPapersDeadline() {
         return fullPapersDeadline;
     }
 
-    public Date getBiddingDeadline() {
+    public LocalDate getBiddingDeadline() {
         return biddingDeadline;
     }
 
-    public Date getEvaluationDeadline() {
+    public LocalDate getEvaluationDeadline() {
         return evaluationDeadline;
     }
-
 
     public Conference getConference() {
         return this.conference;
     }
 
-
-
-    @Override
-    public String toString() {
-        return "ConferenceEdition{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", conferenceStartDate=" + conferenceStartDate +
-                ", conferenceEndDate=" + conferenceEndDate +
-                ", abstractsDeadline=" + abstractsDeadline +
-                ", fullPapersDeadline=" + fullPapersDeadline +
-                ", biddingDeadline=" + biddingDeadline +
-                ", evaluationDeadline=" + evaluationDeadline +
-                '}';
-    }
 }
 

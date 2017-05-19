@@ -1,4 +1,4 @@
-package com.frasinu.view.controllers;
+package com.frasinu.iss.view.controllers;
 
 import org.springframework.stereotype.Controller;
 

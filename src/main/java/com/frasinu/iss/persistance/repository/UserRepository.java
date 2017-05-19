@@ -1,5 +1,5 @@
-package com.frasinu.persistance.repository;
-import com.frasinu.persistance.model.User;
+package com.frasinu.iss.persistance.repository;
+import com.frasinu.iss.persistance.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

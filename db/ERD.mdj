@@ -6753,7 +6753,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFa9v0VdNtk3nQ="
 							},
-							"name": "idUser",
+							"name": "user",
 							"type": "INTEGER",
 							"length": 0,
 							"primaryKey": false,
@@ -7115,7 +7115,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFa9whTtdu2llg="
 							},
-							"name": "idUser",
+							"name": "user",
 							"type": "INTEGER",
 							"length": 0,
 							"primaryKey": false,
@@ -8111,7 +8111,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFa94stW9639fI="
 							},
-							"name": "idUser",
+							"name": "user",
 							"type": "INTEGER",
 							"length": 0,
 							"primaryKey": false,
@@ -8300,7 +8300,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFa95uAGN9chAc="
 							},
-							"name": "idUser",
+							"name": "user",
 							"type": "INTEGER",
 							"length": 0,
 							"primaryKey": false,
@@ -9026,7 +9026,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFbpW4VNDidIM8="
 							},
-							"name": "idUser",
+							"name": "user",
 							"type": "INTEGER",
 							"length": 0,
 							"primaryKey": true,
@@ -9317,7 +9317,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFb2UA2zbEEBf0="
 							},
-							"name": "idUser",
+							"name": "user",
 							"length": 0,
 							"primaryKey": true,
 							"foreignKey": true,

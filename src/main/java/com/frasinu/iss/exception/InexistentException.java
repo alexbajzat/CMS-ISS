@@ -1,4 +1,4 @@
-package com.frasinu.exception;
+package com.frasinu.iss.exception;
 
 /**
  * Created by bjz on 5/7/2017.

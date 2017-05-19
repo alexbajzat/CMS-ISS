@@ -1,10 +1,11 @@
-package com.frasinu.service;
+package com.frasinu.iss.service;
 
-import com.frasinu.persistance.model.Proposal;
-import com.frasinu.persistance.repository.ProposalRepository;
-import com.frasinu.service.service_requests.pcmember.AddPCMRequest;
-import com.frasinu.service.service_requests.proposal.CreateProposalForAuthorRequest;
-import com.frasinu.service.service_requests.proposal.CreateProposalRequest;
+import com.frasinu.iss.persistance.model.Keyword;
+import com.frasinu.iss.persistance.repository.ProposalRepository;
+import com.frasinu.iss.service.service_requests.proposal.CreateProposalForAuthorRequest;
+import com.frasinu.iss.service.service_requests.proposal.CreateProposalRequest;
+import com.frasinu.iss.persistance.model.Proposal;
+import com.frasinu.iss.service.service_requests.proposal.FindForAuthorRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,20 +24,6 @@ public class ProposalService implements IProposalService {
         return proposalRepository.findAll();
     }
 
-    @Override
-    public List<Proposal> findAllAccepted() {
-        return null;
-    }
-
-    @Override
-    public List<Proposal> findForTopic(String topic) {
-        return null;
-    }
-
-    @Override
-    public List<Proposal> findForKeywords(List<String> keywords) {
-        return null;
-    }
 
     @Override
     public Proposal createProposal(CreateProposalRequest createProposalRequest) {
@@ -55,5 +42,10 @@ public class ProposalService implements IProposalService {
         Integer idProposal = createProposalForAuthorRequest.getIdAuthor();
         //proposalRepository.addProposalForAuthor(idProposal, idAuthor);
         return proposalRepository.findOne(idProposal);
+    }
+
+    @Override
+    public List<Proposal> findForAuthor(FindForAuthorRequest findForAuthorRequest) {
+        return proposalRepository.findAllForAuthor(findForAuthorRequest.getAuthorId());
     }
 }

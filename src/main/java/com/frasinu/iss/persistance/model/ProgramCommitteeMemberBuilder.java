@@ -1,4 +1,4 @@
-package com.frasinu.persistance.model;
+package com.frasinu.iss.persistance.model;
 
 /**
  * Created by bjz on 5/9/2017.

@@ -1,6 +1,6 @@
-package com.frasinu.service;
+package com.frasinu.iss.service;
 
-import com.frasinu.persistance.model.Conference;
+import com.frasinu.iss.persistance.model.Conference;
 
 import java.util.List;
 

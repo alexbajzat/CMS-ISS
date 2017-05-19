@@ -1,7 +1,7 @@
-package com.frasinu.service;
+package com.frasinu.iss.service;
 
-import com.frasinu.persistance.model.Author;
-import com.frasinu.service.service_requests.author.CreateAuthorRequest;
+import com.frasinu.iss.persistance.model.Author;
+import com.frasinu.iss.service.service_requests.author.CreateAuthorRequest;
 
 import java.util.List;
 

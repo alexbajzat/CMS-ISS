@@ -1,11 +1,11 @@
-package com.frasinu.view.controllers;
+package com.frasinu.iss.view.controllers;
 
-import com.frasinu.exception.RegisterException;
-import com.frasinu.service.UserService;
-import com.frasinu.service.service_requests.user.RegisterUserRequest;
+import com.frasinu.iss.exception.RegisterException;
+import com.frasinu.iss.service.UserService;
+import com.frasinu.iss.service.service_requests.user.RegisterUserRequest;
+import com.frasinu.iss.view.Screen;
 import javafx.event.ActionEvent;
-import com.frasinu.view.FrasinuApplication;
-import com.frasinu.view.Screen;
+import com.frasinu.iss.view.FrasinuApplication;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;

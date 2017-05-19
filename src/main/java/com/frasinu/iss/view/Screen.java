@@ -1,17 +1,17 @@
-package com.frasinu.view;
+package com.frasinu.iss.view;
 
 /**
  * Created by Paul on 5/7/17.
  */
 public enum Screen {
-    ABOUT("about.fxml", "About this app","com.frasinu.view.controllers.AboutController"),
-    ATTEND("attend.fxml","Attend to a conference","com.frasinu.view.controllers.AttendController"),
-    CONFERENCE("conference.fxml", "Conference","com.frasinu.view.controllers.ConferenceController"),
-    CONFERENCES("conferences.fxml", "Conferences","com.frasinu.view.controllers.ConferencesController"),
-    LOGIN("login.fxml", "Login","com.frasinu.view.controllers.LoginController"),
-    PAPER("papers.fxml","Papers","com.frasinu.view.controllers.PaperController"),
-    REGISTER("register.fxml", "Register","com.frasinu.view.controllers.RegisterController"),
-    TEST("test.fxml", "Test","com.frasinu.view.controllers.TestController");
+    ABOUT("about.fxml", "About this app","AboutController"),
+    ATTEND("attend.fxml","Attend to a conference","AttendController"),
+    CONFERENCE("conference.fxml", "Conference","ConferenceController"),
+    CONFERENCES("conferences.fxml", "Conferences","ConferencesController"),
+    LOGIN("login.fxml", "Login","LoginController"),
+    PAPER("papers.fxml","Papers","PaperController"),
+    REGISTER("register.fxml", "Register","RegisterController"),
+    TEST("test.fxml", "Test","TestController");
 
     private final String name;
     private final String title;

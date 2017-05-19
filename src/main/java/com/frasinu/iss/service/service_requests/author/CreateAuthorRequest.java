@@ -1,4 +1,6 @@
-package com.frasinu.service.service_requests.author;
+package com.frasinu.iss.service.service_requests.author;
+
+import com.frasinu.iss.persistance.model.User;
 
 /**
  * Created by bjz on 5/18/2017.
@@ -6,12 +8,12 @@ package com.frasinu.service.service_requests.author;
 public class CreateAuthorRequest {
     private String affiliation;
     private String email;
-    private Integer idUser;
+    private User user;
 
-    public CreateAuthorRequest(String affiliation, String email,Integer idUser) {
+    public CreateAuthorRequest(String affiliation, String email,User user) {
         this.affiliation = affiliation;
         this.email = email;
-        this.idUser = idUser;
+        this.user = user;
     }
 
     public String getAffiliation() {
@@ -22,7 +24,7 @@ public class CreateAuthorRequest {
         return email;
     }
 
-    public Integer getIdUser() {
-        return idUser;
+    public User getIdUser() {
+        return user;
     }
 }

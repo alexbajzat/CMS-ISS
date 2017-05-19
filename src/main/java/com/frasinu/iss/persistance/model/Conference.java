@@ -1,4 +1,4 @@
-package com.frasinu.persistance.model;
+package com.frasinu.iss.persistance.model;
 
 
 import javax.persistence.*;
@@ -20,7 +20,7 @@ public class Conference {
     @Column(name = "website")
     private String webpage;
     @OneToMany(mappedBy = "conference")
-    private List<ConferenceEdition> conferenceEditions = new ArrayList<>();
+    private List<ConferenceEdition> conferenceEditions;
 
 
     Conference() {

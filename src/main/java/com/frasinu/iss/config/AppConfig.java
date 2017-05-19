@@ -1,13 +1,11 @@
-package com.frasinu.config;
+package com.frasinu.iss.config;
 
+import com.frasinu.iss.exception.DataBaseException;
 import com.mysql.cj.jdbc.MysqlDataSource;
-import com.frasinu.exception.DataBaseException;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -25,7 +23,7 @@ import java.util.Properties;
  * Created by bjz on 5/5/2017.
  */
 @Configuration
-@EnableJpaRepositories(basePackages = "com.frasinu.persistance.repository")
+@EnableJpaRepositories(basePackages = "com.frasinu.iss.persistance.repository")
 @EnableTransactionManagement
 public class AppConfig {
     @Bean
@@ -50,7 +48,7 @@ public class AppConfig {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(dataSource());
-        em.setPackagesToScan(new String[]{"com.frasinu.persistance.model"});
+        em.setPackagesToScan(new String[]{"com.frasinu.iss.persistance.model"});
 
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);

@@ -1,6 +1,7 @@
-package com.frasinu.persistance.model;
+package com.frasinu.iss.persistance.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by bjz on 5/9/2017.
@@ -16,8 +17,14 @@ public class Author {
     private String affiliation;
     @Column(name = "email")
     private String email;
-    @Column(name = "id_user")
-    private Integer userId;
+
+    @ManyToOne()
+    @JoinColumn(name = "id_user", nullable = false)
+    private User user;
+
+    @ManyToMany(mappedBy = "authors", fetch = FetchType.LAZY)
+    private List<Proposal> proposals;
+
 
     Author() {
     }
@@ -26,11 +33,14 @@ public class Author {
         return new AuthorBuilder();
     }
 
-    Author(Integer id, String affiliation, String email, Integer userId) {
+    Author(Integer id, String affiliation, String email) {
         this.id = id;
         this.affiliation = affiliation;
         this.email = email;
-        this.userId = userId;
+    }
+
+    public User getUser() {
+        return user;
     }
 
 
@@ -46,7 +56,5 @@ public class Author {
         return email;
     }
 
-    public Integer getUserId() {
-        return userId;
-    }
+
 }

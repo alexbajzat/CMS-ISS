@@ -1,4 +1,4 @@
-package com.frasinu.validator;
+package com.frasinu.iss.validator;
 
 import javax.xml.bind.ValidationException;
 

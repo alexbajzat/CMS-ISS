@@ -1,4 +1,4 @@
-package com.frasinu.service.service_requests.proposal;
+package com.frasinu.iss.service.service_requests.proposal;
 
 /**
  * Created by bjz on 5/18/2017.

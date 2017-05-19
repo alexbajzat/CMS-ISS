@@ -1,4 +1,4 @@
-package com.frasinu.persistance.model;
+package com.frasinu.iss.persistance.model;
 
 /**
  * Created by bjz on 5/9/2017.
@@ -7,13 +7,13 @@ public class AuthorBuilder {
     private Integer id;
     private String affiliation;
     private String email;
-    private Integer idUser;
+    private User user;
 
     AuthorBuilder() {
     }
 
     public Author build() {
-        return new Author(id, affiliation, email, idUser);
+        return new Author(id, affiliation, email);
     }
 
     AuthorBuilder setId(Integer id) {
@@ -21,8 +21,8 @@ public class AuthorBuilder {
         return this;
     }
 
-    public AuthorBuilder setIdUser(Integer idUser) {
-        this.idUser = idUser;
+    public AuthorBuilder setUser(User user) {
+        this.user = user;
         return this;
     }
 

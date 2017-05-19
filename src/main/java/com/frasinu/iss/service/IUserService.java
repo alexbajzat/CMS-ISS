@@ -1,12 +1,12 @@
-package com.frasinu.service;
+package com.frasinu.iss.service;
 
-import com.frasinu.exception.LoginException;
-import com.frasinu.exception.RegisterException;
-import com.frasinu.persistance.model.User;
-import com.frasinu.service.service_requests.user.LoginUserRequest;
-import com.frasinu.service.service_requests.user.RegisterUserRequest;
-import com.frasinu.service.service_requests.user.DeleteUserRequest;
-import com.frasinu.service.service_requests.user.UpdateUserRequest;
+import com.frasinu.iss.exception.LoginException;
+import com.frasinu.iss.exception.RegisterException;
+import com.frasinu.iss.service.service_requests.user.DeleteUserRequest;
+import com.frasinu.iss.service.service_requests.user.LoginUserRequest;
+import com.frasinu.iss.service.service_requests.user.RegisterUserRequest;
+import com.frasinu.iss.persistance.model.User;
+import com.frasinu.iss.service.service_requests.user.UpdateUserRequest;
 
 import javax.xml.bind.ValidationException;
 

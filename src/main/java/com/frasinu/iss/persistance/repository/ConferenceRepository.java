@@ -1,6 +1,6 @@
-package com.frasinu.persistance.repository;
+package com.frasinu.iss.persistance.repository;
 
-import com.frasinu.persistance.model.Conference;
+import com.frasinu.iss.persistance.model.Conference;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 

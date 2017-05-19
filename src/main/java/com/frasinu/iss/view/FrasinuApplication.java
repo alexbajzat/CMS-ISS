@@ -1,30 +1,28 @@
-package com.frasinu.view;
+package com.frasinu.iss.view;
 
-import com.frasinu.main.Main;
-import com.frasinu.view.controllers.LoginController;
+import com.frasinu.iss.main.Main;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import com.frasinu.view.controllers.BaseController;
+import com.frasinu.iss.view.controllers.BaseController;
+import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.HashMap;
 
 /**
  * Created by Paul on 5/7/17.
  */
-@ComponentScan(basePackages = "com.frasinu")
+@ComponentScan(basePackages = "com.frasinu.iss")
 public class FrasinuApplication extends Application {
 
     private static Stage primaryStage;
-    private static ApplicationContext applicationContext = new AnnotationConfigApplicationContext(Main.class);
+    private static ApplicationContext applicationContext = new AnnotationConfigApplicationContext(FrasinuApplication.class);
 
     public static void changeScreen(Screen screen) {
         changeScreen(screen, null);
@@ -53,8 +51,8 @@ public class FrasinuApplication extends Application {
 
             BaseController baseController= null;
             try {
-                baseController = (BaseController)applicationContext.getBean(Class.forName(classController));
-            } catch (ClassNotFoundException e) {
+                baseController = (BaseController)applicationContext.getBean(classController);
+            } catch (BeansException e) {
                 e.printStackTrace();
             }
             loader.setController(baseController);

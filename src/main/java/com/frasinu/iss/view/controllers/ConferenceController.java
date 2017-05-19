@@ -1,10 +1,9 @@
-package com.frasinu.view.controllers;
+package com.frasinu.iss.view.controllers;
 
-import com.frasinu.service.ConferenceService;
-import com.frasinu.view.FrasinuApplication;
-import com.frasinu.view.Screen;
+import com.frasinu.iss.service.ConferenceService;
+import com.frasinu.iss.view.Screen;
+import com.frasinu.iss.view.FrasinuApplication;
 import javafx.event.ActionEvent;
-import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 

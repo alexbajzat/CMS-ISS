@@ -1,6 +1,6 @@
-package com.frasinu.service;
+package com.frasinu.iss.service;
 
-import com.frasinu.persistance.model.ProgramCommitteeMember;
+import com.frasinu.iss.persistance.model.ProgramCommitteeMember;
 
 import java.util.List;
 

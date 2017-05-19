@@ -1,13 +1,10 @@
-package com.frasinu.service;
+package com.frasinu.iss.service;
 
-import com.frasinu.config.AppConfig;
-import com.frasinu.service.UserService;
+import com.frasinu.iss.config.AppConfig;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by bjz on 5/7/2017.

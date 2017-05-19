@@ -1,4 +1,6 @@
-package com.frasinu.persistance.model;
+package com.frasinu.iss.persistance.model;
+
+import java.util.List;
 
 /**
  * Created by bjz on 5/9/2017.
@@ -8,9 +10,10 @@ public class ProposalBuilder {
     private String title;
     private String abstractPaper;
     private String fullPaper;
+    private List<Author> authors;
 
     public Proposal build() {
-        return new Proposal(id, title, abstractPaper, fullPaper);
+        return new Proposal(id, title, abstractPaper, fullPaper, authors);
     }
 
     ProposalBuilder() {
@@ -33,6 +36,11 @@ public class ProposalBuilder {
 
     public ProposalBuilder setFullPaper(String fullPaper) {
         this.fullPaper = fullPaper;
+        return this;
+    }
+
+    public ProposalBuilder setAuthors(List<Author> authors) {
+        this.authors = authors;
         return this;
     }
 }
