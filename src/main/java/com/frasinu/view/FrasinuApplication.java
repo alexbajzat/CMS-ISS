@@ -28,6 +28,17 @@ public class FrasinuApplication extends Application {
         changeScreen(screen, null);
     }
 
+    public static void createScreen(Screen screen){
+        createScreen(screen,null);
+    }
+
+    public static void createScreen(Screen screen,HashMap<String, Object> data){
+        Stage stage=new Stage();
+        stage.setScene(createSceneFromFXML(screen.getName(), data, screen.getController()));
+        stage.setTitle(screen.getTitle());
+        stage.show();
+    }
+
     public static void changeScreen(Screen screen, HashMap<String, Object> data) {
         primaryStage.setScene(createSceneFromFXML(screen.getName(), data, screen.getController()));
         primaryStage.setTitle(screen.getTitle());

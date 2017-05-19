@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -18,20 +15,6 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
         </TableView>
-        <MenuBar prefHeight="35.0" prefWidth="763.0">
-            <menus>
-                <Menu mnemonicParsing="false" text="History">
-                    <items>
-                        <MenuItem mnemonicParsing="false" text="View historic" />
-                    </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Help">
-                    <items>
-                        <MenuItem mnemonicParsing="false" text="About" />
-                    </items>
-                </Menu>
-            </menus>
-        </MenuBar>
         <Button layoutX="566.0" layoutY="377.0" mnemonicParsing="false" text="Go To Conference" />
       <TableView fx:id="conferenceEditions" layoutX="342.0" layoutY="35.0" prefHeight="314.0" prefWidth="421.0">
         <columns>
@@ -40,6 +23,5 @@
             <TableColumn prefWidth="180.0" text="End Date" />
         </columns>
       </TableView>
-      <Button fx:id="viewSchedule" layoutX="46.0" layoutY="377.0" mnemonicParsing="false" onAction="#goToSchedule" text="View Schedule" />
     </children>
 </AnchorPane>

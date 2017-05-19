@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.RadioMenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="487.0" prefWidth="822.0" styleClass="background" stylesheets="@stylelayout.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
     <center>
@@ -41,28 +36,11 @@
             <children>
                 <HBox layoutX="533.0" prefHeight="47.0" prefWidth="268.0">
                     <children>
-                        <Button mnemonicParsing="false" prefHeight="37.0" prefWidth="100.0" text="Attend" />
+                        <Button mnemonicParsing="false" onAction="#goToAttend" prefHeight="37.0" prefWidth="100.0" text="Attend" />
                         <Button mnemonicParsing="false" onAction="#goToConferences" prefHeight="37.0" prefWidth="94.0" text="Back" />
                     </children>
                 </HBox>
             </children>
         </AnchorPane>
     </bottom>
-    <top>
-        <MenuBar prefHeight="25.0" prefWidth="797.0" BorderPane.alignment="CENTER">
-            <menus>
-                <Menu mnemonicParsing="false" text="Menu">
-                    <items>
-                        <MenuItem mnemonicParsing="false" text="Publish/Update" />
-                    </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Review">
-                    <items>
-                        <RadioMenuItem mnemonicParsing="false" text="See evaluation" />
-                        <MenuItem mnemonicParsing="false" text="Make review" />
-                    </items>
-                </Menu>
-            </menus>
-        </MenuBar>
-    </top>
 </BorderPane>
