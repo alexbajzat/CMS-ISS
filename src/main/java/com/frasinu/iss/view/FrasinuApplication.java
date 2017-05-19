@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import com.frasinu.view.controllers.BaseController;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -19,6 +20,7 @@ import java.util.HashMap;
 /**
  * Created by Paul on 5/7/17.
  */
+@ComponentScan(basePackages = "com.frasinu")
 public class FrasinuApplication extends Application {
 
     private static Stage primaryStage;
