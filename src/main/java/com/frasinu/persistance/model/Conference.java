@@ -2,6 +2,8 @@ package com.frasinu.persistance.model;
 
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by bjz on 5/9/2017.
@@ -17,6 +19,9 @@ public class Conference {
     private String name;
     @Column(name = "website")
     private String webpage;
+    @OneToMany(mappedBy = "conference")
+    private List<ConferenceEdition> conferenceEditions = new ArrayList<>();
+
 
     Conference() {
     }
@@ -42,4 +47,12 @@ public class Conference {
     public String getWebpage() {
         return webpage;
     }
+
+
+    public List<ConferenceEdition> getConferenceEditions() {
+        return this.conferenceEditions;
+    }
+
+
+
 }
