@@ -10,8 +10,11 @@ import com.frasinu.service.service_requests.user.LoginUserRequest;
 import com.frasinu.service.service_requests.user.RegisterUserRequest;
 import com.frasinu.service.service_requests.user.DeleteUserRequest;
 import com.frasinu.service.service_requests.user.UpdateUserRequest;
+import com.frasinu.validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.xml.bind.ValidationException;
 
 /**
  * Created by bjz on 5/7/2017.
@@ -19,6 +22,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService implements IUserService {
     private UserRepository userRepository;
+    private UserValidator userValidator=new UserValidator();
 
     @Autowired
     public void setUserRepository(UserRepository userRepository) {
@@ -37,6 +41,12 @@ public class UserService implements IUserService {
                 .setPassword(password)
                 .build();
 
+        try {
+            userValidator.validare(user);
+        } catch (ValidationException e) {
+            throw new RegisterException(e.getMessage());
+        }
+
         if (userRepository.findByUsername(username) != null) {
             throw new RegisterException("User already exists!");
         }
@@ -50,7 +60,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public User updateUser(UpdateUserRequest updateUserRequest) throws InexistentException {
+    public User updateUser(UpdateUserRequest updateUserRequest) throws InexistentException,ValidationException {
         int id = updateUserRequest.getIdOfUserToUpdate();
         String name = updateUserRequest.getNewName();
         String username = updateUserRequest.getNewUsername();
@@ -62,6 +72,7 @@ public class UserService implements IUserService {
                 .setUsername(username)
                 .setPassword(password)
                 .build();
+        userValidator.validare(user);
         if (userRepository.findOne(id) == null) {
             throw new InexistentException("No such user!");
         }
