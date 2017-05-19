@@ -12,6 +12,8 @@ import com.frasinu.service.service_requests.user.DeleteUserRequest;
 import com.frasinu.service.service_requests.user.UpdateUserRequest;
 import com.frasinu.validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.providers.encoding.Md5PasswordEncoder;
+import org.springframework.security.providers.encoding.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.xml.bind.ValidationException;
@@ -35,6 +37,8 @@ public class UserService implements IUserService {
         String username = registerUserRequest.getUsername();
         String password = registerUserRequest.getPassword();
 
+        PasswordEncoder encoder = new Md5PasswordEncoder();
+
         User user = User.builder()
                 .setName(name)
                 .setUsername(username)
@@ -46,6 +50,12 @@ public class UserService implements IUserService {
         } catch (ValidationException e) {
             throw new RegisterException(e.getMessage());
         }
+
+        user=User.builder()
+                .setName(name)
+                .setUsername(username)
+                .setPassword(encoder.encodePassword(password,null))
+                .build();
 
         if (userRepository.findByUsername(username) != null) {
             throw new RegisterException("User already exists!");
@@ -66,6 +76,8 @@ public class UserService implements IUserService {
         String username = updateUserRequest.getNewUsername();
         String password = updateUserRequest.getNewPassword();
 
+        PasswordEncoder encoder = new Md5PasswordEncoder();
+
         User user = User.builder()
                 .setId(id)
                 .setName(name)
@@ -73,6 +85,13 @@ public class UserService implements IUserService {
                 .setPassword(password)
                 .build();
         userValidator.validare(user);
+        
+        user=User.builder()
+                .setName(name)
+                .setUsername(username)
+                .setPassword(encoder.encodePassword(password,null))
+                .build();
+
         if (userRepository.findOne(id) == null) {
             throw new InexistentException("No such user!");
         }
@@ -83,6 +102,8 @@ public class UserService implements IUserService {
     public void checkLogin(LoginUserRequest loginUserRequest) throws LoginException {
         String username=loginUserRequest.getUsername();
         String password=loginUserRequest.getPassword();
+        PasswordEncoder encoder = new Md5PasswordEncoder();
+        password=encoder.encodePassword(password,null);
         User user=null;
         user=userRepository.findByUsername(username);
         if(user==null)
