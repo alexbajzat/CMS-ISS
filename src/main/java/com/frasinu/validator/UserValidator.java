@@ -17,8 +17,10 @@ public class UserValidator implements Validator<User> {
             throw new ValidationException("User has no username!");
         if(obj.getPassword().equals(""))
             throw new ValidationException("User has no password!");
-        if(obj.getPassword().length()<5 || obj.getPassword().length()>20)
-            throw new ValidationException("Password must be longer that 5 and less than 20 characters!");
+        if(obj.getPassword().length()>20)
+            throw new ValidationException("Password must be less than 20 characters!");
+        if(obj.getUsername().length()>20)
+            throw new ValidationException("Username must be less than 20 characters!");
 
     }
 }

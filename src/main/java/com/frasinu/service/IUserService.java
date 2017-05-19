@@ -1,6 +1,7 @@
 package com.frasinu.service;
 
 import com.frasinu.exception.LoginException;
+import com.frasinu.exception.RegisterException;
 import com.frasinu.persistance.model.User;
 import com.frasinu.service.service_requests.user.LoginUserRequest;
 import com.frasinu.service.service_requests.user.RegisterUserRequest;
@@ -11,7 +12,7 @@ import com.frasinu.service.service_requests.user.UpdateUserRequest;
  * Created by bjz on 5/7/2017.
  */
 public interface IUserService {
-    User registerUser(RegisterUserRequest registerUserRequest);
+    User registerUser(RegisterUserRequest registerUserRequest) throws RegisterException;
 
     void deleteUser(DeleteUserRequest deleteUserRequest);
 

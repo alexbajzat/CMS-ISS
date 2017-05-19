@@ -3,6 +3,7 @@ package com.frasinu.service;
 import com.frasinu.exception.DuplicatedValueException;
 import com.frasinu.exception.InexistentException;
 import com.frasinu.exception.LoginException;
+import com.frasinu.exception.RegisterException;
 import com.frasinu.persistance.model.User;
 import com.frasinu.persistance.repository.UserRepository;
 import com.frasinu.service.service_requests.user.LoginUserRequest;
@@ -25,7 +26,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public User registerUser(RegisterUserRequest registerUserRequest) {
+    public User registerUser(RegisterUserRequest registerUserRequest) throws RegisterException{
         String name = registerUserRequest.getName();
         String username = registerUserRequest.getUsername();
         String password = registerUserRequest.getPassword();
@@ -37,7 +38,7 @@ public class UserService implements IUserService {
                 .build();
 
         if (userRepository.findByUsername(username) != null) {
-            throw new DuplicatedValueException("User already exists!");
+            throw new RegisterException("User already exists!");
         }
         return userRepository.save(user);
     }
@@ -69,8 +70,19 @@ public class UserService implements IUserService {
 
     @Override
     public void checkLogin(LoginUserRequest loginUserRequest) throws LoginException {
-        //todo if username and password mismatch , throw a LoginException
+        String username=loginUserRequest.getUsername();
+        String password=loginUserRequest.getPassword();
+        User user=null;
+        user=userRepository.findByUsername(username);
+        if(user==null)
+            throw new LoginException("Invalid username");
+        if(!user.getPassword().equals(password))
+            throw new LoginException("Invalid password");
+
+        }
+
+
         // todo hash the password with md5 , hardcode the salt
-        //todo create a LoginException (Exception not Runtime)
+
     }
-}
+
