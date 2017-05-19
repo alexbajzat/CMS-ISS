@@ -10,10 +10,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
 /**
  * Created by Paul on 5/9/17.
  */
+@Controller
 public class RegisterController extends BaseController {
     @FXML
     TextField username;
@@ -40,7 +42,7 @@ public class RegisterController extends BaseController {
             if(password.getText().equals(password1.getText())){
                 userService.registerUser(new RegisterUserRequest(name.getText(),username.getText(), password.getText()));
                 showDialog("Registered in with success!", "Great!");
-                FrasinuApplication.changeScreen(Screen.CONFERENCES);
+                FrasinuApplication.changeScreen(Screen.LOGIN);
             }
             else
                 throw new RegisterException("Retyped password different from the original password");

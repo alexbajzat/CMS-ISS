@@ -13,8 +13,7 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
             minHeight="-Infinity" minWidth="-Infinity" prefHeight="258.0"
             prefWidth="289.0" styleClass="background" stylesheets="@/layouts/stylelayout.css"
-            xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.frasinu.view.controllers.RegisterController">
+            xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <GridPane layoutX="14.0" layoutY="14.0" prefHeight="183.0" prefWidth="261.0">
             <columnConstraints>
