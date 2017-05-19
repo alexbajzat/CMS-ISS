@@ -1,11 +1,15 @@
 package com.frasinu.view;
 
+import com.frasinu.main.Main;
+import com.frasinu.view.controllers.LoginController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import com.frasinu.view.controllers.BaseController;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -18,24 +22,42 @@ import java.util.HashMap;
 public class FrasinuApplication extends Application {
 
     private static Stage primaryStage;
+    private static ApplicationContext applicationContext = new AnnotationConfigApplicationContext(Main.class);
 
     public static void changeScreen(Screen screen) {
         changeScreen(screen, null);
     }
 
+    public static void createScreen(Screen screen){
+        createScreen(screen,null);
+    }
+
+    public static void createScreen(Screen screen,HashMap<String, Object> data){
+        Stage stage=new Stage();
+        stage.setScene(createSceneFromFXML(screen.getName(), data, screen.getController()));
+        stage.setTitle(screen.getTitle());
+        stage.show();
+    }
+
     public static void changeScreen(Screen screen, HashMap<String, Object> data) {
-        primaryStage.setScene(createSceneFromFXML(screen.getName(), data));
+        primaryStage.setScene(createSceneFromFXML(screen.getName(), data, screen.getController()));
         primaryStage.setTitle(screen.getTitle());
         primaryStage.show();
     }
 
-    private static Scene createSceneFromFXML(String name, HashMap<String, Object> data) {
+    private static Scene createSceneFromFXML(String name, HashMap<String, Object> data, String classController) {
         try {
-            FXMLLoader loader = new FXMLLoader();
-            InputStream fxmlStream = FrasinuApplication.class.getResourceAsStream("/layouts/" + name);
+            FXMLLoader loader = new FXMLLoader(FrasinuApplication.class.getResource("/layouts/" + name));
 
-            Parent root = loader.load(fxmlStream);
-            BaseController baseController = loader.getController();
+            BaseController baseController= null;
+            try {
+                baseController = (BaseController)applicationContext.getBean(Class.forName(classController));
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+            loader.setController(baseController);
+            Parent root = loader.load();
+            //BaseController baseController = loader.getController();
             if (baseController == null) {
                 throw new IllegalArgumentException("The " + name + " layout doesn't have a controller!");
             }
