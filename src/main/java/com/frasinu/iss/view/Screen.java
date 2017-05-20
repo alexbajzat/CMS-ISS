@@ -6,12 +6,19 @@ package com.frasinu.iss.view;
 public enum Screen {
     ABOUT("about.fxml", "About this app","AboutController"),
     ATTEND("attend.fxml","Attend to a conference","AttendController"),
-    CONFERENCE("conference.fxml", "Conference","ConferenceController"),
+    CONFERENCEINFO("conferenceInfo.fxml","Conference info","ConferenceInfoController"),
     CONFERENCES("conferences.fxml", "Conferences","ConferencesController"),
     LOGIN("login.fxml", "Login","LoginController"),
-    PAPER("papers.fxml","Papers","PaperController"),
+    MAKEREVIEW("makeReview.fxml","Make a review","MakeReviewController"),
+    MENU("menu.fxml","Menu","MenuController"),
+    PUBLISH("publish.fxml","Publish","PaperController"),
     REGISTER("register.fxml", "Register","RegisterController"),
+    SCHEDULE("schedule.fxml", "Schedule","ScheduleController"),
+    SEEBIDS("seeBids.fxml","See Bids","SeeBidsController"),
+    SEEPROPOSALS("seeProposals.fxml","See Proposals","SeeProposalsController"),
+    SEEREVIEWS("seeReviews.fxml","See Reviews","SeeReviewsController"),
     TEST("test.fxml", "Test","TestController");
+
 
     private final String name;
     private final String title;
