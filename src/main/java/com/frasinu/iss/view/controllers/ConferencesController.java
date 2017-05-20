@@ -3,6 +3,7 @@ package com.frasinu.iss.view.controllers;
 import com.frasinu.iss.persistance.model.Conference;
 import com.frasinu.iss.persistance.model.ConferenceEdition;
 import com.frasinu.iss.service.ConferenceService;
+import com.frasinu.iss.service.service_requests.conference.FindConferenceEditionByConferenceRequest;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
@@ -23,8 +24,8 @@ import java.util.ResourceBundle;
  */
 @Controller(value = "ConferencesController")
 public class ConferencesController extends BaseController implements Initializable {
-    ObservableList<Conference> model;
-    ObservableList<ConferenceEdition> model1;
+    ObservableList<Conference> modelConferences;
+    ObservableList<ConferenceEdition> modelConferenceEditions;
 
 
     @FXML
@@ -41,17 +42,18 @@ public class ConferencesController extends BaseController implements Initializab
 
     @Override
     public void initialize(URL url, ResourceBundle rb){
-        this.model= FXCollections.observableArrayList((List<Conference>)conferencesService.getAll());
-        conferences.setItems(model);
+        this.modelConferences= FXCollections.observableArrayList(conferencesService.getAll());
+        conferences.setItems(modelConferences);
 
         conferences.setRowFactory(tv -> {
             TableRow<Conference> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (! row.isEmpty()) {
 
-                    Conference clickedRow = row.getItem();
-                    this.model1= FXCollections.observableArrayList((List<ConferenceEdition>)conferencesService.findConferenceEditionsByConference(clickedRow));
-                    conferenceEditions.setItems(model1);
+                    Conference clickedConference = row.getItem();
+                    this.modelConferenceEditions= FXCollections.observableArrayList(conferencesService.findConferenceEditionsByConference
+                            (new FindConferenceEditionByConferenceRequest(clickedConference.getId())));
+                    conferenceEditions.setItems(modelConferenceEditions);
 
                 }
             });

@@ -2,6 +2,7 @@ package com.frasinu.iss.service;
 
 import com.frasinu.iss.persistance.model.Conference;
 import com.frasinu.iss.persistance.model.ConferenceEdition;
+import com.frasinu.iss.service.service_requests.conference.FindConferenceEditionByConferenceRequest;
 
 import java.util.List;
 
@@ -10,5 +11,5 @@ import java.util.List;
  */
 public interface IConferenceService {
     List<Conference> getAll();
-    List<ConferenceEdition> findConferenceEditionsByConference(Conference conference);
+    List<ConferenceEdition> findConferenceEditionsByConference(FindConferenceEditionByConferenceRequest findConferenceEditionByConferenceRequest);
 }
