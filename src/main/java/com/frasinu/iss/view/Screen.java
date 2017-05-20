@@ -10,7 +10,7 @@ public enum Screen {
     CONFERENCES("conferences.fxml", "Conferences","ConferencesController"),
     LOGIN("login.fxml", "Login","LoginController"),
     MAKEREVIEW("makeReview.fxml","Make a review","MakeReviewController"),
-    MENU("menu.fxml","Menu","MenuController"),
+    MENU("menuAuthor.fxml","Menu Author","AuthorController"),
     PUBLISH("publish.fxml","Publish","PaperController"),
     REGISTER("register.fxml", "Register","RegisterController"),
     SCHEDULE("schedule.fxml", "Schedule","ScheduleController"),

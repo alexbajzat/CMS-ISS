@@ -3,10 +3,12 @@ package com.frasinu.iss.view.controllers;
 import com.frasinu.iss.persistance.model.Conference;
 import com.frasinu.iss.persistance.model.ConferenceEdition;
 import com.frasinu.iss.service.ConferenceService;
-import com.frasinu.iss.service.service_requests.conference.FindConferenceEditionByConferenceRequest;
+import com.frasinu.iss.service.service_requests.conference.FindConferenceEditionsByConferenceIdRequest;
+import com.frasinu.iss.view.FrasinuApplication;
+import com.frasinu.iss.view.Screen;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableRow;
@@ -14,9 +16,8 @@ import javafx.scene.control.TableView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import javax.annotation.PostConstruct;
 import java.net.URL;
-import java.util.List;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 /**
@@ -29,9 +30,9 @@ public class ConferencesController extends BaseController implements Initializab
 
 
     @FXML
-    TableView conferences;
+    TableView<Conference> conferences;
     @FXML
-    TableView conferenceEditions;
+    TableView<ConferenceEdition> conferenceEditions;
     private ConferenceService conferencesService;
 
 
@@ -52,12 +53,24 @@ public class ConferencesController extends BaseController implements Initializab
 
                     Conference clickedConference = row.getItem();
                     this.modelConferenceEditions= FXCollections.observableArrayList(conferencesService.findConferenceEditionsByConference
-                            (new FindConferenceEditionByConferenceRequest(clickedConference.getId())));
+                            (new FindConferenceEditionsByConferenceIdRequest(clickedConference.getId())));
                     conferenceEditions.setItems(modelConferenceEditions);
 
                 }
             });
             return row ;
         });
+    }
+
+    public void goToEdition(ActionEvent actionEvent) {
+        int index=conferenceEditions.getSelectionModel().getSelectedIndex();
+        if (index<0) {
+            showDialog("You have to select a conference edition first!", "Ooops!");
+        }
+        else {
+            HashMap<String, Object> map = getData();
+            map.put("idEdition", conferenceEditions.getSelectionModel().getSelectedItem().getId());
+            FrasinuApplication.changeScreen(Screen.CONFERENCEINFO, map);
+        }
     }
 }
