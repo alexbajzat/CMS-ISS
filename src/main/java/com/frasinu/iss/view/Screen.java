@@ -6,7 +6,7 @@ package com.frasinu.iss.view;
 public enum Screen {
     ABOUT("about.fxml", "About this app","AboutController"),
     ATTEND("attend.fxml","Attend to a conference","AttendController"),
-    CONFERENCE("conference.fxml", "Conference","ConferenceController"),
+    SCHEDULE("schedule.fxml", "Schedule","ScheduleController"),
     CONFERENCES("conferences.fxml", "Conferences","ConferencesController"),
     LOGIN("login.fxml", "Login","LoginController"),
     PAPER("papers.fxml","Papers","PaperController"),

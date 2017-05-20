@@ -5,12 +5,15 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import com.frasinu.iss.view.FrasinuApplication;
 import com.frasinu.iss.view.Screen;
+import org.springframework.stereotype.Controller;
 
 import java.util.HashMap;
 
 /**
  * Created by Paul on 5/7/17.
  */
+@Controller(value = "AboutController")
+
 public class AboutController extends BaseController {
 
     @FXML

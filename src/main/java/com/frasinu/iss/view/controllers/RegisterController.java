@@ -15,7 +15,7 @@ import org.springframework.stereotype.Controller;
 /**
  * Created by Paul on 5/9/17.
  */
-@Controller
+@Controller(value = "RegisterController")
 public class RegisterController extends BaseController {
     @FXML
     TextField username;

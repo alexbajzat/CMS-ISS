@@ -10,9 +10,8 @@ import org.springframework.stereotype.Controller;
 /**
  * Created by Ericqw on 15.05.2017.
  */
-@Controller
-
-public class ConferenceController extends BaseController{
+@Controller(value = "ScheduleController")
+public class ScheduleController extends BaseController{
     private ConferenceService conferencesService;
 
     @Autowired
