@@ -46,32 +46,15 @@
          <menus>
             <Menu mnemonicParsing="false" text="Menu">
                <items>
-                  <Menu mnemonicParsing="false" text="Author">
-                     <items>
-                        <MenuItem mnemonicParsing="false" text="Publish" />
-                        <MenuItem mnemonicParsing="false" text="Update" />
-                     </items>
-                  </Menu>
-                  <Menu mnemonicParsing="false" text="PC comitee">
-                     <items>
-                        <MenuItem mnemonicParsing="false" text="See proposals" />
-                        <MenuItem mnemonicParsing="false" text="Make review" />
-                        <MenuItem mnemonicParsing="false" text="See reviews" />
-                     </items>
-                  </Menu>
-                  <Menu mnemonicParsing="false" text="Steering comitee">
-                     <items>
-                        <MenuItem mnemonicParsing="false" text="Asign papers" />
-                        <MenuItem mnemonicParsing="false" text="See bids" />
-                        <MenuItem mnemonicParsing="false" text="Modify conference" />
-                     </items>
-                  </Menu>
+                  <MenuItem mnemonicParsing="false" text="Author" />
+                  <MenuItem mnemonicParsing="false" text="PC Member" />
+                  <MenuItem mnemonicParsing="false" text="Steering committee" />
                </items>
             </Menu>
-            <Menu mnemonicParsing="false" text="Conference">
+            <Menu mnemonicParsing="false" text="Conference Edition">
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#seeSchedule" text="View schedule" />
-                  <MenuItem mnemonicParsing="false" onAction="#seeConferenceInfo" text="See info" />
+                  <MenuItem mnemonicParsing="false"  text="See info" />
                </items>
             </Menu>
          </menus>

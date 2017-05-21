@@ -12,6 +12,6 @@ import org.springframework.stereotype.Controller;
 public class BidsController extends BaseController {
     public void back(ActionEvent ae)
     {
-        FrasinuApplication.changeScreen(Screen.MENU);
+        FrasinuApplication.changeScreen(Screen.AUTHOR);
     }
 }

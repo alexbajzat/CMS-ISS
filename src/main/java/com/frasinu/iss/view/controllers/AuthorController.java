@@ -22,9 +22,9 @@ public class AuthorController extends BaseController {
             FrasinuApplication.changeScreen(Screen.CONFERENCEINFO);
         }
         public void publishPaper(ActionEvent ac){
-            FrasinuApplication.changeScreen(Screen.PUBLISH);
+            FrasinuApplication.changeScreen(Screen.PAPER);
         }
         public void updatePaper(ActionEvent ac){
-            FrasinuApplication.changeScreen(Screen.PUBLISH);
+            FrasinuApplication.changeScreen(Screen.PAPER);
         }
 }

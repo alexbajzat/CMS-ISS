@@ -9,43 +9,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="363.0" prefWidth="685.0" styleClass="background" stylesheets="@stylelayout.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <MenuBar prefHeight="35.0" prefWidth="685.0">
-         <menus>
-            <Menu mnemonicParsing="false" text="Menu">
-               <items>
-                  <Menu mnemonicParsing="false" text="Author">
-                     <items>
-                        <MenuItem mnemonicParsing="false" onAction="#publishPaper" text="Publish" />
-                        <MenuItem mnemonicParsing="false" onAction="#updatePaper" text="Update" />
-                     </items>
-                  </Menu>
-                  <Menu mnemonicParsing="false" text="PC comitee">
-                     <items>
-                        <MenuItem mnemonicParsing="false" text="See proposals" />
-                        <MenuItem mnemonicParsing="false" text="Make review" />
-                        <MenuItem mnemonicParsing="false" text="See reviews" />
-                     </items>
-                  </Menu>
-                  <Menu mnemonicParsing="false" text="Steering comitee">
-                     <items>
-                        <MenuItem mnemonicParsing="false" text="Asign papers" />
-                        <MenuItem mnemonicParsing="false" text="See bids" />
-                        <MenuItem mnemonicParsing="false" text="Modify conference" />
-                     </items>
-                  </Menu>
-               </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Conference">
-               <items>
-                  <MenuItem mnemonicParsing="false" onAction="#seeSchedule" text="View schedule" />
-                  <MenuItem mnemonicParsing="false" onAction="#seeConferenceInfo" text="See info" />
-               </items>
-            </Menu>
-         </menus>
-      </MenuBar>
       <TableView layoutX="14.0" layoutY="41.0" prefHeight="245.0" prefWidth="249.0">
          <columns>
             <TableColumn prefWidth="127.0" text="Date" />
@@ -67,5 +32,22 @@
             <Button mnemonicParsing="false" onAction="#goToConferences" prefHeight="37.0" prefWidth="94.0" text="Back" />
          </children>
       </HBox>
+      <MenuBar prefHeight="35.0" prefWidth="685.0">
+         <menus>
+            <Menu mnemonicParsing="false" text="Menu">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Author" />
+                  <MenuItem mnemonicParsing="false" text="PC Member" />
+                  <MenuItem mnemonicParsing="false" text="Steering committee" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Conference Edition">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="View schedule" />
+                  <MenuItem mnemonicParsing="false" onAction="#seeConferenceInfo" text="See info" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
    </children>
 </AnchorPane>

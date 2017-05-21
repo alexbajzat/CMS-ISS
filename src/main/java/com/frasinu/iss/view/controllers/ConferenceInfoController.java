@@ -41,12 +41,9 @@ public class ConferenceInfoController extends BaseController{
 
 
     public void seeSchedule(ActionEvent ac){
-        FrasinuApplication.changeScreen(Screen.SCHEDULE);
+        FrasinuApplication.changeScreen(Screen.SCHEDULE, getData());
     }
 
-    public void seeConferenceInfo(ActionEvent ac){
-        FrasinuApplication.changeScreen(Screen.CONFERENCEINFO);
-    }
 
 
     @Override
