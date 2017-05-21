@@ -22,6 +22,5 @@ public class Topic {
             joinColumns = {@JoinColumn(name = "proposal_id", nullable = false, updatable = false)},
             inverseJoinColumns = {@JoinColumn(name = "topic_id", nullable = false, updatable = false)})
     private List<Proposal> proposals;
-
 }
 

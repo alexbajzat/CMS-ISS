@@ -19,6 +19,7 @@ public class Conference {
     private String name;
     @Column(name = "website")
     private String webpage;
+
     @OneToMany(fetch = FetchType.EAGER,mappedBy = "conference")
     private List<ConferenceEdition> conferenceEditions;
 

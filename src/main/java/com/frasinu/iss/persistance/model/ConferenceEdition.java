@@ -28,6 +28,7 @@ public class ConferenceEdition {
     private LocalDate biddingDeadline;
     @Column(name = "evaluation_ceadline")
     private LocalDate evaluationDeadline;
+
     @ManyToOne
     @JoinColumn(name = "id_conference")
     private Conference conference;

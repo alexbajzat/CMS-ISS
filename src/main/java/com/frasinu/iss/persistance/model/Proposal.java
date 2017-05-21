@@ -32,6 +32,9 @@ public class Proposal {
             inverseJoinColumns = {@JoinColumn(name = "author_id", nullable = false, updatable = false)})
     private List<Author> authors;
 
+    @OneToMany(mappedBy = "proposal",fetch = FetchType.EAGER)
+    private List<ReviewedProposal> reviewed;
+
 
     @Fetch(FetchMode.SELECT)
     @ManyToMany(mappedBy = "proposals", fetch = FetchType.EAGER)
@@ -41,7 +44,6 @@ public class Proposal {
     @ManyToMany(mappedBy = "proposals", fetch = FetchType.EAGER)
     private List<Topic> topics;
 
-
     Proposal() {
     }
 
@@ -50,7 +52,7 @@ public class Proposal {
     }
 
     Proposal(Integer id, String title, String abstractPaper, String fullPaper, List<Author> authors, List<Keyword> keywords,
-    List<Topic>topics) {
+             List<Topic> topics) {
         this.id = id;
         this.title = title;
         this.abstractPaper = abstractPaper;
@@ -86,6 +88,10 @@ public class Proposal {
 
     public List<Keyword> getKeywords() {
         return keywords;
+    }
+
+    public List<ReviewedProposal> getReviews() {
+        return reviewed;
     }
 }
 
