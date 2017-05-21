@@ -44,7 +44,6 @@ public class ProposalService {
         List<Integer> authorsId = createProposalRequest.getAuthorsId();
         List<String> keywords = createProposalRequest.getKeywords();
         List<String> topics = createProposalRequest.getTopics();
-        proposalRepository.addProposalForAuthor(proposal.getId(), 1);
 
         authorsId.forEach(id -> {
             proposalRepository.addProposalForAuthor(proposal.getId(), id);
@@ -64,12 +63,16 @@ public class ProposalService {
         topicRepository.save(parsedTopics)
                 .forEach(topic -> topicRepository.addTopicForProposal(topic.getId(), proposal.getId()));
 
-        return proposal;
+        return findById(proposal.getId());
 
     }
 
 
     public List<Proposal> findForAuthor(FindForAuthorRequest findForAuthorRequest) {
         return proposalRepository.findAllForAuthor(findForAuthorRequest.getAuthorId());
+    }
+
+    public Proposal findById(Integer proposalId) {
+        return proposalRepository.findOne(proposalId);
     }
 }
