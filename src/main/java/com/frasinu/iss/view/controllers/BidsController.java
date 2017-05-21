@@ -8,8 +8,8 @@ import org.springframework.stereotype.Controller;
 /**
  * Created by Toshiba on 5/20/2017.
  */
-@Controller(value = "SeeBidsController")
-public class SeeBidsController extends BaseController {
+@Controller(value = "BidsController")
+public class BidsController extends BaseController {
     public void back(ActionEvent ae)
     {
         FrasinuApplication.changeScreen(Screen.MENU);

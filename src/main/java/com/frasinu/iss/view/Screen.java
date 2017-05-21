@@ -14,9 +14,9 @@ public enum Screen {
     PUBLISH("publish.fxml","Publish","PaperController"),
     REGISTER("register.fxml", "Register","RegisterController"),
     SCHEDULE("schedule.fxml", "Schedule","ScheduleController"),
-    SEEBIDS("seeBids.fxml","See Bids","SeeBidsController"),
-    SEEPROPOSALS("seeProposals.fxml","See Proposals","SeeProposalsController"),
-    SEEREVIEWS("seeReviews.fxml","See Reviews","SeeReviewsController"),
+    BIDS("bids.fxml","See Bids","BidsController"),
+    PROPOSALS("proposals.fxml","See Proposals","ProposalsController"),
+    REVIEWS("reviews.fxml","See Reviews","ReviewsController"),
     TEST("test.fxml", "Test","TestController");
 
 
