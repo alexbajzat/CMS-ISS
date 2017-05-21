@@ -13,7 +13,7 @@ import java.util.List;
  * Created by bjz on 5/18/2017.
  */
 @Service
-public class ProposalService{
+public class ProposalService {
     @Autowired
     private ProposalRepository proposalRepository;
 
@@ -28,10 +28,14 @@ public class ProposalService{
                 .setTitle(createProposalRequest.getTitle())
                 .build();
 
-        Integer authorId = createProposalRequest.getAuthorId();
-
         proposalRepository.save(proposal);
-        proposalRepository.addProposalForAuthor(proposal.getId(), authorId);
+
+        List<Integer> authorsId = createProposalRequest.getAuthorsId();
+
+        authorsId.forEach(id -> {
+            proposalRepository.addProposalForAuthor(proposal.getId(), id);
+        });
+
         return proposal;
 
     }
