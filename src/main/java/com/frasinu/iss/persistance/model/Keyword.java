@@ -17,9 +17,31 @@ public class Keyword {
     private String value;
 
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "proposal_keyword",
             joinColumns = {@JoinColumn(name = "proposal_id", nullable = false, updatable = false)},
             inverseJoinColumns = {@JoinColumn(name = "keyword_id", nullable = false, updatable = false)})
     private List<Keyword> proposals;
+
+    public Keyword() {
+    }
+
+    public Keyword(int id, String value, List<Keyword> proposals) {
+        this.id = id;
+        this.value = value;
+        this.proposals = proposals;
+    }
+
+
+    public int getId() {
+        return id;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public List<Keyword> getProposals() {
+        return proposals;
+    }
 }

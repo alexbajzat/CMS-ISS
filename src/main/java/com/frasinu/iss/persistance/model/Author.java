@@ -22,7 +22,7 @@ public class Author {
     @JoinColumn(name = "id_user", nullable = false)
     private User user;
 
-    @ManyToMany(mappedBy = "authors", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "authors", fetch = FetchType.EAGER)
     private List<Proposal> proposals;
 
 

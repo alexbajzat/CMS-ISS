@@ -1,6 +1,9 @@
 package com.frasinu.iss.persistance.model;
 
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -21,11 +24,22 @@ public class Proposal {
     @Column(name = "full_paper")
     private String fullPaper;
 
+
+    @Fetch(FetchMode.SELECT)
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "author_proposal",
             joinColumns = {@JoinColumn(name = "proposal_id", nullable = false, updatable = false)},
             inverseJoinColumns = {@JoinColumn(name = "author_id", nullable = false, updatable = false)})
     private List<Author> authors;
+
+
+    @Fetch(FetchMode.SELECT)
+    @ManyToMany(mappedBy = "proposals", fetch = FetchType.EAGER)
+    private List<Keyword> keywords;
+
+    @Fetch(FetchMode.SELECT)
+    @ManyToMany(mappedBy = "proposals", fetch = FetchType.EAGER)
+    private List<Topic> topics;
 
 
     Proposal() {
@@ -35,12 +49,15 @@ public class Proposal {
         return new ProposalBuilder();
     }
 
-    Proposal(Integer id, String title, String abstractPaper, String fullPaper, List<Author> authors) {
+    Proposal(Integer id, String title, String abstractPaper, String fullPaper, List<Author> authors, List<Keyword> keywords,
+    List<Topic>topics) {
         this.id = id;
         this.title = title;
         this.abstractPaper = abstractPaper;
         this.fullPaper = fullPaper;
         this.authors = authors;
+        this.keywords = keywords;
+        this.topics = topics;
     }
 
     public Integer getId() {
@@ -62,4 +79,13 @@ public class Proposal {
     public List<Author> getAuthors() {
         return authors;
     }
+
+    public List<Topic> getTopics() {
+        return topics;
+    }
+
+    public List<Keyword> getKeywords() {
+        return keywords;
+    }
 }
+

@@ -11,16 +11,28 @@ public class ProposalBuilder {
     private String abstractPaper;
     private String fullPaper;
     private List<Author> authors;
+    private List<Keyword> keywords;
+    private List<Topic> topics;
 
     public Proposal build() {
-        return new Proposal(id, title, abstractPaper, fullPaper, authors);
+        return new Proposal(id, title, abstractPaper, fullPaper, authors, keywords, topics);
     }
 
     ProposalBuilder() {
     }
 
+    public ProposalBuilder setTopics(List<Topic> topics) {
+        this.topics = topics;
+        return this;
+    }
+
     public ProposalBuilder setId(Integer id) {
         this.id = id;
+        return this;
+    }
+
+    public ProposalBuilder setKeywords(List<Keyword> keywords) {
+        this.keywords = keywords;
         return this;
     }
 

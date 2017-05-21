@@ -16,11 +16,11 @@ public class Topic {
     @Column(name = "value")
     private String value;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "proposal_topic",
             joinColumns = {@JoinColumn(name = "proposal_id", nullable = false, updatable = false)},
             inverseJoinColumns = {@JoinColumn(name = "topic_id", nullable = false, updatable = false)})
-    private List<Topic> topics;
+    private List<Proposal> proposals;
 
 }
 
