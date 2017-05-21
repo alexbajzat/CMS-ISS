@@ -8,10 +8,10 @@ import org.springframework.stereotype.Controller;
 /**
  * Created by Toshiba on 5/20/2017.
  */
-@Controller(value = "SeeReviewsController")
-public class SeeReviewsController extends BaseController {
+@Controller(value = "BidsController")
+public class BidsController extends BaseController {
     public void back(ActionEvent ae)
     {
-        FrasinuApplication.changeScreen(Screen.MENU);
+        FrasinuApplication.changeScreen(Screen.AUTHOR);
     }
 }

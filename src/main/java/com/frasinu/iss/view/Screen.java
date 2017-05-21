@@ -10,13 +10,13 @@ public enum Screen {
     CONFERENCES("conferences.fxml", "Conferences","ConferencesController"),
     LOGIN("login.fxml", "Login","LoginController"),
     MAKEREVIEW("makeReview.fxml","Make a review","MakeReviewController"),
-    MENU("menu.fxml","Menu","MenuController"),
-    PUBLISH("publish.fxml","Publish","PaperController"),
+    AUTHOR("menuAuthor.fxml","Menu Author","AuthorController"),
+    PAPER("paper.fxml","Paper","PaperController"),
     REGISTER("register.fxml", "Register","RegisterController"),
     SCHEDULE("schedule.fxml", "Schedule","ScheduleController"),
-    SEEBIDS("seeBids.fxml","See Bids","SeeBidsController"),
-    SEEPROPOSALS("seeProposals.fxml","See Proposals","SeeProposalsController"),
-    SEEREVIEWS("seeReviews.fxml","See Reviews","SeeReviewsController"),
+    BIDS("bids.fxml","See Bids","BidsController"),
+    PROPOSALS("proposals.fxml","See Proposals","ProposalsController"),
+    REVIEWS("reviews.fxml","See Reviews","ReviewsController"),
     TEST("test.fxml", "Test","TestController");
 
 

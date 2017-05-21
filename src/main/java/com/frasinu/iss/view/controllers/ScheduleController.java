@@ -20,13 +20,17 @@ public class ScheduleController extends BaseController{
     }
 
     public void goToConferences(ActionEvent actionEvent) {
-        FrasinuApplication.changeScreen(Screen.CONFERENCES);
+        FrasinuApplication.changeScreen(Screen.CONFERENCES,getData());
     }
 
     public void goToAttend(ActionEvent actionEvent){
 
 
-        FrasinuApplication.createScreen(Screen.ATTEND);
+        FrasinuApplication.createScreen(Screen.ATTEND,getData());
 
+    }
+
+    public void seeConferenceInfo(ActionEvent ac){
+        FrasinuApplication.changeScreen(Screen.CONFERENCEINFO,getData());
     }
 }
