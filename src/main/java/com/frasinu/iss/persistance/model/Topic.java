@@ -13,7 +13,8 @@ public class Topic {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name = "value")
+
+    @Column(name = "value",unique = true)
     private String value;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)

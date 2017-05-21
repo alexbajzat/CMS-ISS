@@ -13,16 +13,14 @@ import java.util.List;
  * Created by cory_ on 19-May-17.
  */
 @Service
-public class ConferenceService implements IConferenceService {
+public class ConferenceService{
     @Autowired
     private ConferenceRepository conferenceRepository;
 
-    @Override
     public List<Conference> getAll() {
         return conferenceRepository.findAll();
     }
 
-    @Override
     public List<ConferenceEdition> findConferenceEditionsByConference(FindConferenceEditionByConferenceRequest findConferenceEditionByConferenceRequest){
         return conferenceRepository.findByConferenceId(findConferenceEditionByConferenceRequest.getConferenceId()).getConferenceEditions();
     }

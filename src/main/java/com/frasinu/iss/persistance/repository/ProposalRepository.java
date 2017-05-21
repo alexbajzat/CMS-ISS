@@ -16,4 +16,7 @@ public interface ProposalRepository extends JpaRepository<Proposal, Integer> {
     @Transactional
     @Query(value = "Select * from proposal p join user_app ua where ua.id = :author",nativeQuery = true)
     List<Proposal> findAllForAuthor(@Param(value = "author") Integer authorId);
+
+    @Query(value = "insert into author_proposal(proposal_id, author_id) values(:proposal, :author)",nativeQuery = true)
+    void addProposalForAuthor(@Param(value = "proposal") int idProposal ,@Param(value = "author") int idAuthor);
 }
