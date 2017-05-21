@@ -3,10 +3,10 @@ package com.frasinu.iss.service.service_requests.conference;
 /**
  * Created by cory_ on 20-May-17.
  */
-public class FindConferenceEditionByConferenceRequest {
+public class FindByConferenceIdRequest {
     private int conferenceId;
 
-    public FindConferenceEditionByConferenceRequest(int conferenceId) {
+    public FindByConferenceIdRequest(int conferenceId) {
         this.conferenceId = conferenceId;
     }
 
