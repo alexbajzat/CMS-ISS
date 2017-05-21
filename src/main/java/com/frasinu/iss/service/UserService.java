@@ -5,10 +5,7 @@ import com.frasinu.iss.exception.LoginException;
 import com.frasinu.iss.exception.RegisterException;
 import com.frasinu.iss.persistance.repository.UserRepository;
 import com.frasinu.iss.persistance.model.User;
-import com.frasinu.iss.service.service_requests.user.LoginUserRequest;
-import com.frasinu.iss.service.service_requests.user.RegisterUserRequest;
-import com.frasinu.iss.service.service_requests.user.DeleteUserRequest;
-import com.frasinu.iss.service.service_requests.user.UpdateUserRequest;
+import com.frasinu.iss.service.service_requests.user.*;
 import com.frasinu.iss.validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.providers.encoding.Md5PasswordEncoder;
@@ -106,6 +103,10 @@ public class UserService {
         if (!user.getPassword().equals(password))
             throw new LoginException("Invalid password");
 
+    }
+
+    public User findByUsername(FindByUsernameRequest findByUsernameRequest) {
+        return userRepository.findByUsername(findByUsernameRequest.getUsername());
     }
 
 }
