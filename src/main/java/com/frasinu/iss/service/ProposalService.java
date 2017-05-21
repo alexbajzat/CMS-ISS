@@ -21,7 +21,7 @@ public class ProposalService {
         return proposalRepository.findAll();
     }
 
-    public Proposal createProposalForAuthor(CreateProposalRequest createProposalRequest) {
+    public Proposal createProposalForAuthors(CreateProposalRequest createProposalRequest) {
         Proposal proposal = Proposal.builder()
                 .setAbstractPaper(createProposalRequest.getAbstractPaper())
                 .setFullPaper(createProposalRequest.getFullPaper())
