@@ -56,14 +56,24 @@ public class ConferenceInfoController extends BaseController{
         int idEdition=(int)getData().get("idEdition");
         ConferenceEdition conferenceEdition=conferenceEditionService.findByConferenceEditionId(new FindByConferenceEditionIdRequest(idEdition));
         Conference conference=conferenceEditionService.findConferenceByConferenceEditionId(new FindConferenceByConferenceEditionIdRequest(idEdition));
-        name.setText(conference.getName()+"; "+conferenceEdition.getName());
+        if(conference.getName()!=null )
+            name.setText(conference.getName());
+        if(conference.getName()!=null && conferenceEdition.getName()!=null)
+            name.setText(conference.getName()+"; "+conferenceEdition.getName());
         website.setText(conference.getWebpage());
-        startDate.setText(conferenceEdition.getConferenceStartDate().toString());
-        endDate.setText(conferenceEdition.getConferenceEndDate().toString());
-        abstractsDeadline.setText(conferenceEdition.getAbstractsDeadline().toString());
-        papersDeadline.setText(conferenceEdition.getFullPapersDeadline().toString());
-        bidDeadline.setText(conferenceEdition.getBiddingDeadline().toString());
-        evaluationDeadline.setText(conferenceEdition.getEvaluationDeadline().toString());
+        if(conferenceEdition.getConferenceStartDate()!=null)
+            startDate.setText(conferenceEdition.getConferenceStartDate().toString());
+        if(conferenceEdition.getConferenceEndDate()!=null)
+            endDate.setText(conferenceEdition.getConferenceEndDate().toString());
+        if(conferenceEdition.getAbstractsDeadline()!=null)
+            abstractsDeadline.setText(conferenceEdition.getAbstractsDeadline().toString());
+        if(conferenceEdition.getFullPapersDeadline()!=null)
+            papersDeadline.setText(conferenceEdition.getFullPapersDeadline().toString());
+        if(conferenceEdition.getBiddingDeadline()!=null)
+            bidDeadline.setText(conferenceEdition.getBiddingDeadline().toString());
+        if(conferenceEdition.getEvaluationDeadline()!=null)
+            evaluationDeadline.setText(conferenceEdition.getEvaluationDeadline().toString());
+
 
     }
 

@@ -14,7 +14,7 @@ public class Topic {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "value",unique = true)
+    @Column(name = "value", unique = true)
     private String value;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -22,5 +22,24 @@ public class Topic {
             joinColumns = {@JoinColumn(name = "proposal_id", nullable = false, updatable = false)},
             inverseJoinColumns = {@JoinColumn(name = "topic_id", nullable = false, updatable = false)})
     private List<Proposal> proposals;
+
+    public Topic() {
+    }
+
+    public Topic(String value) {
+        this.value = value;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public List<Proposal> getProposals() {
+        return proposals;
+    }
 }
 
