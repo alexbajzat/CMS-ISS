@@ -10,10 +10,9 @@ public class UserBuilder {
     private String name;
     private String username;
     private String password;
-    private List<Author> authors;
 
     public User build() {
-        return new User(id, name, username, password, authors);
+        return new User(id, name, username, password);
     }
 
     public UserBuilder setId(Integer id) {
@@ -36,8 +35,4 @@ public class UserBuilder {
         return this;
     }
 
-    public UserBuilder setAuthors(List<Author> authors) {
-        this.authors = authors;
-        return this;
-    }
 }

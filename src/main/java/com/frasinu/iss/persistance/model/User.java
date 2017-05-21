@@ -12,34 +12,32 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private final Integer id;
+    private Integer id;
     @Column(name = "name")
-    private final String name;
+    private String name;
     @Column(name = "username")
-    private final String username;
+    private String username;
     @Column(name = "password")
-    private final String password;
+    private String password;
 
     @OneToMany(mappedBy = "user")
     private List<Author> authors;
 
+    @OneToMany(mappedBy = "user")
+    private List<Reviewer> reviewers;
+
     public User() {
-        this.id = 0;
-        this.name = "";
-        this.username = "";
-        this.password = "";
     }
 
     public static UserBuilder builder() {
         return new UserBuilder();
     }
 
-    User(Integer id, String name, String username, String password, List<Author> authors) {
+    User(Integer id, String name, String username, String password) {
         this.id = id;
         this.name = name;
         this.username = username;
         this.password = password;
-        this.authors = authors;
     }
 
     public Integer getId() {
@@ -60,5 +58,9 @@ public class User {
 
     public List<Author> getAuthors() {
         return authors;
+    }
+
+    public List<Reviewer> getReviewers() {
+        return reviewers;
     }
 }

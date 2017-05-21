@@ -5,7 +5,10 @@ import com.frasinu.iss.exception.LoginException;
 import com.frasinu.iss.exception.RegisterException;
 import com.frasinu.iss.persistance.repository.UserRepository;
 import com.frasinu.iss.persistance.model.User;
-import com.frasinu.iss.service.service_requests.user.*;
+import com.frasinu.iss.service.service_requests.user.LoginUserRequest;
+import com.frasinu.iss.service.service_requests.user.RegisterUserRequest;
+import com.frasinu.iss.service.service_requests.user.DeleteUserRequest;
+import com.frasinu.iss.service.service_requests.user.UpdateUserRequest;
 import com.frasinu.iss.validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.providers.encoding.Md5PasswordEncoder;
@@ -18,7 +21,7 @@ import javax.xml.bind.ValidationException;
  * Created by bjz on 5/7/2017.
  */
 @Service
-public class UserService implements IUserService {
+public class UserService {
     private UserRepository userRepository;
     private UserValidator userValidator = new UserValidator();
 
@@ -27,7 +30,6 @@ public class UserService implements IUserService {
         this.userRepository = userRepository;
     }
 
-    @Override
     public User registerUser(RegisterUserRequest registerUserRequest) throws RegisterException {
         String name = registerUserRequest.getName();
         String username = registerUserRequest.getUsername();
@@ -59,13 +61,11 @@ public class UserService implements IUserService {
         return userRepository.save(user);
     }
 
-    @Override
     public void deleteUser(DeleteUserRequest deleteUserRequest) throws InexistentException {
         int id = deleteUserRequest.getId();
         userRepository.delete(id);
     }
 
-    @Override
     public User updateUser(UpdateUserRequest updateUserRequest) throws InexistentException, ValidationException {
         int id = updateUserRequest.getIdOfUserToUpdate();
         String name = updateUserRequest.getNewName();
@@ -94,7 +94,6 @@ public class UserService implements IUserService {
         return userRepository.save(user);
     }
 
-    @Override
     public void checkLogin(LoginUserRequest loginUserRequest) throws LoginException {
         String username = loginUserRequest.getUsername();
         String password = loginUserRequest.getPassword();
@@ -109,9 +108,5 @@ public class UserService implements IUserService {
 
     }
 
-
-    public User findByUsername(FindByUsernameRequest findByUsernameRequest) {
-        return userRepository.findByUsername(findByUsernameRequest.getUsername());
-    }
 }
 

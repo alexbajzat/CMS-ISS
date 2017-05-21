@@ -11,13 +11,13 @@ public class ProgramCommitteeMember {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    protected Integer id;
     @Column(name = "affiliation")
-    private String affiliation;
+    protected String affiliation;
     @Column(name = "email")
-    private String email;
+    protected String email;
     @Column(name = "webpage")
-    private String webpage;
+    protected String webpage;
 
     public static ProgramCommitteeMemberBuilder builder() {
         return new ProgramCommitteeMemberBuilder();
