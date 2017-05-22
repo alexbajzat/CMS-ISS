@@ -5,13 +5,9 @@ package com.frasinu.iss.view.controllers;
 import com.frasinu.iss.persistance.model.Author;
 import com.frasinu.iss.persistance.model.User;
 import com.frasinu.iss.service.AuthorService;
-import com.frasinu.iss.service.ConferenceEditionService;
 import com.frasinu.iss.service.UserService;
-import com.frasinu.iss.service.service_requests.author.CreateAuthorRequest;
 import com.frasinu.iss.service.service_requests.author.UpdateAuthorRequest;
-import com.frasinu.iss.service.service_requests.conferenceedition.FindByConferenceEditionIdRequest;
 import com.frasinu.iss.service.service_requests.user.FindByIdRequest;
-import com.frasinu.iss.service.service_requests.user.FindIfUserIsAuthorRequest;
 import com.frasinu.iss.service.service_requests.user.UpdateUserRequest;
 import com.frasinu.iss.view.FrasinuApplication;
 import com.frasinu.iss.view.Screen;
@@ -53,6 +49,8 @@ public class AuthorController extends BaseController {
             //make a new screen
             FrasinuApplication.changeScreen(Screen.CONFERENCEINFO,getData());
         }
+
+    public void goToPaper(ActionEvent ac){ FrasinuApplication.changeScreen(Screen.PAPER, getData());}
 
     @Override
     public void setData(HashMap<String, Object> data){
