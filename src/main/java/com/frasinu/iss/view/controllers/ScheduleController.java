@@ -10,9 +10,8 @@ import org.springframework.stereotype.Controller;
 /**
  * Created by Ericqw on 15.05.2017.
  */
-@Controller
-
-public class ConferenceController extends BaseController{
+@Controller(value = "ScheduleController")
+public class ScheduleController extends BaseController{
     private ConferenceService conferencesService;
 
     @Autowired
@@ -21,13 +20,17 @@ public class ConferenceController extends BaseController{
     }
 
     public void goToConferences(ActionEvent actionEvent) {
-        FrasinuApplication.changeScreen(Screen.CONFERENCES);
+        FrasinuApplication.changeScreen(Screen.CONFERENCES,getData());
     }
 
     public void goToAttend(ActionEvent actionEvent){
 
 
-        FrasinuApplication.createScreen(Screen.ATTEND);
+        FrasinuApplication.createScreen(Screen.ATTEND,getData());
 
+    }
+
+    public void seeConferenceInfo(ActionEvent ac){
+        FrasinuApplication.changeScreen(Screen.CONFERENCEINFO,getData());
     }
 }

@@ -4,48 +4,46 @@ import javax.persistence.*;
 import java.util.List;
 
 /**
- * Created by bjz on 5/9/2017.
+ * Created by bjz on 5/21/2017.
  */
 @Entity
-@Table(name = "author")
-public class Author {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+@Table(name = "reviewer")
+public class Reviewer {
+    @javax.persistence.Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column(name = "affiliation")
     private String affiliation;
     @Column(name = "email")
     private String email;
+    @Column(name = "webpage")
+    private String webpage;
 
     @ManyToOne()
     @JoinColumn(name = "id_user", nullable = false)
     private User user;
 
-    @ManyToMany(mappedBy = "authors", fetch = FetchType.EAGER)
-    private List<Proposal> proposals;
 
+    @OneToMany(mappedBy = "reviewer", fetch = FetchType.EAGER)
+    private List<ReviewedProposal> proposals;
 
-    Author() {
+    public Reviewer() {
     }
 
-    public static AuthorBuilder builder() {
-        return new AuthorBuilder();
-    }
-
-    Author(Integer id, String affiliation, String email) {
+    Reviewer(Integer id, String affiliation, String email, String webpage) {
         this.id = id;
         this.affiliation = affiliation;
         this.email = email;
+        this.webpage = webpage;
     }
-
-    public User getUser() {
-        return user;
-    }
-
 
     public Integer getId() {
         return id;
+    }
+
+    public List<ReviewedProposal> getProposals() {
+        return proposals;
     }
 
     public String getAffiliation() {
@@ -56,7 +54,11 @@ public class Author {
         return email;
     }
 
-    public List<Proposal> getProposals() {
-        return proposals;
+    public User getUser() {
+        return user;
+    }
+
+    public String getWebpage() {
+        return webpage;
     }
 }

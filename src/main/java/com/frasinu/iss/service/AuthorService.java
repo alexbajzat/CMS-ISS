@@ -12,11 +12,10 @@ import java.util.List;
  * Created by bjz on 5/18/2017.
  */
 @Service
-public class AuthorService implements IAuthorService {
+public class AuthorService {
     @Autowired
     private AuthorRepository authorRepository;
 
-    @Override
     public Author addAuthor(CreateAuthorRequest createAuthorRequest) {
         Author author = Author.builder()
                 .setAffiliation(createAuthorRequest.getAffiliation())
@@ -27,12 +26,10 @@ public class AuthorService implements IAuthorService {
         return authorRepository.save(author);
     }
 
-    @Override
     public List<Author> getAll() {
         return authorRepository.findAll();
     }
 
-    @Override
     public Author findByUserId(Integer userId) {
         return authorRepository.findByUserId(userId);
     }

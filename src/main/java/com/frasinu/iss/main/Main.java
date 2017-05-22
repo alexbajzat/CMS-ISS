@@ -1,16 +1,12 @@
 package com.frasinu.iss.main;
 
-import com.frasinu.iss.persistance.model.Keyword;
 import com.frasinu.iss.persistance.model.Proposal;
-import com.frasinu.iss.service.AuthorService;
-import com.frasinu.iss.service.KeywordService;
 import com.frasinu.iss.service.ProposalService;
-import com.frasinu.iss.service.UserService;
+import com.frasinu.iss.service.service_requests.proposal.CreateProposalRequest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 
-import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -21,10 +17,15 @@ import java.util.stream.Stream;
 public class Main {
     public static void main(String args[]) {
         ApplicationContext applicationContext = new AnnotationConfigApplicationContext(Main.class);
-        AuthorService authorService = applicationContext.getBean(AuthorService.class);
         ProposalService proposalService = applicationContext.getBean(ProposalService.class);
-        UserService userService = applicationContext.getBean(UserService.class);
-        KeywordService keywordService = applicationContext.getBean(KeywordService.class);
-        List<Keyword> keywords = keywordService.findProposalForKeywords(Stream.of("ceva").collect(Collectors.toList()));
+        CreateProposalRequest createProposalRequest = CreateProposalRequest.builder()
+                .setAbstractPaper("test_abs")
+                .setFullPaper("full_test")
+                .setTitle("test_title")
+                .setTopics(Stream.of("topic1", "topic2").collect(Collectors.toList()))
+                .setKeywords(Stream.of("keyword1", "keyword2").collect(Collectors.toList()))
+                .setAuthorsId(Stream.of(1).collect(Collectors.toList()))
+                .build();
+        Proposal proposal = proposalService.createProposalForAuthors(createProposalRequest);
     }
 }

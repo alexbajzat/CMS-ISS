@@ -9,16 +9,14 @@ import java.util.List;
 /**
  * Created by bjz on 5/18/2017.
  */
-public class PCMemberService implements IPCMemberService {
+public class PCMemberService{
     @Autowired
     private PCMemberRepository pcMemberRepository;
 
-    @Override
     public ProgramCommitteeMember addMember(ProgramCommitteeMember programCommitteeMember) {
         return null;
     }
 
-    @Override
     public List<ProgramCommitteeMember> getAllPcMembers() {
         return null;
     }
