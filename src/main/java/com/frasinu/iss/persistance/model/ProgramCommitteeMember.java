@@ -1,6 +1,7 @@
 package com.frasinu.iss.persistance.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by bjz on 5/9/2017.
@@ -12,12 +13,18 @@ public class ProgramCommitteeMember {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Integer id;
+
     @Column(name = "affiliation")
     protected String affiliation;
+
     @Column(name = "email")
     protected String email;
+
     @Column(name = "webpage")
     protected String webpage;
+
+    @OneToMany(mappedBy = "PCMember",fetch = FetchType.EAGER)
+    protected List<BiddedProposal> biddedProposals;
 
     public static ProgramCommitteeMemberBuilder builder() {
         return new ProgramCommitteeMemberBuilder();
@@ -43,5 +50,9 @@ public class ProgramCommitteeMember {
 
     public String getWebpage() {
         return webpage;
+    }
+
+    public List<BiddedProposal> getBiddedProposals() {
+        return biddedProposals;
     }
 }

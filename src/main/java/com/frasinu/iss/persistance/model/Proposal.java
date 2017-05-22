@@ -35,6 +35,9 @@ public class Proposal {
     @OneToMany(mappedBy = "proposal",fetch = FetchType.EAGER)
     private List<ReviewedProposal> reviewed;
 
+    @Fetch(FetchMode.SELECT)
+    @OneToMany(mappedBy = "proposal",fetch = FetchType.EAGER)
+    private List<BiddedProposal> bidded;
 
     @Fetch(FetchMode.SELECT)
     @ManyToMany(mappedBy = "proposals", fetch = FetchType.EAGER)
@@ -92,6 +95,10 @@ public class Proposal {
 
     public List<ReviewedProposal> getReviews() {
         return reviewed;
+    }
+
+    public List<BiddedProposal> getBids() {
+        return bidded;
     }
 }
 
