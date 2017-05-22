@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="363.0" prefWidth="685.0" styleClass="background" stylesheets="@stylelayout.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="363.0" prefWidth="685.0" styleClass="background" stylesheets="@stylelayout.css" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <GridPane layoutX="314.0" layoutY="77.0" prefHeight="260.0" prefWidth="342.0" stylesheets="@stylelayout.css">
         <columnConstraints>
@@ -47,14 +47,15 @@
             <Menu mnemonicParsing="false" text="Menu">
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#goToAuthor" text="Author" />
-                  <MenuItem mnemonicParsing="false" text="PC Member" />
-                  <MenuItem mnemonicParsing="false" text="Steering committee" />
+                  <MenuItem mnemonicParsing="false" onAction="#goToPCMember" text="PC Member" />
+                  <MenuItem mnemonicParsing="false" onAction="#goToSteeringCom" text="Steering committee" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Conference Edition">
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#seeSchedule" text="View schedule" />
-                  <MenuItem mnemonicParsing="false"  text="See info" />
+                  <MenuItem mnemonicParsing="false" text="See info" />
+                  <MenuItem mnemonicParsing="false" onAction="#goToConferences" text="Back to conferences" />
                </items>
             </Menu>
          </menus>

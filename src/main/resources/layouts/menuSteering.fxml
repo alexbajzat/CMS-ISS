@@ -19,9 +19,9 @@
         <menus>
           <Menu mnemonicParsing="false" text="Menu">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Author" />
+                  <MenuItem mnemonicParsing="false" onAction="#goToAuthor" text="Author" />
                   <MenuItem mnemonicParsing="false" onAction="#goToPCMember" text="PC Member" />
-                <MenuItem mnemonicParsing="false" onAction="#goToSteeringCom" text="Steering committee" />
+                <MenuItem mnemonicParsing="false" text="Steering committee" />
                </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Conference">
@@ -38,7 +38,7 @@
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="326.0" prefWidth="204.0" styleClass="background" stylesheets="@stylelayout.css">
                <children>
-                  <Button layoutX="36.0" layoutY="268.0" mnemonicParsing="false" onAction="#update" prefHeight="37.0" prefWidth="124.0" text="Update info" />
+                  <Button layoutX="36.0" layoutY="268.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="124.0" text="Update info" />
                   <GridPane layoutX="7.0" layoutY="57.0" prefHeight="195.0" prefWidth="181.0" stylesheets="@stylelayout.css">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="85.0" minWidth="10.0" prefWidth="78.0" />
@@ -57,15 +57,17 @@
                         <TextField fx:id="name" prefHeight="24.0" prefWidth="111.0" GridPane.columnIndex="1" />
                         <TextField fx:id="email" prefHeight="22.0" prefWidth="111.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <TextField fx:id="affiliation" prefHeight="8.0" prefWidth="111.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label text="Webpage:" GridPane.rowIndex="3" />
+                        <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
                      </children>
                   </GridPane>
-                  <Label layoutX="14.0" layoutY="14.0" text="AUTHOR" />
+                  <Label layoutX="14.0" layoutY="14.0" text="STEERING MEMBER" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="326.0" prefWidth="468.0" styleClass="background" stylesheets="@stylelayout.css">
                <children>
-                  <Button layoutX="60.0" layoutY="263.0" mnemonicParsing="false" text="Upload a paper" />
-                  <Button layoutX="235.0" layoutY="263.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="202.0" text="View uploaded papers" />
+                  <Button layoutX="82.0" layoutY="264.0" mnemonicParsing="false" text="Assing papers" />
+                  <Button layoutX="209.0" layoutY="264.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="178.0" text="Modify conference" />
                </children>
             </AnchorPane>
         </items>

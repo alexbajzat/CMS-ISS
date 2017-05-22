@@ -61,8 +61,6 @@ public class ConferenceInfoController extends BaseController{
         FrasinuApplication.changeScreen(Screen.SCHEDULE, getData());
     }
 
-
-
     @Override
     public void setData(HashMap<String, Object> data){
         super.setData(data);
@@ -117,6 +115,16 @@ public class ConferenceInfoController extends BaseController{
         map.put("idAuthor", author.getId());
         FrasinuApplication.changeScreen(Screen.AUTHOR, getData());
     }
+    public void goToPCMember(ActionEvent ac){
+        FrasinuApplication.changeScreen(Screen.PCMEMBER, getData());
+    }
+
+    public void goToSteeringCom(ActionEvent ac){
+        FrasinuApplication.changeScreen(Screen.STEERING, getData());
+    }
 
 
+    public void goToConferences(ActionEvent actionEvent) {
+        FrasinuApplication.changeScreen(Screen.CONFERENCES,getData());
+    }
 }
