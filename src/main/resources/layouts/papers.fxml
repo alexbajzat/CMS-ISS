@@ -26,9 +26,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
-            <children>
                 <Label prefHeight="41.0" prefWidth="162.0" text="Select extra author(s):" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            </children>
         </GridPane>
         <Button layoutX="385.0" layoutY="433.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="141.0" text="Upload file" />
         <TextField layoutX="126.0" layoutY="414.0" promptText="example.docx" />
