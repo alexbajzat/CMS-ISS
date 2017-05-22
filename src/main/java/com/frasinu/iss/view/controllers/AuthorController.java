@@ -45,10 +45,7 @@ public class AuthorController extends BaseController {
     public void seeSchedule(ActionEvent ac){
             FrasinuApplication.changeScreen(Screen.SCHEDULE,getData());
         }
-    public void seeConferenceInfo(ActionEvent ac){
-            //make a new screen
-            FrasinuApplication.changeScreen(Screen.CONFERENCEINFO,getData());
-        }
+    public void seeConferenceInfo(ActionEvent ac){FrasinuApplication.changeScreen(Screen.CONFERENCEINFO,getData());}
 
     public void goToPaper(ActionEvent ac){ FrasinuApplication.changeScreen(Screen.PAPER, getData());}
 
@@ -93,5 +90,11 @@ public class AuthorController extends BaseController {
         }
         authorService.updateUser(new UpdateAuthorRequest(newAuthor.getId(),newAuthor.getAffiliation(),newAuthor.getEmail(),newAuthor.getUser(),newAuthor.getConferenceEdition()));
     }
+    public void goToPCMember(ActionEvent ac){
+        FrasinuApplication.changeScreen(Screen.PCMEMBER, getData());
+    }
 
+    public void goToSteeringCom(ActionEvent ac){
+        FrasinuApplication.changeScreen(Screen.STEERING, getData());
+    }
 }

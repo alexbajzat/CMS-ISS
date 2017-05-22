@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="363.0" prefWidth="685.0" styleClass="background" stylesheets="@stylelayout.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="363.0" prefWidth="685.0" styleClass="background" stylesheets="@stylelayout.css" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <TableView layoutX="14.0" layoutY="41.0" prefHeight="245.0" prefWidth="249.0">
          <columns>
@@ -26,10 +26,9 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <HBox layoutX="473.0" layoutY="305.0" prefHeight="44.0" prefWidth="196.0">
+      <HBox layoutX="448.0" layoutY="305.0" prefHeight="44.0" prefWidth="196.0">
          <children>
             <Button mnemonicParsing="false" onAction="#goToAttend" prefHeight="37.0" prefWidth="100.0" text="Attend" />
-            <Button mnemonicParsing="false" onAction="#goToConferences" prefHeight="37.0" prefWidth="94.0" text="Back" />
          </children>
       </HBox>
       <MenuBar prefHeight="35.0" prefWidth="685.0">
@@ -37,14 +36,15 @@
             <Menu mnemonicParsing="false" text="Menu">
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#goToAuthor" text="Author" />
-                  <MenuItem mnemonicParsing="false" text="PC Member" />
-                  <MenuItem mnemonicParsing="false" text="Steering committee" />
+                  <MenuItem mnemonicParsing="false" onAction="#goToPCMember" text="PC Member" />
+                  <MenuItem mnemonicParsing="false" onAction="#goToSteeringCom" text="Steering committee" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Conference Edition">
                <items>
                   <MenuItem mnemonicParsing="false" text="View schedule" />
                   <MenuItem mnemonicParsing="false" onAction="#seeConferenceInfo" text="See info" />
+                  <MenuItem mnemonicParsing="false" onAction="#goToConferences" text="Back to conferences" />
                </items>
             </Menu>
          </menus>
