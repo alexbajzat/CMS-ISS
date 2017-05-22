@@ -26,10 +26,9 @@ public class Keyword {
     public Keyword() {
     }
 
-    public Keyword(int id, String value, List<Keyword> proposals) {
+    public Keyword(String value) {
         this.id = id;
         this.value = value;
-        this.proposals = proposals;
     }
 
 
