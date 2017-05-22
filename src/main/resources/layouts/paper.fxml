@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="607.0" prefWidth="635.0" styleClass="background" stylesheets="@stylelayout.css" xmlns="http://javafx.com/javafx/8.0.76-ea" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="519.0" prefWidth="635.0" styleClass="background" stylesheets="@stylelayout.css" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <GridPane layoutX="21.0" layoutY="25.0" prefHeight="132.0" prefWidth="276.0">
             <columnConstraints>
@@ -28,18 +28,18 @@
             </rowConstraints>
                 <Label prefHeight="41.0" prefWidth="162.0" text="Select extra author(s):" GridPane.columnIndex="1" GridPane.rowIndex="1" />
         </GridPane>
-        <Button layoutX="385.0" layoutY="433.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="141.0" text="Upload file" />
-        <TextField layoutX="126.0" layoutY="414.0" promptText="example.docx" />
-        <Label layoutX="7.0" layoutY="420.0" text="Paper(full):" />
-        <ListView layoutX="74.0" layoutY="74.0" prefHeight="200.0" prefWidth="200.0" />
-        <ListView layoutX="355.0" layoutY="74.0" prefHeight="200.0" prefWidth="200.0" />
-        <Button layoutX="104.0" layoutY="300.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="141.0" text="Add author" />
-        <Button layoutX="387.0" layoutY="300.0" mnemonicParsing="false" text="Remove author" />
-        <TextField layoutX="126.0" layoutY="362.0" promptText="example.docx" />
-        <Label layoutX="7.0" layoutY="368.0" text="Paper(abstract):" />
-        <TextField layoutX="126.0" layoutY="469.0" promptText="keyword1,keyword2,etc." />
-        <TextField layoutX="126.0" layoutY="522.0" promptText="topics1,topics2,etc." />
-        <Label layoutX="8.0" layoutY="475.0" text="Keywords:" />
-        <Label layoutX="22.0" layoutY="528.0" text="Topics:" />
+        <Button layoutX="413.0" layoutY="352.0" mnemonicParsing="false" onAction="#upload" prefHeight="37.0" prefWidth="141.0" text="Upload file" />
+        <TextField fx:id="fullPaperTxt" layoutX="162.0" layoutY="333.0" promptText="example.docx" />
+        <Label layoutX="34.0" layoutY="339.0" text="Paper(full):" />
+        <ListView fx:id="listAuthors" layoutX="74.0" layoutY="74.0" prefHeight="175.0" prefWidth="162.0" />
+        <ListView fx:id="listExtraAuthors" layoutX="354.0" layoutY="74.0" prefHeight="175.0" prefWidth="162.0" />
+        <Button layoutX="254.0" layoutY="112.0" mnemonicParsing="false" onAction="#addExtraAuthor" prefHeight="37.0" prefWidth="86.0" text="Add" />
+        <Button layoutX="254.0" layoutY="170.0" mnemonicParsing="false" onAction="#removeExtraAuthor" text="Remove" />
+        <TextField fx:id="abstractPaperTxt" layoutX="162.0" layoutY="281.0" promptText="example.docx" />
+        <Label layoutX="34.0" layoutY="287.0" text="Paper(abstract):" />
+        <TextField fx:id="keywordsTxt" layoutX="162.0" layoutY="388.0" promptText="keyword1,keyword2,etc." />
+        <TextField fx:id="topicsTxt" layoutX="162.0" layoutY="441.0" promptText="topics1,topics2,etc." />
+        <Label layoutX="34.0" layoutY="394.0" text="Keywords:" />
+        <Label layoutX="34.0" layoutY="447.0" text="Topics:" />
     </children>
 </AnchorPane>
