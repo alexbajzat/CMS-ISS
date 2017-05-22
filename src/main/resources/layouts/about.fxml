@@ -5,42 +5,38 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-      prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.131"
-      stylesheets="@/layouts/stylelayout.css"
-      xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@/layouts/stylelayout.css" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <Label layoutX="189.0" layoutY="30.0" text="Welcome!">
             <font>
-                <Font size="50.0"/>
+                <Font size="50.0" />
             </font>
         </Label>
         <Label layoutX="32.0" layoutY="110.0" text="App build by: ">
             <font>
-                <Font size="22.0"/>
+                <Font size="22.0" />
             </font>
         </Label>
         <Label layoutX="175.0" layoutY="107.0" text="Paul Boldijar ">
             <font>
-                <Font size="29.0"/>
+                <Font size="29.0" />
             </font>
         </Label>
         <Label layoutX="175.0" layoutY="158.0" text="Your name">
             <font>
-                <Font size="29.0"/>
+                <Font size="29.0" />
             </font>
         </Label>
         <Label layoutX="175.0" layoutY="200.0" text="Your name">
             <font>
-                <Font size="29.0"/>
+                <Font size="29.0" />
             </font>
         </Label>
         <Label layoutX="175.0" layoutY="244.0" text="Your name">
             <font>
-                <Font size="29.0"/>
+                <Font size="29.0" />
             </font>
         </Label>
-        <Button fx:id="magic" layoutX="476.0" layoutY="359.0" mnemonicParsing="false" onAction="#magicClicked"
-                text="Click for magic"/>
+        <Button fx:id="magic" layoutX="333.0" layoutY="276.0" mnemonicParsing="false" onAction="#magicClicked" text="Click for magic" />
     </children>
 </Pane>
