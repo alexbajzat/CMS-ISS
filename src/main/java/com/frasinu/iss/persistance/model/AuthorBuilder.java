@@ -8,15 +8,16 @@ public class AuthorBuilder {
     private String affiliation;
     private String email;
     private User user;
+    private ConferenceEdition conferenceEdition;
 
     AuthorBuilder() {
     }
 
     public Author build() {
-        return new Author(id, affiliation, email);
+        return new Author(id, affiliation, email,user,conferenceEdition);
     }
 
-    AuthorBuilder setId(Integer id) {
+    public AuthorBuilder setId(Integer id) {
         this.id = id;
         return this;
     }
@@ -35,4 +36,10 @@ public class AuthorBuilder {
         this.email = email;
         return this;
     }
+
+    public AuthorBuilder setConferenceEdition(ConferenceEdition conferenceEdition) {
+        this.conferenceEdition=conferenceEdition;
+        return this;
+    }
+
 }

@@ -3,6 +3,7 @@ package com.frasinu.iss.persistance.model;
 import javax.persistence.*;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  * Created by cory_ on 19-May-17.
@@ -32,6 +33,9 @@ public class ConferenceEdition {
     @ManyToOne
     @JoinColumn(name = "id_conference")
     private Conference conference;
+
+    @OneToMany(mappedBy = "conferenceEdition")
+    private List<Author> authors;
 
 
     public ConferenceEdition() {
@@ -90,5 +94,8 @@ public class ConferenceEdition {
         return this.conference;
     }
 
+    public List<Author> getAuthors() {
+        return authors;
+    }
 }
 

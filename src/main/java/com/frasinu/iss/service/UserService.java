@@ -3,6 +3,7 @@ package com.frasinu.iss.service;
 import com.frasinu.iss.exception.InexistentException;
 import com.frasinu.iss.exception.LoginException;
 import com.frasinu.iss.exception.RegisterException;
+import com.frasinu.iss.persistance.model.Author;
 import com.frasinu.iss.persistance.repository.UserRepository;
 import com.frasinu.iss.persistance.model.User;
 import com.frasinu.iss.service.service_requests.user.*;
@@ -91,6 +92,27 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    public User updateUserPasswordEncoded(UpdateUserRequest updateUserRequest) throws InexistentException, ValidationException {
+        int id = updateUserRequest.getIdOfUserToUpdate();
+        String name = updateUserRequest.getNewName();
+        String username = updateUserRequest.getNewUsername();
+        String password = updateUserRequest.getNewPassword();
+
+        PasswordEncoder encoder = new Md5PasswordEncoder();
+
+        User user = User.builder()
+                .setId(id)
+                .setName(name)
+                .setUsername(username)
+                .setPassword(password)
+                .build();
+
+        if (userRepository.findOne(id) == null) {
+            throw new InexistentException("No such user!");
+        }
+        return userRepository.save(user);
+    }
+
     public void checkLogin(LoginUserRequest loginUserRequest) throws LoginException {
         String username = loginUserRequest.getUsername();
         String password = loginUserRequest.getPassword();
@@ -109,5 +131,18 @@ public class UserService {
         return userRepository.findByUsername(findByUsernameRequest.getUsername());
     }
 
+
+    public Author findIfUserIsAuthor(FindIfUserIsAuthorRequest findIfUserIsAuthorRequest){
+        User user=userRepository.findById(findIfUserIsAuthorRequest.getIdUser());
+        for(Author a:user.getAuthors()){
+            if(a.getConferenceEdition().getId()==findIfUserIsAuthorRequest.getIdEdition())
+                return a;
+        }
+        return null;
+    }
+
+    public User findById(FindByIdRequest findByIdRequest){
+        return userRepository.findById(findByIdRequest.getId());
+    }
 }
 

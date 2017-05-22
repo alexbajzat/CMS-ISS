@@ -22,7 +22,11 @@ public class Author {
     @JoinColumn(name = "id_user", nullable = false)
     private User user;
 
-    @ManyToMany(mappedBy = "authors", fetch = FetchType.EAGER)
+    @ManyToOne()
+    @JoinColumn(name = "id_conference_edition", nullable = false)
+    private ConferenceEdition conferenceEdition;
+
+    @ManyToMany(mappedBy = "authors")
     private List<Proposal> proposals;
 
 
@@ -33,14 +37,20 @@ public class Author {
         return new AuthorBuilder();
     }
 
-    Author(Integer id, String affiliation, String email) {
+    Author(Integer id, String affiliation, String email, User user,ConferenceEdition conferenceEdition) {
         this.id = id;
         this.affiliation = affiliation;
         this.email = email;
+        this.user=user;
+        this.conferenceEdition=conferenceEdition;
     }
 
     public User getUser() {
         return user;
+    }
+
+    public ConferenceEdition getConferenceEdition() {
+        return conferenceEdition;
     }
 
 
