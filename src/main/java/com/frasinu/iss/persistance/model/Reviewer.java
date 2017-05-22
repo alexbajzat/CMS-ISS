@@ -25,7 +25,7 @@ public class Reviewer {
     private User user;
 
 
-    @OneToMany(mappedBy = "reviewer", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "reviewer")
     private List<ReviewedProposal> proposals;
 
     public Reviewer() {
