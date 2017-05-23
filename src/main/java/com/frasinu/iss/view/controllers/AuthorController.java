@@ -3,10 +3,13 @@ package com.frasinu.iss.view.controllers;
 
 
 import com.frasinu.iss.persistance.model.Author;
+import com.frasinu.iss.persistance.model.Reviewer;
 import com.frasinu.iss.persistance.model.User;
 import com.frasinu.iss.service.AuthorService;
+import com.frasinu.iss.service.ReviewerService;
 import com.frasinu.iss.service.UserService;
 import com.frasinu.iss.service.service_requests.author.UpdateAuthorRequest;
+import com.frasinu.iss.service.service_requests.reviewer.FindByUserIdRequest;
 import com.frasinu.iss.service.service_requests.user.FindByIdRequest;
 import com.frasinu.iss.service.service_requests.user.UpdateUserRequest;
 import com.frasinu.iss.view.FrasinuApplication;
@@ -31,6 +34,13 @@ public class AuthorController extends BaseController {
 
     private AuthorService authorService;
     private UserService userService;
+    private ReviewerService reviewerService;
+
+
+    @Autowired
+    public void setReviewerService(ReviewerService reviewerService) {
+        this.reviewerService=reviewerService;
+    }
 
     @Autowired
     public void setAuthorService(AuthorService authorService) {
@@ -90,8 +100,20 @@ public class AuthorController extends BaseController {
         }
         authorService.updateUser(new UpdateAuthorRequest(newAuthor.getId(),newAuthor.getAffiliation(),newAuthor.getEmail(),newAuthor.getUser(),newAuthor.getConferenceEdition()));
     }
-    public void goToPCMember(ActionEvent ac){
-        FrasinuApplication.changeScreen(Screen.PCMEMBER, getData());
+    public void goToPCMember(ActionEvent ac) {
+        Reviewer reviewer = reviewerService.findByUserId(new FindByUserIdRequest((int) getData().get("idUser"), (int) getData().get("idEdition")));
+        if (reviewer == null) {
+            showDialog("You are not part of the Program Committee Members", "Ooops!");
+            return;
+        } else {
+            if (reviewer.getEmail() == null && reviewer.getWebpage() == null && reviewer.getAffiliation() == null)
+                showDialog("We are glad that you accepted to be a Program Committee Member this year. Please complete your personal info on the left side to " +
+                        "complete the registration.", "Info!");
+
+            HashMap<String, Object> map = getData();
+            map.put("idReviewer", reviewer.getId());
+            FrasinuApplication.changeScreen(Screen.PCMEMBER, getData());
+        }
     }
 
     public void goToSteeringCom(ActionEvent ac){
