@@ -2,20 +2,20 @@ package com.frasinu.iss.view.controllers;
 
 import com.frasinu.iss.persistance.model.Author;
 import com.frasinu.iss.persistance.model.Reviewer;
+import com.frasinu.iss.persistance.model.SteeringCommitteeMember;
 import com.frasinu.iss.persistance.model.User;
-import com.frasinu.iss.service.AuthorService;
-import com.frasinu.iss.service.ConferenceEditionService;
-import com.frasinu.iss.service.ReviewerService;
-import com.frasinu.iss.service.UserService;
+import com.frasinu.iss.service.*;
 import com.frasinu.iss.service.service_requests.author.CreateAuthorRequest;
 import com.frasinu.iss.service.service_requests.conferenceedition.FindByConferenceEditionIdRequest;
 import com.frasinu.iss.service.service_requests.reviewer.FindReviewerByIdRequest;
 import com.frasinu.iss.service.service_requests.reviewer.UpdateReviewerRequest;
+import com.frasinu.iss.service.service_requests.steeringcommitteemember.FindByUserAndConferenceEditionIdRequest;
 import com.frasinu.iss.service.service_requests.user.FindByIdRequest;
 import com.frasinu.iss.service.service_requests.user.FindIfUserIsAuthorRequest;
 import com.frasinu.iss.service.service_requests.user.UpdateUserRequest;
 import com.frasinu.iss.view.FrasinuApplication;
 import com.frasinu.iss.view.Screen;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -38,7 +38,13 @@ public class PCController extends BaseController{
     private UserService userService;
     private AuthorService authorService;
     private ReviewerService reviewerService;
+    private SteeringCommitteeMemberService steeringCommitteeMemberService;
 
+    @Autowired
+    public void setSteeringCommitteeMemberService(SteeringCommitteeMemberService steeringCommitteeMemberService) {
+
+        this.steeringCommitteeMemberService=steeringCommitteeMemberService;
+    }
 
     @Autowired
     public void setReviewerService(ReviewerService reviewerService) {
@@ -133,8 +139,21 @@ public class PCController extends BaseController{
 
         FrasinuApplication.changeScreen(Screen.AUTHOR, getData());
     }
-    public void goToSteeringCom(javafx.event.ActionEvent ac){
-        FrasinuApplication.changeScreen(Screen.STEERING, getData());
+
+    public void goToSteeringCom(ActionEvent ac) {
+        SteeringCommitteeMember steeringCommitteeMember = steeringCommitteeMemberService.findByUserAndConferenceEditionId(new FindByUserAndConferenceEditionIdRequest((int) getData().get("idUser"), (int) getData().get("idEdition")));
+        if (steeringCommitteeMember == null) {
+            showDialog("You are not part of the Steering Committee Members", "Ooops!");
+            return;
+        } else {
+            HashMap<String, Object> map = getData();
+            map.put("idSteeringCommitteeMember", steeringCommitteeMember.getId());
+            FrasinuApplication.changeScreen(Screen.STEERING, getData());
+        }
+    }
+
+    public void goToConferences(ActionEvent actionEvent) {
+        FrasinuApplication.changeScreen(Screen.CONFERENCES,getData());
     }
 
 }

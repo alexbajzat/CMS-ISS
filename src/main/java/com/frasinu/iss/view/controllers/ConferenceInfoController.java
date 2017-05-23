@@ -1,14 +1,12 @@
 package com.frasinu.iss.view.controllers;
 
-import com.frasinu.iss.persistance.model.Author;
-import com.frasinu.iss.persistance.model.Conference;
-import com.frasinu.iss.persistance.model.ConferenceEdition;
-import com.frasinu.iss.persistance.model.Reviewer;
+import com.frasinu.iss.persistance.model.*;
 import com.frasinu.iss.service.*;
 import com.frasinu.iss.service.service_requests.author.CreateAuthorRequest;
 import com.frasinu.iss.service.service_requests.conferenceedition.FindByConferenceEditionIdRequest;
 import com.frasinu.iss.service.service_requests.conferenceedition.FindConferenceByConferenceEditionIdRequest;
 import com.frasinu.iss.service.service_requests.reviewer.FindByUserAndEditionIdRequest;
+import com.frasinu.iss.service.service_requests.steeringcommitteemember.FindByUserAndConferenceEditionIdRequest;
 import com.frasinu.iss.service.service_requests.user.FindByIdRequest;
 import com.frasinu.iss.service.service_requests.user.FindIfUserIsAuthorRequest;
 import com.frasinu.iss.view.FrasinuApplication;
@@ -37,6 +35,14 @@ public class ConferenceInfoController extends BaseController{
     @FXML
     TextField startDate,endDate,abstractsDeadline,papersDeadline,bidDeadline,evaluationDeadline;
 
+
+    private SteeringCommitteeMemberService steeringCommitteeMemberService;
+
+    @Autowired
+    public void setSteeringCommitteeMemberService(SteeringCommitteeMemberService steeringCommitteeMemberService) {
+
+        this.steeringCommitteeMemberService=steeringCommitteeMemberService;
+    }
     @Autowired
     public void setConferenceEditionService(ConferenceEditionService conferenceEditionService) {
         this.conferenceEditionService = conferenceEditionService;
@@ -130,8 +136,16 @@ public class ConferenceInfoController extends BaseController{
         }
     }
 
-    public void goToSteeringCom(ActionEvent ac){
-        FrasinuApplication.changeScreen(Screen.STEERING, getData());
+    public void goToSteeringCom(ActionEvent ac) {
+        SteeringCommitteeMember steeringCommitteeMember = steeringCommitteeMemberService.findByUserAndConferenceEditionId(new FindByUserAndConferenceEditionIdRequest((int) getData().get("idUser"), (int) getData().get("idEdition")));
+        if (steeringCommitteeMember == null) {
+            showDialog("You are not part of the Steering Committee Members", "Ooops!");
+            return;
+        } else {
+            HashMap<String, Object> map = getData();
+            map.put("idSteeringCommitteeMember", steeringCommitteeMember.getId());
+            FrasinuApplication.changeScreen(Screen.STEERING, getData());
+        }
     }
 
 

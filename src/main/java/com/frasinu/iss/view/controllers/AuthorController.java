@@ -4,12 +4,15 @@ package com.frasinu.iss.view.controllers;
 
 import com.frasinu.iss.persistance.model.Author;
 import com.frasinu.iss.persistance.model.Reviewer;
+import com.frasinu.iss.persistance.model.SteeringCommitteeMember;
 import com.frasinu.iss.persistance.model.User;
 import com.frasinu.iss.service.AuthorService;
 import com.frasinu.iss.service.ReviewerService;
+import com.frasinu.iss.service.SteeringCommitteeMemberService;
 import com.frasinu.iss.service.UserService;
 import com.frasinu.iss.service.service_requests.author.UpdateAuthorRequest;
 import com.frasinu.iss.service.service_requests.reviewer.FindByUserAndEditionIdRequest;
+import com.frasinu.iss.service.service_requests.steeringcommitteemember.FindByUserAndConferenceEditionIdRequest;
 import com.frasinu.iss.service.service_requests.user.FindByIdRequest;
 import com.frasinu.iss.service.service_requests.user.UpdateUserRequest;
 import com.frasinu.iss.view.FrasinuApplication;
@@ -35,7 +38,13 @@ public class AuthorController extends BaseController {
     private AuthorService authorService;
     private UserService userService;
     private ReviewerService reviewerService;
+    private SteeringCommitteeMemberService steeringCommitteeMemberService;
 
+    @Autowired
+    public void setSteeringCommitteeMemberService(SteeringCommitteeMemberService steeringCommitteeMemberService) {
+
+        this.steeringCommitteeMemberService=steeringCommitteeMemberService;
+    }
 
     @Autowired
     public void setReviewerService(ReviewerService reviewerService) {
@@ -58,6 +67,10 @@ public class AuthorController extends BaseController {
     public void seeConferenceInfo(ActionEvent ac){FrasinuApplication.changeScreen(Screen.CONFERENCEINFO,getData());}
 
     public void goToPaper(ActionEvent ac){ FrasinuApplication.changeScreen(Screen.PAPER, getData());}
+
+    public void goToConferences(ActionEvent actionEvent) {
+        FrasinuApplication.changeScreen(Screen.CONFERENCES,getData());
+    }
 
     @Override
     public void setData(HashMap<String, Object> data){
@@ -116,7 +129,14 @@ public class AuthorController extends BaseController {
         }
     }
 
-    public void goToSteeringCom(ActionEvent ac){
-        FrasinuApplication.changeScreen(Screen.STEERING, getData());
-    }
-}
+    public void goToSteeringCom(ActionEvent ac) {
+        SteeringCommitteeMember steeringCommitteeMember = steeringCommitteeMemberService.findByUserAndConferenceEditionId(new FindByUserAndConferenceEditionIdRequest((int) getData().get("idUser"), (int) getData().get("idEdition")));
+        if (steeringCommitteeMember == null) {
+            showDialog("You are not part of the Steering Committee Members", "Ooops!");
+            return;
+        } else {
+            HashMap<String, Object> map = getData();
+            map.put("idSteeringCommitteeMember", steeringCommitteeMember.getId());
+            FrasinuApplication.changeScreen(Screen.STEERING, getData());
+        }
+    }}

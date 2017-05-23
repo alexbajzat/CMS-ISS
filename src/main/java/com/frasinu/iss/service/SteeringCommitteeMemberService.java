@@ -16,7 +16,7 @@ public class SteeringCommitteeMemberService {
     @Autowired
     private SteeringCommitteeMemberRepository steeringCommitteeMemberRepository;
 
-    public SteeringCommitteeMember findByUserAndConferenceId(FindByUserAndConferenceEditionIdRequest findByUserAndConferenceIdRequest){
+    public SteeringCommitteeMember findByUserAndConferenceEditionId(FindByUserAndConferenceEditionIdRequest findByUserAndConferenceIdRequest){
         return steeringCommitteeMemberRepository.findByUserAndEditionId(findByUserAndConferenceIdRequest.getIdUser(),findByUserAndConferenceIdRequest.getIdEdition());
     }
 

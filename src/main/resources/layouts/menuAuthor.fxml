@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="363.0" prefWidth="685.0" styleClass="background" stylesheets="@stylelayout.css" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="363.0" prefWidth="685.0" styleClass="background" stylesheets="@stylelayout.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
@@ -24,12 +24,13 @@
                 <MenuItem mnemonicParsing="false" onAction="#goToSteeringCom" text="Steering committee" />
                </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Conference">
-            <items>
-              <MenuItem mnemonicParsing="false" onAction="#seeSchedule" text="View schedule" />
+            <Menu mnemonicParsing="false" text="Conference">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#seeSchedule" text="View schedule" />
                   <MenuItem mnemonicParsing="false" onAction="#seeConferenceInfo" text="See info" />
-            </items>
-          </Menu>
+                  <MenuItem mnemonicParsing="false" onAction="#goToConferences" text="Back to conferences" />
+               </items>
+            </Menu>
         </menus>
       </MenuBar>
    </top>

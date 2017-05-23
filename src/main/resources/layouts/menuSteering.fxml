@@ -24,12 +24,13 @@
                 <MenuItem mnemonicParsing="false" text="Steering committee" />
                </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Conference">
-            <items>
-              <MenuItem mnemonicParsing="false" onAction="#seeSchedule" text="View schedule" />
+            <Menu mnemonicParsing="false" text="Conference">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#seeSchedule" text="View schedule" />
                   <MenuItem mnemonicParsing="false" onAction="#seeConferenceInfo" text="See info" />
-            </items>
-          </Menu>
+                  <MenuItem mnemonicParsing="false" onAction="#goToConferences" text="Back to conferences" />
+               </items>
+            </Menu>
         </menus>
       </MenuBar>
    </top>
@@ -50,11 +51,14 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Label text="Rank:" />
-                        <TextField fx:id="rank" prefHeight="24.0" prefWidth="111.0" GridPane.columnIndex="1" />
+                        <Label text="Rank:" GridPane.rowIndex="1" />
+                        <TextField fx:id="rank" editable="false" prefHeight="24.0" prefWidth="111.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField fx:id="name" GridPane.columnIndex="1" />
+                        <Label text="Name:" />
                      </children>
                   </GridPane>
                   <Label layoutX="10.0" prefHeight="57.0" prefWidth="189.0" text="STEERING COMMITTEE MEMBER" textAlignment="CENTER" wrapText="true" />
+                  <Button layoutX="49.0" layoutY="275.0" mnemonicParsing="false" onAction="#update" text="Update Info" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="326.0" prefWidth="460.0" styleClass="background" stylesheets="@stylelayout.css">
