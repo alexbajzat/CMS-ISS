@@ -1,5 +1,6 @@
 package com.frasinu.iss.utils.parser;
 
+import com.frasinu.iss.exception.ParserException;
 import org.apache.poi.xwpf.extractor.XWPFWordExtractor;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
@@ -19,7 +20,7 @@ public class DocumentParser {
         try {
             docx = new XWPFDocument(inputStream);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new ParserException("Parser erorr:"+e);
         }
         XWPFWordExtractor we = new XWPFWordExtractor(docx);
         List<XWPFParagraph> text = docx.getParagraphs();
