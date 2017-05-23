@@ -9,7 +9,7 @@ import com.frasinu.iss.service.AuthorService;
 import com.frasinu.iss.service.ReviewerService;
 import com.frasinu.iss.service.UserService;
 import com.frasinu.iss.service.service_requests.author.UpdateAuthorRequest;
-import com.frasinu.iss.service.service_requests.reviewer.FindByUserIdRequest;
+import com.frasinu.iss.service.service_requests.reviewer.FindByUserAndEditionIdRequest;
 import com.frasinu.iss.service.service_requests.user.FindByIdRequest;
 import com.frasinu.iss.service.service_requests.user.UpdateUserRequest;
 import com.frasinu.iss.view.FrasinuApplication;
@@ -101,7 +101,7 @@ public class AuthorController extends BaseController {
         authorService.updateAuthor(new UpdateAuthorRequest(newAuthor.getId(),newAuthor.getAffiliation(),newAuthor.getEmail(),newAuthor.getUser(),newAuthor.getConferenceEdition()));
     }
     public void goToPCMember(ActionEvent ac) {
-        Reviewer reviewer = reviewerService.findByUserId(new FindByUserIdRequest((int) getData().get("idUser"), (int) getData().get("idEdition")));
+        Reviewer reviewer = reviewerService.findByUserAndEditionId(new FindByUserAndEditionIdRequest((int) getData().get("idUser"), (int) getData().get("idEdition")));
         if (reviewer == null) {
             showDialog("You are not part of the Program Committee Members", "Ooops!");
             return;

@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public interface ReviewerRepository extends JpaRepository<Reviewer, Integer> {
     @Query(value = "select * from reviewer a where a.id_user = :id and a.id_conference_edition=:id_conference_edition" , nativeQuery = true)
-   Reviewer findByUserId(@Param("id") Integer userId,@Param(value = "id_conference_edition") int idConferenceEdition);
+   Reviewer findByUserAndEditionId(@Param("id") Integer userId,@Param(value = "id_conference_edition") int idConferenceEdition);
     @Query(value = "select * from reviewer a where a.id = :id" , nativeQuery = true)
     Reviewer findById(@Param("id") Integer Id);
 }

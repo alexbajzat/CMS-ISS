@@ -8,24 +8,20 @@ import com.frasinu.iss.service.*;
 import com.frasinu.iss.service.service_requests.author.CreateAuthorRequest;
 import com.frasinu.iss.service.service_requests.conferenceedition.FindByConferenceEditionIdRequest;
 import com.frasinu.iss.service.service_requests.conferenceedition.FindConferenceByConferenceEditionIdRequest;
-import com.frasinu.iss.service.service_requests.reviewer.FindByUserIdRequest;
+import com.frasinu.iss.service.service_requests.reviewer.FindByUserAndEditionIdRequest;
 import com.frasinu.iss.service.service_requests.user.FindByIdRequest;
 import com.frasinu.iss.service.service_requests.user.FindIfUserIsAuthorRequest;
 import com.frasinu.iss.view.FrasinuApplication;
 import com.frasinu.iss.view.Screen;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import javafx.event.ActionEvent;
 
-import javax.xml.soap.Text;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Optional;
-import java.util.ResourceBundle;
 
 /**
  * Created by Ericqw on 20.05.2017.
@@ -118,7 +114,7 @@ public class ConferenceInfoController extends BaseController{
     }
     public void goToPCMember(ActionEvent ac){
 
-        Reviewer reviewer=reviewerService.findByUserId(new FindByUserIdRequest((int)getData().get("idUser"),(int)getData().get("idEdition")));
+        Reviewer reviewer=reviewerService.findByUserAndEditionId(new FindByUserAndEditionIdRequest((int)getData().get("idUser"),(int)getData().get("idEdition")));
         if(reviewer==null) {
                 showDialog("You are not part of the Program Committee Members", "Ooops!");
                 return;
