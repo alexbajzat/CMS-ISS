@@ -2,15 +2,21 @@ package com.frasinu.iss.view.controllers;
 
 
 import com.frasinu.iss.persistance.model.Author;
+import com.frasinu.iss.persistance.model.Proposal;
 import com.frasinu.iss.persistance.model.User;
 import com.frasinu.iss.service.AuthorService;
+import com.frasinu.iss.service.ProposalService;
 import com.frasinu.iss.service.UserService;
+import com.frasinu.iss.service.service_requests.author.FindUserIdRequest;
 import com.frasinu.iss.service.service_requests.author.UpdateAuthorRequest;
+import com.frasinu.iss.service.service_requests.proposal.FindForAuthorRequest;
 import com.frasinu.iss.service.service_requests.user.FindByIdRequest;
 import com.frasinu.iss.service.service_requests.user.UpdateUserRequest;
 import com.frasinu.iss.view.FrasinuApplication;
 import com.frasinu.iss.view.Screen;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -34,10 +40,10 @@ public class AuthorController extends BaseController {
     private TextField name, email, affiliation;
 
     @FXML
-    private TableColumn<Author, String> titleColumn;
+    private TableColumn<Proposal, String> titleColumn;
 
     @FXML
-    private TableColumn<Author, String> topicsColumn;
+    private TableColumn<Proposal, String> topicsColumn;
 
     @FXML
     private TableView uploadedProposalsTableView;
@@ -47,6 +53,9 @@ public class AuthorController extends BaseController {
 
     private AuthorService authorService;
     private UserService userService;
+    private ObservableList<Proposal> model;
+    private Integer authorId;
+    private ProposalService proposalService;
 
     @Autowired
     public void setAuthorService(AuthorService authorService) {
@@ -56,6 +65,11 @@ public class AuthorController extends BaseController {
     @Autowired
     public void setUserService(UserService userService) {
         this.userService = userService;
+    }
+
+    @Autowired
+    public void setProposalService(ProposalService proposalService) {
+        this.proposalService = proposalService;
     }
 
     public void seeSchedule(ActionEvent ac) {
@@ -88,7 +102,7 @@ public class AuthorController extends BaseController {
         if (author.getAffiliation() != null)
             affiliation.setText(author.getAffiliation());
         uploadedProposalsTableView.setVisible(false);
-
+        authorId = (Integer) getData().get("idAuthor");
     }
 
     public void update() {
@@ -121,6 +135,8 @@ public class AuthorController extends BaseController {
         if (uploadedProposalsTableView.isVisible()) {
             uploadedProposalsTableView.setVisible(false);
         } else {
+            model = FXCollections.observableList(proposalService.findForAuthor(new FindForAuthorRequest(authorId)));
+            uploadedProposalsTableView.setItems(model);
             uploadedProposalsTableView.setVisible(true);
         }
     }
