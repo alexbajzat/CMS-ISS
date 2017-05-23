@@ -14,7 +14,7 @@ public class Topic {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "value", unique = true)
+    @Column(name = "value")
     private String value;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)

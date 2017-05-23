@@ -4,6 +4,7 @@ import com.frasinu.iss.exception.InexistentException;
 import com.frasinu.iss.persistance.repository.AuthorRepository;
 import com.frasinu.iss.persistance.model.Author;
 import com.frasinu.iss.service.service_requests.author.CreateAuthorRequest;
+import com.frasinu.iss.service.service_requests.author.FindAllByConferenceEditionRequest;
 import com.frasinu.iss.service.service_requests.author.FindUserIdRequest;
 import com.frasinu.iss.service.service_requests.author.UpdateAuthorRequest;
 import com.frasinu.iss.service.service_requests.user.FindByIdRequest;
@@ -60,5 +61,8 @@ public class AuthorService {
         return authorRepository.findById(findByIdRequest.getId());
     }
 
+    public List<Author> findAllByConferenceEdition(FindAllByConferenceEditionRequest findAllByConferenceEditionRequest){
+        return authorRepository.findAllByConferenceEdition(findAllByConferenceEditionRequest.getConferenceEditionId());
+    }
 }
 

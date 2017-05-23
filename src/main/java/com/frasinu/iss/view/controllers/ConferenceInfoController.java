@@ -71,12 +71,7 @@ public class ConferenceInfoController extends BaseController{
         int idEdition=(int)getData().get("idEdition");
         ConferenceEdition conferenceEdition=conferenceEditionService.findByConferenceEditionId(new FindByConferenceEditionIdRequest(idEdition));
         Conference conference=conferenceEditionService.findConferenceByConferenceEditionId(new FindConferenceByConferenceEditionIdRequest(idEdition));
-        if(conference.getName()!=null )
-            name.setText(conference.getName());
-        if(conference.getName()!=null && conferenceEdition.getName()!=null)
-            name.setText(conference.getName()+"; "+conferenceEdition.getName());
-        if(conference.getWebpage()!=null)
-            website.setText(conference.getWebpage());
+        name.setText(conference.getName()+"; "+conferenceEdition.getName());
         if(conferenceEdition.getConferenceStartDate()!=null)
             startDate.setText(conferenceEdition.getConferenceStartDate().toString());
         if(conferenceEdition.getConferenceEndDate()!=null)

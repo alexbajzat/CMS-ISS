@@ -37,6 +37,9 @@ public class ConferenceEdition {
     @OneToMany(mappedBy = "conferenceEdition")
     private List<Author> authors;
 
+    @OneToMany(mappedBy = "conferenceEdition")
+    private List<Reviewer> reviewers;
+
 
     public ConferenceEdition() {
     }

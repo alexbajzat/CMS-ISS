@@ -13,7 +13,7 @@ public class Keyword {
     @Column(name = "id")
     @Id
     private int id;
-    @Column(name = "value", unique = true)
+    @Column(name = "value")
     private String value;
 
 

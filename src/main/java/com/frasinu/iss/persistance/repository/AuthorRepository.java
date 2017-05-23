@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * Created by bjz on 5/18/2017.
  */
@@ -15,4 +17,6 @@ public interface AuthorRepository extends JpaRepository<Author, Integer> {
     Author findByUserId(@Param("id") Integer userId);
     @Query(value = "select * from author a where a.id = :id" , nativeQuery = true)
     Author findById(@Param("id") Integer Id);
+    @Query(value = "Select * from author a  where a.id_conference_edition = :id_conference_edition",nativeQuery = true)
+    List<Author> findAllByConferenceEdition(@Param(value = "id_conference_edition") Integer id_conference_edition);
 }

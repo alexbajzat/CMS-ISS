@@ -8,12 +8,14 @@ public class ReviewerBuilder {
     private String affiliation;
     private String email;
     private String webpage;
+    private ConferenceEdition conferenceEdition;
+    private User user;
 
     public ReviewerBuilder() {
     }
 
     public Reviewer build() {
-        return new Reviewer(id, affiliation, email, webpage);
+        return new Reviewer(id, affiliation, email, webpage,user,conferenceEdition);
     }
 
     public ReviewerBuilder setId(Integer id) {
