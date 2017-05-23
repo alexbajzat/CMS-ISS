@@ -40,6 +40,9 @@ public class ConferenceEdition {
     @OneToMany(mappedBy = "conferenceEdition")
     private List<Reviewer> reviewers;
 
+    @OneToMany(mappedBy = "conferenceEdition")
+    private List<SteeringCommitteeMember> steeringCommitteeMembers;
+
 
     public ConferenceEdition() {
     }
