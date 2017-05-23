@@ -37,5 +37,17 @@ public class ReviewerBuilder {
         this.webpage = webpage;
         return this;
     }
+
+    public ReviewerBuilder setConferenceEdition(ConferenceEdition conferenceEdition) {
+        this.conferenceEdition = conferenceEdition;
+        return this;
+
+    }
+
+    public ReviewerBuilder setUser(User user) {
+        this.user = user;
+        return this;
+
+    }
 }
 

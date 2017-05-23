@@ -10,8 +10,10 @@ import com.frasinu.iss.service.UserService;
 import com.frasinu.iss.service.service_requests.author.CreateAuthorRequest;
 import com.frasinu.iss.service.service_requests.conferenceedition.FindByConferenceEditionIdRequest;
 import com.frasinu.iss.service.service_requests.reviewer.FindReviewerByIdRequest;
+import com.frasinu.iss.service.service_requests.reviewer.UpdateReviewerRequest;
 import com.frasinu.iss.service.service_requests.user.FindByIdRequest;
 import com.frasinu.iss.service.service_requests.user.FindIfUserIsAuthorRequest;
+import com.frasinu.iss.service.service_requests.user.UpdateUserRequest;
 import com.frasinu.iss.view.FrasinuApplication;
 import com.frasinu.iss.view.Screen;
 import javafx.fxml.FXML;
@@ -21,6 +23,7 @@ import javafx.scene.control.TextField;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import javax.xml.bind.ValidationException;
 import java.util.HashMap;
 import java.util.Optional;
 
@@ -77,6 +80,29 @@ public class PCController extends BaseController{
         if(reviewer.getWebpage()!=null)
             webpage.setText(reviewer.getWebpage());
 
+    }
+
+    public void update(){
+        int idReviewer=(int)getData().get("idReviewer");
+        int idUser=(int)getData().get("idUser");
+        User user= userService.findById(new FindByIdRequest(idUser));
+        Reviewer reviewer=reviewerService.findById(new FindReviewerByIdRequest(idReviewer));
+        User newUser=User.builder().setId(user.getId())
+                .setName(name.getText())
+                .setUsername(user.getUsername())
+                .setPassword(user.getPassword()).build();
+        Reviewer newReviewer=Reviewer.builder().setId(reviewer.getId())
+                .setEmail(email.getText())
+                .setAffiliation(affiliation.getText())
+                .setWebpage(webpage.getText())
+                .setUser(reviewer.getUser())
+                .setConferenceEdition(reviewer.getConferenceEdition()).build();
+        try {
+            userService.updateUserPasswordEncoded(new UpdateUserRequest(newUser.getId(),newUser.getName(),newUser.getUsername(),newUser.getPassword()));
+        } catch (ValidationException e) {
+            showDialog(e.getMessage(), "Ooops!");
+        }
+        reviewerService.updateReviewer(new UpdateReviewerRequest(newReviewer.getId(),newReviewer.getAffiliation(),newReviewer.getEmail(),newReviewer.getWebpage(),newReviewer.getUser(),newReviewer.getConferenceEdition()));
     }
 
     public void seeSchedule(javafx.event.ActionEvent ac){

@@ -46,6 +46,10 @@ public class Reviewer {
         this.conferenceEdition=conferenceEdition;
     }
 
+    public static ReviewerBuilder builder() {
+        return new ReviewerBuilder();
+    }
+
     public Integer getId() {
         return id;
     }
@@ -74,4 +78,7 @@ public class Reviewer {
         return biddedProposals;
     }
 
+    public ConferenceEdition getConferenceEdition() {
+        return conferenceEdition;
+    }
 }

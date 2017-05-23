@@ -32,7 +32,7 @@ public class AuthorService {
         return authorRepository.save(author);
     }
 
-    public Author updateUser(UpdateAuthorRequest updateAuthorRequest) throws InexistentException {
+    public Author updateAuthor(UpdateAuthorRequest updateAuthorRequest) throws InexistentException {
 
         Author author = Author.builder()
                 .setId(updateAuthorRequest.getIdOfAuthorToUpdate())

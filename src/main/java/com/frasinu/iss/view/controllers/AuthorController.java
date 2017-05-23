@@ -98,7 +98,7 @@ public class AuthorController extends BaseController {
         } catch (ValidationException e) {
             showDialog(e.getMessage(), "Ooops!");
         }
-        authorService.updateUser(new UpdateAuthorRequest(newAuthor.getId(),newAuthor.getAffiliation(),newAuthor.getEmail(),newAuthor.getUser(),newAuthor.getConferenceEdition()));
+        authorService.updateAuthor(new UpdateAuthorRequest(newAuthor.getId(),newAuthor.getAffiliation(),newAuthor.getEmail(),newAuthor.getUser(),newAuthor.getConferenceEdition()));
     }
     public void goToPCMember(ActionEvent ac) {
         Reviewer reviewer = reviewerService.findByUserId(new FindByUserIdRequest((int) getData().get("idUser"), (int) getData().get("idEdition")));
