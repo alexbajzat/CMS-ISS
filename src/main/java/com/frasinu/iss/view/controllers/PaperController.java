@@ -3,6 +3,7 @@ package com.frasinu.iss.view.controllers;
 import com.frasinu.iss.persistance.model.Author;
 import com.frasinu.iss.service.AuthorService;
 import com.frasinu.iss.service.ProposalService;
+import com.frasinu.iss.service.service_requests.conferenceedition.FindByConferenceEditionIdRequest;
 import com.frasinu.iss.service.service_requests.proposal.CreateProposalRequest;
 import com.frasinu.iss.view.FrasinuApplication;
 import com.frasinu.iss.view.Screen;
@@ -36,7 +37,8 @@ public class PaperController extends BaseController{
     TextField titleTxt, fullPaperTxt, abstractPaperTxt, keywordsTxt, topicsTxt;
 
     public void init(){
-        List<Author> authors = authorService.getAll();
+        int idEdition = (int)getData().get("idEdition");//this should be checked but how?
+        List<Author> authors = authorService.getAllByConferenceEdition(new FindByConferenceEditionIdRequest(idEdition));
         //remove current author from list
         authors.removeIf((Author a)-> a.getId().equals(getData().get("idAuthor")));
         ObservableList<Author> items = FXCollections.observableList(authors);
