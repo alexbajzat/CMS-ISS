@@ -47,6 +47,9 @@ public class Proposal {
     @ManyToMany(mappedBy = "proposals", fetch = FetchType.EAGER)
     private List<Topic> topics;
 
+    @OneToMany(mappedBy = "proposal")
+    private List<Presentation> presentations;
+
     Proposal() {
     }
 

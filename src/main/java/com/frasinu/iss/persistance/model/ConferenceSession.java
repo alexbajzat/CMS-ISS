@@ -26,6 +26,9 @@ public class ConferenceSession {
     private ConferenceEdition conferenceEdition;
 
 
+    @OneToMany(mappedBy = "conferenceSession")
+    private List<Presentation> presentations;
+
 
     public ConferenceSession() {
     }

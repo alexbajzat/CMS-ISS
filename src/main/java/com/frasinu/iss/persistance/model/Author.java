@@ -29,6 +29,8 @@ public class Author {
     @ManyToMany(mappedBy = "authors")
     private List<Proposal> proposals;
 
+    @OneToMany(mappedBy = "author")
+    private List<Presentation> presentations;
 
     Author() {
     }
