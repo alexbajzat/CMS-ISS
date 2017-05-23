@@ -32,6 +32,7 @@ public class ScheduleController extends BaseController{
     private AuthorService authorService;
     private ReviewerService reviewerService;
     private SteeringCommitteeMemberService steeringCommitteeMemberService;
+    
 
     @Autowired
     public void setSteeringCommitteeMemberService(SteeringCommitteeMemberService steeringCommitteeMemberService) {

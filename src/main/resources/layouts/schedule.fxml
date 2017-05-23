@@ -12,13 +12,14 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="363.0" prefWidth="685.0" styleClass="background" stylesheets="@stylelayout.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TableView layoutX="14.0" layoutY="41.0" prefHeight="245.0" prefWidth="249.0">
+      <TableView layoutY="41.0" prefHeight="245.0" prefWidth="314.0">
          <columns>
-            <TableColumn prefWidth="127.0" text="Date" />
-            <TableColumn prefWidth="127.0" text="AM/PM" />
+            <TableColumn prefWidth="127.0" text="Name" />
+            <TableColumn prefWidth="95.0" text="Date" />
+            <TableColumn prefWidth="86.0" text="Time" />
          </columns>
       </TableView>
-      <TableView layoutX="324.0" layoutY="41.0" prefHeight="245.0" prefWidth="345.0">
+      <TableView layoutX="340.0" layoutY="41.0" prefHeight="245.0" prefWidth="345.0">
          <columns>
             <TableColumn prefWidth="190.0" text="Title" />
             <TableColumn prefWidth="145.0" text="Author" />
