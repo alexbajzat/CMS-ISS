@@ -1,8 +1,6 @@
 package com.frasinu.iss.view.controllers;
 
-import com.frasinu.iss.persistance.model.Author;
-import com.frasinu.iss.persistance.model.Reviewer;
-import com.frasinu.iss.persistance.model.SteeringCommitteeMember;
+import com.frasinu.iss.persistance.model.*;
 import com.frasinu.iss.service.*;
 import com.frasinu.iss.service.service_requests.author.CreateAuthorRequest;
 import com.frasinu.iss.service.service_requests.conferenceedition.FindByConferenceEditionIdRequest;
@@ -12,9 +10,13 @@ import com.frasinu.iss.service.service_requests.user.FindByIdRequest;
 import com.frasinu.iss.service.service_requests.user.FindIfUserIsAuthorRequest;
 import com.frasinu.iss.view.Screen;
 import com.frasinu.iss.view.FrasinuApplication;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.TableView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -32,7 +34,19 @@ public class ScheduleController extends BaseController{
     private AuthorService authorService;
     private ReviewerService reviewerService;
     private SteeringCommitteeMemberService steeringCommitteeMemberService;
-    
+    private ConferenceSessionService conferenceSessionService;
+
+    ObservableList<ConferenceSession> modelConferenceSessions;
+
+
+    @FXML
+    TableView<ConferenceSession> conferenceSessions;
+
+    @Autowired
+    public void setConferenceSessionService(ConferenceSessionService conferenceSessionService) {
+
+        this.conferenceSessionService=conferenceSessionService;
+    }
 
     @Autowired
     public void setSteeringCommitteeMemberService(SteeringCommitteeMemberService steeringCommitteeMemberService) {
@@ -64,6 +78,20 @@ public class ScheduleController extends BaseController{
     public void setConferenceService(ConferenceService conferencesService) {
         this.conferencesService=conferencesService;
     }
+
+
+    @Override
+    public void setData(HashMap<String, Object> data){
+        super.setData(data);
+        init();
+    }
+
+    public void init() {
+        this.modelConferenceSessions= FXCollections.observableArrayList(conferenceSessionService.
+                findByConferenceEditionId(new FindByConferenceEditionIdRequest((int)getData().get("idEdition"))));
+        conferenceSessions.setItems(modelConferenceSessions);
+    }
+
 
     public void goToConferences(ActionEvent actionEvent) {
         FrasinuApplication.changeScreen(Screen.CONFERENCES,getData());
