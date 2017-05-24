@@ -2,7 +2,6 @@ package com.frasinu.iss.persistance.model;
 
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -53,7 +52,10 @@ public class Conference {
     public List<ConferenceEdition> getConferenceEditions() {
         return this.conferenceEditions;
     }
-
+    @Override
+    public String toString(){
+        return getName();
+    }
 
 
 }

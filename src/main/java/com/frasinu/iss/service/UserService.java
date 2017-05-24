@@ -4,8 +4,9 @@ import com.frasinu.iss.exception.InexistentException;
 import com.frasinu.iss.exception.LoginException;
 import com.frasinu.iss.exception.RegisterException;
 import com.frasinu.iss.persistance.model.Author;
-import com.frasinu.iss.persistance.repository.UserRepository;
+import com.frasinu.iss.persistance.model.Reviewer;
 import com.frasinu.iss.persistance.model.User;
+import com.frasinu.iss.persistance.repository.UserRepository;
 import com.frasinu.iss.service.service_requests.user.*;
 import com.frasinu.iss.validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.security.providers.encoding.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.xml.bind.ValidationException;
+import java.util.List;
 
 /**
  * Created by bjz on 5/7/2017.
@@ -143,6 +145,18 @@ public class UserService {
 
     public User findById(FindByIdRequest findByIdRequest){
         return userRepository.findById(findByIdRequest.getId());
+    }
+
+    public List<User> getAll(){
+
+        return userRepository.findAll();
+    }
+
+
+    public Reviewer findIfUserIsPC(Integer idUser, Integer idEdition) {
+        User user=userRepository.findById(idUser);
+        
+        return null;
     }
 }
 

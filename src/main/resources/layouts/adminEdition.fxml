@@ -9,8 +9,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="357.0" styleClass="background" stylesheets="@stylelayout.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="431.0" styleClass="background" stylesheets="@stylelayout.css" xmlns="http://javafx.com/javafx/8.0.101" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <GridPane layoutX="21.0" layoutY="24.0" prefHeight="303.0" prefWidth="311.0">
         <columnConstraints>
@@ -44,5 +43,6 @@
          </children>
       </GridPane>
       <Button layoutX="121.0" layoutY="349.0" mnemonicParsing="false" text="Add edition" />
+      <Button layoutX="313.0" layoutY="349.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="68.0" text="Back" />
    </children>
 </AnchorPane>

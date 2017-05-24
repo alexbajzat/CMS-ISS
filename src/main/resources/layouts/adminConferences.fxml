@@ -10,8 +10,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="background" stylesheets="@stylelayout.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="background" stylesheets="@stylelayout.css" xmlns="http://javafx.com/javafx/8.0.101" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <TableView layoutX="38.0" layoutY="28.0" prefHeight="354.0" prefWidth="310.0">
         <columns>
@@ -39,6 +38,8 @@
          </children>
       </GridPane>
       <Button layoutX="355.0" layoutY="205.0" mnemonicParsing="false" text="Update" />
-      <Button layoutX="431.0" layoutY="205.0" mnemonicParsing="false" text="Add edition" />
+      <Button layoutX="431.0" layoutY="205.0" mnemonicParsing="false" onAction="#goToEdition" text="Add edition" />
+      <Button fx:id="goBack" layoutX="475.0" layoutY="314.0" mnemonicParsing="false" text="Back" />
+      <Button fx:id="goToUsers" layoutX="355.0" layoutY="314.0" mnemonicParsing="false" text="Users" />
    </children>
 </AnchorPane>
