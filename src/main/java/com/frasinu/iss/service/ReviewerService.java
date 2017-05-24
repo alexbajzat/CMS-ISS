@@ -61,4 +61,8 @@ public class ReviewerService {
     public Reviewer findById(FindReviewerByIdRequest findByUserIdRequest){
         return reviewerRepository.findOne(findByUserIdRequest.getId());
     }
+
+    public void deleteReviewer(int id) {
+        reviewerRepository.delete(id);
+    }
 }

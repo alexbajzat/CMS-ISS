@@ -68,5 +68,9 @@ public class AuthorService {
     public List<Proposal> findProposals(FindProposalsRequest findProposalsRequest){
         return authorRepository.findOne(findProposalsRequest.getId()).getProposals();
     }
+
+    public void deleteAuthor(int id) {
+        authorRepository.delete(id);
+    }
 }
 

@@ -1,9 +1,9 @@
 package com.frasinu.iss.view.controllers;
 
 import com.frasinu.iss.persistance.model.*;
-import com.frasinu.iss.service.ConferenceEditionService;
-import com.frasinu.iss.service.ConferenceService;
-import com.frasinu.iss.service.UserService;
+import com.frasinu.iss.service.*;
+import com.frasinu.iss.service.service_requests.author.CreateAuthorRequest;
+import com.frasinu.iss.service.service_requests.reviewer.CreateReviewerRequest;
 import com.frasinu.iss.service.service_requests.user.FindIfUserIsAuthorRequest;
 import com.frasinu.iss.view.FrasinuApplication;
 import com.frasinu.iss.view.Screen;
@@ -46,6 +46,8 @@ public class AdminUsersController extends BaseController {
     private UserService userService;
     private ConferenceService conferenceService;
     private ConferenceEditionService editionService;
+    private AuthorService authorService;
+    private ReviewerService reviewerService;
     @FXML
     public void initialize() {
         table.getSelectionModel().selectFirst();
@@ -106,11 +108,12 @@ public class AdminUsersController extends BaseController {
             ConferenceEdition ed = (ConferenceEdition) editionsCombo.getSelectionModel().getSelectedItem();
             Author a = userService.findIfUserIsAuthor(new FindIfUserIsAuthorRequest(user.getId(), ed.getId()));
             Reviewer pc = userService.findIfUserIsPC(user.getId(), ed.getId());
+
             if (a != null)
                 author.setSelected(true);
             if (pc != null)
                 pcMember.setSelected(true);
-
+            //the same for steering
         }
 
 
@@ -127,12 +130,31 @@ public class AdminUsersController extends BaseController {
     public void setConferenceEditionService(ConferenceEditionService editionService) {
         this.editionService=editionService;
     }
+    @Autowired
+    public void setAuthorService(AuthorService authorService) {
+        this.authorService=authorService;
+    }
+    @Autowired
+    public void setReviewerService(ReviewerService reviewerService) {
+        this.reviewerService=reviewerService;
+    }
 
 
 
     public void goToMenu(ActionEvent ac){ FrasinuApplication.changeScreen(Screen.MENUADMIN, getData());}
     public void update(ActionEvent ac){
-
+        User user=table.getSelectionModel().getSelectedItem();
+        ConferenceEdition ed = (ConferenceEdition) editionsCombo.getSelectionModel().getSelectedItem();
+        Author a = userService.findIfUserIsAuthor(new FindIfUserIsAuthorRequest(user.getId(), ed.getId()));
+        Reviewer pc = userService.findIfUserIsPC(user.getId(), ed.getId());
+        if (a==null && author.isSelected())
+           authorService.addAuthor(new CreateAuthorRequest("","",user,ed));
+        if (pc==null && pcMember.isSelected())
+            reviewerService.addReviewer(new CreateReviewerRequest("","","",user,ed));
+        if (a!=null && !author.isSelected())
+            authorService.deleteAuthor(a.getId());
+        if (pc!=null && !pcMember.isSelected())
+            reviewerService.deleteReviewer(pc.getId());
 
     }
 

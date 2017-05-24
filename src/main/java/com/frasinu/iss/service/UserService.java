@@ -14,12 +14,14 @@ import org.springframework.security.providers.encoding.Md5PasswordEncoder;
 import org.springframework.security.providers.encoding.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import javax.xml.bind.ValidationException;
 import java.util.List;
 
 /**
  * Created by bjz on 5/7/2017.
  */
+@Transactional
 @Service
 public class UserService {
     private UserRepository userRepository;
@@ -152,10 +154,15 @@ public class UserService {
         return userRepository.findAll();
     }
 
-
-    public Reviewer findIfUserIsPC(Integer idUser, Integer idEdition) {
+    public Reviewer findIfUserIsPC(int idUser, int idEdition) {
         User user=userRepository.findById(idUser);
-        
+        for(Reviewer r:user.getReviewers()){
+            System.out.println("/n");
+            System.out.println(idEdition);
+            System.out.println(r.getConferenceEdition().getId());
+            if(r.getConferenceEdition().getId()==idEdition)
+                return r;
+        }
         return null;
     }
 }
