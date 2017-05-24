@@ -24,26 +24,38 @@ public class Reviewer {
     @JoinColumn(name = "id_user", nullable = false)
     private User user;
 
+    @ManyToOne()
+    @JoinColumn(name = "id_conference_edition", nullable = false)
+    private ConferenceEdition conferenceEdition;
 
     @OneToMany(mappedBy = "reviewer")
-    private List<ReviewedProposal> proposals;
+    private List<ReviewedProposal> reviewedProposals;
+
+    @OneToMany(mappedBy = "reviewer")
+    protected List<BiddedProposal> biddedProposals;
 
     public Reviewer() {
     }
 
-    Reviewer(Integer id, String affiliation, String email, String webpage) {
+    Reviewer(Integer id, String affiliation, String email, String webpage,User user,ConferenceEdition conferenceEdition) {
         this.id = id;
         this.affiliation = affiliation;
         this.email = email;
         this.webpage = webpage;
+        this.user=user;
+        this.conferenceEdition=conferenceEdition;
+    }
+
+    public static ReviewerBuilder builder() {
+        return new ReviewerBuilder();
     }
 
     public Integer getId() {
         return id;
     }
 
-    public List<ReviewedProposal> getProposals() {
-        return proposals;
+    public List<ReviewedProposal> getReviewedProposals() {
+        return reviewedProposals;
     }
 
     public String getAffiliation() {
@@ -60,5 +72,13 @@ public class Reviewer {
 
     public String getWebpage() {
         return webpage;
+    }
+
+    public List<BiddedProposal> getBiddedProposals() {
+        return biddedProposals;
+    }
+
+    public ConferenceEdition getConferenceEdition() {
+        return conferenceEdition;
     }
 }

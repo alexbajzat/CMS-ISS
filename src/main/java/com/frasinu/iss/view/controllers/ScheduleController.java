@@ -1,19 +1,22 @@
 package com.frasinu.iss.view.controllers;
 
-import com.frasinu.iss.persistance.model.Author;
-import com.frasinu.iss.service.AuthorService;
-import com.frasinu.iss.service.ConferenceEditionService;
-import com.frasinu.iss.service.ConferenceService;
-import com.frasinu.iss.service.UserService;
+import com.frasinu.iss.persistance.model.*;
+import com.frasinu.iss.service.*;
 import com.frasinu.iss.service.service_requests.author.CreateAuthorRequest;
 import com.frasinu.iss.service.service_requests.conferenceedition.FindByConferenceEditionIdRequest;
+import com.frasinu.iss.service.service_requests.reviewer.FindByUserAndEditionIdRequest;
+import com.frasinu.iss.service.service_requests.steeringcommitteemember.FindByUserAndConferenceEditionIdRequest;
 import com.frasinu.iss.service.service_requests.user.FindByIdRequest;
 import com.frasinu.iss.service.service_requests.user.FindIfUserIsAuthorRequest;
 import com.frasinu.iss.view.Screen;
 import com.frasinu.iss.view.FrasinuApplication;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.TableView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -29,6 +32,32 @@ public class ScheduleController extends BaseController{
     private ConferenceEditionService conferenceEditionService;
     private UserService userService;
     private AuthorService authorService;
+    private ReviewerService reviewerService;
+    private SteeringCommitteeMemberService steeringCommitteeMemberService;
+    private ConferenceSessionService conferenceSessionService;
+
+    ObservableList<ConferenceSession> modelConferenceSessions;
+
+
+    @FXML
+    TableView<ConferenceSession> conferenceSessions;
+
+    @Autowired
+    public void setConferenceSessionService(ConferenceSessionService conferenceSessionService) {
+
+        this.conferenceSessionService=conferenceSessionService;
+    }
+
+    @Autowired
+    public void setSteeringCommitteeMemberService(SteeringCommitteeMemberService steeringCommitteeMemberService) {
+
+        this.steeringCommitteeMemberService=steeringCommitteeMemberService;
+    }
+
+    @Autowired
+    public void setReviewerService(ReviewerService reviewerService) {
+        this.reviewerService=reviewerService;
+    }
 
     @Autowired
     public void setConferenceEditionService(ConferenceEditionService conferenceEditionService) {
@@ -49,6 +78,20 @@ public class ScheduleController extends BaseController{
     public void setConferenceService(ConferenceService conferencesService) {
         this.conferencesService=conferencesService;
     }
+
+
+    @Override
+    public void setData(HashMap<String, Object> data){
+        super.setData(data);
+        init();
+    }
+
+    public void init() {
+        this.modelConferenceSessions= FXCollections.observableArrayList(conferenceSessionService.
+                findByConferenceEditionId(new FindByConferenceEditionIdRequest((int)getData().get("idEdition"))));
+        conferenceSessions.setItems(modelConferenceSessions);
+    }
+
 
     public void goToConferences(ActionEvent actionEvent) {
         FrasinuApplication.changeScreen(Screen.CONFERENCES,getData());
@@ -83,12 +126,31 @@ public class ScheduleController extends BaseController{
         map.put("idAuthor", author.getId());
         FrasinuApplication.changeScreen(Screen.AUTHOR, getData());
     }
-    public void goToPCMember(ActionEvent ac){
-        FrasinuApplication.changeScreen(Screen.PCMEMBER, getData());
+    public void goToPCMember(ActionEvent ac) {
+        Reviewer reviewer = reviewerService.findByUserAndEditionId(new FindByUserAndEditionIdRequest((int) getData().get("idUser"), (int) getData().get("idEdition")));
+        if (reviewer == null) {
+            showDialog("You are not part of the Program Committee Members", "Ooops!");
+            return;
+        } else {
+            if (reviewer.getEmail() == null && reviewer.getWebpage() == null && reviewer.getAffiliation() == null)
+                showDialog("We are glad that you accepted to be a Program Committee Member this year. Please complete your personal info on the left side to " +
+                        "complete the registration.", "Info!");
+
+            HashMap<String, Object> map = getData();
+            map.put("idReviewer", reviewer.getId());
+            FrasinuApplication.changeScreen(Screen.PCMEMBER, getData());
+        }
     }
 
-    public void goToSteeringCom(ActionEvent ac){
-        FrasinuApplication.changeScreen(Screen.STEERING, getData());
+    public void goToSteeringCom(ActionEvent ac) {
+        SteeringCommitteeMember steeringCommitteeMember = steeringCommitteeMemberService.findByUserAndConferenceEditionId(new FindByUserAndConferenceEditionIdRequest((int) getData().get("idUser"), (int) getData().get("idEdition")));
+        if (steeringCommitteeMember == null) {
+            showDialog("You are not part of the Steering Committee Members", "Ooops!");
+            return;
+        } else {
+            HashMap<String, Object> map = getData();
+            map.put("idSteeringCommitteeMember", steeringCommitteeMember.getId());
+            FrasinuApplication.changeScreen(Screen.STEERING, getData());
+        }
     }
-
 }

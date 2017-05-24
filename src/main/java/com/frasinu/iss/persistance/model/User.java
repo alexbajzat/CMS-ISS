@@ -15,7 +15,7 @@ public class User {
     private Integer id;
     @Column(name = "name")
     private String name;
-    @Column(name = "username")
+    @Column(name = "username", unique = true)
     private String username;
     @Column(name = "password")
     private String password;
@@ -25,6 +25,9 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<Reviewer> reviewers;
+
+    @OneToMany(mappedBy = "user")
+    private List<SteeringCommitteeMember> steeringCommitteeMembers;
 
     public User() {
     }
@@ -63,4 +66,6 @@ public class User {
     public List<Reviewer> getReviewers() {
         return reviewers;
     }
+
+
 }

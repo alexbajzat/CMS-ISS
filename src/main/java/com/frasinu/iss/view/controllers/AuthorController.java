@@ -2,18 +2,24 @@ package com.frasinu.iss.view.controllers;
 
 
 import com.frasinu.iss.persistance.model.Author;
-import com.frasinu.iss.persistance.model.Proposal;
+import com.frasinu.iss.persistance.model.Reviewer;
+import com.frasinu.iss.persistance.model.SteeringCommitteeMember;
 import com.frasinu.iss.persistance.model.User;
 import com.frasinu.iss.service.AuthorService;
+import com.frasinu.iss.service.ReviewerService;
+import com.frasinu.iss.service.SteeringCommitteeMemberService;
+import com.frasinu.iss.persistance.model.Proposal;
 import com.frasinu.iss.service.ProposalService;
 import com.frasinu.iss.service.UserService;
-import com.frasinu.iss.service.service_requests.author.FindUserIdRequest;
+import com.frasinu.iss.service.service_requests.author.FindProposalsRequest;
 import com.frasinu.iss.service.service_requests.author.UpdateAuthorRequest;
-import com.frasinu.iss.service.service_requests.proposal.FindForAuthorRequest;
+import com.frasinu.iss.service.service_requests.reviewer.FindByUserAndEditionIdRequest;
+import com.frasinu.iss.service.service_requests.steeringcommitteemember.FindByUserAndConferenceEditionIdRequest;
 import com.frasinu.iss.service.service_requests.user.FindByIdRequest;
 import com.frasinu.iss.service.service_requests.user.UpdateUserRequest;
 import com.frasinu.iss.view.FrasinuApplication;
 import com.frasinu.iss.view.Screen;
+import com.sun.deploy.util.StringUtils;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,12 +29,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import javax.xml.bind.ValidationException;
 import java.util.HashMap;
+import java.util.stream.Collectors;
 
 
 /**
@@ -51,8 +57,25 @@ public class AuthorController extends BaseController {
     @FXML
     private Button viewUploadedPapersButton;
 
+    @FXML
+    TableColumn<Proposal, String> topics = new TableColumn<>();
+
+
     private AuthorService authorService;
     private UserService userService;
+    private ReviewerService reviewerService;
+    private SteeringCommitteeMemberService steeringCommitteeMemberService;
+
+    @Autowired
+    public void setSteeringCommitteeMemberService(SteeringCommitteeMemberService steeringCommitteeMemberService) {
+
+        this.steeringCommitteeMemberService=steeringCommitteeMemberService;
+    }
+
+    @Autowired
+    public void setReviewerService(ReviewerService reviewerService) {
+        this.reviewerService=reviewerService;
+    }
     private ObservableList<Proposal> model;
     private Integer authorId;
     private ProposalService proposalService;
@@ -84,6 +107,10 @@ public class AuthorController extends BaseController {
         FrasinuApplication.changeScreen(Screen.PAPER, getData());
     }
 
+    public void goToConferences(ActionEvent actionEvent) {
+        FrasinuApplication.changeScreen(Screen.CONFERENCES,getData());
+    }
+
     @Override
     public void setData(HashMap<String, Object> data) {
         super.setData(data);
@@ -91,6 +118,7 @@ public class AuthorController extends BaseController {
     }
 
     public void init() {
+        setCellValueFactory();
         int idAuthor = (int) getData().get("idAuthor");
         int idUser = (int) getData().get("idUser");
         User user = userService.findById(new FindByIdRequest(idUser));
@@ -103,6 +131,7 @@ public class AuthorController extends BaseController {
             affiliation.setText(author.getAffiliation());
         uploadedProposalsTableView.setVisible(false);
         authorId = (Integer) getData().get("idAuthor");
+
     }
 
     public void update() {
@@ -124,24 +153,53 @@ public class AuthorController extends BaseController {
         } catch (ValidationException e) {
             showDialog(e.getMessage(), "Ooops!");
         }
-        authorService.updateUser(new UpdateAuthorRequest(newAuthor.getId(), newAuthor.getAffiliation(), newAuthor.getEmail(), newAuthor.getUser(), newAuthor.getConferenceEdition()));
+        authorService.updateAuthor(new UpdateAuthorRequest(newAuthor.getId(),newAuthor.getAffiliation(),newAuthor.getEmail(),newAuthor.getUser(),newAuthor.getConferenceEdition()));
+    }
+    public void goToPCMember(ActionEvent ac) {
+        Reviewer reviewer = reviewerService.findByUserAndEditionId(new FindByUserAndEditionIdRequest((int) getData().get("idUser"), (int) getData().get("idEdition")));
+        if (reviewer == null) {
+            showDialog("You are not part of the Program Committee Members", "Ooops!");
+            return;
+        } else {
+            if (reviewer.getEmail() == null && reviewer.getWebpage() == null && reviewer.getAffiliation() == null)
+                showDialog("We are glad that you accepted to be a Program Committee Member this year. Please complete your personal info on the left side to " +
+                        "complete the registration.", "Info!");
+
+            HashMap<String, Object> map = getData();
+            map.put("idReviewer", reviewer.getId());
+            FrasinuApplication.changeScreen(Screen.PCMEMBER, getData());
+        }
     }
 
-    public void goToPCMember(ActionEvent ac) {
-        FrasinuApplication.changeScreen(Screen.PCMEMBER, getData());
+    public void goToSteeringCom(ActionEvent ac) {
+        SteeringCommitteeMember steeringCommitteeMember = steeringCommitteeMemberService.findByUserAndConferenceEditionId(new FindByUserAndConferenceEditionIdRequest((int) getData().get("idUser"), (int) getData().get("idEdition")));
+        if (steeringCommitteeMember == null) {
+            showDialog("You are not part of the Steering Committee Members", "Ooops!");
+            return;
+        } else {
+            HashMap<String, Object> map = getData();
+            map.put("idSteeringCommitteeMember", steeringCommitteeMember.getId());
+            FrasinuApplication.changeScreen(Screen.STEERING, getData());
+        }
     }
+
+
+
 
     public void fillProposalsTable() {
         if (uploadedProposalsTableView.isVisible()) {
             uploadedProposalsTableView.setVisible(false);
         } else {
-            model = FXCollections.observableList(proposalService.findForAuthor(new FindForAuthorRequest(authorId)));
+            model = FXCollections.observableList(authorService.findProposals(new FindProposalsRequest(authorId)));
             uploadedProposalsTableView.setItems(model);
             uploadedProposalsTableView.setVisible(true);
         }
     }
 
-    public void goToSteeringCom(ActionEvent ac) {
-        FrasinuApplication.changeScreen(Screen.STEERING, getData());
+    public void setCellValueFactory(){
+
+        topics.setCellValueFactory(c-> new SimpleStringProperty(c.getValue().getTopics().stream().map(Object::toString)
+                .collect(Collectors.joining(", "))));
     }
+
 }
