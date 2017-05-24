@@ -15,7 +15,7 @@ public enum Screen {
     REGISTER("register.fxml", "Register","RegisterController"),
     SCHEDULE("schedule.fxml", "Schedule","ScheduleController"),
     BIDS("bids.fxml","See Bids","BidsController"),
-    PROPOSALS("proposals.fxml","See Proposals","ProposalsController"),
+    BIDPAPERS("bidpaper.fxml","See Proposals","BidPaperController"),
     PCMEMBER("menuPC.fxml","Menu PCMember","PCController"),
     STEERING("menuSteering.fxml","Steering Member","SteeringComController"),
     REVIEWS("reviews.fxml","See Reviews","ReviewsController"),
