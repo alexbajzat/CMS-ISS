@@ -7,13 +7,14 @@ import com.frasinu.iss.service.service_requests.conference.FindConferenceEdition
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.List;
 
 /**
  * Created by cory_ on 19-May-17.
  */
 @Service
-public class ConferenceService{
+public class ConferenceService {
     @Autowired
     private ConferenceRepository conferenceRepository;
 
@@ -21,7 +22,7 @@ public class ConferenceService{
         return conferenceRepository.findAll();
     }
 
-    public List<ConferenceEdition> findConferenceEditionsByConference(FindConferenceEditionsByConferenceIdRequest findConferenceEditionByConferenceRequest){
+    public List<ConferenceEdition> findConferenceEditionsByConference(FindConferenceEditionsByConferenceIdRequest findConferenceEditionByConferenceRequest) {
         return conferenceRepository.findByConferenceId(findConferenceEditionByConferenceRequest.getConferenceId()).getConferenceEditions();
     }
 }

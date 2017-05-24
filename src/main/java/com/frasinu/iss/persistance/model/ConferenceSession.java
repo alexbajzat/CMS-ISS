@@ -18,8 +18,8 @@ public class ConferenceSession {
     private String name;
     @Column(name = "date")
     private LocalDate date;
-    @Column(name = "am_pm")
-    private String amPm;
+    @Column(name = "period_of_day")
+    private String periodOfDay;
 
     @ManyToOne
     @JoinColumn(name = "id_conference_edition")
@@ -33,11 +33,11 @@ public class ConferenceSession {
     public ConferenceSession() {
     }
 
-    ConferenceSession(Integer id, String name, LocalDate date, String amPm,ConferenceEdition conferenceEdition){
+    ConferenceSession(Integer id, String name, LocalDate date, String periodOfDay,ConferenceEdition conferenceEdition){
         this.id = id;
         this.name = name;
         this.date = date;
-        this.amPm = amPm;
+        this.periodOfDay=periodOfDay;
         this.conferenceEdition = conferenceEdition;
     }
 
@@ -58,8 +58,8 @@ public class ConferenceSession {
         return date;
     }
 
-    public String getAmPm() {
-        return amPm;
+    public String getPeriodOfDay() {
+        return periodOfDay;
     }
 
     public ConferenceEdition getConferenceEdition() {

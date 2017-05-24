@@ -27,7 +27,7 @@
             </TableColumn>
             <TableColumn prefWidth="86.0" text="Time" >
             <cellValueFactory>
-               <PropertyValueFactory property="amPm" />
+               <PropertyValueFactory property="periodOfDay" />
             </cellValueFactory>
             </TableColumn>
          </columns>

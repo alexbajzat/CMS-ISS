@@ -9,14 +9,14 @@ public class ConferenceSessionBuilder {
     private Integer id;
     private String name;
     private LocalDate date;
-    private String amPm;
+    private String periodOfDay;
     private ConferenceEdition conferenceEdition;
 
     public ConferenceSessionBuilder() {
     }
 
     public ConferenceSession build() {
-        return new ConferenceSession(id, name, date, amPm, conferenceEdition);
+        return new ConferenceSession(id, name, date,periodOfDay, conferenceEdition);
     }
 
     public void setId(Integer id) {
@@ -33,8 +33,8 @@ public class ConferenceSessionBuilder {
         return this;
     }
 
-    public ConferenceSessionBuilder setAmPm(String amPm) {
-        this.amPm = amPm;
+    public ConferenceSessionBuilder setPeriodOfDay(String periodOfDay) {
+        this.periodOfDay=periodOfDay;
         return this;
 
     }

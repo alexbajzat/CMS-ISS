@@ -38,6 +38,7 @@ public class PaperController extends BaseController{
 
     public void init(){
         List<Author> authors = authorService.findAllByConferenceEdition(new FindAllByConferenceEditionRequest((int)getData().get(("idEdition"))));
+
         //remove current author from list
         authors.removeIf((Author a)-> a.getId().equals(getData().get("idAuthor")));
         ObservableList<Author> items = FXCollections.observableList(authors);
