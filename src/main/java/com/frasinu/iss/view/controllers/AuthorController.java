@@ -104,8 +104,16 @@ public class AuthorController extends BaseController {
         FrasinuApplication.changeScreen(Screen.PAPER, getData());
     }
 
+    public void updatePaper(ActionEvent actionEvent){FrasinuApplication.changeScreen(Screen.PAPERUPDATE,getData());}
+
     public void goToConferences(ActionEvent actionEvent) {
         FrasinuApplication.changeScreen(Screen.CONFERENCES,getData());
+    }
+    public void goToReviews(ActionEvent actionEvent){
+        FrasinuApplication.changeScreen(Screen.PAPERREVIEWS,getData());
+    }
+    public void goToPresentation(ActionEvent actionEvent){
+        FrasinuApplication.changeScreen(Screen.PAPERPRESENTATION,getData());
     }
 
     @Override

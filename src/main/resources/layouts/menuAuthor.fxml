@@ -80,9 +80,9 @@
                       </TableColumn>
                     </columns>
                   </TableView>
-                  <Button layoutX="145.0" layoutY="275.0" mnemonicParsing="false" text="Update paper" />
-                  <Button layoutX="271.0" layoutY="275.0" mnemonicParsing="false" text="See reviews" />
-                  <Button layoutX="381.0" layoutY="275.0" mnemonicParsing="false" text="Present" />
+                  <Button layoutX="145.0" layoutY="275.0" mnemonicParsing="false" onAction="#updatePaper" text="Update paper" />
+                  <Button layoutX="271.0" layoutY="275.0" mnemonicParsing="false" onAction="#goToReviews" text="See reviews" />
+                  <Button layoutX="381.0" layoutY="275.0" mnemonicParsing="false" onAction="#goToPresentation" text="Present" />
                </children>
             </AnchorPane>
         </items>
