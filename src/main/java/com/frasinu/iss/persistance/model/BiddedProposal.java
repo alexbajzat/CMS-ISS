@@ -6,9 +6,6 @@ import javax.persistence.*;
  * Created by Andrei on 21-May-17.
  */
 
-enum BidResult{
-    ACCEPTED, REJECTED
-}
 
 @Entity
 @Table(name = "bidded_proposal")
@@ -19,15 +16,15 @@ public class BiddedProposal {
     private int id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "pc_member_id")
-    private ProgramCommitteeMember PCMember;
+    @JoinColumn(name = "reviewer_id")
+    private Reviewer reviewer;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "proposal_id")
     private Proposal proposal;
 
-    @Enumerated(EnumType.STRING)
-    private BidResult result;
+    @Column(name = "result")
+    private String result;
 
     BiddedProposal(){}
 
@@ -35,15 +32,15 @@ public class BiddedProposal {
         return id;
     }
 
-    public ProgramCommitteeMember getPCMember() {
-        return PCMember;
+    public Reviewer getPCMember() {
+        return reviewer;
     }
 
     public Proposal getProposal() {
         return proposal;
     }
 
-    public BidResult getResult() {
+    public String getResult() {
         return result;
     }
 }

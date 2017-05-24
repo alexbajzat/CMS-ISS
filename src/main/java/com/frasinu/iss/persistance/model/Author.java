@@ -26,9 +26,11 @@ public class Author {
     @JoinColumn(name = "id_conference_edition", nullable = false)
     private ConferenceEdition conferenceEdition;
 
-    @ManyToMany(mappedBy = "authors")
+    @ManyToMany(mappedBy = "authors",fetch = FetchType.EAGER)
     private List<Proposal> proposals;
 
+    @OneToMany(mappedBy = "author")
+    private List<Presentation> presentations;
 
     Author() {
     }

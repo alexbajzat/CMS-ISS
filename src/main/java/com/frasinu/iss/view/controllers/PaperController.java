@@ -3,7 +3,7 @@ package com.frasinu.iss.view.controllers;
 import com.frasinu.iss.persistance.model.Author;
 import com.frasinu.iss.service.AuthorService;
 import com.frasinu.iss.service.ProposalService;
-import com.frasinu.iss.service.service_requests.conferenceedition.FindByConferenceEditionIdRequest;
+import com.frasinu.iss.service.service_requests.author.FindAllByConferenceEditionRequest;
 import com.frasinu.iss.service.service_requests.proposal.CreateProposalRequest;
 import com.frasinu.iss.view.FrasinuApplication;
 import com.frasinu.iss.view.Screen;
@@ -37,8 +37,8 @@ public class PaperController extends BaseController{
     TextField titleTxt, fullPaperTxt, abstractPaperTxt, keywordsTxt, topicsTxt;
 
     public void init(){
-        int idEdition = (int)getData().get("idEdition");//this should be checked but how?
-        List<Author> authors = authorService.getAllByConferenceEdition(new FindByConferenceEditionIdRequest(idEdition));
+        List<Author> authors = authorService.findAllByConferenceEdition(new FindAllByConferenceEditionRequest((int)getData().get(("idEdition"))));
+
         //remove current author from list
         authors.removeIf((Author a)-> a.getId().equals(getData().get("idAuthor")));
         ObservableList<Author> items = FXCollections.observableList(authors);
@@ -52,7 +52,7 @@ public class PaperController extends BaseController{
                 if (empty || item == null || item.getUser() == null) {
                     setText(null);
                 } else {
-                    setText(item.getUser().getUsername());
+                    setText(item.getUser().getName());
                 }
             }
         });
@@ -65,7 +65,7 @@ public class PaperController extends BaseController{
                 if (empty || item == null || item.getUser() == null) {
                     setText(null);
                 } else {
-                    setText(item.getUser().getUsername());
+                    setText(item.getUser().getName());
                 }
             }
         });
@@ -95,8 +95,16 @@ public class PaperController extends BaseController{
     }
 
     public void upload(ActionEvent ac){
+        if(titleTxt.getText().equals("")){
+            showDialog("Sorry, you have to give a title to your paper!", "Ooops!");
+            return;
+        }
         String title = titleTxt.getText();
         String fullPaper = fullPaperTxt.getText();
+        if(abstractPaperTxt.getText().equals("")){
+            showDialog("Sorry, you have to upload an abstract!", "Ooops!");
+            return;
+        }
         String abstractPaper = abstractPaperTxt.getText();
         String[] keywords = keywordsTxt.getText().split(",");
         String[] topics = topicsTxt.getText().split(",");
@@ -131,9 +139,8 @@ public class PaperController extends BaseController{
         for (Author author: listExtraAuthors.getItems()
              ) {
             listAuthors.getItems().add(author);
-            listExtraAuthors.getItems().remove(author);
         }
-
+        listExtraAuthors.getItems().clear();
         titleTxt.setText("");
         fullPaperTxt.setText("");
         abstractPaperTxt.setText("");

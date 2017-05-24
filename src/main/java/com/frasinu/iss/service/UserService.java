@@ -133,7 +133,7 @@ public class UserService {
 
 
     public Author findIfUserIsAuthor(FindIfUserIsAuthorRequest findIfUserIsAuthorRequest){
-        User user=userRepository.findById(findIfUserIsAuthorRequest.getIdUser());
+        User user=userRepository.findOne(findIfUserIsAuthorRequest.getIdUser());
         for(Author a:user.getAuthors()){
             if(a.getConferenceEdition().getId()==findIfUserIsAuthorRequest.getIdEdition())
                 return a;
@@ -142,7 +142,7 @@ public class UserService {
     }
 
     public User findById(FindByIdRequest findByIdRequest){
-        return userRepository.findById(findByIdRequest.getId());
+        return userRepository.findOne(findByIdRequest.getId());
     }
 }
 

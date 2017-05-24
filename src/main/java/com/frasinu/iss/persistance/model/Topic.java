@@ -14,7 +14,7 @@ public class Topic {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "value", unique = true)
+    @Column(name = "value")
     private String value;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -40,6 +40,11 @@ public class Topic {
 
     public List<Proposal> getProposals() {
         return proposals;
+    }
+
+    @Override
+    public String toString() {
+        return  value;
     }
 }
 

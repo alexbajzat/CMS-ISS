@@ -3,10 +3,10 @@ package com.frasinu.iss.service.service_requests.author;
 /**
  * Created by bjz on 5/15/2017.
  */
-public class FindByIdRequest {
+public class FindProposalsRequest {
     private final int id;
 
-    public FindByIdRequest(int id) {
+    public FindProposalsRequest(int id) {
         this.id = id;
     }
 

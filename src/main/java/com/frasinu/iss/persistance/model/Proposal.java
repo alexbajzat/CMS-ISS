@@ -32,7 +32,7 @@ public class Proposal {
             inverseJoinColumns = {@JoinColumn(name = "author_id", nullable = false, updatable = false)})
     private List<Author> authors;
 
-    @OneToMany(mappedBy = "proposal",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "proposal")
     private List<ReviewedProposal> reviewed;
 
     @Fetch(FetchMode.SELECT)
@@ -46,6 +46,9 @@ public class Proposal {
     @Fetch(FetchMode.SELECT)
     @ManyToMany(mappedBy = "proposals", fetch = FetchType.EAGER)
     private List<Topic> topics;
+
+    @OneToMany(mappedBy = "proposal")
+    private List<Presentation> presentations;
 
     Proposal() {
     }
