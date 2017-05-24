@@ -1,12 +1,10 @@
 package com.frasinu.iss.service;
 
 import com.frasinu.iss.exception.InexistentException;
+import com.frasinu.iss.persistance.model.Proposal;
 import com.frasinu.iss.persistance.repository.AuthorRepository;
 import com.frasinu.iss.persistance.model.Author;
-import com.frasinu.iss.service.service_requests.author.CreateAuthorRequest;
-import com.frasinu.iss.service.service_requests.author.FindAllByConferenceEditionRequest;
-import com.frasinu.iss.service.service_requests.author.FindUserIdRequest;
-import com.frasinu.iss.service.service_requests.author.UpdateAuthorRequest;
+import com.frasinu.iss.service.service_requests.author.*;
 import com.frasinu.iss.service.service_requests.user.FindByIdRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -60,11 +58,15 @@ public class AuthorService {
     }
 
     public Author findById(FindByIdRequest findByIdRequest) {
-        return authorRepository.findById(findByIdRequest.getId());
+        return authorRepository.findOne(findByIdRequest.getId());
     }
 
     public List<Author> findAllByConferenceEdition(FindAllByConferenceEditionRequest findAllByConferenceEditionRequest){
         return authorRepository.findAllByConferenceEdition(findAllByConferenceEditionRequest.getConferenceEditionId());
+    }
+
+    public List<Proposal> findProposals(FindProposalsRequest findProposalsRequest){
+        return authorRepository.findOne(findProposalsRequest.getId()).getProposals();
     }
 }
 

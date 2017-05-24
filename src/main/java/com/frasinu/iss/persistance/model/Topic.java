@@ -41,5 +41,10 @@ public class Topic {
     public List<Proposal> getProposals() {
         return proposals;
     }
+
+    @Override
+    public String toString() {
+        return  value;
+    }
 }
 

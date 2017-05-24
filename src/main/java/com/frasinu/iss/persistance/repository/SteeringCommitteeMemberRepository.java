@@ -14,6 +14,5 @@ import org.springframework.transaction.annotation.Transactional;
 public interface SteeringCommitteeMemberRepository extends JpaRepository<SteeringCommitteeMember, Integer> {
     @Query(value = "select * from steering_committee_member a where a.id_user = :id and a.id_conference_edition=:id_conference_edition" , nativeQuery = true)
     SteeringCommitteeMember findByUserAndEditionId(@Param("id") Integer userId, @Param(value = "id_conference_edition") int idConferenceEdition);
-    @Query(value = "select * from steering_committee_member a where a.id = :id" , nativeQuery = true)
-    SteeringCommitteeMember findById(@Param("id") Integer Id);
+
 }

@@ -11,14 +11,16 @@ import com.frasinu.iss.service.SteeringCommitteeMemberService;
 import com.frasinu.iss.persistance.model.Proposal;
 import com.frasinu.iss.service.ProposalService;
 import com.frasinu.iss.service.UserService;
+import com.frasinu.iss.service.service_requests.author.FindProposalsRequest;
 import com.frasinu.iss.service.service_requests.author.UpdateAuthorRequest;
 import com.frasinu.iss.service.service_requests.reviewer.FindByUserAndEditionIdRequest;
 import com.frasinu.iss.service.service_requests.steeringcommitteemember.FindByUserAndConferenceEditionIdRequest;
-import com.frasinu.iss.service.service_requests.proposal.FindForAuthorRequest;
 import com.frasinu.iss.service.service_requests.user.FindByIdRequest;
 import com.frasinu.iss.service.service_requests.user.UpdateUserRequest;
 import com.frasinu.iss.view.FrasinuApplication;
 import com.frasinu.iss.view.Screen;
+import com.sun.deploy.util.StringUtils;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -32,6 +34,7 @@ import org.springframework.stereotype.Controller;
 
 import javax.xml.bind.ValidationException;
 import java.util.HashMap;
+import java.util.stream.Collectors;
 
 
 /**
@@ -53,6 +56,10 @@ public class AuthorController extends BaseController {
 
     @FXML
     private Button viewUploadedPapersButton;
+
+    @FXML
+    TableColumn<Proposal, String> topics = new TableColumn<>();
+
 
     private AuthorService authorService;
     private UserService userService;
@@ -111,6 +118,7 @@ public class AuthorController extends BaseController {
     }
 
     public void init() {
+        setCellValueFactory();
         int idAuthor = (int) getData().get("idAuthor");
         int idUser = (int) getData().get("idUser");
         User user = userService.findById(new FindByIdRequest(idUser));
@@ -123,6 +131,7 @@ public class AuthorController extends BaseController {
             affiliation.setText(author.getAffiliation());
         uploadedProposalsTableView.setVisible(false);
         authorId = (Integer) getData().get("idAuthor");
+
     }
 
     public void update() {
@@ -181,10 +190,16 @@ public class AuthorController extends BaseController {
         if (uploadedProposalsTableView.isVisible()) {
             uploadedProposalsTableView.setVisible(false);
         } else {
-            model = FXCollections.observableList(proposalService.findForAuthor(new FindForAuthorRequest(authorId)));
+            model = FXCollections.observableList(authorService.findProposals(new FindProposalsRequest(authorId)));
             uploadedProposalsTableView.setItems(model);
             uploadedProposalsTableView.setVisible(true);
         }
+    }
+
+    public void setCellValueFactory(){
+
+        topics.setCellValueFactory(c-> new SimpleStringProperty(c.getValue().getTopics().stream().map(Object::toString)
+                .collect(Collectors.joining(", "))));
     }
 
 }

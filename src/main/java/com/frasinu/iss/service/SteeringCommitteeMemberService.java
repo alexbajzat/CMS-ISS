@@ -21,6 +21,6 @@ public class SteeringCommitteeMemberService {
     }
 
     public SteeringCommitteeMember findById(FindSteeringCommitteeMemberByIdRequest findSteeringCommitteeMemberByIdRequest){
-        return steeringCommitteeMemberRepository.findById(findSteeringCommitteeMemberByIdRequest.getId());
+        return steeringCommitteeMemberRepository.findOne(findSteeringCommitteeMemberByIdRequest.getId());
     }
 }

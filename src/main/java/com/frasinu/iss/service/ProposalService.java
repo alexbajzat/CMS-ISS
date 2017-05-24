@@ -7,7 +7,6 @@ import com.frasinu.iss.persistance.repository.ProposalRepository;
 import com.frasinu.iss.persistance.repository.TopicRepository;
 import com.frasinu.iss.service.service_requests.proposal.CreateProposalRequest;
 import com.frasinu.iss.persistance.model.Proposal;
-import com.frasinu.iss.service.service_requests.proposal.FindForAuthorRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -68,9 +67,7 @@ public class ProposalService {
     }
 
 
-    public List<Proposal> findForAuthor(FindForAuthorRequest findForAuthorRequest) {
-        return proposalRepository.findAllForAuthor(findForAuthorRequest.getAuthorId());
-    }
+
 
     public Proposal findById(Integer proposalId) {
         return proposalRepository.findOne(proposalId);

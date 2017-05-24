@@ -14,9 +14,6 @@ import java.util.List;
  */
 @Transactional
 public interface ProposalRepository extends JpaRepository<Proposal, Integer> {
-    @Transactional
-    @Query(value = "Select distinct * from proposal p join author_proposal ua where ua.author_id = :author",nativeQuery = true)
-    List<Proposal> findAllForAuthor(@Param(value = "author") Integer authorId);
 
     @Transactional
     @Modifying

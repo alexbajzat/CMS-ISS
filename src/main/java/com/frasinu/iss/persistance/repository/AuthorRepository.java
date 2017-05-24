@@ -15,8 +15,6 @@ import java.util.List;
 public interface AuthorRepository extends JpaRepository<Author, Integer> {
     @Query(value = "select * from author a where a.id_user = :id" , nativeQuery = true)
     Author findByUserId(@Param("id") Integer userId);
-    @Query(value = "select * from author a where a.id = :id" , nativeQuery = true)
-    Author findById(@Param("id") Integer Id);
 
     @Query(value = "Select * from author a  where a.id_conference_edition = :id_conference_edition",nativeQuery = true)
     List<Author> findAllByConferenceEdition(@Param(value = "id_conference_edition") Integer id_conference_edition);

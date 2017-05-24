@@ -11,6 +11,5 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public interface ConferenceEditionRepository extends JpaRepository<ConferenceEdition,Integer> {
-    @Query(value = "select * from conference_edition ce where ce.id = :id" , nativeQuery = true)
-    ConferenceEdition findByConferenceEditionId(@Param("id") Integer id);
+
 }

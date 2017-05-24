@@ -79,7 +79,8 @@
                             <PropertyValueFactory property="title" />
                         </cellValueFactory>
                       </TableColumn>
-                      <TableColumn fx:id="topicsColumn" prefWidth="166.0" text="Topics" />
+                      <TableColumn fx:id="topics" prefWidth="166.0" text="Topics" >
+                      </TableColumn>
                     </columns>
                   </TableView>
                </children>

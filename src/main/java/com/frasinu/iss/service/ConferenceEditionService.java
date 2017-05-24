@@ -27,10 +27,10 @@ public class ConferenceEditionService implements IConferenceEditionService {
 
     @Override
     public ConferenceEdition findByConferenceEditionId(FindByConferenceEditionIdRequest findByConferenceEditionIdRequest){
-        return conferenceEditionRepository.findByConferenceEditionId(findByConferenceEditionIdRequest.getConferenceEditionId());
+        return conferenceEditionRepository.findOne(findByConferenceEditionIdRequest.getConferenceEditionId());
     }
     @Override
     public Conference findConferenceByConferenceEditionId(FindConferenceByConferenceEditionIdRequest findConferenceByConferenceEditionIdRequest){
-        return conferenceEditionRepository.findByConferenceEditionId(findConferenceByConferenceEditionIdRequest.getConferenceEditionId()).getConference();
+        return conferenceEditionRepository.findOne(findConferenceByConferenceEditionIdRequest.getConferenceEditionId()).getConference();
     }
 }

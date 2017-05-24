@@ -59,6 +59,6 @@ public class ReviewerService {
     }
 
     public Reviewer findById(FindReviewerByIdRequest findByUserIdRequest){
-        return reviewerRepository.findById(findByUserIdRequest.getId());
+        return reviewerRepository.findOne(findByUserIdRequest.getId());
     }
 }
