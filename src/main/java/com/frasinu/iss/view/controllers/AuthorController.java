@@ -55,9 +55,6 @@ public class AuthorController extends BaseController {
     private TableView uploadedProposalsTableView;
 
     @FXML
-    private Button viewUploadedPapersButton;
-
-    @FXML
     TableColumn<Proposal, String> topics = new TableColumn<>();
 
 
@@ -107,8 +104,16 @@ public class AuthorController extends BaseController {
         FrasinuApplication.changeScreen(Screen.PAPER, getData());
     }
 
+    public void updatePaper(ActionEvent actionEvent){FrasinuApplication.changeScreen(Screen.PAPERUPDATE,getData());}
+
     public void goToConferences(ActionEvent actionEvent) {
         FrasinuApplication.changeScreen(Screen.CONFERENCES,getData());
+    }
+    public void goToReviews(ActionEvent actionEvent){
+        FrasinuApplication.changeScreen(Screen.PAPERREVIEWS,getData());
+    }
+    public void goToPresentation(ActionEvent actionEvent){
+        FrasinuApplication.changeScreen(Screen.PAPERPRESENTATION,getData());
     }
 
     @Override
@@ -129,9 +134,9 @@ public class AuthorController extends BaseController {
             email.setText(author.getEmail());
         if (author.getAffiliation() != null)
             affiliation.setText(author.getAffiliation());
-        uploadedProposalsTableView.setVisible(false);
         authorId = (Integer) getData().get("idAuthor");
-
+        model = FXCollections.observableList(authorService.findProposals(new FindProposalsRequest(authorId)));
+        uploadedProposalsTableView.setItems(model);
     }
 
     public void update() {
@@ -180,19 +185,6 @@ public class AuthorController extends BaseController {
             HashMap<String, Object> map = getData();
             map.put("idSteeringCommitteeMember", steeringCommitteeMember.getId());
             FrasinuApplication.changeScreen(Screen.STEERING, getData());
-        }
-    }
-
-
-
-
-    public void fillProposalsTable() {
-        if (uploadedProposalsTableView.isVisible()) {
-            uploadedProposalsTableView.setVisible(false);
-        } else {
-            model = FXCollections.observableList(authorService.findProposals(new FindProposalsRequest(authorId)));
-            uploadedProposalsTableView.setItems(model);
-            uploadedProposalsTableView.setVisible(true);
         }
     }
 
