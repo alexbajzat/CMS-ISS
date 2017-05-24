@@ -22,4 +22,9 @@ public interface ProposalRepository extends JpaRepository<Proposal, Integer> {
     @Modifying
     @Query(value = "Insert into author_proposal(proposal_id, author_id) values(:proposal, :author)",nativeQuery = true)
     Integer addProposalForAuthor(@Param(value = "proposal") int idProposal ,@Param(value = "author") int idAuthor);
+
+    @Transactional
+    @Modifying
+    @Query(value = "update proposal set abstract=:abs,full_paper=:full  where id=:idP",nativeQuery = true)
+    void update(@Param(value = "idP") int idProposal,@Param(value = "abs") String abs,@Param(value = "full") String full);
 }

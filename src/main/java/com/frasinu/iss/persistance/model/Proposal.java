@@ -54,6 +54,17 @@ public class Proposal {
         return new ProposalBuilder();
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setAbstractPaper(String abstractPaper) {
+        this.abstractPaper = abstractPaper;
+    }
+
+    public void setFullPaper(String fullPaper) {
+        this.fullPaper = fullPaper;
+    }
     Proposal(Integer id, String title, String abstractPaper, String fullPaper, List<Author> authors, List<Keyword> keywords,
              List<Topic> topics) {
         this.id = id;
@@ -61,6 +72,7 @@ public class Proposal {
         this.abstractPaper = abstractPaper;
         this.fullPaper = fullPaper;
         this.authors = authors;
+
         this.keywords = keywords;
         this.topics = topics;
     }
@@ -99,6 +111,21 @@ public class Proposal {
 
     public List<BiddedProposal> getBids() {
         return bidded;
+    }
+
+    public String getTopicsString() {
+        String res="";
+        for (Topic topic:topics) {
+            res += topic+",";
+        }
+        if (res!="")
+            return res.substring(0,res.length()-1);
+        else
+            return res;
+    }
+
+    public void setTopics(List<Topic> topics) {
+        this.topics = topics;
     }
 }
 

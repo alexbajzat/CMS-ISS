@@ -7,14 +7,12 @@ import com.frasinu.iss.persistance.model.User;
 import com.frasinu.iss.service.AuthorService;
 import com.frasinu.iss.service.ProposalService;
 import com.frasinu.iss.service.UserService;
-import com.frasinu.iss.service.service_requests.author.FindUserIdRequest;
 import com.frasinu.iss.service.service_requests.author.UpdateAuthorRequest;
 import com.frasinu.iss.service.service_requests.proposal.FindForAuthorRequest;
 import com.frasinu.iss.service.service_requests.user.FindByIdRequest;
 import com.frasinu.iss.service.service_requests.user.UpdateUserRequest;
 import com.frasinu.iss.view.FrasinuApplication;
 import com.frasinu.iss.view.Screen;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -81,8 +79,28 @@ public class AuthorController extends BaseController {
     }
 
     public void goToPaper(ActionEvent ac) {
+
+
+        HashMap<String, Object> map = getData();
+        if (map.get("justUpdate")!=null)
+            map.remove("justUpdate");
         FrasinuApplication.changeScreen(Screen.PAPER, getData());
+
     }
+
+    public void updatePaper(ActionEvent ac) {
+
+        Proposal proposal = (Proposal)uploadedProposalsTableView.getSelectionModel().getSelectedItem();
+        if (proposal!=null){
+            HashMap<String, Object> map = getData();
+            map.put("justUpdate","yes");
+            map.put("proposal", proposal);
+
+            FrasinuApplication.changeScreen(Screen.PAPER, getData());
+        }
+
+    }
+
 
     @Override
     public void setData(HashMap<String, Object> data) {
@@ -103,6 +121,8 @@ public class AuthorController extends BaseController {
             affiliation.setText(author.getAffiliation());
         uploadedProposalsTableView.setVisible(false);
         authorId = (Integer) getData().get("idAuthor");
+        titleColumn.setCellValueFactory(new PropertyValueFactory<Proposal, String>("title"));
+        topicsColumn.setCellValueFactory(new PropertyValueFactory<Proposal, String>("topicsString"));
     }
 
     public void update() {
@@ -135,9 +155,11 @@ public class AuthorController extends BaseController {
         if (uploadedProposalsTableView.isVisible()) {
             uploadedProposalsTableView.setVisible(false);
         } else {
+
             model = FXCollections.observableList(proposalService.findForAuthor(new FindForAuthorRequest(authorId)));
             uploadedProposalsTableView.setItems(model);
             uploadedProposalsTableView.setVisible(true);
+
         }
     }
 

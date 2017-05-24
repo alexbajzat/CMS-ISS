@@ -33,17 +33,27 @@ public class ProposalService {
     }
 
     public Proposal createProposalForAuthors(CreateProposalRequest createProposalRequest) {
+        List<String> topics = createProposalRequest.getTopics();
+        List<Topic> parsedTopics = topics.stream()
+                .map(Topic::new)
+                .collect(Collectors.toList());
+
+
         Proposal proposal = Proposal.builder()
                 .setAbstractPaper(createProposalRequest.getAbstractPaper())
                 .setFullPaper(createProposalRequest.getFullPaper())
                 .setTitle(createProposalRequest.getTitle())
+                .setTopics(parsedTopics)
                 .build();
+
+
 
         proposalRepository.save(proposal);
 
+
         List<Integer> authorsId = createProposalRequest.getAuthorsId();
         List<String> keywords = createProposalRequest.getKeywords();
-        List<String> topics = createProposalRequest.getTopics();
+
 
         authorsId.forEach(id -> {
             proposalRepository.addProposalForAuthor(proposal.getId(), id);
@@ -56,12 +66,11 @@ public class ProposalService {
         keywordRepository.save(parsedKeywords)
                 .forEach(keyword -> keywordRepository.addKeywordForProposal(keyword.getId(), proposal.getId()));
 
-        List<Topic> parsedTopics = topics.stream()
-                .map(Topic::new)
-                .collect(Collectors.toList());
+
 
         topicRepository.save(parsedTopics)
                 .forEach(topic -> topicRepository.addTopicForProposal(topic.getId(), proposal.getId()));
+
 
         return findById(proposal.getId());
 
@@ -74,5 +83,10 @@ public class ProposalService {
 
     public Proposal findById(Integer proposalId) {
         return proposalRepository.findOne(proposalId);
+    }
+
+
+    public void updateProposal(Proposal proposal) {
+        proposalRepository.update(proposal.getId(),proposal.getAbstractPaper(),proposal.getFullPaper());
     }
 }

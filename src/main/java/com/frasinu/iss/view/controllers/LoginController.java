@@ -4,17 +4,19 @@ import com.frasinu.iss.exception.LoginException;
 import com.frasinu.iss.service.UserService;
 import com.frasinu.iss.service.service_requests.user.FindByUsernameRequest;
 import com.frasinu.iss.service.service_requests.user.LoginUserRequest;
-import javafx.event.ActionEvent;
 import com.frasinu.iss.view.FrasinuApplication;
 import com.frasinu.iss.view.Screen;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by Paul on 5/9/17.
@@ -29,6 +31,18 @@ public class LoginController extends BaseController {
 
     private UserService userService;
 
+    @FXML
+    public void  initialize(){
+        password.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                if (keyEvent.getCode() == KeyCode.ENTER)  {
+                    login(new ActionEvent());
+                }
+            }
+        });
+
+    }
     @Autowired
     public void setUserService(UserService userService) {
         this.userService = userService;
