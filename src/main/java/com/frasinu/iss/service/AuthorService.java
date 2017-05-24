@@ -6,6 +6,7 @@ import com.frasinu.iss.persistance.model.Author;
 import com.frasinu.iss.service.service_requests.author.CreateAuthorRequest;
 import com.frasinu.iss.service.service_requests.author.FindUserIdRequest;
 import com.frasinu.iss.service.service_requests.author.UpdateAuthorRequest;
+import com.frasinu.iss.service.service_requests.conferenceedition.FindByConferenceEditionIdRequest;
 import com.frasinu.iss.service.service_requests.user.FindByIdRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,6 +51,10 @@ public class AuthorService {
 
     public List<Author> getAll() {
         return authorRepository.findAll();
+    }
+
+    public List<Author> getAllByConferenceEdition(FindByConferenceEditionIdRequest findByConferenceEditionIdRequest) {
+        return authorRepository.findByConferenceEdition(findByConferenceEditionIdRequest.getConferenceEditionId());
     }
 
     public Author findByUserId(FindUserIdRequest findByUserIdRequest) {
