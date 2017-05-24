@@ -6,6 +6,7 @@ import com.frasinu.iss.persistance.model.Reviewer;
 import com.frasinu.iss.service.AuthorService;
 import com.frasinu.iss.service.ReviewerService;
 import com.frasinu.iss.service.service_requests.author.FindAllByConferenceEditionRequest;
+import com.frasinu.iss.service.service_requests.reviewer.AssignPaperToReviewerRequest;
 import com.frasinu.iss.service.service_requests.reviewer.FindReviewersByEditionRequest;
 import com.frasinu.iss.view.FrasinuApplication;
 import com.frasinu.iss.view.Screen;
@@ -31,8 +32,10 @@ public class BidsController extends BaseController {
     TextField paperTxt,reviewerTxt;
 
     private ReviewerService reviewerService;
-    //private ConferenceEditionService editionService;
     private AuthorService authorService;
+    Reviewer selectedReviewer = null;
+    Proposal selectedPaper = null;
+
 
     @Autowired
     public void setAuthorService(AuthorService authorService){this.authorService = authorService;}
@@ -95,7 +98,10 @@ public class BidsController extends BaseController {
 
         listPapers.getSelectionModel()
                 .selectedItemProperty()
-                .addListener((observable, oldValue, newValue) -> paperTxt.setText(((Proposal)newValue).getTitle()));
+                .addListener((observable, oldValue, newValue) -> {
+                            selectedPaper = ((Proposal)newValue);
+                            paperTxt.setText(selectedPaper.getTitle());
+                        });
     }
 
     private void initReviewer() {
@@ -118,6 +124,22 @@ public class BidsController extends BaseController {
 
         listReviewers.getSelectionModel()
                      .selectedItemProperty()
-                     .addListener((observable, oldValue, newValue) -> reviewerTxt.setText(((Reviewer)newValue).getUser().getUsername()));
+                     .addListener((observable, oldValue, newValue) ->{
+                                 selectedReviewer = ((Reviewer)newValue);
+                                 reviewerTxt.setText(selectedReviewer.getUser().getUsername());
+                             });
+    }
+
+    public void assign(){
+        if ((selectedReviewer == null) || (selectedPaper == null)){
+            showDialog("Please select a reviewer and a paper!","Ooops!");
+            return;
+        }
+
+        boolean added = reviewerService.assignPaperToReviewer(new AssignPaperToReviewerRequest(selectedReviewer.getId(), selectedPaper.getId(), "IN PROGRESS"));
+        if (added)
+            showDialog("Paper assigned to reviewer!", "Success!");
+        else
+            showDialog("Sorry, this paper might be already assigned to this reviewer.", "Error!");
     }
 }

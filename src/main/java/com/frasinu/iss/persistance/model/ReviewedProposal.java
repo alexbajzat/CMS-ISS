@@ -23,6 +23,14 @@ public class ReviewedProposal {
     @Column(name = "review")
     private String review;
 
+    ReviewedProposal(){}
+
+    public ReviewedProposal(Reviewer reviewer, Proposal proposal, String review) {
+        this.reviewer = reviewer;
+        this.proposal = proposal;
+        this.review = review;
+    }
+
     public Integer getId() {
         return id;
     }
