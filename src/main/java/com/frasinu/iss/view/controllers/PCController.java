@@ -155,5 +155,14 @@ public class PCController extends BaseController{
     public void goToConferences(ActionEvent actionEvent) {
         FrasinuApplication.changeScreen(Screen.CONFERENCES,getData());
     }
+    public void bidPapers(ActionEvent actionEvent){
+        FrasinuApplication.changeScreen(Screen.BIDPAPERS,getData());
+    }
+    public void makeReview(ActionEvent actionEvent){
+        FrasinuApplication.changeScreen(Screen.MAKEREVIEW,getData());
+    }
+    public void seeReview(ActionEvent actionEvent){
+        FrasinuApplication.changeScreen(Screen.REVIEWS,getData());
+    }
 
 }
