@@ -63,7 +63,7 @@
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="326.0" prefWidth="460.0" styleClass="background" stylesheets="@stylelayout.css">
                <children>
-                  <Button layoutX="82.0" layoutY="264.0" mnemonicParsing="false" text="Assing papers" />
+                  <Button layoutX="82.0" layoutY="264.0" mnemonicParsing="false" onAction="#assignPaper" text="Assing papers" />
                   <Button layoutX="209.0" layoutY="264.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="178.0" text="Modify conference" />
                </children>
             </AnchorPane>
