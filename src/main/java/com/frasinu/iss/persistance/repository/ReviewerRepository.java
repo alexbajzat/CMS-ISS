@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * Created by bjz on 5/21/2017.
  */
@@ -13,5 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 public interface ReviewerRepository extends JpaRepository<Reviewer, Integer> {
     @Query(value = "select * from reviewer a where a.id_user = :id and a.id_conference_edition=:id_conference_edition" , nativeQuery = true)
    Reviewer findByUserAndEditionId(@Param("id") Integer userId,@Param(value = "id_conference_edition") int idConferenceEdition);
+
+    @Query(value = "select * from reviewer r where r.id_conference_edition=:id_conference_edition" , nativeQuery = true)
+    List<Reviewer> findByEditionId(@Param(value = "id_conference_edition") int idConferenceEdition);
 
 }

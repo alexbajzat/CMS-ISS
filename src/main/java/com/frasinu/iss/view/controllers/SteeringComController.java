@@ -146,4 +146,8 @@ public class SteeringComController extends BaseController {
     public void goToConferences(ActionEvent actionEvent) {
         FrasinuApplication.changeScreen(Screen.CONFERENCES,getData());
     }
+
+    public void assignPaper(ActionEvent actionEvent){
+        FrasinuApplication.changeScreen(Screen.BIDS, getData());
+    }
 }
