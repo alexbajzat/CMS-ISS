@@ -1,12 +1,11 @@
 package com.frasinu.iss.service;
 
 import com.frasinu.iss.exception.InexistentException;
+import com.frasinu.iss.persistance.model.ReviewedProposal;
 import com.frasinu.iss.persistance.model.Reviewer;
+import com.frasinu.iss.persistance.repository.ReviewedProposalRepository;
 import com.frasinu.iss.persistance.repository.ReviewerRepository;
-import com.frasinu.iss.service.service_requests.reviewer.CreateReviewerRequest;
-import com.frasinu.iss.service.service_requests.reviewer.FindReviewerByIdRequest;
-import com.frasinu.iss.service.service_requests.reviewer.FindByUserAndEditionIdRequest;
-import com.frasinu.iss.service.service_requests.reviewer.UpdateReviewerRequest;
+import com.frasinu.iss.service.service_requests.reviewer.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +18,9 @@ import java.util.List;
 public class ReviewerService {
     @Autowired
     private ReviewerRepository reviewerRepository;
+
+    @Autowired
+    private ReviewedProposalRepository reviewedProposalRepository;
 
     public Reviewer addReviewer(CreateReviewerRequest createReviewerRequest) {
         Reviewer reviewer = Reviewer.builder()
@@ -60,5 +62,20 @@ public class ReviewerService {
 
     public Reviewer findById(FindReviewerByIdRequest findByUserIdRequest){
         return reviewerRepository.findOne(findByUserIdRequest.getId());
+    }
+
+    public List<Reviewer> getAllReviewersForEdition(FindReviewersByEditionRequest findReviewersByEditionRequest){
+        return reviewerRepository.findByEditionId(findReviewersByEditionRequest.getIdEdition());
+    }
+
+    public boolean assignPaperToReviewer(AssignPaperToReviewerRequest assignPaperToReviewerRequest){
+        int idReviewer = assignPaperToReviewerRequest.getIdReviewer();
+        int idPaper = assignPaperToReviewerRequest.getIdPaper();
+        ReviewedProposal reviewedProposal = reviewedProposalRepository.findByReviewerAndProposal(idReviewer, idPaper);
+        if (reviewedProposal != null)
+            return false;
+        String result = assignPaperToReviewerRequest.getResult();
+        reviewedProposalRepository.addReviewPropposal(idReviewer, idPaper, result);
+        return true;
     }
 }
