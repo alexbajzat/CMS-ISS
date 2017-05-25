@@ -6,19 +6,20 @@ import com.frasinu.iss.persistance.model.User;
 /**
  * Created by Betty on 5/25/2017.
  */
-public class CreateSteeringRequest {
-
+public class UpdateSteeringRequest {
+    private int id;
     private String rank;
     private ConferenceEdition conferenceEdition;
     private User user;
 
-    public CreateSteeringRequest(String rank, ConferenceEdition conferenceEdition, User user) {
+    public UpdateSteeringRequest(int id,String rank, ConferenceEdition conferenceEdition, User user) {
+        this.id=id;
         this.rank = rank;
         this.conferenceEdition = conferenceEdition;
         this.user = user;
     }
 
-
+    public int getId(){return id;}
     public String getRank() {
         return rank;
     }

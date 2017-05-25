@@ -7,6 +7,7 @@ import com.frasinu.iss.service.service_requests.reviewer.CreateReviewerRequest;
 import com.frasinu.iss.service.service_requests.reviewer.FindByUserAndEditionIdRequest;
 import com.frasinu.iss.service.service_requests.steeringcommitteemember.CreateSteeringRequest;
 import com.frasinu.iss.service.service_requests.steeringcommitteemember.FindByUserAndConferenceEditionIdRequest;
+import com.frasinu.iss.service.service_requests.steeringcommitteemember.UpdateSteeringRequest;
 import com.frasinu.iss.view.FrasinuApplication;
 import com.frasinu.iss.view.Screen;
 import javafx.beans.value.ChangeListener;
@@ -40,6 +41,8 @@ public class AdminUsersController extends BaseController {
     private ComboBox<Conference> conferencesCombo;
     @FXML
     private ComboBox<ConferenceEdition> editionsCombo;
+    @FXML
+    private ComboBox<String> rankCombo;
     private @FXML TableColumn<User,String> usernameCol;
     private @FXML TableColumn<User,String> nameCol;
     private @FXML TableView<User> table;
@@ -54,6 +57,8 @@ public class AdminUsersController extends BaseController {
     private SteeringCommitteeMemberService steeringService;
     @FXML
     public void initialize() {
+        rankCombo.getItems().addAll("","Chair","Co-chair");
+        rankCombo.editableProperty().setValue(false);
         table.getSelectionModel().selectFirst();
         List<Conference> allConf=conferenceService.getAll();
         conferencesCombo.getItems().addAll(allConf);
@@ -62,6 +67,18 @@ public class AdminUsersController extends BaseController {
         List<ConferenceEdition> allEditions=editionService.findEditionsFotConference(c.getId());
         editionsCombo.getItems().addAll(allEditions);
         editionsCombo.getSelectionModel().selectFirst();
+
+        steeringMember.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if (steeringMember.isSelected()) {
+                    rankCombo.setVisible(true);
+                    rankCombo.getSelectionModel().selectFirst();
+                }
+                else
+                    rankCombo.setVisible(false);
+            }
+        });
 
         conferencesCombo.valueProperty().addListener(new ChangeListener<Conference>() {
             @Override
@@ -107,7 +124,7 @@ public class AdminUsersController extends BaseController {
         author.setSelected(false);
         pcMember.setSelected(false);
         steeringMember.setSelected(false);
-
+        rankCombo.setVisible(false);
         if(user!=null) {
             ConferenceEdition ed = (ConferenceEdition) editionsCombo.getSelectionModel().getSelectedItem();
             Author a = authorService.findByUserIdEditionId(new FindByUserAndEditionIdRequest(user.getId(), ed.getId()));
@@ -117,8 +134,21 @@ public class AdminUsersController extends BaseController {
                 author.setSelected(true);
             if (pc != null)
                 pcMember.setSelected(true);
-            if (st != null)
+            if (st != null) {
                 steeringMember.setSelected(true);
+                rankCombo.setVisible(true);
+                if (st.getRank().equals("Chair"))
+                    rankCombo.getSelectionModel().select("Chair");
+                else {
+                    if (st.getRank().equals("Co-Chair"))
+                        rankCombo.getSelectionModel().select("Co-Chair");
+                    else
+                        rankCombo.getSelectionModel().selectLast();
+                }
+
+            }
+
+
 
         }
 
@@ -151,9 +181,13 @@ public class AdminUsersController extends BaseController {
 
 
 
-    public void goToMenu(ActionEvent ac){ FrasinuApplication.changeScreen(Screen.ADMINCONFERENCES, getData());}
+    public void goToMenu(ActionEvent ac){ FrasinuApplication.changeScreen(Screen.MENUADMIN, getData());}
     public void update(ActionEvent ac){
         User user=table.getSelectionModel().getSelectedItem();
+        if (user==null) {
+            showDialog("Please select a user", "ERROR");
+            return;
+        }
         ConferenceEdition ed = (ConferenceEdition) editionsCombo.getSelectionModel().getSelectedItem();
         Author a = authorService.findByUserIdEditionId(new FindByUserAndEditionIdRequest(user.getId(), ed.getId()));
         Reviewer pc = reviewerService.findByUserAndEditionId(new FindByUserAndEditionIdRequest(user.getId(), ed.getId()));
@@ -169,8 +203,16 @@ public class AdminUsersController extends BaseController {
             authorService.deleteAuthor(a.getId());
         if (pc!=null && !pcMember.isSelected())
             reviewerService.deleteReviewer(pc.getId());
-        if (st==null && steeringMember.isSelected())
-            steeringService.addSteering(new CreateSteeringRequest("",ed,user));
+        String rank=rankCombo.getSelectionModel().getSelectedItem();
+        if (st==null && steeringMember.isSelected()){
+            steeringService.addSteering(new CreateSteeringRequest(rank,ed,user));
+        }
+        if (st!=null && steeringMember.isSelected() && !st.getRank().equals(rank)){
+            steeringService.updateSteering(new UpdateSteeringRequest(st.getId(),rank,ed,user));
+            System.out.println(rank+"  "+st.getRank());
+        }
+
+
         if (st!=null && !steeringMember.isSelected())
             steeringService.deleteSteering(st.getId());
 
