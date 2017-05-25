@@ -78,4 +78,8 @@ public class ReviewerService {
         reviewedProposalRepository.addReviewPropposal(idReviewer, idPaper, result);
         return true;
     }
+
+    public void deleteReviewer(Integer id) {
+        reviewerRepository.delete(id);
+    }
 }

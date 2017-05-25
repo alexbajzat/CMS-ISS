@@ -11,8 +11,5 @@ import org.springframework.stereotype.Controller;
 @Controller(value = "AdminConferencesController")
 public class AdminConferencesController extends BaseController {
     public void goBack(ActionEvent ac){ FrasinuApplication.changeScreen(Screen.MENUADMIN, getData());}
-    public void gotoEdition(ActionEvent ac){ FrasinuApplication.changeScreen(Screen.ADMINEDITION, getData());}
-
-
-
+    public void goToEdition(ActionEvent ac){ FrasinuApplication.changeScreen(Screen.ADMINEDITION, getData());}
 }

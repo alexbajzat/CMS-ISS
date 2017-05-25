@@ -4,7 +4,9 @@ import com.frasinu.iss.persistance.model.*;
 import com.frasinu.iss.service.*;
 import com.frasinu.iss.service.service_requests.author.CreateAuthorRequest;
 import com.frasinu.iss.service.service_requests.reviewer.CreateReviewerRequest;
-import com.frasinu.iss.service.service_requests.user.FindIfUserIsAuthorRequest;
+import com.frasinu.iss.service.service_requests.reviewer.FindByUserAndEditionIdRequest;
+import com.frasinu.iss.service.service_requests.steeringcommitteemember.CreateSteeringRequest;
+import com.frasinu.iss.service.service_requests.steeringcommitteemember.FindByUserAndConferenceEditionIdRequest;
 import com.frasinu.iss.view.FrasinuApplication;
 import com.frasinu.iss.view.Screen;
 import javafx.beans.value.ChangeListener;
@@ -43,11 +45,13 @@ public class AdminUsersController extends BaseController {
     private @FXML TableView<User> table;
     private ObservableList<User> model;
 
-    private UserService userService;
+
     private ConferenceService conferenceService;
     private ConferenceEditionService editionService;
+    private UserService userService;
     private AuthorService authorService;
     private ReviewerService reviewerService;
+    private SteeringCommitteeMemberService steeringService;
     @FXML
     public void initialize() {
         table.getSelectionModel().selectFirst();
@@ -106,14 +110,16 @@ public class AdminUsersController extends BaseController {
 
         if(user!=null) {
             ConferenceEdition ed = (ConferenceEdition) editionsCombo.getSelectionModel().getSelectedItem();
-            Author a = userService.findIfUserIsAuthor(new FindIfUserIsAuthorRequest(user.getId(), ed.getId()));
-            Reviewer pc = userService.findIfUserIsPC(user.getId(), ed.getId());
-
+            Author a = authorService.findByUserIdEditionId(new FindByUserAndEditionIdRequest(user.getId(), ed.getId()));
+            Reviewer pc = reviewerService.findByUserAndEditionId(new FindByUserAndEditionIdRequest(user.getId(), ed.getId()));
+            SteeringCommitteeMember st=steeringService.findByUserAndConferenceEditionId(new FindByUserAndConferenceEditionIdRequest(user.getId(), ed.getId()));
             if (a != null)
                 author.setSelected(true);
             if (pc != null)
                 pcMember.setSelected(true);
-            //the same for steering
+            if (st != null)
+                steeringMember.setSelected(true);
+
         }
 
 
@@ -138,15 +144,23 @@ public class AdminUsersController extends BaseController {
     public void setReviewerService(ReviewerService reviewerService) {
         this.reviewerService=reviewerService;
     }
+    @Autowired
+    public void setSteeringService(SteeringCommitteeMemberService sService) {
+        this.steeringService=sService;
+    }
 
 
 
-    public void goToMenu(ActionEvent ac){ FrasinuApplication.changeScreen(Screen.MENUADMIN, getData());}
+    public void goToMenu(ActionEvent ac){ FrasinuApplication.changeScreen(Screen.ADMINCONFERENCES, getData());}
     public void update(ActionEvent ac){
         User user=table.getSelectionModel().getSelectedItem();
         ConferenceEdition ed = (ConferenceEdition) editionsCombo.getSelectionModel().getSelectedItem();
-        Author a = userService.findIfUserIsAuthor(new FindIfUserIsAuthorRequest(user.getId(), ed.getId()));
-        Reviewer pc = userService.findIfUserIsPC(user.getId(), ed.getId());
+        Author a = authorService.findByUserIdEditionId(new FindByUserAndEditionIdRequest(user.getId(), ed.getId()));
+        Reviewer pc = reviewerService.findByUserAndEditionId(new FindByUserAndEditionIdRequest(user.getId(), ed.getId()));
+        SteeringCommitteeMember st=steeringService.findByUserAndConferenceEditionId(new FindByUserAndConferenceEditionIdRequest(user.getId(), ed.getId()));
+
+
+
         if (a==null && author.isSelected())
            authorService.addAuthor(new CreateAuthorRequest("","",user,ed));
         if (pc==null && pcMember.isSelected())
@@ -155,6 +169,10 @@ public class AdminUsersController extends BaseController {
             authorService.deleteAuthor(a.getId());
         if (pc!=null && !pcMember.isSelected())
             reviewerService.deleteReviewer(pc.getId());
+        if (st==null && steeringMember.isSelected())
+            steeringService.addSteering(new CreateSteeringRequest("",ed,user));
+        if (st!=null && !steeringMember.isSelected())
+            steeringService.deleteSteering(st.getId());
 
     }
 

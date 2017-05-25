@@ -43,6 +43,6 @@
          </children>
       </GridPane>
       <Button layoutX="121.0" layoutY="349.0" mnemonicParsing="false" text="Add edition" />
-      <Button layoutX="313.0" layoutY="349.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="68.0" text="Back" />
+      <Button layoutX="313.0" layoutY="349.0" mnemonicParsing="false" onAction="#toBack" prefHeight="25.0" prefWidth="68.0" text="Back" />
    </children>
 </AnchorPane>

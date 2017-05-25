@@ -19,4 +19,6 @@ public interface AuthorRepository extends JpaRepository<Author, Integer> {
     @Query(value = "Select * from author a  where a.id_conference_edition = :id_conference_edition",nativeQuery = true)
     List<Author> findAllByConferenceEdition(@Param(value = "id_conference_edition") Integer id_conference_edition);
 
+    @Query(value = "Select * from author a  where a.id_conference_edition = :idEdition and a.id_user=:idUser",nativeQuery = true)
+    Author findByUserIdEditionId(@Param("idUser") int idUser,@Param("idEdition") int idEdition);
 }
