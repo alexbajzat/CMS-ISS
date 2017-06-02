@@ -2,10 +2,7 @@ package com.frasinu.iss.service;
 
 import com.frasinu.iss.persistance.model.SteeringCommitteeMember;
 import com.frasinu.iss.persistance.repository.SteeringCommitteeMemberRepository;
-import com.frasinu.iss.service.service_requests.steeringcommitteemember.CreateSteeringRequest;
-import com.frasinu.iss.service.service_requests.steeringcommitteemember.FindByUserAndConferenceEditionIdRequest;
-import com.frasinu.iss.service.service_requests.steeringcommitteemember.FindSteeringCommitteeMemberByIdRequest;
-import com.frasinu.iss.service.service_requests.steeringcommitteemember.UpdateSteeringRequest;
+import com.frasinu.iss.service.service_requests.steeringcommitteemember.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -49,5 +46,13 @@ public class SteeringCommitteeMemberService {
                 .build();
 
         return steeringCommitteeMemberRepository.save(steering);
+    }
+
+    public SteeringCommitteeMember getChairByEdition(FindChairByEditionRequest findChairByEditionRequest) {
+       for (SteeringCommitteeMember steering:steeringCommitteeMemberRepository.findAll()){
+           if (steering.getRank().equals("Chair") && steering.getConferenceEdition().getId()==findChairByEditionRequest.getEdition().getId())
+            return steering;
+       }
+       return null;
     }
 }

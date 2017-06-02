@@ -3,46 +3,63 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="431.0" styleClass="background" stylesheets="@stylelayout.css" xmlns="http://javafx.com/javafx/8.0.101" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="439.0" prefWidth="658.0" styleClass="background" stylesheets="@stylelayout.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <GridPane layoutX="21.0" layoutY="24.0" prefHeight="303.0" prefWidth="311.0">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <Label text="Name:" />
-            <Label text="Abstract deadline:" GridPane.rowIndex="1" />
-            <Label text="Bidding deadline:" GridPane.rowIndex="2" />
-            <Label text="End date:" GridPane.rowIndex="4" />
-            <Label text="Start date:" GridPane.rowIndex="3" />
-            <Label text="Evaluation deadline:" GridPane.rowIndex="5" />
-            <Label text="Papers deadline:" GridPane.rowIndex="6" />
-            <TextField GridPane.columnIndex="1" />
-            <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="6" />
-         </children>
-      </GridPane>
-      <Button layoutX="121.0" layoutY="349.0" mnemonicParsing="false" text="Add edition" />
-      <Button layoutX="313.0" layoutY="349.0" mnemonicParsing="false" onAction="#toBack" prefHeight="25.0" prefWidth="68.0" text="Back" />
+      <BorderPane prefHeight="374.0" prefWidth="598.0">
+         <right>
+            <GridPane prefHeight="303.0" prefWidth="313.0" BorderPane.alignment="CENTER">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="199.0" minWidth="10.0" prefWidth="165.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="179.0" minWidth="10.0" prefWidth="173.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="Name:" />
+                  <Label text="Abstract deadline:" GridPane.rowIndex="3" />
+                  <Label text="Evaluation deadline:" GridPane.rowIndex="6" />
+                  <Label text="Full Papers deadline:" GridPane.rowIndex="4" />
+                  <TextField fx:id="name" prefWidth="254.0" GridPane.columnIndex="1" />
+                  <DatePicker fx:id="abstractD" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <DatePicker fx:id="evaluationD" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <DatePicker fx:id="papersD" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <DatePicker fx:id="biddingD" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <Label text="Bidding deadline:" GridPane.rowIndex="5" />
+                  <DatePicker fx:id="startDate" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label text="Start date:" GridPane.rowIndex="1" />
+                  <DatePicker fx:id="endDate" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label text="End date:" GridPane.rowIndex="2" />
+               </children>
+            </GridPane>
+         </right>
+         <bottom>
+            <HBox alignment="CENTER" prefHeight="35.0" prefWidth="598.0" spacing="30.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button alignment="CENTER" contentDisplay="TOP" layoutX="430.0" layoutY="10.0" mnemonicParsing="false" onAction="#delete" prefHeight="37.0" prefWidth="135.0" text="Delete Edition" />
+                  <Button mnemonicParsing="false" onAction="#add" text="Add edition" />
+               </children>
+            </HBox>
+         </bottom>
+         <left>
+            <ListView fx:id="listEditions" prefHeight="337.0" prefWidth="222.0" BorderPane.alignment="CENTER" />
+         </left>
+      </BorderPane>
+      <Button alignment="TOP_RIGHT" layoutX="547.0" layoutY="382.0" mnemonicParsing="false" onAction="#goBack" prefHeight="25.0" prefWidth="68.0" text="Back" />
    </children>
 </AnchorPane>

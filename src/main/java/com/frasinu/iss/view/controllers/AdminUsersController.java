@@ -7,6 +7,7 @@ import com.frasinu.iss.service.service_requests.reviewer.CreateReviewerRequest;
 import com.frasinu.iss.service.service_requests.reviewer.FindByUserAndEditionIdRequest;
 import com.frasinu.iss.service.service_requests.steeringcommitteemember.CreateSteeringRequest;
 import com.frasinu.iss.service.service_requests.steeringcommitteemember.FindByUserAndConferenceEditionIdRequest;
+import com.frasinu.iss.service.service_requests.steeringcommitteemember.FindChairByEditionRequest;
 import com.frasinu.iss.service.service_requests.steeringcommitteemember.UpdateSteeringRequest;
 import com.frasinu.iss.view.FrasinuApplication;
 import com.frasinu.iss.view.Screen;
@@ -205,11 +206,16 @@ public class AdminUsersController extends BaseController {
             reviewerService.deleteReviewer(pc.getId());
         String rank=rankCombo.getSelectionModel().getSelectedItem();
         if (st==null && steeringMember.isSelected()){
+            if (steeringService.getChairByEdition(new FindChairByEditionRequest(ed))!=null)
+                showDialog("There is already a Chair for this edition: "+ed.getName(),"ERROR");
+            else
             steeringService.addSteering(new CreateSteeringRequest(rank,ed,user));
         }
         if (st!=null && steeringMember.isSelected() && !st.getRank().equals(rank)){
+            if (steeringService.getChairByEdition(new FindChairByEditionRequest(ed))!=null)
+                showDialog("There is already a Chair for this edition: "+ed.getName(),"ERROR");
+            else
             steeringService.updateSteering(new UpdateSteeringRequest(st.getId(),rank,ed,user));
-            System.out.println(rank+"  "+st.getRank());
         }
 
 

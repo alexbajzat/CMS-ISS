@@ -55,7 +55,16 @@ public class AdminConferencesController extends BaseController {
 
     }
     public void goBack(ActionEvent ac){ FrasinuApplication.changeScreen(Screen.MENUADMIN, getData());}
-    public void goToEdition(ActionEvent ac){ FrasinuApplication.changeScreen(Screen.ADMINEDITION, getData());}
+    public void goToEdition(ActionEvent ac) {
+        Conference conference = conferencesTable.getSelectionModel().getSelectedItem();
+        if (conference == null)
+            showDialog("Please select a conference", "ERROR");
+        else {
+            getData().put("Conference", conference);
+            FrasinuApplication.changeScreen(Screen.ADMINEDITION, getData());
+        }
+    }
+
     public void create(ActionEvent ac) {
         if (name.getText().isEmpty() )
             showDialog("Please enter the name and the website of the conference", "ERROR!");

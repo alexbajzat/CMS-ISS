@@ -1,12 +1,11 @@
 package com.frasinu.iss.view;
 
-import com.frasinu.iss.main.Main;
+import com.frasinu.iss.view.controllers.BaseController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import com.frasinu.iss.view.controllers.BaseController;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;

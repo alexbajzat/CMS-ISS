@@ -3,6 +3,8 @@ package com.frasinu.iss.service;
 import com.frasinu.iss.persistance.model.Conference;
 import com.frasinu.iss.persistance.model.ConferenceEdition;
 import com.frasinu.iss.persistance.repository.ConferenceEditionRepository;
+import com.frasinu.iss.service.service_requests.conferenceedition.CreateEditionRequest;
+import com.frasinu.iss.service.service_requests.conferenceedition.DeleteEditionRequest;
 import com.frasinu.iss.service.service_requests.conferenceedition.FindByConferenceEditionIdRequest;
 import com.frasinu.iss.service.service_requests.conferenceedition.FindConferenceByConferenceEditionIdRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,4 +37,22 @@ public class ConferenceEditionService implements IConferenceEditionService {
         return conferenceEditionRepository.allForConference(idConference);
     }
 
+    public void deleteEdition(DeleteEditionRequest deleteEditionRequest) {
+        conferenceEditionRepository.delete(deleteEditionRequest.getEdition());
+    }
+
+    public ConferenceEdition addEdition(CreateEditionRequest createEditionRequest) {
+        ConferenceEdition ed = ConferenceEdition.builder()
+                .setName(createEditionRequest.getName())
+                .setAbstractsDeadline(createEditionRequest.getAbstractsDeadline())
+                .setBiddingDeadline(createEditionRequest.getBiddingDeadline())
+                .setConferenceStartDate(createEditionRequest.getConferenceStartDate())
+                .setConferenceEndDate(createEditionRequest.getConferenceEndDate())
+                .setFullPapersDeadline(createEditionRequest.getFullPapersDeadline())
+                .setEvaluationDeadline(createEditionRequest.getEvaluationDeadline())
+                .setConference(createEditionRequest.getConference())
+                .build();
+
+        return conferenceEditionRepository.save(ed);
+    }
 }
