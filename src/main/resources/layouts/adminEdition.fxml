@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="439.0" prefWidth="658.0" styleClass="background" stylesheets="@stylelayout.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="439.0" prefWidth="658.0" styleClass="background" stylesheets="@stylelayout.css" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane prefHeight="374.0" prefWidth="598.0">
          <right>
@@ -53,6 +53,7 @@
                <children>
                   <Button alignment="CENTER" contentDisplay="TOP" layoutX="430.0" layoutY="10.0" mnemonicParsing="false" onAction="#delete" prefHeight="37.0" prefWidth="135.0" text="Delete Edition" />
                   <Button mnemonicParsing="false" onAction="#add" text="Add edition" />
+                  <Button alignment="CENTER" contentDisplay="TOP" layoutX="171.0" layoutY="10.0" mnemonicParsing="false" onAction="#update" prefHeight="37.0" prefWidth="135.0" text="Update Edition" />
                </children>
             </HBox>
          </bottom>

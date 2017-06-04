@@ -67,7 +67,7 @@ public class AdminConferencesController extends BaseController {
 
     public void create(ActionEvent ac) {
         if (name.getText().isEmpty() )
-            showDialog("Please enter the name and the website of the conference", "ERROR!");
+            showDialog("Please enter the name of the conference", "ERROR!");
         else {
             conferenceService.addConference(new CreateConferenceRequest(name.getText(), webpage.getText()));
             model = FXCollections.observableArrayList(conferenceService.getAll());
@@ -82,7 +82,7 @@ public class AdminConferencesController extends BaseController {
             return;
         }
         if (name.getText().isEmpty()) {
-            showDialog("Please enter the name and the website of the conference", "ERROR!");
+            showDialog("Please enter the name of the conference", "ERROR!");
             return;
         }
         conferenceService.updateConference(new UpdateConferenceRequest(conf.getId(),name.getText(),webpage.getText()));

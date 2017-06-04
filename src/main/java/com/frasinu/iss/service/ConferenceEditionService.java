@@ -3,10 +3,7 @@ package com.frasinu.iss.service;
 import com.frasinu.iss.persistance.model.Conference;
 import com.frasinu.iss.persistance.model.ConferenceEdition;
 import com.frasinu.iss.persistance.repository.ConferenceEditionRepository;
-import com.frasinu.iss.service.service_requests.conferenceedition.CreateEditionRequest;
-import com.frasinu.iss.service.service_requests.conferenceedition.DeleteEditionRequest;
-import com.frasinu.iss.service.service_requests.conferenceedition.FindByConferenceEditionIdRequest;
-import com.frasinu.iss.service.service_requests.conferenceedition.FindConferenceByConferenceEditionIdRequest;
+import com.frasinu.iss.service.service_requests.conferenceedition.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -51,6 +48,22 @@ public class ConferenceEditionService implements IConferenceEditionService {
                 .setFullPapersDeadline(createEditionRequest.getFullPapersDeadline())
                 .setEvaluationDeadline(createEditionRequest.getEvaluationDeadline())
                 .setConference(createEditionRequest.getConference())
+                .build();
+
+        return conferenceEditionRepository.save(ed);
+    }
+
+    public ConferenceEdition updateEdition(UpdateEditionRequest updateEditionRequest) {
+        ConferenceEdition ed = ConferenceEdition.builder()
+                .setId(updateEditionRequest.getId())
+                .setName(updateEditionRequest.getName())
+                .setAbstractsDeadline(updateEditionRequest.getAbstractsDeadline())
+                .setBiddingDeadline(updateEditionRequest.getBiddingDeadline())
+                .setConferenceStartDate(updateEditionRequest.getConferenceStartDate())
+                .setConferenceEndDate(updateEditionRequest.getConferenceEndDate())
+                .setFullPapersDeadline(updateEditionRequest.getFullPapersDeadline())
+                .setEvaluationDeadline(updateEditionRequest.getEvaluationDeadline())
+                .setConference(updateEditionRequest.getConference())
                 .build();
 
         return conferenceEditionRepository.save(ed);

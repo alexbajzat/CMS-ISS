@@ -50,7 +50,7 @@ public class SteeringCommitteeMemberService {
 
     public SteeringCommitteeMember getChairByEdition(FindChairByEditionRequest findChairByEditionRequest) {
        for (SteeringCommitteeMember steering:steeringCommitteeMemberRepository.findAll()){
-           if (steering.getRank().equals("Chair") && steering.getConferenceEdition().getId()==findChairByEditionRequest.getEdition().getId())
+           if (steering.getRank().equals("Chair") && steering.getConferenceEdition().getId().equals(findChairByEditionRequest.getEdition().getId()))
             return steering;
        }
        return null;

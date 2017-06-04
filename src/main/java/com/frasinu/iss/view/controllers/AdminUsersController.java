@@ -206,14 +206,17 @@ public class AdminUsersController extends BaseController {
             reviewerService.deleteReviewer(pc.getId());
         String rank=rankCombo.getSelectionModel().getSelectedItem();
         if (st==null && steeringMember.isSelected()){
-            if (steeringService.getChairByEdition(new FindChairByEditionRequest(ed))!=null)
-                showDialog("There is already a Chair for this edition: "+ed.getName(),"ERROR");
+            SteeringCommitteeMember chair=steeringService.getChairByEdition(new FindChairByEditionRequest(ed));
+
+            if (chair!=null && rank.equals("Chair"))
+                showDialog("There is already a Chair for this edition: "+chair.getUser().getName(),"ERROR");
             else
             steeringService.addSteering(new CreateSteeringRequest(rank,ed,user));
         }
         if (st!=null && steeringMember.isSelected() && !st.getRank().equals(rank)){
-            if (steeringService.getChairByEdition(new FindChairByEditionRequest(ed))!=null)
-                showDialog("There is already a Chair for this edition: "+ed.getName(),"ERROR");
+            SteeringCommitteeMember chair=steeringService.getChairByEdition(new FindChairByEditionRequest(ed));
+            if (chair!=null && rank.equals("Chair"))
+                showDialog("There is already a Chair for this edition: "+chair.getUser().getName(),"ERROR");
             else
             steeringService.updateSteering(new UpdateSteeringRequest(st.getId(),rank,ed,user));
         }
