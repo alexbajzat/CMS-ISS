@@ -3,6 +3,7 @@ package com.frasinu.iss.persistance.model;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.ManyToAny;
 
 import javax.persistence.*;
 import java.util.List;
@@ -36,7 +37,7 @@ public class Proposal {
     private List<ReviewedProposal> reviewed;
 
     @Fetch(FetchMode.SELECT)
-    @OneToMany(mappedBy = "proposal",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "proposal", fetch = FetchType.EAGER)
     private List<BiddedProposal> bidded;
 
     @Fetch(FetchMode.SELECT)
@@ -50,6 +51,10 @@ public class Proposal {
     @OneToMany(mappedBy = "proposal")
     private List<Presentation> presentations;
 
+    @ManyToOne
+    private ConferenceEdition conferenceEdition;
+
+
     Proposal() {
     }
 
@@ -58,7 +63,7 @@ public class Proposal {
     }
 
     Proposal(Integer id, String title, String abstractPaper, String fullPaper, List<Author> authors, List<Keyword> keywords,
-             List<Topic> topics) {
+             List<Topic> topics, ConferenceEdition conferenceEdition) {
         this.id = id;
         this.title = title;
         this.abstractPaper = abstractPaper;
@@ -66,6 +71,7 @@ public class Proposal {
         this.authors = authors;
         this.keywords = keywords;
         this.topics = topics;
+        this.conferenceEdition = conferenceEdition;
     }
 
     public Integer getId() {
@@ -102,6 +108,22 @@ public class Proposal {
 
     public List<BiddedProposal> getBids() {
         return bidded;
+    }
+
+    public ConferenceEdition getConferenceEdition() {
+        return conferenceEdition;
+    }
+
+    public List<ReviewedProposal> getReviewed() {
+        return reviewed;
+    }
+
+    public List<BiddedProposal> getBidded() {
+        return bidded;
+    }
+
+    public List<Presentation> getPresentations() {
+        return presentations;
     }
 }
 

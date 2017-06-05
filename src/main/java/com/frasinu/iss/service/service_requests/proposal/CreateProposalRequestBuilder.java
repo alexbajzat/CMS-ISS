@@ -1,5 +1,7 @@
 package com.frasinu.iss.service.service_requests.proposal;
 
+import com.frasinu.iss.persistance.model.ConferenceEdition;
+
 import java.util.List;
 
 /**
@@ -12,16 +14,22 @@ public class CreateProposalRequestBuilder {
     private List<Integer> authorsId;
     private List<String> keywords;
     private List<String> topics;
+    private ConferenceEdition conferenceEdition;
 
     CreateProposalRequestBuilder() {
     }
 
     public CreateProposalRequest build() {
-        return new CreateProposalRequest(title, abstractPaper, fullPaper, authorsId, keywords, topics);
+        return new CreateProposalRequest(title, abstractPaper, fullPaper, authorsId, keywords, topics, conferenceEdition);
     }
 
     public CreateProposalRequestBuilder setTitle(String title) {
         this.title = title;
+        return this;
+    }
+
+    public CreateProposalRequestBuilder setConferenceEdition(ConferenceEdition conferenceEdition) {
+        this.conferenceEdition = conferenceEdition;
         return this;
     }
 
