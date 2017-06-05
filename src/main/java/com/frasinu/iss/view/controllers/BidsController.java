@@ -1,11 +1,10 @@
 package com.frasinu.iss.view.controllers;
 
-import com.frasinu.iss.persistance.model.Author;
+import com.frasinu.iss.persistance.model.BiddedProposal;
 import com.frasinu.iss.persistance.model.Proposal;
 import com.frasinu.iss.persistance.model.Reviewer;
 import com.frasinu.iss.service.AuthorService;
 import com.frasinu.iss.service.ReviewerService;
-import com.frasinu.iss.service.service_requests.author.FindAllByConferenceEditionRequest;
 import com.frasinu.iss.service.service_requests.reviewer.AssignPaperToReviewerRequest;
 import com.frasinu.iss.service.service_requests.reviewer.FindReviewersByEditionRequest;
 import com.frasinu.iss.view.FrasinuApplication;
@@ -19,7 +18,9 @@ import javafx.scene.control.TextField;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by Toshiba on 5/20/2017.
@@ -27,9 +28,11 @@ import java.util.*;
 @Controller(value = "BidsController")
 public class BidsController extends BaseController {
     @FXML
-    ListView listReviewers, listPapers;
+    private ListView<Reviewer> listReviewers;
     @FXML
-    TextField paperTxt,reviewerTxt;
+    private ListView<Proposal> listPapers;
+    @FXML
+    private TextField paperTxt,reviewerTxt;
 
     private ReviewerService reviewerService;
     private AuthorService authorService;
@@ -69,19 +72,36 @@ public class BidsController extends BaseController {
 
     private void initPaper() {
         int idEdition = (int)getData().get("idEdition");
-
-        List<Author> authors = authorService.findAllByConferenceEdition( new FindAllByConferenceEditionRequest(idEdition));
-                List<Proposal> papers = new ArrayList<>();
-        for (Author author:
-                authors) {
-            for (Proposal paper:
-                 author.getProposals()) {
-                if (!papers.contains(paper))
-                    papers.add(paper);
+        listReviewers.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection == null) {
+                listPapers.getSelectionModel().clearSelection();
             }
+            else{
+                Reviewer reviewer = newSelection;
+                System.out.println(reviewer.getUser().getUsername());
+                List<BiddedProposal> biddedProposals = reviewer.getBiddedProposals();
 
-        }
-        listPapers.setItems(FXCollections.observableArrayList(papers));
+                List<Proposal> papers = new ArrayList<>();
+                for (BiddedProposal biddedProposal:
+                        biddedProposals)
+                    papers.add(biddedProposal.getProposal());
+
+                listPapers.setItems(FXCollections.observableArrayList(papers));
+            }
+        });
+
+//        List<Author> authors = authorService.findAllByConferenceEdition( new FindAllByConferenceEditionRequest(idEdition));
+//                List<Proposal> papers = new ArrayList<>();
+//        for (Author author:
+//                authors) {
+//            for (Proposal paper:
+//                 author.getProposals()) {
+//                if (!papers.contains(paper))
+//                    papers.add(paper);
+//            }
+//
+//        }
+//
 
         listPapers.setCellFactory(param -> new ListCell<Proposal>() {
             @Override
