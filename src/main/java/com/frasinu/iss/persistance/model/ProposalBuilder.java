@@ -13,12 +13,18 @@ public class ProposalBuilder {
     private List<Author> authors;
     private List<Keyword> keywords;
     private List<Topic> topics;
+    private ConferenceEdition conferenceEdition;
 
     public Proposal build() {
-        return new Proposal(id, title, abstractPaper, fullPaper, authors, keywords, topics);
+        return new Proposal(id, title, abstractPaper, fullPaper, authors, keywords, topics, conferenceEdition);
     }
 
     ProposalBuilder() {
+    }
+
+    public ProposalBuilder setConferenceEdition(ConferenceEdition conferenceEdition) {
+        this.conferenceEdition = conferenceEdition;
+        return this;
     }
 
     public ProposalBuilder setTopics(List<Topic> topics) {

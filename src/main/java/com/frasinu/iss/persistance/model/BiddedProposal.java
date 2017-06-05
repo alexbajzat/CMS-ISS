@@ -13,7 +13,7 @@ public class BiddedProposal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "reviewer_id")
@@ -28,7 +28,14 @@ public class BiddedProposal {
 
     BiddedProposal(){}
 
-    public int getId() {
+    public BiddedProposal(Integer id, Reviewer reviewer, Proposal proposal, String result) {
+        this.id = id;
+        this.reviewer = reviewer;
+        this.proposal = proposal;
+        this.result = result;
+    }
+
+    public Integer getId() {
         return id;
     }
 

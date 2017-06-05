@@ -7,6 +7,7 @@ import com.frasinu.iss.persistance.repository.ProposalRepository;
 import com.frasinu.iss.persistance.repository.TopicRepository;
 import com.frasinu.iss.service.service_requests.proposal.CreateProposalRequest;
 import com.frasinu.iss.persistance.model.Proposal;
+import com.frasinu.iss.service.service_requests.proposal.FindByConferenceEdition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,6 +37,7 @@ public class ProposalService {
                 .setAbstractPaper(createProposalRequest.getAbstractPaper())
                 .setFullPaper(createProposalRequest.getFullPaper())
                 .setTitle(createProposalRequest.getTitle())
+                .setConferenceEdition(createProposalRequest.getConferenceEdition())
                 .build();
 
         proposalRepository.save(proposal);
@@ -66,7 +68,9 @@ public class ProposalService {
 
     }
 
-
+    public List<Proposal> findByConferenceId(FindByConferenceEdition conferenceEdition) {
+        return proposalRepository.findByConferenceEdition(conferenceEdition.getId());
+    }
 
 
     public Proposal findById(Integer proposalId) {

@@ -1,5 +1,6 @@
 package com.frasinu.iss.service.service_requests.proposal;
 
+import com.frasinu.iss.persistance.model.ConferenceEdition;
 import com.frasinu.iss.persistance.model.Keyword;
 import com.frasinu.iss.persistance.model.Topic;
 
@@ -15,15 +16,17 @@ public class CreateProposalRequest {
     private List<Integer> authorsId;
     private List<String> keywords;
     private List<String> topics;
+    private ConferenceEdition conferenceEdition;
 
     CreateProposalRequest(String title, String abstractPaper, String fullPaper, List<Integer> authorId,
-                          List<String> keywords, List<String> topics) {
+                          List<String> keywords, List<String> topics, ConferenceEdition conferenceEdition) {
         this.title = title;
         this.abstractPaper = abstractPaper;
         this.fullPaper = fullPaper;
         this.authorsId = authorId;
         this.keywords = keywords;
         this.topics = topics;
+        this.conferenceEdition = conferenceEdition;
     }
 
     public static CreateProposalRequestBuilder builder() {
@@ -32,6 +35,10 @@ public class CreateProposalRequest {
 
     public List<Integer> getAuthorsId() {
         return authorsId;
+    }
+
+    public ConferenceEdition getConferenceEdition() {
+        return conferenceEdition;
     }
 
     public String getTitle() {
