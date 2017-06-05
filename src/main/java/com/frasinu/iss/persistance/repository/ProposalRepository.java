@@ -17,6 +17,9 @@ public interface ProposalRepository extends JpaRepository<Proposal, Integer> {
 
     @Transactional
     @Modifying
-    @Query(value = "Insert into author_proposal(proposal_id, author_id) values(:proposal, :author)",nativeQuery = true)
-    Integer addProposalForAuthor(@Param(value = "proposal") int idProposal ,@Param(value = "author") int idAuthor);
+    @Query(value = "Insert into author_proposal(proposal_id, author_id) values(:proposal, :author)", nativeQuery = true)
+    Integer addProposalForAuthor(@Param(value = "proposal") int idProposal, @Param(value = "author") int idAuthor);
+
+    @Query(value = "SELECT * FROM Proposal WHERE conferenceEdition_id=:id_edition", nativeQuery = true)
+    List<Proposal> findByConferenceEdition(@Param(value = "id_edition") int idEdition);
 }

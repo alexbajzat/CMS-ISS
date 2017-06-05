@@ -4,6 +4,7 @@ import com.frasinu.iss.persistance.model.*;
 import com.frasinu.iss.service.*;
 import com.frasinu.iss.service.service_requests.author.CreateAuthorRequest;
 import com.frasinu.iss.service.service_requests.conferenceedition.FindByConferenceEditionIdRequest;
+import com.frasinu.iss.service.service_requests.proposal.FindByConferenceEdition;
 import com.frasinu.iss.service.service_requests.reviewer.FindReviewerByIdRequest;
 import com.frasinu.iss.service.service_requests.reviewer.UpdateReviewerRequest;
 import com.frasinu.iss.service.service_requests.steeringcommitteemember.FindByUserAndConferenceEditionIdRequest;
@@ -41,6 +42,7 @@ public class PCController extends BaseController {
     private AuthorService authorService;
     private ReviewerService reviewerService;
     private ProposalService proposalService;
+    private Integer idEdition;
 
 
     private SteeringCommitteeMemberService steeringCommitteeMemberService;
@@ -113,8 +115,8 @@ public class PCController extends BaseController {
             property.setValue(proposal.getValue().getAuthors().get(0).getUser().getName());
             return property;
         });
-
-        fillProposalsTable(proposalService.getAll());
+        idEdition = (Integer) getData().get("idEdition");
+        fillProposalsTable(proposalService.findByConferenceId(new FindByConferenceEdition(idEdition)));
     }
 
     private void fillProposalsTable(List<Proposal> proposals) {

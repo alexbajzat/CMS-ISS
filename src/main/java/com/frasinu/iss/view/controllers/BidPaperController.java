@@ -5,6 +5,7 @@ import com.frasinu.iss.service.BiddedProposalService;
 import com.frasinu.iss.service.ProposalService;
 import com.frasinu.iss.service.ReviewerService;
 import com.frasinu.iss.service.service_requests.biddedproposal.AddBiddedProposalRequest;
+import com.frasinu.iss.service.service_requests.proposal.FindByConferenceEdition;
 import com.frasinu.iss.service.service_requests.reviewer.FindReviewerByIdRequest;
 import com.frasinu.iss.view.FrasinuApplication;
 import com.frasinu.iss.view.Screen;
@@ -42,7 +43,7 @@ public class BidPaperController extends BaseController {
     private TableColumn<Proposal, String> nameColumn;
     @FXML
     private TableColumn<Proposal, String> authorColumn;
-
+    private Integer conferenceId;
 
     private void init() {
         ObservableList<Bid> model = FXCollections.observableList(Stream.of(Bid.values())
@@ -60,8 +61,8 @@ public class BidPaperController extends BaseController {
             property.setValue(proposal.getValue().getAuthors().get(0).getUser().getName());
             return property;
         });
-
-        fillProposalsTable(proposalService.getAll());
+        conferenceId = (Integer) getData().get("idEdition");
+        fillProposalsTable(proposalService.findByConferenceId(new FindByConferenceEdition(conferenceId)));
     }
 
     @Override
