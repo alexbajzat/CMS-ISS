@@ -8,14 +8,14 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="484.0" styleClass="background" stylesheets="@stylelayout.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TableView layoutX="23.0" layoutY="14.0" prefHeight="263.0" prefWidth="438.0">
+      <TableView fx:id="proposalsTableView" layoutX="23.0" layoutY="14.0" prefHeight="263.0" prefWidth="438.0">
         <columns>
-          <TableColumn prefWidth="217.0" text="Title" />
-          <TableColumn prefWidth="216.0" text="Author" />
+          <TableColumn fx:id="nameColumn" prefWidth="217.0" text="Title" />
+          <TableColumn fx:id="authorColumn" prefWidth="216.0" text="Author" />
         </columns>
       </TableView>
-      <Button layoutX="57.0" layoutY="349.0" mnemonicParsing="false" text="Bid Paper" />
+      <Button layoutX="57.0" layoutY="349.0" mnemonicParsing="false" onAction="#bid" text="Bid Paper" />
       <Button layoutX="371.0" layoutY="349.0" mnemonicParsing="false" onAction="#back" text="Back" />
-      <ComboBox layoutX="30.0" layoutY="318.0" prefWidth="150.0" />
+      <ComboBox fx:id="bidTypesComboBox" layoutX="30.0" layoutY="318.0" prefWidth="150.0" />
    </children>
 </AnchorPane>
