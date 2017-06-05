@@ -5,6 +5,7 @@ import com.frasinu.iss.persistance.model.Proposal;
 import com.frasinu.iss.persistance.repository.AuthorRepository;
 import com.frasinu.iss.persistance.model.Author;
 import com.frasinu.iss.service.service_requests.author.*;
+import com.frasinu.iss.service.service_requests.reviewer.FindByUserAndEditionIdRequest;
 import com.frasinu.iss.service.service_requests.user.FindByIdRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -57,6 +58,10 @@ public class AuthorService {
         return authorRepository.findByUserId(findByUserIdRequest.getId());
     }
 
+    public Author findByUserIdEditionId(FindByUserAndEditionIdRequest findByUserIdRequest) {
+        return authorRepository.findByUserIdEditionId(findByUserIdRequest.getIdUser(),findByUserIdRequest.getIdEdition());
+    }
+
     public Author findById(FindByIdRequest findByIdRequest) {
         return authorRepository.findOne(findByIdRequest.getId());
     }
@@ -67,6 +72,10 @@ public class AuthorService {
 
     public List<Proposal> findProposals(FindProposalsRequest findProposalsRequest){
         return authorRepository.findOne(findProposalsRequest.getId()).getProposals();
+    }
+
+    public void deleteAuthor(int id) {
+        authorRepository.delete(id);
     }
 }
 

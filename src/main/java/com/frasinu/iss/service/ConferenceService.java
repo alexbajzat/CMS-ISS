@@ -1,13 +1,16 @@
 package com.frasinu.iss.service;
 
+import com.frasinu.iss.exception.InexistentException;
 import com.frasinu.iss.persistance.model.Conference;
 import com.frasinu.iss.persistance.model.ConferenceEdition;
 import com.frasinu.iss.persistance.repository.ConferenceRepository;
+import com.frasinu.iss.service.service_requests.conference.CreateConferenceRequest;
+import com.frasinu.iss.service.service_requests.conference.DeleteConferenceRequest;
 import com.frasinu.iss.service.service_requests.conference.FindConferenceEditionsByConferenceIdRequest;
+import com.frasinu.iss.service.service_requests.conference.UpdateConferenceRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -24,5 +27,33 @@ public class ConferenceService {
 
     public List<ConferenceEdition> findConferenceEditionsByConference(FindConferenceEditionsByConferenceIdRequest findConferenceEditionByConferenceRequest) {
         return conferenceRepository.findByConferenceId(findConferenceEditionByConferenceRequest.getConferenceId()).getConferenceEditions();
+    }
+
+    public Conference addConference(CreateConferenceRequest createConferenceRequest) {
+        Conference conf = Conference.builder()
+                .setName(createConferenceRequest.getName())
+                .setWebpage(createConferenceRequest.getWebpage())
+                .build();
+
+        return conferenceRepository.save(conf);
+    }
+
+    public Conference updateConference(UpdateConferenceRequest updateConferenceRequest) {
+        Conference conf= Conference.builder()
+                .setId(updateConferenceRequest.getId())
+                .setName(updateConferenceRequest.getName())
+                .setWebpage(updateConferenceRequest.getWebpage())
+                .build();
+
+
+        if (conferenceRepository.findOne(updateConferenceRequest.getId()) == null) {
+            throw new InexistentException("No such conference!");
+        }
+
+
+        return conferenceRepository.save(conf);
+    }
+    public void deleteConference(DeleteConferenceRequest deleteConferenceRequest){
+        conferenceRepository.delete(deleteConferenceRequest.getId());
     }
 }

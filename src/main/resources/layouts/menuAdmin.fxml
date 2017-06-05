@@ -4,11 +4,11 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="370.0" styleClass="background" stylesheets="@stylelayout.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="370.0" styleClass="background" stylesheets="@stylelayout.css" xmlns="http://javafx.com/javafx/8.0.101" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button layoutX="60.0" layoutY="314.0" mnemonicParsing="false" text="Users" />
-      <Button layoutX="166.0" layoutY="314.0" mnemonicParsing="false" text="Conferences" />
+      <Button layoutX="14.0" layoutY="206.0" mnemonicParsing="false" onAction="#goToUsers" prefHeight="58.0" prefWidth="104.0" text="Users" />
+      <Button layoutX="180.0" layoutY="206.0" mnemonicParsing="false" onAction="#goToConferences" prefHeight="58.0" prefWidth="151.0" text="Conferences" />
       <Label layoutX="60.0" layoutY="31.0" text="Admin " />
+      <Button layoutX="264.0" layoutY="330.0" mnemonicParsing="false" onAction="#goBack" text="Back" />
    </children>
 </AnchorPane>

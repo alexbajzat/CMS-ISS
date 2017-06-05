@@ -1,6 +1,5 @@
 package com.frasinu.iss.persistance.model;
 
-import java.sql.Date;
 import java.time.LocalDate;
 
 /**
@@ -25,8 +24,9 @@ public class ConferenceEditionBuilder {
         return new ConferenceEdition(id, name, conferenceStartDate, conferenceEndDate, abstractsDeadline, fullPapersDeadline, biddingDeadline, evaluationDeadline, conference);
     }
 
-    public void setId(Integer id) {
+    public ConferenceEditionBuilder  setId(Integer id) {
         this.id = id;
+        return this;
     }
 
     public ConferenceEditionBuilder setName(String name) {

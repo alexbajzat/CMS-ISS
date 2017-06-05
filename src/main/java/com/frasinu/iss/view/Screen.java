@@ -22,7 +22,11 @@ public enum Screen {
     PCMEMBER("menuPC.fxml","Menu PCMember","PCController"),
     STEERING("menuSteering.fxml","Steering Member","SteeringComController"),
     REVIEWS("reviews.fxml","See Reviews","ReviewsController"),
-    TEST("test.fxml", "Test","TestController");
+    TEST("test.fxml", "Test","TestController"),
+    MENUADMIN("menuAdmin.fxml","Menu for admin","AdminMenuController"),
+    ADMINCONFERENCES("adminConferences.fxml","Update Conferences","AdminConferencesController"),
+    ADMINUSERS("adminUsers.fxml","","AdminUsersController"),
+    ADMINEDITION("adminEdition.fxml","Menu for admin","AdminEditionsController");
 
 
     private final String name;

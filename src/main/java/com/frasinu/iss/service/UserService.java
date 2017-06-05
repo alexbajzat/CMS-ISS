@@ -4,8 +4,9 @@ import com.frasinu.iss.exception.InexistentException;
 import com.frasinu.iss.exception.LoginException;
 import com.frasinu.iss.exception.RegisterException;
 import com.frasinu.iss.persistance.model.Author;
-import com.frasinu.iss.persistance.repository.UserRepository;
+import com.frasinu.iss.persistance.model.Reviewer;
 import com.frasinu.iss.persistance.model.User;
+import com.frasinu.iss.persistance.repository.UserRepository;
 import com.frasinu.iss.service.service_requests.user.*;
 import com.frasinu.iss.validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +14,14 @@ import org.springframework.security.providers.encoding.Md5PasswordEncoder;
 import org.springframework.security.providers.encoding.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import javax.xml.bind.ValidationException;
+import java.util.List;
 
 /**
  * Created by bjz on 5/7/2017.
  */
+@Transactional
 @Service
 public class UserService {
     private UserRepository userRepository;
@@ -143,6 +147,23 @@ public class UserService {
 
     public User findById(FindByIdRequest findByIdRequest){
         return userRepository.findOne(findByIdRequest.getId());
+    }
+
+    public List<User> getAll(){
+
+        return userRepository.findAll();
+    }
+
+    public Reviewer findIfUserIsPC(int idUser, int idEdition) {
+        User user=userRepository.findById(idUser);
+        for(Reviewer r:user.getReviewers()){
+            System.out.println("/n");
+            System.out.println(idEdition);
+            System.out.println(r.getConferenceEdition().getId());
+            if(r.getConferenceEdition().getId()==idEdition)
+                return r;
+        }
+        return null;
     }
 }
 
