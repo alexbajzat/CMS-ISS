@@ -52,7 +52,7 @@ public class AuthorController extends BaseController {
     private TableColumn<Proposal, String> topicsColumn;
 
     @FXML
-    private TableView uploadedProposalsTableView;
+    private TableView<Proposal> uploadedProposalsTableView;
 
     @FXML
     TableColumn<Proposal, String> topics = new TableColumn<>();
@@ -104,7 +104,17 @@ public class AuthorController extends BaseController {
         FrasinuApplication.changeScreen(Screen.PAPER, getData());
     }
 
-    public void updatePaper(ActionEvent actionEvent){FrasinuApplication.changeScreen(Screen.PAPERUPDATE,getData());}
+    public void updatePaper(ActionEvent actionEvent){
+        int index=uploadedProposalsTableView.getSelectionModel().getSelectedIndex();
+        if (index<0) {
+            showDialog("You have to select a paper first!", "Ooops!");
+        }
+        else {
+            HashMap<String, Object> map = getData();
+            map.put("idProposal", uploadedProposalsTableView.getSelectionModel().getSelectedItem().getId());
+            FrasinuApplication.changeScreen(Screen.PAPERUPDATE, map);
+        }
+    }
 
     public void goToConferences(ActionEvent actionEvent) {
         FrasinuApplication.changeScreen(Screen.CONFERENCES,getData());
@@ -123,7 +133,6 @@ public class AuthorController extends BaseController {
     }
 
     public void init() {
-        setCellValueFactoryTopics();
         int idAuthor = (int) getData().get("idAuthor");
         int idUser = (int) getData().get("idUser");
         User user = userService.findById(new FindByIdRequest(idUser));
@@ -137,6 +146,8 @@ public class AuthorController extends BaseController {
         authorId = (Integer) getData().get("idAuthor");
         model = FXCollections.observableList(authorService.findProposals(new FindProposalsRequest(authorId)));
         uploadedProposalsTableView.setItems(model);
+        setCellValueFactoryTopics();
+
     }
 
     public void update() {

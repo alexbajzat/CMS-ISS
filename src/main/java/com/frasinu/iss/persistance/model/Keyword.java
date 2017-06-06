@@ -43,4 +43,9 @@ public class Keyword {
     public List<Keyword> getProposals() {
         return proposals;
     }
+
+    @Override
+    public String toString() {
+        return  value;
+    }
 }
