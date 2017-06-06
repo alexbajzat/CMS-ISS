@@ -1,5 +1,8 @@
 package com.frasinu.iss.persistance.model;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -17,10 +20,13 @@ public class Keyword {
     private String value;
 
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+
+
+    @Fetch(FetchMode.SELECT)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "proposal_keyword",
-            joinColumns = {@JoinColumn(name = "proposal_id", nullable = false, updatable = false)},
-            inverseJoinColumns = {@JoinColumn(name = "keyword_id", nullable = false, updatable = false)})
+            joinColumns = {@JoinColumn(name = "keyword_id", nullable = false, updatable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "proposal_id", nullable = false, updatable = false)})
     private List<Keyword> proposals;
 
     public Keyword() {
