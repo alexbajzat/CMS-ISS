@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
@@ -20,9 +19,5 @@
       <TextField fx:id="resultTxt" editable="false" layoutX="201.0" layoutY="173.0" prefHeight="37.0" prefWidth="152.0" promptText="result" />
        <Button layoutX="168.0" layoutY="291.0" mnemonicParsing="false" onAction="#assign" text="Assign paper to reviewer" />
        <Button layoutX="482.0" layoutY="334.0" mnemonicParsing="false" onAction="#back" prefHeight="37.0" prefWidth="88.0" text="Back" />
-
-
-
-
    </children>
 </AnchorPane>
