@@ -92,6 +92,9 @@ public class AdminEditionsController extends BaseController {
         else {
             ConferenceEdition ed=listEditions.getSelectionModel().getSelectedItem();
             conferenceEditionService.updateEdition(new UpdateEditionRequest(ed.getId(),name.getText(), startDate.getValue(), endDate.getValue(), abstractD.getValue(), papersD.getValue(), biddingD.getValue(), evaluationD.getValue(), conference));
+            List<ConferenceEdition> editions=conferenceEditionService.findEditionsFotConference(conference.getId());
+            ObservableList<ConferenceEdition> items = FXCollections.observableList(editions);
+            listEditions.setItems(items);
         }
 
     }

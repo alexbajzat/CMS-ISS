@@ -1,9 +1,6 @@
 package com.frasinu.iss.view.controllers;
 
-import com.frasinu.iss.persistance.model.Author;
-import com.frasinu.iss.persistance.model.Reviewer;
-import com.frasinu.iss.persistance.model.SteeringCommitteeMember;
-import com.frasinu.iss.persistance.model.User;
+import com.frasinu.iss.persistance.model.*;
 import com.frasinu.iss.service.*;
 import com.frasinu.iss.service.service_requests.author.CreateAuthorRequest;
 import com.frasinu.iss.service.service_requests.conferenceedition.FindByConferenceEditionIdRequest;
@@ -145,6 +142,12 @@ public class SteeringComController extends BaseController {
 
     public void goToConferences(ActionEvent actionEvent) {
         FrasinuApplication.changeScreen(Screen.CONFERENCES,getData());
+    }
+    public void goToModify(ActionEvent actionEvent) {
+        int idEdition=(int)getData().get("idEdition");
+        ConferenceEdition edition=conferenceEditionService.findByConferenceEditionId(new FindByConferenceEditionIdRequest(idEdition));
+        getData().put("edition",edition);
+        FrasinuApplication.changeScreen(Screen.EDITIONUPDATE,getData());
     }
 
     public void assignPaper(ActionEvent actionEvent){

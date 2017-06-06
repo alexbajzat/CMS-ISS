@@ -26,7 +26,8 @@ public enum Screen {
     MENUADMIN("menuAdmin.fxml","Menu for admin","AdminMenuController"),
     ADMINCONFERENCES("adminConferences.fxml","Update Conferences","AdminConferencesController"),
     ADMINUSERS("adminUsers.fxml","","AdminUsersController"),
-    ADMINEDITION("adminEdition.fxml","Menu for admin","AdminEditionsController");
+    ADMINEDITION("adminEdition.fxml","Menu for admin","AdminEditionsController"),
+    EDITIONUPDATE("editionUpdate.fxml","Modify deadlines","EditionUpdateController");
 
 
     private final String name;

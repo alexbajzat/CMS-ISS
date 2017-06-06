@@ -128,6 +128,8 @@ public class AdminUsersController extends BaseController {
         rankCombo.setVisible(false);
         if(user!=null) {
             ConferenceEdition ed = (ConferenceEdition) editionsCombo.getSelectionModel().getSelectedItem();
+            if (ed==null)
+                return;
             Author a = authorService.findByUserIdEditionId(new FindByUserAndEditionIdRequest(user.getId(), ed.getId()));
             Reviewer pc = reviewerService.findByUserAndEditionId(new FindByUserAndEditionIdRequest(user.getId(), ed.getId()));
             SteeringCommitteeMember st=steeringService.findByUserAndConferenceEditionId(new FindByUserAndConferenceEditionIdRequest(user.getId(), ed.getId()));
