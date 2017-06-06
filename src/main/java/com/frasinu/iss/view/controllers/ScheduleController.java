@@ -4,24 +4,25 @@ import com.frasinu.iss.persistance.model.*;
 import com.frasinu.iss.service.*;
 import com.frasinu.iss.service.service_requests.author.CreateAuthorRequest;
 import com.frasinu.iss.service.service_requests.conferenceedition.FindByConferenceEditionIdRequest;
+import com.frasinu.iss.service.service_requests.presentation.FindByConferenceSessionRequest;
 import com.frasinu.iss.service.service_requests.reviewer.FindByUserAndEditionIdRequest;
 import com.frasinu.iss.service.service_requests.steeringcommitteemember.FindByUserAndConferenceEditionIdRequest;
 import com.frasinu.iss.service.service_requests.user.FindByIdRequest;
 import com.frasinu.iss.service.service_requests.user.FindIfUserIsAuthorRequest;
 import com.frasinu.iss.view.Screen;
 import com.frasinu.iss.view.FrasinuApplication;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import java.util.HashMap;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Created by Ericqw on 15.05.2017.
@@ -30,6 +31,7 @@ import java.util.Optional;
 public class ScheduleController extends BaseController{
     private ConferenceService conferencesService;
     private ConferenceEditionService conferenceEditionService;
+    private PresentationService presentationService;
     private UserService userService;
     private AuthorService authorService;
     private ReviewerService reviewerService;
@@ -37,15 +39,30 @@ public class ScheduleController extends BaseController{
     private ConferenceSessionService conferenceSessionService;
 
     ObservableList<ConferenceSession> modelConferenceSessions;
+    ObservableList<Presentation> modelPresentations;
 
 
     @FXML
     TableView<ConferenceSession> conferenceSessions;
+    @FXML
+    TableView<Presentation> presentations;
+
+    @FXML
+    private TableColumn<Presentation, String> presentationTitleColumn;
+
+    @FXML
+    private TableColumn<Presentation, String> presentationSpeakerColumn;
 
     @Autowired
     public void setConferenceSessionService(ConferenceSessionService conferenceSessionService) {
 
         this.conferenceSessionService=conferenceSessionService;
+    }
+
+    @Autowired
+    public void setPresentationService(PresentationService presentationService) {
+
+        this.presentationService=presentationService;
     }
 
     @Autowired
@@ -87,9 +104,24 @@ public class ScheduleController extends BaseController{
     }
 
     public void init() {
+        this.setCellValueFactoryPresentation();
         this.modelConferenceSessions= FXCollections.observableArrayList(conferenceSessionService.
                 findByConferenceEditionId(new FindByConferenceEditionIdRequest((int)getData().get("idEdition"))));
         conferenceSessions.setItems(modelConferenceSessions);
+        conferenceSessions.setRowFactory(tv -> {
+            TableRow<ConferenceSession> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (! row.isEmpty()) {
+
+                    ConferenceSession clickedConferenceSession = row.getItem();
+                    this.modelPresentations= FXCollections.observableArrayList(presentationService.findByConferenceSessionId
+                            (new FindByConferenceSessionRequest(clickedConferenceSession.getId())));
+                    presentations.setItems(modelPresentations);
+
+                }
+            });
+            return row ;
+        });
     }
 
 
@@ -152,5 +184,11 @@ public class ScheduleController extends BaseController{
             map.put("idSteeringCommitteeMember", steeringCommitteeMember.getId());
             FrasinuApplication.changeScreen(Screen.STEERING, getData());
         }
+    }
+
+    public void setCellValueFactoryPresentation(){
+
+        presentationTitleColumn.setCellValueFactory(p-> new SimpleStringProperty(p.getValue().getProposal().getTitle()));
+        presentationSpeakerColumn.setCellValueFactory(p->new SimpleStringProperty(p.getValue().getAuthor().getUser().getName()));
     }
 }

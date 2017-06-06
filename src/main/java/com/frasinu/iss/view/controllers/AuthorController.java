@@ -123,7 +123,7 @@ public class AuthorController extends BaseController {
     }
 
     public void init() {
-        setCellValueFactory();
+        setCellValueFactoryTopics();
         int idAuthor = (int) getData().get("idAuthor");
         int idUser = (int) getData().get("idUser");
         User user = userService.findById(new FindByIdRequest(idUser));
@@ -188,7 +188,7 @@ public class AuthorController extends BaseController {
         }
     }
 
-    public void setCellValueFactory(){
+    public void setCellValueFactoryTopics(){
 
         topics.setCellValueFactory(c-> new SimpleStringProperty(c.getValue().getTopics().stream().map(Object::toString)
                 .collect(Collectors.joining(", "))));
