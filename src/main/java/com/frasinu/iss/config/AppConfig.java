@@ -44,6 +44,22 @@ public class AppConfig {
         return dataSource;
     }
 
+
+    @Bean
+    public String root() {
+        Properties properties = new Properties();
+        String root = null;
+        InputStream inputStream = AppConfig.class.getResourceAsStream("/application.properties");
+        try {
+            properties.load(inputStream);
+            root=properties.getProperty("files.root");
+
+        } catch (IOException e) {
+            throw new DataBaseException("Cannot read application properties!" + e);
+        }
+        return root;
+    }
+
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
@@ -78,5 +94,6 @@ public class AppConfig {
         properties.setProperty("hibernate.hbm2ddl.auto", "update");
         return properties;
     }
+
 
 }

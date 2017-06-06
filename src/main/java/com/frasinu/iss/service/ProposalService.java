@@ -1,5 +1,6 @@
 package com.frasinu.iss.service;
 
+import com.frasinu.iss.exception.InexistentException;
 import com.frasinu.iss.persistance.model.Keyword;
 import com.frasinu.iss.persistance.model.Topic;
 import com.frasinu.iss.persistance.repository.KeywordRepository;
@@ -8,9 +9,11 @@ import com.frasinu.iss.persistance.repository.TopicRepository;
 import com.frasinu.iss.service.service_requests.proposal.CreateProposalRequest;
 import com.frasinu.iss.persistance.model.Proposal;
 import com.frasinu.iss.service.service_requests.proposal.FindByConferenceEdition;
+import com.frasinu.iss.validator.ValidatorProposal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.xml.bind.ValidationException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,6 +22,7 @@ import java.util.stream.Collectors;
  */
 @Service
 public class ProposalService {
+    private ValidatorProposal proposalValidator = new ValidatorProposal();
     @Autowired
     private ProposalRepository proposalRepository;
 
@@ -32,7 +36,7 @@ public class ProposalService {
         return proposalRepository.findAll();
     }
 
-    public Proposal createProposalForAuthors(CreateProposalRequest createProposalRequest) {
+    public Proposal createProposalForAuthors(CreateProposalRequest createProposalRequest) throws InexistentException {
         Proposal proposal = Proposal.builder()
                 .setAbstractPaper(createProposalRequest.getAbstractPaper())
                 .setFullPaper(createProposalRequest.getFullPaper())
@@ -40,6 +44,11 @@ public class ProposalService {
                 .setConferenceEdition(createProposalRequest.getConferenceEdition())
                 .build();
 
+        try {
+            proposalValidator.validare(proposal);
+        } catch (InexistentException e) {
+            throw new InexistentException(e.getMessage());
+        }
         proposalRepository.save(proposal);
 
         List<Integer> authorsId = createProposalRequest.getAuthorsId();
