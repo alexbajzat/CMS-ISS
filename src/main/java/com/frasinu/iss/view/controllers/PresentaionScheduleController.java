@@ -145,6 +145,7 @@ public class PresentaionScheduleController extends BaseController {
         Integer paperId=(Integer) getData().get("idProposal");
        Proposal proposal=proposalService.findById(new FindByPaperIdRequest(paperId));
         presentationService.addPresentation(new CreatePresentationRequest(Time.valueOf(hour),author,conferenceSession,proposal));
+        showDialog("Your presentation was registered!", "Great!");
     }
 
     public void back(ActionEvent actionEvent){

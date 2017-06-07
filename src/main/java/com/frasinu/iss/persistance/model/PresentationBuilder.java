@@ -16,10 +16,6 @@ public class PresentationBuilder {
 
 
     public Presentation build() {
-        System.out.println(time);
-        System.out.println(conferenceSession);
-        System.out.println(author);
-        System.out.println(proposal);
         return new Presentation(id, time,conferenceSession,author,proposal);
     }
 
