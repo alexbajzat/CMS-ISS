@@ -4,6 +4,8 @@ import com.frasinu.iss.persistance.model.*;
 import com.frasinu.iss.service.*;
 import com.frasinu.iss.service.service_requests.author.CreateAuthorRequest;
 import com.frasinu.iss.service.service_requests.conferenceedition.FindByConferenceEditionIdRequest;
+import com.frasinu.iss.service.service_requests.listener.CreateListenerRequest;
+import com.frasinu.iss.service.service_requests.listener.FindByUserAndSessionIdRequest;
 import com.frasinu.iss.service.service_requests.presentation.FindByConferenceSessionRequest;
 import com.frasinu.iss.service.service_requests.reviewer.FindByUserAndEditionIdRequest;
 import com.frasinu.iss.service.service_requests.steeringcommitteemember.FindByUserAndConferenceEditionIdRequest;
@@ -21,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -37,6 +40,8 @@ public class ScheduleController extends BaseController{
     private ReviewerService reviewerService;
     private SteeringCommitteeMemberService steeringCommitteeMemberService;
     private ConferenceSessionService conferenceSessionService;
+    private ListenerService listenerService;
+
 
     ObservableList<ConferenceSession> modelConferenceSessions;
     ObservableList<Presentation> modelPresentations;
@@ -57,6 +62,11 @@ public class ScheduleController extends BaseController{
     public void setConferenceSessionService(ConferenceSessionService conferenceSessionService) {
 
         this.conferenceSessionService=conferenceSessionService;
+    }
+
+    @Autowired
+    public void setListenerService(ListenerService listenerService) {
+            this.listenerService=listenerService;
     }
 
     @Autowired
@@ -130,7 +140,22 @@ public class ScheduleController extends BaseController{
     }
 
     public void goToAttend(ActionEvent actionEvent){
-        FrasinuApplication.createScreen(Screen.ATTEND,getData());
+        ConferenceSession conferenceSession=conferenceSessions.getSelectionModel().getSelectedItem();
+        if (conferenceSession==null) {
+            showDialog("You have to select a conference session first!", "Ooops!");
+        }
+        else {
+            List<Listener> listen=listenerService.findByConferenceSessionIAndUser(new FindByUserAndSessionIdRequest((int)getData().get("idUser"),conferenceSession.getId()));
+            if(listen.size()>0){
+                showDialog("You are already registered as a listener to this session!", "Ooops!");
+
+            }
+            else{
+                listenerService.addListener(new CreateListenerRequest(conferenceSession,userService.findById(new FindByIdRequest((int)getData().get("idUser")))));
+                showDialog("You were registered as a listener!", "Ooops!");
+
+            }
+        }
     }
     public void seeConferenceInfo(ActionEvent ac){
         FrasinuApplication.changeScreen(Screen.CONFERENCEINFO,getData());
