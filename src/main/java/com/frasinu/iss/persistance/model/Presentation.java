@@ -1,8 +1,12 @@
 package com.frasinu.iss.persistance.model;
 
 import javax.persistence.*;
+import java.sql.Time;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by cory_ on 23-May-17.
@@ -11,12 +15,14 @@ import java.util.List;
 @Entity
 @Table(name = "presentation")
 public class Presentation {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+
     @Id
-    private int id;
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
     @Column(name = "time")
-    private LocalTime time;
+    private Time time;
 
 
     @ManyToOne
@@ -35,7 +41,11 @@ public class Presentation {
     public Presentation() {
     }
 
-    public Presentation(int id,LocalTime time, ConferenceSession conferenceSession, Author author, Proposal proposal) {
+    public static PresentationBuilder builder() {
+        return new PresentationBuilder();
+    }
+
+    Presentation(Integer id, Time time, ConferenceSession conferenceSession, Author author, Proposal proposal) {
         this.id=id;
         this.time = time;
         this.conferenceSession = conferenceSession;
@@ -43,11 +53,11 @@ public class Presentation {
         this.proposal = proposal;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public LocalTime getTime() {
+    public Time getTime() {
         return time;
     }
 
@@ -62,4 +72,5 @@ public class Presentation {
     public Proposal getProposal() {
         return proposal;
     }
+
 }

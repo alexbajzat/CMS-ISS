@@ -1,5 +1,6 @@
 package com.frasinu.iss.persistance.model;
 
+import java.sql.Time;
 import java.time.LocalTime;
 
 /**
@@ -8,7 +9,7 @@ import java.time.LocalTime;
 public class PresentationBuilder {
 
     private Integer id;
-    private LocalTime time;
+    private Time time;
     private ConferenceSession conferenceSession;
     private Author author;
     private Proposal proposal;
@@ -22,23 +23,32 @@ public class PresentationBuilder {
 
     }
 
-    public void setId(Integer id) {
+    public PresentationBuilder setId(Integer id) {
         this.id = id;
+        return this;
+
     }
 
-    public void setTime(LocalTime time) {
+    public PresentationBuilder setTime(Time time) {
         this.time = time;
+        return this;
+
     }
 
-    public void setConferenceSession(ConferenceSession conferenceSession) {
+    public PresentationBuilder setConferenceSession(ConferenceSession conferenceSession) {
         this.conferenceSession = conferenceSession;
+        return this;
+
     }
 
-    public void setAuthor(Author author) {
+    public PresentationBuilder setAuthor(Author author) {
         this.author = author;
+        return this;
+
     }
 
-    public void setProposal(Proposal proposal) {
+    public PresentationBuilder setProposal(Proposal proposal) {
         this.proposal = proposal;
+        return this;
     }
 }
