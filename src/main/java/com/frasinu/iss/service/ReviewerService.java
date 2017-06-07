@@ -79,6 +79,10 @@ public class ReviewerService {
         return true;
     }
 
+    public List<ReviewedProposal> getReviewdProposals(GetReviewedProposalsRequest getReviewedProposalsRequest){
+        return reviewedProposalRepository.findAllReviewedProposals(getReviewedProposalsRequest.getIdReviewer());
+    }
+
     public void deleteReviewer(Integer id) {
         reviewerRepository.delete(id);
     }

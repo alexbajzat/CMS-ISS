@@ -6,6 +6,7 @@ import com.frasinu.iss.service.service_requests.author.CreateAuthorRequest;
 import com.frasinu.iss.service.service_requests.conferenceedition.FindByConferenceEditionIdRequest;
 import com.frasinu.iss.service.service_requests.proposal.FindByConferenceEdition;
 import com.frasinu.iss.service.service_requests.reviewer.FindReviewerByIdRequest;
+import com.frasinu.iss.service.service_requests.reviewer.GetReviewedProposalsRequest;
 import com.frasinu.iss.service.service_requests.reviewer.UpdateReviewerRequest;
 import com.frasinu.iss.service.service_requests.steeringcommitteemember.FindByUserAndConferenceEditionIdRequest;
 import com.frasinu.iss.service.service_requests.user.FindByIdRequest;
@@ -14,13 +15,11 @@ import com.frasinu.iss.service.service_requests.user.UpdateUserRequest;
 import com.frasinu.iss.view.FrasinuApplication;
 import com.frasinu.iss.view.Screen;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.util.Callback;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -34,24 +33,26 @@ import java.util.Optional;
  */
 @Controller(value = "PCController")
 public class PCController extends BaseController {
-    @FXML
-    private
-    TextField name, email, affiliation, webpage;
+    private SteeringCommitteeMemberService steeringCommitteeMemberService;
     private ConferenceEditionService conferenceEditionService;
     private UserService userService;
     private AuthorService authorService;
     private ReviewerService reviewerService;
     private ProposalService proposalService;
+
     private Integer idEdition;
+    private Reviewer currentReviewer;
+    private List<ReviewedProposal> reviewedProposals;
 
-
-    private SteeringCommitteeMemberService steeringCommitteeMemberService;
+    @FXML private TextField name, email, affiliation, webpage;
     @FXML
-    private TableView papersTableView;
+    private TableView<Proposal> papersTableView;
     @FXML
     private TableColumn<Proposal, String> nameColumn;
     @FXML
     private TableColumn<Proposal, String> authorColumn;
+    @FXML
+    private CheckBox reviewedCheckBox;
 
     @Autowired
     public void setSteeringCommitteeMemberService(SteeringCommitteeMemberService steeringCommitteeMemberService) {
@@ -93,16 +94,20 @@ public class PCController extends BaseController {
     private void init() {
         int idReviewer = (int) getData().get("idReviewer");
         int idUser = (int) getData().get("idUser");
+        idEdition = (Integer) getData().get("idEdition");
+
         User user = userService.findById(new FindByIdRequest(idUser));
-        Reviewer reviewer = reviewerService.findById(new FindReviewerByIdRequest(idReviewer));
+        currentReviewer = reviewerService.findById(new FindReviewerByIdRequest(idReviewer));
+        reviewedProposals = reviewerService.getReviewdProposals(new GetReviewedProposalsRequest(idReviewer));
+
         if (user.getName() != null)
             name.setText(user.getName());
-        if (reviewer.getEmail() != null)
-            email.setText(reviewer.getEmail());
-        if (reviewer.getAffiliation() != null)
-            affiliation.setText(reviewer.getAffiliation());
-        if (reviewer.getWebpage() != null)
-            webpage.setText(reviewer.getWebpage());
+        if (currentReviewer.getEmail() != null)
+            email.setText(currentReviewer.getEmail());
+        if (currentReviewer.getAffiliation() != null)
+            affiliation.setText(currentReviewer.getAffiliation());
+        if (currentReviewer.getWebpage() != null)
+            webpage.setText(currentReviewer.getWebpage());
 
         nameColumn.setCellValueFactory((proposal) -> {
             SimpleStringProperty property = new SimpleStringProperty();
@@ -115,7 +120,22 @@ public class PCController extends BaseController {
             property.setValue(proposal.getValue().getAuthors().get(0).getUser().getName());
             return property;
         });
-        idEdition = (Integer) getData().get("idEdition");
+
+        papersTableView.getSelectionModel()
+                .selectedItemProperty()
+                .addListener((observable, oldValue, newValue) ->{
+                    if (newValue != null){
+                        for (ReviewedProposal reviewedProposal:
+                             reviewedProposals) {
+                            if (reviewedProposal.getProposal().getId() == newValue.getId()){
+                                reviewedCheckBox.setSelected(true);
+                                return;
+                            }
+                        }
+                    }
+                    reviewedCheckBox.setSelected(false);
+                });
+
         fillProposalsTable(proposalService.findByConferenceId(new FindByConferenceEdition(idEdition)));
     }
 
@@ -201,7 +221,16 @@ public class PCController extends BaseController {
     }
 
     public void makeReview(ActionEvent actionEvent) {
-        FrasinuApplication.changeScreen(Screen.MAKEREVIEW, getData());
+        if (reviewedCheckBox.isSelected())
+            FrasinuApplication.changeScreen(Screen.MAKEREVIEW, getData());
+        else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Ooops!");
+            alert.setHeaderText(null);
+            alert.setContentText("You cannot make a review for this paper!");
+
+            alert.showAndWait();
+        }
     }
 
     public void seeReview(ActionEvent actionEvent) {
