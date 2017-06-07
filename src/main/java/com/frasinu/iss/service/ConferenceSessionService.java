@@ -20,6 +20,9 @@ public class ConferenceSessionService {
     @Autowired
     private ConferenceSessionRepository conferenceSessionRepository;
 
+    public List<ConferenceSession> getAll() {
+        return conferenceSessionRepository.findAll();
+    }
 
     public List<ConferenceSession> findByConferenceEditionId(FindByConferenceEditionIdRequest findByConferenceEditionIdRequest){
         return conferenceSessionRepository.findByConferenceEditionId(findByConferenceEditionIdRequest.getConferenceEditionId());

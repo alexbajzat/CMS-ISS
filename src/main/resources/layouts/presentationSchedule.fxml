@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="233.0" prefWidth="306.0" styleClass="background" stylesheets="@stylelayout.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="233.0" prefWidth="306.0" styleClass="background" stylesheets="@stylelayout.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <GridPane layoutX="40.0" layoutY="30.0" prefHeight="128.0" prefWidth="229.0">
         <columnConstraints>
@@ -21,12 +21,10 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <ComboBox prefWidth="150.0" GridPane.columnIndex="1" />
-            <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label text="Day" />
-            <Label text="Sesion" GridPane.rowIndex="1" />
-            <Label text="Hour" GridPane.rowIndex="2" />
-            <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <ComboBox fx:id="sessionCombo" prefWidth="150.0" GridPane.columnIndex="1" />
+            <Label text="Sesion" />
+            <Label text="Hour" GridPane.rowIndex="1" />
+            <ComboBox fx:id="hourCombo" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
       <Button layoutX="76.0" layoutY="171.0" mnemonicParsing="false" text="Present" />
