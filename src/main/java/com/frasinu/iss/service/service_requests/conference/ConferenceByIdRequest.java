@@ -7,5 +7,6 @@ public class ConferenceByIdRequest {
     private int id;
     public int getId(){return id;}
     public ConferenceByIdRequest(Integer id) {
+        this.id=id;
     }
 }

@@ -24,7 +24,7 @@ public class ConferenceEditionService implements IConferenceEditionService {
 
     @Override
     public ConferenceEdition findByConferenceEditionId(FindByConferenceEditionIdRequest findByConferenceEditionIdRequest){
-        return conferenceEditionRepository.findOne(findByConferenceEditionIdRequest.getConferenceEditionId());
+        return conferenceEditionRepository.findByConferenceEditionId(findByConferenceEditionIdRequest.getConferenceEditionId());
     }
     @Override
     public Conference findConferenceByConferenceEditionId(FindConferenceByConferenceEditionIdRequest findConferenceByConferenceEditionIdRequest){

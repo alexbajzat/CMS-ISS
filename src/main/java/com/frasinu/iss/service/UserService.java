@@ -85,6 +85,7 @@ public class UserService {
         userValidator.validare(user);
 
         user = User.builder()
+                .setId(id)
                 .setName(name)
                 .setUsername(username)
                 .setPassword(encoder.encodePassword(password, null))

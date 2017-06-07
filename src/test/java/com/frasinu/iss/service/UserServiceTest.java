@@ -1,19 +1,21 @@
-package com.frasinu.iss;
+package com.frasinu.iss.service;
 
+import com.frasinu.iss.BaseTestClass;
 import com.frasinu.iss.exception.LoginException;
 import com.frasinu.iss.exception.RegisterException;
 import com.frasinu.iss.persistance.model.Conference;
 import com.frasinu.iss.persistance.model.ConferenceEdition;
 import com.frasinu.iss.persistance.model.User;
-import com.frasinu.iss.service.ConferenceEditionService;
-import com.frasinu.iss.service.UserService;
+import com.frasinu.iss.service.service_requests.conference.CreateConferenceRequest;
+import com.frasinu.iss.service.service_requests.conference.DeleteConferenceRequest;
 import com.frasinu.iss.service.service_requests.conferenceedition.CreateEditionRequest;
 import com.frasinu.iss.service.service_requests.conferenceedition.DeleteEditionRequest;
 import com.frasinu.iss.service.service_requests.user.*;
 import javassist.NotFoundException;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.xml.bind.ValidationException;
 import java.time.LocalDate;
@@ -24,18 +26,22 @@ import java.util.List;
  * Created by Betty on 6/7/2017.
  */
 public class UserServiceTest extends BaseTestClass {
-    private static UserService userService;
-    private static List<Integer> addedUsers=new ArrayList<>();
-    private static ConferenceEdition edition;
-    private static ConferenceEditionService editionService;
-    @BeforeClass
-    public static void init() throws RegisterException{
-        userService=new UserService();
+    @Autowired
+    private UserService userService;
+    private List<Integer> addedUsers=new ArrayList<>();
+    private ConferenceEdition edition;
+    @Autowired
+    private ConferenceEditionService editionService;
+    @Autowired
+    private ConferenceService conferenceService;
+    private Conference conf;
+    @Before
+    public void init() throws RegisterException{
         User u=userService.registerUser(new RegisterUserRequest("testName","test","1234"));
-        User u2=userService.registerUser(new RegisterUserRequest("testName2","test2","1234"));
-        addedUsers.add(u.getId(),u2.getId());
-        Conference conf = Conference.builder().setName("testConf").setWebpage("ceva.com").build();
-        editionService=new ConferenceEditionService();
+        User u2=userService.registerUser(new RegisterUserRequest("testNameDoi","test2","1234"));
+        addedUsers.add(u.getId());
+        addedUsers.add(u2.getId());
+        conf=conferenceService.addConference(new CreateConferenceRequest("testConf","ceva.com"));
         edition=editionService.addEdition(new CreateEditionRequest("ed",LocalDate.now(),LocalDate.now(),LocalDate.now(),LocalDate.now(),LocalDate.now(),LocalDate.now(),conf));
 
 
@@ -61,10 +67,6 @@ public class UserServiceTest extends BaseTestClass {
         User u2=userService.findByUsername(new FindByUsernameRequest("test2"));
         if (u==null || u2==null)
             throw new NotFoundException("user not found");
-        else {
-            addedUsers.add(u.getId());
-            addedUsers.add(u2.getId());
-        }
     }
 
     @Test(expected = NotFoundException.class)
@@ -72,8 +74,6 @@ public class UserServiceTest extends BaseTestClass {
         User u=userService.findByUsername(new FindByUsernameRequest("test100"));
         if (u==null)
             throw new NotFoundException("user not found");
-        else
-            addedUsers.add(u.getId());
     }
     @Test
     public void testFindById() throws NotFoundException{
@@ -100,8 +100,8 @@ public class UserServiceTest extends BaseTestClass {
 
     @Test(expected = NotFoundException.class)
     public void testFindIfPC() throws NotFoundException {
-        Object author=userService.findIfUserIsPC(new FindIfUserIsPCRequest(addedUsers.get(0),edition.getId()));
-        if (author==null)
+        Object pc=userService.findIfUserIsPC(new FindIfUserIsPCRequest(addedUsers.get(0),edition.getId()));
+        if (pc==null)
             throw new NotFoundException("PC not found");
     }
 
@@ -109,23 +109,25 @@ public class UserServiceTest extends BaseTestClass {
 
     @Test
     public void testUpdate() throws ValidationException{
-        userService.updateUser(new UpdateUserRequest(addedUsers.get(0),"testUpdate","testUpdate","1234"));
+        User u=userService.updateUser(new UpdateUserRequest(addedUsers.get(0),"testUpdate","test","1234"));
+        assert(u.getName().equals("testUpdate"));
     }
 
     @Test
     public void testDelete() throws ValidationException {
-        userService.deleteUser(new DeleteUserRequest(addedUsers.get(0)));
-        addedUsers.remove(0);
+        userService.deleteUser(new DeleteUserRequest(addedUsers.get(1)));
+        addedUsers.remove(1);
 
     }
 
 
 
-    @AfterClass
-    public static void end() {
+    @After
+    public void end() {
         for (int id: addedUsers)
             userService.deleteUser(new DeleteUserRequest(id));
         editionService.deleteEdition(new DeleteEditionRequest(edition));
+        conferenceService.deleteConference(new DeleteConferenceRequest(conf.getId()));
 
     }
 
