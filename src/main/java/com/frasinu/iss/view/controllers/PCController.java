@@ -205,7 +205,7 @@ public class PCController extends BaseController {
     }
 
     public void seeReview(ActionEvent actionEvent) {
-        FrasinuApplication.changeScreen(Screen.REVIEWS, getData());
+        FrasinuApplication.changeScreen(Screen.PAPERREVIEWS, getData());
     }
 
 }
