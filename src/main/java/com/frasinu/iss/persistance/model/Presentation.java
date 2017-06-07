@@ -19,7 +19,7 @@ public class Presentation {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Column(name = "time")
     private Time time;
@@ -45,7 +45,7 @@ public class Presentation {
         return new PresentationBuilder();
     }
 
-    Presentation(int id, Time time, ConferenceSession conferenceSession, Author author, Proposal proposal) {
+    Presentation(Integer id, Time time, ConferenceSession conferenceSession, Author author, Proposal proposal) {
         this.id=id;
         this.time = time;
         this.conferenceSession = conferenceSession;
@@ -53,7 +53,7 @@ public class Presentation {
         this.proposal = proposal;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
