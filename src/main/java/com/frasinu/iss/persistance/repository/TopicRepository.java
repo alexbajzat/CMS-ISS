@@ -17,4 +17,9 @@ public interface TopicRepository extends JpaRepository<Topic, Integer> {
     @Modifying
     @Query(value = "insert into proposal_topic(proposal_id,topic_id) values(:proposal,:topic)", nativeQuery = true)
     void addTopicForProposal(@Param(value = "topic") Integer topicId, @Param(value = "proposal") Integer proposalId);
+
+    @Transactional
+    @Modifying
+    @Query(value = "delete from proposal_topic where proposal_id =:proposal", nativeQuery = true)
+    void deleteTopicForProposal(@Param(value = "proposal") Integer proposal);
 }
