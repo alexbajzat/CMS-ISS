@@ -1,25 +1,24 @@
 package com.frasinu.iss.view.controllers;
 
-import com.frasinu.iss.persistance.model.Author;
-import com.frasinu.iss.persistance.model.Proposal;
+import com.frasinu.iss.persistance.model.BiddedProposal;
 import com.frasinu.iss.persistance.model.Reviewer;
-import com.frasinu.iss.service.AuthorService;
+import com.frasinu.iss.service.BiddedProposalService;
 import com.frasinu.iss.service.ReviewerService;
-import com.frasinu.iss.service.service_requests.author.FindAllByConferenceEditionRequest;
 import com.frasinu.iss.service.service_requests.reviewer.AssignPaperToReviewerRequest;
 import com.frasinu.iss.service.service_requests.reviewer.FindReviewersByEditionRequest;
+import com.frasinu.iss.service.service_requests.reviewer.GetBiddedProposalsForReviewerRequest;
 import com.frasinu.iss.view.FrasinuApplication;
 import com.frasinu.iss.view.Screen;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by Toshiba on 5/20/2017.
@@ -27,23 +26,24 @@ import java.util.*;
 @Controller(value = "BidsController")
 public class BidsController extends BaseController {
     @FXML
-    ListView listReviewers, listPapers;
+    private ListView<Reviewer> listReviewers;
     @FXML
-    TextField paperTxt,reviewerTxt;
+    private TableView<BiddedProposal> tablePapers;
+    @FXML
+    private TextField paperTxt, reviewerTxt, resultTxt;
+    @FXML
+    private TableColumn<BiddedProposal, String> titleColumn, resultColumn;
 
     private ReviewerService reviewerService;
-    private AuthorService authorService;
+    private BiddedProposalService biddedProposalService;
     Reviewer selectedReviewer = null;
-    Proposal selectedPaper = null;
+    BiddedProposal selectedPaper = null;
 
 
     @Autowired
-    public void setAuthorService(AuthorService authorService){this.authorService = authorService;}
-//
-//    @Autowired
-//    public void setConfereneEditionService(ConferenceEditionService editionService) {
-//        this.editionService = editionService;
-//    }
+    public void setBiddedProposalService(BiddedProposalService biddedProposalService){
+        this.biddedProposalService = biddedProposalService;
+    }
 
     @Autowired
     public void setReviewerService(ReviewerService reviewerService) {
@@ -70,38 +70,51 @@ public class BidsController extends BaseController {
     private void initPaper() {
         int idEdition = (int)getData().get("idEdition");
 
-        List<Author> authors = authorService.findAllByConferenceEdition( new FindAllByConferenceEditionRequest(idEdition));
-                List<Proposal> papers = new ArrayList<>();
-        for (Author author:
-                authors) {
-            for (Proposal paper:
-                 author.getProposals()) {
-                if (!papers.contains(paper))
-                    papers.add(paper);
+        listReviewers.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection == null) {
+                tablePapers.getSelectionModel().clearSelection();
             }
+            else{
+                Reviewer reviewer = newSelection;
 
-        }
-        listPapers.setItems(FXCollections.observableArrayList(papers));
+                List<BiddedProposal> biddedProposals = biddedProposalService.
+                        getAllByReviewer(new GetBiddedProposalsForReviewerRequest(reviewer.getId(), idEdition));
 
-        listPapers.setCellFactory(param -> new ListCell<Proposal>() {
-            @Override
-            protected void updateItem(Proposal item, boolean empty) {
-                super.updateItem(item, empty);
-
-                if (empty || item == null || item == null) {
-                    setText(null);
-                } else {
-                    setText(item.getTitle());
-                }
+                tablePapers.setItems(FXCollections.observableArrayList(biddedProposals));
             }
         });
 
-        listPapers.getSelectionModel()
+        tablePapers.getSelectionModel()
                 .selectedItemProperty()
-                .addListener((observable, oldValue, newValue) -> {
-                            selectedPaper = ((Proposal)newValue);
-                            paperTxt.setText(selectedPaper.getTitle());
-                        });
+                .addListener((observable, oldValue, newValue) ->{
+                    selectedPaper = newValue;
+                    if (newValue != null){
+                        paperTxt.setText(selectedPaper.getProposal().getTitle());
+                        resultTxt.setText(selectedPaper.getResult() );
+                    }
+                    else {
+                        paperTxt.setText(null);
+                        resultTxt.setText(null);
+                    }
+                });
+
+        titleColumn.setCellValueFactory((biddedProposal) -> {
+            SimpleStringProperty property = new SimpleStringProperty();
+            if (biddedProposal == null)
+                property.setValue(null);
+            else
+                property.setValue(biddedProposal.getValue().getProposal().getTitle());
+            return property;
+        });
+
+        resultColumn.setCellValueFactory((biddedProposal) -> {
+            SimpleStringProperty property = new SimpleStringProperty();
+            if (biddedProposal == null)
+                property.setValue(null);
+            else
+                property.setValue(biddedProposal.getValue().getResult());
+            return property;
+        });
     }
 
     private void initReviewer() {
@@ -114,7 +127,7 @@ public class BidsController extends BaseController {
             protected void updateItem(Reviewer item, boolean empty) {
                 super.updateItem(item, empty);
 
-                if (empty || item == null || item.getUser() == null) {
+                if ((item == null) || (item.getUser() == null)) {
                     setText(null);
                 } else {
                     setText(item.getUser().getUsername() + "(" + item.getUser().getName() + ")");
@@ -136,7 +149,7 @@ public class BidsController extends BaseController {
             return;
         }
 
-        boolean added = reviewerService.assignPaperToReviewer(new AssignPaperToReviewerRequest(selectedReviewer.getId(), selectedPaper.getId(), "IN PROGRESS"));
+        boolean added = reviewerService.assignPaperToReviewer(new AssignPaperToReviewerRequest(selectedReviewer.getId(), selectedPaper.getProposal().getId(), "IN PROGRESS"));
         if (added)
             showDialog("Paper assigned to reviewer!", "Success!");
         else
