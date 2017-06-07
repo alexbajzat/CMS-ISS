@@ -6,7 +6,7 @@ import com.frasinu.iss.service.service_requests.author.CreateAuthorRequest;
 import com.frasinu.iss.service.service_requests.conferenceedition.FindByConferenceEditionIdRequest;
 import com.frasinu.iss.service.service_requests.proposal.FindByConferenceEdition;
 import com.frasinu.iss.service.service_requests.reviewer.FindReviewerByIdRequest;
-import com.frasinu.iss.service.service_requests.reviewer.GetReviewedProposalsRequest;
+import com.frasinu.iss.service.service_requests.reviewer.GetAllReviewedProposalsRequest;
 import com.frasinu.iss.service.service_requests.reviewer.UpdateReviewerRequest;
 import com.frasinu.iss.service.service_requests.steeringcommitteemember.FindByUserAndConferenceEditionIdRequest;
 import com.frasinu.iss.service.service_requests.user.FindByIdRequest;
@@ -98,7 +98,7 @@ public class PCController extends BaseController {
 
         User user = userService.findById(new FindByIdRequest(idUser));
         currentReviewer = reviewerService.findById(new FindReviewerByIdRequest(idReviewer));
-        reviewedProposals = reviewerService.getReviewdProposals(new GetReviewedProposalsRequest(idReviewer));
+        reviewedProposals = reviewerService.getReviewdProposals(new GetAllReviewedProposalsRequest(idReviewer));
 
         if (user.getName() != null)
             name.setText(user.getName());
@@ -221,8 +221,12 @@ public class PCController extends BaseController {
     }
 
     public void makeReview(ActionEvent actionEvent) {
-        if (reviewedCheckBox.isSelected())
+        if (reviewedCheckBox.isSelected()){
+            int idPaper =  papersTableView.getSelectionModel().getSelectedItem().getId();
+            getData().put("idPaper", idPaper);
             FrasinuApplication.changeScreen(Screen.MAKEREVIEW, getData());
+        }
+
         else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Ooops!");
