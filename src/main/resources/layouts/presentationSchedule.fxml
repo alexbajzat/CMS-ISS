@@ -27,7 +27,7 @@
             <ComboBox fx:id="hourCombo" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
-      <Button layoutX="76.0" layoutY="171.0" mnemonicParsing="false" text="Present" />
+      <Button layoutX="76.0" layoutY="171.0" mnemonicParsing="false" onAction="#present" text="Present" />
       <Button layoutX="157.0" layoutY="171.0" mnemonicParsing="false" onAction="#back" text="Back" />
    </children>
 </AnchorPane>

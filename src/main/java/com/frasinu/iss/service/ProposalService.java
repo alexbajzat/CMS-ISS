@@ -9,7 +9,7 @@ import com.frasinu.iss.persistance.repository.TopicRepository;
 import com.frasinu.iss.service.service_requests.proposal.CreateProposalRequest;
 import com.frasinu.iss.persistance.model.Proposal;
 import com.frasinu.iss.service.service_requests.proposal.FindByConferenceEdition;
-import com.frasinu.iss.service.service_requests.proposal.FindByIdRequest;
+import com.frasinu.iss.service.service_requests.proposal.FindByPaperIdRequest;
 import com.frasinu.iss.service.service_requests.proposal.UpdateProposalRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -73,7 +73,7 @@ public class ProposalService {
         topicRepository.save(parsedTopics)
                 .forEach(topic -> topicRepository.addTopicForProposal(topic.getId(), proposal.getId()));
 
-        return findById(new FindByIdRequest(proposal.getId()));
+        return findById(new FindByPaperIdRequest(proposal.getId()));
 
     }
 
@@ -108,7 +108,7 @@ public class ProposalService {
         topicRepository.save(parsedTopics)
                 .forEach(topic -> topicRepository.addTopicForProposal(topic.getId(), proposal.getId()));
 
-        return findById(new FindByIdRequest(proposal.getId()));
+        return findById(new FindByPaperIdRequest(proposal.getId()));
 
     }
 
@@ -117,7 +117,7 @@ public class ProposalService {
     }
 
 
-    public Proposal findById(FindByIdRequest findByIdRequest) {
+    public Proposal findById(FindByPaperIdRequest findByIdRequest) {
         return proposalRepository.findOne(findByIdRequest.getId());
     }
 }

@@ -71,4 +71,13 @@ public class Author {
     public List<Proposal> getProposals() {
         return proposals;
     }
+
+    @Override
+    public String toString() {
+        return "Author{" +
+                "id=" + id +
+                ", affiliation='" + affiliation + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
 }

@@ -126,5 +126,14 @@ public class Proposal {
     public List<Presentation> getPresentations() {
         return presentations;
     }
+
+    @Override
+    public String toString() {
+        return "Proposal{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                '}';
+    }
 }
+
 
