@@ -80,11 +80,7 @@ public class FrasinuApplication extends Application {
             alert.setContentText("Please try again.");
             alert.show();
         });
-        try {
-            FrasinuApplication.primaryStage = primaryStage;
-            changeScreen(Screen.LOGIN);
-        } catch (Exception ex) {
-
-        }
+        FrasinuApplication.primaryStage = primaryStage;
+        changeScreen(Screen.LOGIN);
     }
 }
