@@ -19,7 +19,7 @@ public class BiddedProposal {
     @JoinColumn(name = "reviewer_id")
     private Reviewer reviewer;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "proposal_id")
     private Proposal proposal;
 
