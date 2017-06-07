@@ -36,6 +36,7 @@ public class ConferenceEditionService implements IConferenceEditionService {
 
     public void deleteEdition(DeleteEditionRequest deleteEditionRequest) {
         conferenceEditionRepository.delete(deleteEditionRequest.getEdition());
+
     }
 
     public ConferenceEdition addEdition(CreateEditionRequest createEditionRequest) {

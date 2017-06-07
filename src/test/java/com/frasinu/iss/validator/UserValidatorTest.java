@@ -46,4 +46,5 @@ public class UserValidatorTest {
                 .setPassword("123")
                 .build());
     }
+
 }
