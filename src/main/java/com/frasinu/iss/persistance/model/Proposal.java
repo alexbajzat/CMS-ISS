@@ -7,6 +7,7 @@ import org.hibernate.annotations.ManyToAny;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by bjz on 5/9/2017.
