@@ -1,19 +1,24 @@
 package com.frasinu.iss.view.controllers;
 
-import com.frasinu.iss.persistance.model.*;
+import com.frasinu.iss.persistance.model.Bid;
+import com.frasinu.iss.persistance.model.Proposal;
+import com.frasinu.iss.persistance.model.Reviewer;
 import com.frasinu.iss.service.BiddedProposalService;
 import com.frasinu.iss.service.ProposalService;
 import com.frasinu.iss.service.ReviewerService;
 import com.frasinu.iss.service.service_requests.biddedproposal.AddBiddedProposalRequest;
 import com.frasinu.iss.service.service_requests.proposal.FindByConferenceEdition;
-import com.frasinu.iss.service.service_requests.reviewer.FindReviewerByIdRequest;
+import com.frasinu.iss.service.service_requests.reviewer.FindByUserAndEditionIdRequest;
 import com.frasinu.iss.view.FrasinuApplication;
 import com.frasinu.iss.view.Screen;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -79,14 +84,15 @@ public class BidPaperController extends BaseController {
     public void bid() {
         Proposal proposal = (Proposal) proposalsTableView.getSelectionModel().getSelectedItem();
         Integer userId = (Integer) getData().get("idUser");
-        Reviewer reviewer = reviewerService.findById(new FindReviewerByIdRequest(userId));
+        Integer editionId = (Integer) getData().get("idEdition");
+        Reviewer reviewer = reviewerService.findByUserAndEditionId(new FindByUserAndEditionIdRequest(userId, editionId));
         Bid bid = bidTypesComboBox.getValue();
 
-        if (bid == null) {
+        if ((bid == null) || (proposal == null)){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Transaction informations");
             alert.setHeaderText(null);
-            alert.setContentText("Please select a bid type!");
+            alert.setContentText("Please select a bid type and a paper!");
 
             alert.showAndWait();
         } else {

@@ -5,14 +5,19 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="background" stylesheets="@stylelayout.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ListView fx:id="listReviewers" layoutX="67.0" layoutY="59.0" prefHeight="200.0" prefWidth="139.0" />
-      <ListView fx:id="listPapers" layoutX="428.0" layoutY="59.0" prefHeight="200.0" prefWidth="139.0" />
-      <Label layoutX="75.0" layoutY="22.0" prefHeight="25.0" prefWidth="88.0" text="Reviewers:" />
+      <ListView fx:id="listReviewers" layoutX="41.0" layoutY="59.0" prefHeight="200.0" prefWidth="139.0" />
+       <TableView fx:id="tablePapers" layoutX="371.0" layoutY="59.0" prefHeight="200.0" prefWidth="209.0">
+           <columns>
+               <TableColumn fx:id="titleColumn" prefWidth="115.0" text="Title" />
+               <TableColumn fx:id="resultColumn" prefWidth="89.0" text="Result" />
+           </columns>
+       </TableView>
+      <Label layoutX="51.0" layoutY="22.0" prefHeight="25.0" prefWidth="88.0" text="Reviewers:" />
       <Label layoutX="444.0" layoutY="22.0" prefHeight="25.0" prefWidth="54.0" text="Papers:" />
-      <TextField fx:id="reviewerTxt" editable="false" layoutX="244.0" layoutY="114.0" prefHeight="37.0" prefWidth="152.0" promptText="reviewer" />
-      <TextField fx:id="paperTxt" editable="false" layoutX="244.0" layoutY="182.0" prefHeight="37.0" prefWidth="152.0" promptText="paper" />
-       <Button layoutX="222.0" layoutY="276.0" mnemonicParsing="false" onAction="#assign" text="Assign paper to reviewer" />
+      <TextField fx:id="reviewerTxt" editable="false" layoutX="201.0" layoutY="66.0" prefHeight="37.0" prefWidth="152.0" promptText="reviewer" />
+      <TextField fx:id="paperTxt" editable="false" layoutX="201.0" layoutY="122.0" prefHeight="37.0" prefWidth="152.0" promptText="paper" />
+      <TextField fx:id="resultTxt" editable="false" layoutX="201.0" layoutY="173.0" prefHeight="37.0" prefWidth="152.0" promptText="result" />
+       <Button layoutX="168.0" layoutY="291.0" mnemonicParsing="false" onAction="#assign" text="Assign paper to reviewer" />
        <Button layoutX="482.0" layoutY="334.0" mnemonicParsing="false" onAction="#back" prefHeight="37.0" prefWidth="88.0" text="Back" />
-
    </children>
 </AnchorPane>
