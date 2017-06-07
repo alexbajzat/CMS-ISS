@@ -1,13 +1,25 @@
 package com.frasinu.iss;
 
-import org.springframework.context.ApplicationContext;
+import com.frasinu.iss.config.AppConfig;
+import com.frasinu.iss.service.AuthorService;
+import com.frasinu.iss.view.FrasinuApplication;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
 /**
- * Created by bjz on 5/21/2017.
+ * Created by bjz on 6/7/2017.
  */
-@ComponentScan(basePackages = "com.frasinnu.iss")
+@RunWith(SpringRunner.class)
+@ContextConfiguration(classes = {FrasinuApplication.class})
 public class BaseTestClass {
-    protected static ApplicationContext applicationContext = new AnnotationConfigApplicationContext(BaseTestClass.class);
+    @Test
+    public void smt(){
+        System.out.println("ceva");
+    }
 }

@@ -1,6 +1,7 @@
 package com.frasinu.iss.persistance.model;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by bjz on 5/9/2017.

@@ -17,6 +17,6 @@ public interface ReviewedProposalRepository extends JpaRepository<ReviewedPropos
 
     @Transactional
     @Modifying
-    @Query(value = "insert into reviewed_proposal(review, proposal, reviewer) values (:review,:id_proposal, :id_reviewer)" , nativeQuery = true)
-    Integer addReviewPropposal(@Param("id_reviewer") Integer idReviewer, @Param("id_proposal") Integer idProposal, @Param("review") String review);
+    @Query(value = "insert into reviewed_proposal(review, proposal, reviewer) values (:review_result,:id_proposal, :id_reviewer)" , nativeQuery = true)
+    Integer addReviewPropposal(@Param("id_reviewer") Integer idReviewer, @Param("id_proposal") Integer idProposal, @Param("review_result") String review);
 }

@@ -12,6 +12,6 @@ import org.springframework.stereotype.Controller;
 @Controller(value = "PaperReviewController")
 public class PaperReviewController extends BaseController {
     public void back(ActionEvent actionEvent){
-        FrasinuApplication.changeScreen(Screen.AUTHOR,getData());
+        FrasinuApplication.changeScreen(Screen.CONFERENCEINFO,getData());
     }
 }

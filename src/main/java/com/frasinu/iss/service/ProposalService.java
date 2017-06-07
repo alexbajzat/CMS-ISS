@@ -10,6 +10,8 @@ import com.frasinu.iss.service.service_requests.proposal.CreateProposalRequest;
 import com.frasinu.iss.persistance.model.Proposal;
 import com.frasinu.iss.service.service_requests.proposal.FindByConferenceEdition;
 import com.frasinu.iss.validator.ProposalValidator;
+import com.frasinu.iss.service.service_requests.proposal.FindByIdRequest;
+import com.frasinu.iss.service.service_requests.proposal.UpdateProposalRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +23,8 @@ import java.util.stream.Collectors;
  */
 @Service
 public class ProposalService {
-    private ProposalValidator proposalValidator = new ProposalValidator();
+    @Autowired
+    private ProposalValidator proposalValidator;
     @Autowired
     private ProposalRepository proposalRepository;
 
@@ -35,7 +38,49 @@ public class ProposalService {
         return proposalRepository.findAll();
     }
 
-    public Proposal createProposalForAuthors(CreateProposalRequest createProposalRequest) throws InexistentException {
+
+    public Proposal updateProposalForAuthors(UpdateProposalRequest updateProposalRequest){
+        proposalRepository.deleteProposalForAuthor(updateProposalRequest.getId());
+        keywordRepository.deleteKeywordForProposal(updateProposalRequest.getId());
+        topicRepository.deleteTopicForProposal(updateProposalRequest.getId());
+        Proposal proposal = Proposal.builder()
+                .setId(updateProposalRequest.getId())
+                .setAbstractPaper(updateProposalRequest.getAbstractPaper())
+                .setFullPaper(updateProposalRequest.getFullPaper())
+                .setTitle(updateProposalRequest.getTitle())
+                .setConferenceEdition(updateProposalRequest.getConferenceEdition())
+                .build();
+
+        if (proposalRepository.findOne(updateProposalRequest.getId()) == null) {
+            throw new InexistentException("No such paper!");
+        }
+
+        proposalRepository.save(proposal);
+        List<Integer> authorsId = updateProposalRequest.getAuthorsId();
+        List<String> keywords = updateProposalRequest.getKeywords();
+        List<String> topics = updateProposalRequest.getTopics();
+
+        authorsId.forEach(id -> {
+            proposalRepository.addProposalForAuthor(proposal.getId(), id);
+        });
+
+        List<Keyword> parsedKeywords = keywords.stream()
+                .map(Keyword::new)
+                .collect(Collectors.toList());
+        keywordRepository.save(parsedKeywords)
+                .forEach(keyword -> keywordRepository.addKeywordForProposal(keyword.getId(), proposal.getId()));
+
+        List<Topic> parsedTopics = topics.stream()
+                .map(Topic::new)
+                .collect(Collectors.toList());
+        topicRepository.save(parsedTopics)
+                .forEach(topic -> topicRepository.addTopicForProposal(topic.getId(), proposal.getId()));
+
+        return findById(new FindByIdRequest(proposal.getId()));
+
+    }
+
+    public Proposal createProposalForAuthors(CreateProposalRequest createProposalRequest) {
         Proposal proposal = Proposal.builder()
                 .setAbstractPaper(createProposalRequest.getAbstractPaper())
                 .setFullPaper(createProposalRequest.getFullPaper())
@@ -61,7 +106,6 @@ public class ProposalService {
         List<Keyword> parsedKeywords = keywords.stream()
                 .map(Keyword::new)
                 .collect(Collectors.toList());
-
         keywordRepository.save(parsedKeywords)
                 .forEach(keyword -> keywordRepository.addKeywordForProposal(keyword.getId(), proposal.getId()));
 
@@ -72,7 +116,7 @@ public class ProposalService {
         topicRepository.save(parsedTopics)
                 .forEach(topic -> topicRepository.addTopicForProposal(topic.getId(), proposal.getId()));
 
-        return findById(proposal.getId());
+        return findById(new FindByIdRequest(proposal.getId()));
 
     }
 
@@ -81,7 +125,7 @@ public class ProposalService {
     }
 
 
-    public Proposal findById(Integer proposalId) {
-        return proposalRepository.findOne(proposalId);
+    public Proposal findById(FindByIdRequest findByIdRequest) {
+        return proposalRepository.findOne(findByIdRequest.getId());
     }
 }
