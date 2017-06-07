@@ -7,28 +7,44 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="624.0" prefWidth="742.0" styleClass="background" stylesheets="@stylelayout.css" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TableView layoutX="279.0" layoutY="14.0" prefHeight="129.0" prefWidth="441.0">
+      <TableView fx:id="proposalInfos" layoutX="279.0" layoutY="14.0" prefHeight="129.0" prefWidth="441.0">
         <columns>
-          <TableColumn prefWidth="85.0" text="Title" />
-          <TableColumn prefWidth="115.0" text="Author" />
-            <TableColumn prefWidth="129.0" text="Keywords" />
-            <TableColumn prefWidth="106.0" text="Topics" />
+            <TableColumn prefWidth="85.0" text="Title">
+                <cellValueFactory>
+                    <PropertyValueFactory property="title" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn prefWidth="115.0" text="Author">
+                <cellValueFactory>
+                    <PropertyValueFactory property="author" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn prefWidth="129.0" text="Keywords"><cellValueFactory>
+                <PropertyValueFactory property="keywords" />
+            </cellValueFactory>
+            </TableColumn>
+            <TableColumn prefWidth="106.0" text="Topics"><cellValueFactory>
+                <PropertyValueFactory property="topics" />
+            </cellValueFactory>
+            </TableColumn>
         </columns>
       </TableView>
       <Button layoutX="644.0" layoutY="522.0" mnemonicParsing="false" onAction="#back" text="Back" />
-      <ListView layoutX="64.0" layoutY="84.0" prefHeight="201.0" prefWidth="168.0" />
+      <ListView fx:id="listProposals" layoutX="64.0" layoutY="84.0" prefHeight="201.0" prefWidth="168.0" />
       <Label layoutX="70.0" layoutY="36.0" text="Select a paper:" />
-      <TextArea layoutX="355.0" layoutY="219.0" prefHeight="266.0" prefWidth="373.0" />
+      <TextArea fx:id="content" layoutX="355.0" layoutY="219.0" prefHeight="266.0" prefWidth="373.0" />
       <Label layoutX="512.0" layoutY="166.0" text="Content" />
-      <TextField layoutX="102.0" layoutY="403.0" prefHeight="37.0" prefWidth="150.0" />
-      <TextField layoutX="103.0" layoutY="454.0" prefHeight="37.0" prefWidth="150.0" />
+      <TextField fx:id="keyword" layoutX="102.0" layoutY="403.0" prefHeight="37.0" prefWidth="150.0" />
+      <TextField fx:id="topic" layoutX="103.0" layoutY="454.0" prefHeight="37.0" prefWidth="150.0" />
       <Label layoutX="26.0" layoutY="409.0" text="Keyword:" />
       <Label layoutX="38.0" layoutY="460.0" text="Topic:" />
-      <Button layoutX="121.0" layoutY="522.0" mnemonicParsing="false" text="Filter papers" />
+      <Button layoutX="68.0" layoutY="522.0" mnemonicParsing="false" onAction="#filter" text="Filter papers" />
       <Label layoutX="13.0" layoutY="352.0" text="Filter papers by keywords and topics:" />
+      <Button layoutX="190.0" layoutY="522.0" mnemonicParsing="false" onAction="#refresh" text="Refresh list" />
    </children>
 </AnchorPane>
