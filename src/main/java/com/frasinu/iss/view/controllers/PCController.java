@@ -238,7 +238,22 @@ public class PCController extends BaseController {
     }
 
     public void seeReview(ActionEvent actionEvent) {
-        FrasinuApplication.changeScreen(Screen.PAPERREVIEWS, getData());
+        Proposal proposal = papersTableView.getSelectionModel().getSelectedItem();
+        if (proposal != null){
+            int idPaper =  proposal.getId();
+            getData().put("idPaper", idPaper);
+            FrasinuApplication.changeScreen(Screen.PAPERREVIEWS, getData());
+        }
+
+        else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Ooops!");
+            alert.setHeaderText(null);
+            alert.setContentText("Select a paper first!");
+
+            alert.showAndWait();
+        }
+
     }
 
     public void seeDetaliedProposals(ActionEvent actionEvent){FrasinuApplication.changeScreen(Screen.DETALIEDPROPOSALS,getData());}

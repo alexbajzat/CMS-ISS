@@ -1,16 +1,8 @@
 package com.frasinu.iss.view.controllers;
 
 
-import com.frasinu.iss.persistance.model.Author;
-import com.frasinu.iss.persistance.model.Reviewer;
-import com.frasinu.iss.persistance.model.SteeringCommitteeMember;
-import com.frasinu.iss.persistance.model.User;
-import com.frasinu.iss.service.AuthorService;
-import com.frasinu.iss.service.ReviewerService;
-import com.frasinu.iss.service.SteeringCommitteeMemberService;
-import com.frasinu.iss.persistance.model.Proposal;
-import com.frasinu.iss.service.ProposalService;
-import com.frasinu.iss.service.UserService;
+import com.frasinu.iss.persistance.model.*;
+import com.frasinu.iss.service.*;
 import com.frasinu.iss.service.service_requests.author.FindProposalsRequest;
 import com.frasinu.iss.service.service_requests.author.UpdateAuthorRequest;
 import com.frasinu.iss.service.service_requests.reviewer.FindByUserAndEditionIdRequest;
@@ -19,13 +11,12 @@ import com.frasinu.iss.service.service_requests.user.FindByIdRequest;
 import com.frasinu.iss.service.service_requests.user.UpdateUserRequest;
 import com.frasinu.iss.view.FrasinuApplication;
 import com.frasinu.iss.view.Screen;
-import com.sun.deploy.util.StringUtils;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -120,7 +111,22 @@ public class AuthorController extends BaseController {
         FrasinuApplication.changeScreen(Screen.CONFERENCES,getData());
     }
     public void goToReviews(ActionEvent actionEvent){
-        FrasinuApplication.changeScreen(Screen.PAPERREVIEWS,getData());
+        Proposal proposal = uploadedProposalsTableView.getSelectionModel().getSelectedItem();
+        if (proposal != null){
+            int idPaper =  proposal.getId();
+            getData().put("idPaper", idPaper);
+            FrasinuApplication.changeScreen(Screen.PAPERREVIEWS, getData());
+        }
+
+        else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Ooops!");
+            alert.setHeaderText(null);
+            alert.setContentText("Select a paper first!");
+
+            alert.showAndWait();
+        }
+
     }
     public void goToPresentation(ActionEvent actionEvent){
         int index=uploadedProposalsTableView.getSelectionModel().getSelectedIndex();

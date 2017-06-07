@@ -93,7 +93,7 @@ public class ReviewerService {
     }
 
     public List<ReviewedProposal> getReviewdProposals(GetAllReviewedProposalsRequest getAllReviewedProposalsRequest){
-        return reviewedProposalRepository.findAllReviewedProposals(getAllReviewedProposalsRequest.getIdReviewer());
+        return reviewedProposalRepository.findAllReviewedProposalsByReviewer(getAllReviewedProposalsRequest.getIdReviewer());
     }
 
     public ReviewedProposal getReviewedProposal(GetReviewedProposalRequest getReviewedProposalRequest){
