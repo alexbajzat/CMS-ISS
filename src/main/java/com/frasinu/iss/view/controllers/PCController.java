@@ -208,4 +208,5 @@ public class PCController extends BaseController {
         FrasinuApplication.changeScreen(Screen.PAPERREVIEWS, getData());
     }
 
+    public void seeDetaliedProposals(ActionEvent actionEvent){FrasinuApplication.changeScreen(Screen.DETALIEDPROPOSALS,getData());}
 }
