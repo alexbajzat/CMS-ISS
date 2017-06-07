@@ -51,12 +51,10 @@ public class UserServiceTest extends BaseTestClass {
     public void testLogin() throws LoginException{
         userService.checkLogin(new LoginUserRequest("test","1234"));
     }
-
     @Test(expected = LoginException.class)
     public void testLoginException() throws LoginException{
         userService.checkLogin(new LoginUserRequest("test","12345"));
     }
-
     @Test(expected = RegisterException.class)
     public void testRegisterException() throws RegisterException{
         userService.registerUser(new RegisterUserRequest("t","test","1234"));
@@ -68,7 +66,6 @@ public class UserServiceTest extends BaseTestClass {
         if (u==null || u2==null)
             throw new NotFoundException("user not found");
     }
-
     @Test(expected = NotFoundException.class)
     public void testFindException() throws NotFoundException{
         User u=userService.findByUsername(new FindByUsernameRequest("test100"));
@@ -80,9 +77,7 @@ public class UserServiceTest extends BaseTestClass {
         User u=userService.findById(new FindByIdRequest(addedUsers.get(0)));
         if (u==null)
             throw new NotFoundException("user not found");
-
     }
-
     @Test(expected = NotFoundException.class)
     public void testFindByIdException() throws NotFoundException{
         User u=userService.findById(new FindByIdRequest(1232343));
