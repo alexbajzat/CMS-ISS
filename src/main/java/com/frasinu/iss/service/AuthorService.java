@@ -8,6 +8,7 @@ import com.frasinu.iss.service.service_requests.author.*;
 import com.frasinu.iss.service.service_requests.reviewer.FindByUserAndEditionIdRequest;
 import com.frasinu.iss.service.service_requests.user.FindByIdRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

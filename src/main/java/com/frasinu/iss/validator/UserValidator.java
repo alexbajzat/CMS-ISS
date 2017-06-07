@@ -8,7 +8,7 @@ import javax.xml.bind.ValidationException;
  * Created by Toshiba on 5/8/2017.
  */
 public class UserValidator implements Validator<User> {
-    public void validare(User obj) throws ValidationException {
+    public void validate(User obj) throws ValidationException {
         if(obj.getName().equals(""))
             throw new ValidationException("User has no name!");
         if(obj.getName().matches(".*\\d+.*"))
