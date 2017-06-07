@@ -8,12 +8,10 @@ import com.frasinu.iss.service.ConferenceEditionService;
 import com.frasinu.iss.service.ProposalService;
 import com.frasinu.iss.service.service_requests.author.FindAllByConferenceEditionRequest;
 import com.frasinu.iss.service.service_requests.conferenceedition.FindByConferenceEditionIdRequest;
-import com.frasinu.iss.service.service_requests.proposal.CreateProposalRequest;
-import com.frasinu.iss.service.service_requests.proposal.FindByIdRequest;
+import com.frasinu.iss.service.service_requests.proposal.FindByPaperIdRequest;
 import com.frasinu.iss.service.service_requests.proposal.UpdateProposalRequest;
 import com.frasinu.iss.view.FrasinuApplication;
 import com.frasinu.iss.view.Screen;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -65,7 +63,7 @@ public class PaperUpdateController extends BaseController {
 
 
     public void init() {
-        Proposal proposal = proposalService.findById(new FindByIdRequest((int) getData().get(("idProposal"))));
+        Proposal proposal = proposalService.findById(new FindByPaperIdRequest((int) getData().get(("idProposal"))));
         List<Author> extraAuthors=proposal.getAuthors();
         ObservableList<Author> extraItems = FXCollections.observableList(extraAuthors);
         listExtraAuthors.setItems(extraItems);

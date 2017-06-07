@@ -14,6 +14,7 @@ public class AuthorBuilder {
     }
 
     public Author build() {
+
         return new Author(id, affiliation, email,user,conferenceEdition);
     }
 

@@ -4,7 +4,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="363.0" prefWidth="685.0" styleClass="background" stylesheets="@stylelayout.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="363.0" prefWidth="685.0" styleClass="background" stylesheets="@stylelayout.css" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1">
+>>>>>>> master
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
@@ -58,10 +59,12 @@
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="326.0" prefWidth="468.0" styleClass="background" stylesheets="@stylelayout.css">
                <children>
+
                   <Button layoutX="340.0" layoutY="25.0" mnemonicParsing="false" onAction="#bidPapers" text="Bid papers" />
                   <Button layoutX="33.0" layoutY="259.0" mnemonicParsing="false" onAction="#makeReview" prefHeight="32.0" prefWidth="202.0" text="Make review" />
                   <Button layoutX="295.0" layoutY="259.0" mnemonicParsing="false" onAction="#seeReview" text="See reviews" />
                   <TableView fx:id="papersTableView" layoutX="33.0" layoutY="60.0" prefHeight="187.0" prefWidth="292.0">
+
                     <columns>
                       <TableColumn fx:id="nameColumn" prefWidth="95.0" text="Name" />
                       <TableColumn fx:id="authorColumn" prefWidth="96.0" text="Author" />
@@ -70,7 +73,11 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                   </TableView>
-                  <CheckBox fx:id="reviewedCheckBox" layoutX="325.0" layoutY="145.0" mnemonicParsing="false" text="Can make review" textFill="#f5e8e8"  disable="true"/>
+                   
+
+                   <CheckBox fx:id="reviewedCheckBox" layoutX="325.0" layoutY="145.0" mnemonicParsing="false" text="Can make review" textFill="#f5e8e8"  disable="true"/>
+                  <Button layoutX="338.0" layoutY="266.0" mnemonicParsing="false" onAction="#seeDetaliedProposals" text="Detalied papers" />
+
                </children>
             </AnchorPane>
         </items>

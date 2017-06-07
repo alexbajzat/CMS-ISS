@@ -21,12 +21,12 @@ public enum Screen {
     BIDPAPERS("bidpaper.fxml","Bid Proposals","BidPaperController"),
     PCMEMBER("menuPC.fxml","Menu PCMember","PCController"),
     STEERING("menuSteering.fxml","Steering Member","SteeringComController"),
-    REVIEWS("reviews.fxml","Reviews","ReviewsController"),
     TEST("test.fxml", "Test","TestController"),
     MENUADMIN("menuAdmin.fxml","Menu for admin","AdminMenuController"),
     ADMINCONFERENCES("adminConferences.fxml","Update Conferences","AdminConferencesController"),
     ADMINUSERS("adminUsers.fxml","","AdminUsersController"),
-    ADMINEDITION("adminEdition.fxml","Menu for admin","AdminEditionsController");
+    ADMINEDITION("adminEdition.fxml","Menu for admin","AdminEditionsController"),
+    DETALIEDPROPOSALS("detaliedProposals.fxml","Detalied menu","DetaliedProposalsController");
 
 
     private final String name;
