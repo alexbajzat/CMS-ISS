@@ -5,6 +5,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
@@ -27,12 +28,12 @@ public class FrasinuApplication extends Application {
         changeScreen(screen, null);
     }
 
-    public static void createScreen(Screen screen){
-        createScreen(screen,null);
+    public static void createScreen(Screen screen) {
+        createScreen(screen, null);
     }
 
-    public static void createScreen(Screen screen,HashMap<String, Object> data){
-        Stage stage=new Stage();
+    public static void createScreen(Screen screen, HashMap<String, Object> data) {
+        Stage stage = new Stage();
         stage.setScene(createSceneFromFXML(screen.getName(), data, screen.getController()));
         stage.setTitle(screen.getTitle());
         stage.show();
@@ -48,9 +49,9 @@ public class FrasinuApplication extends Application {
         try {
             FXMLLoader loader = new FXMLLoader(FrasinuApplication.class.getResource("/layouts/" + name));
 
-            BaseController baseController= null;
+            BaseController baseController = null;
             try {
-                baseController = (BaseController)applicationContext.getBean(classController);
+                baseController = (BaseController) applicationContext.getBean(classController);
             } catch (BeansException e) {
                 e.printStackTrace();
             }
@@ -71,6 +72,14 @@ public class FrasinuApplication extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        Thread.setDefaultUncaughtExceptionHandler((t, e) -> {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Hmm..");
+            alert.setHeaderText("Something happened..");
+            alert.setContentText("Please try again.");
+            alert.show();
+        });
         FrasinuApplication.primaryStage = primaryStage;
         changeScreen(Screen.LOGIN);
     }
