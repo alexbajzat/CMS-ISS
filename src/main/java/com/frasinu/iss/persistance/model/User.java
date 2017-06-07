@@ -24,6 +24,9 @@ public class User {
     private List<Author> authors;
 
     @OneToMany(mappedBy = "user")
+    private List<Listener> listeners;
+
+    @OneToMany(mappedBy = "user")
     private List<Reviewer> reviewers;
 
     @OneToMany(mappedBy = "user")
