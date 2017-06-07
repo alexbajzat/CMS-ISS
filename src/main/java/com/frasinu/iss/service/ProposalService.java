@@ -9,11 +9,10 @@ import com.frasinu.iss.persistance.repository.TopicRepository;
 import com.frasinu.iss.service.service_requests.proposal.CreateProposalRequest;
 import com.frasinu.iss.persistance.model.Proposal;
 import com.frasinu.iss.service.service_requests.proposal.FindByConferenceEdition;
-import com.frasinu.iss.validator.ValidatorProposal;
+import com.frasinu.iss.validator.ProposalValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.xml.bind.ValidationException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,7 +21,7 @@ import java.util.stream.Collectors;
  */
 @Service
 public class ProposalService {
-    private ValidatorProposal proposalValidator = new ValidatorProposal();
+    private ProposalValidator proposalValidator = new ProposalValidator();
     @Autowired
     private ProposalRepository proposalRepository;
 
@@ -45,7 +44,7 @@ public class ProposalService {
                 .build();
 
         try {
-            proposalValidator.validare(proposal);
+            proposalValidator.validate(proposal);
         } catch (InexistentException e) {
             throw new InexistentException(e.getMessage());
         }

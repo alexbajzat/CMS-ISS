@@ -46,7 +46,7 @@ public class UserService {
                 .build();
 
         try {
-            userValidator.validare(user);
+            userValidator.validate(user);
         } catch (ValidationException e) {
             throw new RegisterException(e.getMessage());
         }
@@ -82,7 +82,7 @@ public class UserService {
                 .setUsername(username)
                 .setPassword(password)
                 .build();
-        userValidator.validare(user);
+        userValidator.validate(user);
 
         user = User.builder()
                 .setName(name)

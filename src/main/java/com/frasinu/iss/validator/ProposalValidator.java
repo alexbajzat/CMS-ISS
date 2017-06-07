@@ -12,11 +12,11 @@ import java.io.File;
  * Created by Florin on 6/6/2017.
  */
 @Component
-public class ValidatorProposal implements Validator<Proposal>{
+public class ProposalValidator implements Validator<Proposal>{
     @Value("${files.root}")
     private String root;
 
-    public void validare(Proposal obj) throws InexistentException {
+    public void validate(Proposal obj) throws InexistentException {
         File f = new File(root+"\\"+obj.getFullPaper());
 
         if(!f.exists())
