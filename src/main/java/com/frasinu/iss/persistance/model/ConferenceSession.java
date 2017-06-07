@@ -65,5 +65,10 @@ public class ConferenceSession {
     public ConferenceEdition getConferenceEdition() {
         return conferenceEdition;
     }
+
+    @Override
+    public String toString(){
+        return getName()+"("+getDate()+" "+getPeriodOfDay()+")";
+    }
 }
 

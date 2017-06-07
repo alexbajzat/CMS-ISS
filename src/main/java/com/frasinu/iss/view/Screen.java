@@ -26,7 +26,8 @@ public enum Screen {
     ADMINCONFERENCES("adminConferences.fxml","Update Conferences","AdminConferencesController"),
     ADMINUSERS("adminUsers.fxml","","AdminUsersController"),
     ADMINEDITION("adminEdition.fxml","Menu for admin","AdminEditionsController"),
-    EDITIONUPDATE("editionUpdate.fxml","Modify deadlines","EditionUpdateController");
+    EDITIONUPDATE("editionUpdate.fxml","Modify deadlines","EditionUpdateController"),
+    DETALIEDPROPOSALS("detaliedProposals.fxml","Detalied menu","DetaliedProposalsController");
 
 
     private final String name;

@@ -123,7 +123,15 @@ public class AuthorController extends BaseController {
         FrasinuApplication.changeScreen(Screen.PAPERREVIEWS,getData());
     }
     public void goToPresentation(ActionEvent actionEvent){
-        FrasinuApplication.changeScreen(Screen.PAPERPRESENTATION,getData());
+        int index=uploadedProposalsTableView.getSelectionModel().getSelectedIndex();
+        if (index<0) {
+            showDialog("You have to select a paper first!", "Ooops!");
+        }
+        else {
+            HashMap<String, Object> map = getData();
+            map.put("idProposal", uploadedProposalsTableView.getSelectionModel().getSelectedItem().getId());
+            FrasinuApplication.changeScreen(Screen.PAPERPRESENTATION, map);
+        }
     }
 
     @Override
