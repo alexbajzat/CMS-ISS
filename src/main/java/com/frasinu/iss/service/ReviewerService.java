@@ -79,6 +79,27 @@ public class ReviewerService {
         return true;
     }
 
+    public boolean makeReview(MakeReviewRequest makeReviewRequest){
+        int idReviewer = makeReviewRequest.getIdReviewer();
+        int idPaper = makeReviewRequest.getIdPaper();
+        ReviewedProposal reviewedProposal = reviewedProposalRepository.findByReviewerAndProposal(idReviewer, idPaper);
+        if (reviewedProposal == null)
+            return false;
+
+        reviewedProposal.setReview(makeReviewRequest.getResult().getName());
+        reviewedProposal.setRecommendation(makeReviewRequest.getRecommendation());
+        reviewedProposalRepository.save(reviewedProposal);
+        return true;
+    }
+
+    public List<ReviewedProposal> getReviewdProposals(GetAllReviewedProposalsRequest getAllReviewedProposalsRequest){
+        return reviewedProposalRepository.findAllReviewedProposals(getAllReviewedProposalsRequest.getIdReviewer());
+    }
+
+    public ReviewedProposal getReviewedProposal(GetReviewedProposalRequest getReviewedProposalRequest){
+        return reviewedProposalRepository.findByReviewerAndProposal(getReviewedProposalRequest.getIdReviewer(), getReviewedProposalRequest.getIdPaper());
+    }
+
     public void deleteReviewer(Integer id) {
         reviewerRepository.delete(id);
     }

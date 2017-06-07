@@ -22,12 +22,12 @@
         </rowConstraints>
          <children>
             <Label text="Qualifier:" />
-            <ComboBox prefHeight="27.0" prefWidth="226.0" GridPane.columnIndex="1" />
+            <ComboBox fx:id="cbQualifier" prefHeight="27.0" prefWidth="226.0" GridPane.columnIndex="1" />
             <Label text="Recommandation:" GridPane.rowIndex="1" />
-            <TextArea prefHeight="67.0" prefWidth="218.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextArea fx:id="textRecommandation" prefHeight="67.0" prefWidth="218.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
-      <Button layoutX="242.0" layoutY="296.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="79.0" text="Submit" />
+      <Button layoutX="242.0" layoutY="296.0" mnemonicParsing="false" onAction="#review" prefHeight="37.0" prefWidth="79.0" text="Submit" />
       <Button layoutX="318.0" layoutY="296.0" mnemonicParsing="false" onAction="#back" prefHeight="37.0" prefWidth="79.0" text="Back" />
       <Button layoutX="143.0" layoutY="296.0" mnemonicParsing="false" text="See paper" />
    </children>

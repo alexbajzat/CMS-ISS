@@ -28,10 +28,10 @@ public class Reviewer {
     @JoinColumn(name = "id_conference_edition", nullable = false)
     private ConferenceEdition conferenceEdition;
 
-    @OneToMany(mappedBy = "reviewer")
+    @OneToMany(cascade=CascadeType.ALL, mappedBy = "reviewer")
     private List<ReviewedProposal> reviewedProposals;
 
-    @OneToMany(mappedBy = "reviewer")
+    @OneToMany(cascade=CascadeType.ALL, mappedBy = "reviewer")
     protected List<BiddedProposal> biddedProposals;
 
     public Reviewer() {

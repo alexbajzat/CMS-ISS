@@ -23,6 +23,9 @@ public class ReviewedProposal {
     @Column(name = "review")
     private String review;
 
+    @Column(name = "recommendation")
+    private String recommendation;
+
     ReviewedProposal(){}
 
     public ReviewedProposal(Reviewer reviewer, Proposal proposal, String review) {
@@ -45,5 +48,13 @@ public class ReviewedProposal {
 
     public String getReview() {
         return review;
+    }
+
+    public String getRecommendation() {return recommendation;}
+
+    public void setReview(String review) {this.review = review;}
+
+    public void setRecommendation(String recommendation) {
+        this.recommendation = recommendation;
     }
 }

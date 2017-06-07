@@ -1,6 +1,7 @@
 package com.frasinu.iss.view.controllers;
 
 import com.frasinu.iss.persistance.model.BiddedProposal;
+import com.frasinu.iss.persistance.model.Result;
 import com.frasinu.iss.persistance.model.Reviewer;
 import com.frasinu.iss.service.BiddedProposalService;
 import com.frasinu.iss.service.ReviewerService;
@@ -149,7 +150,7 @@ public class BidsController extends BaseController {
             return;
         }
 
-        boolean added = reviewerService.assignPaperToReviewer(new AssignPaperToReviewerRequest(selectedReviewer.getId(), selectedPaper.getProposal().getId(), "IN PROGRESS"));
+        boolean added = reviewerService.assignPaperToReviewer(new AssignPaperToReviewerRequest(selectedReviewer.getId(), selectedPaper.getProposal().getId(), Result.BORDERLINE_ACCEPT.getName()));
         if (added)
             showDialog("Paper assigned to reviewer!", "Success!");
         else

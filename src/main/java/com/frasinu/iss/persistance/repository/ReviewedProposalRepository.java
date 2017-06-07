@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * Created by Andrei on 24-May-17.
  */
@@ -14,6 +16,9 @@ import org.springframework.transaction.annotation.Transactional;
 public interface ReviewedProposalRepository extends JpaRepository<ReviewedProposal, Integer> {
     @Query(value = "select * from reviewed_proposal rp where rp.reviewer = :id_reviewer and rp.proposal = :id_proposal" , nativeQuery = true)
     ReviewedProposal findByReviewerAndProposal(@Param("id_reviewer") Integer idReviewer, @Param("id_proposal") Integer idProposal);
+
+    @Query(value = "select * from reviewed_proposal rp where rp.reviewer = :id_reviewer " , nativeQuery = true)
+    List<ReviewedProposal> findAllReviewedProposals(@Param("id_reviewer") Integer idReviewer);
 
     @Transactional
     @Modifying
