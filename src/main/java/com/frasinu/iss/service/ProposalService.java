@@ -9,6 +9,7 @@ import com.frasinu.iss.persistance.repository.TopicRepository;
 import com.frasinu.iss.service.service_requests.proposal.CreateProposalRequest;
 import com.frasinu.iss.persistance.model.Proposal;
 import com.frasinu.iss.service.service_requests.proposal.FindByConferenceEdition;
+import com.frasinu.iss.validator.ProposalValidator;
 import com.frasinu.iss.service.service_requests.proposal.FindByIdRequest;
 import com.frasinu.iss.service.service_requests.proposal.UpdateProposalRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,8 @@ import java.util.stream.Collectors;
  */
 @Service
 public class ProposalService {
+    @Autowired
+    private ProposalValidator proposalValidator;
     @Autowired
     private ProposalRepository proposalRepository;
 
@@ -85,6 +88,11 @@ public class ProposalService {
                 .setConferenceEdition(createProposalRequest.getConferenceEdition())
                 .build();
 
+        try {
+            proposalValidator.validate(proposal);
+        } catch (InexistentException e) {
+            throw new InexistentException(e.getMessage());
+        }
         proposalRepository.save(proposal);
 
         List<Integer> authorsId = createProposalRequest.getAuthorsId();
