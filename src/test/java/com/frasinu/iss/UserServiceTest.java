@@ -34,7 +34,7 @@ public class UserServiceTest extends BaseTestClass {
         User u=userService.registerUser(new RegisterUserRequest("testName","test","1234"));
         User u2=userService.registerUser(new RegisterUserRequest("testName2","test2","1234"));
         addedUsers.add(u.getId(),u2.getId());
-        Conference conf = Conference.builder().setName("conf1").setWebpage("ceva.com").build();
+        Conference conf = Conference.builder().setName("testConf").setWebpage("ceva.com").build();
         editionService=new ConferenceEditionService();
         edition=editionService.addEdition(new CreateEditionRequest("ed",LocalDate.now(),LocalDate.now(),LocalDate.now(),LocalDate.now(),LocalDate.now(),LocalDate.now(),conf));
 
