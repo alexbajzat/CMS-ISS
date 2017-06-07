@@ -88,7 +88,7 @@ public class PresentaionScheduleController extends BaseController {
             public void changed(ObservableValue<? extends ConferenceSession> observable,
                                 ConferenceSession oldValue, ConferenceSession newValue) {
                 if(newValue.getPeriodOfDay().equals("AM")) {
-                    List<String> allHours = Stream.of("8:00:00,9:00:00,10:00:00,11:00:00,12:00:00".split(","))
+                    List<String> allHours = Stream.of("08:00:00,09:00:00,10:00:00,11:00:00,12:00:00".split(","))
                             .collect(Collectors.toList());
                     allHours.removeIf((String h) ->
                     {
