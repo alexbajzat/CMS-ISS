@@ -3,6 +3,7 @@ package com.frasinu.iss.view.controllers;
 import com.frasinu.iss.persistance.model.*;
 import com.frasinu.iss.service.*;
 import com.frasinu.iss.service.service_requests.author.CreateAuthorRequest;
+import com.frasinu.iss.service.service_requests.author.DeleteAuthorRequest;
 import com.frasinu.iss.service.service_requests.reviewer.CreateReviewerRequest;
 import com.frasinu.iss.service.service_requests.reviewer.FindByUserAndEditionIdRequest;
 import com.frasinu.iss.service.service_requests.steeringcommitteemember.CreateSteeringRequest;
@@ -128,6 +129,8 @@ public class AdminUsersController extends BaseController {
         rankCombo.setVisible(false);
         if(user!=null) {
             ConferenceEdition ed = (ConferenceEdition) editionsCombo.getSelectionModel().getSelectedItem();
+            if (ed==null)
+                return;
             Author a = authorService.findByUserIdEditionId(new FindByUserAndEditionIdRequest(user.getId(), ed.getId()));
             Reviewer pc = reviewerService.findByUserAndEditionId(new FindByUserAndEditionIdRequest(user.getId(), ed.getId()));
             SteeringCommitteeMember st=steeringService.findByUserAndConferenceEditionId(new FindByUserAndConferenceEditionIdRequest(user.getId(), ed.getId()));
@@ -201,7 +204,7 @@ public class AdminUsersController extends BaseController {
         if (pc==null && pcMember.isSelected())
             reviewerService.addReviewer(new CreateReviewerRequest("","","",user,ed));
         if (a!=null && !author.isSelected())
-            authorService.deleteAuthor(a.getId());
+            authorService.deleteAuthor(new DeleteAuthorRequest(a.getId()));
         if (pc!=null && !pcMember.isSelected())
             reviewerService.deleteReviewer(pc.getId());
         String rank=rankCombo.getSelectionModel().getSelectedItem();

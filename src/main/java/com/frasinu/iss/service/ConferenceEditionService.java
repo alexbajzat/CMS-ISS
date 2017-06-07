@@ -24,7 +24,7 @@ public class ConferenceEditionService implements IConferenceEditionService {
 
     @Override
     public ConferenceEdition findByConferenceEditionId(FindByConferenceEditionIdRequest findByConferenceEditionIdRequest){
-        return conferenceEditionRepository.findOne(findByConferenceEditionIdRequest.getConferenceEditionId());
+        return conferenceEditionRepository.findByConferenceEditionId(findByConferenceEditionIdRequest.getConferenceEditionId());
     }
     @Override
     public Conference findConferenceByConferenceEditionId(FindConferenceByConferenceEditionIdRequest findConferenceByConferenceEditionIdRequest){
@@ -36,6 +36,7 @@ public class ConferenceEditionService implements IConferenceEditionService {
 
     public void deleteEdition(DeleteEditionRequest deleteEditionRequest) {
         conferenceEditionRepository.delete(deleteEditionRequest.getEdition());
+
     }
 
     public ConferenceEdition addEdition(CreateEditionRequest createEditionRequest) {

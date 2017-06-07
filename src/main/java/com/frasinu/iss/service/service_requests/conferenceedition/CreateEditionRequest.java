@@ -34,27 +34,27 @@ public class CreateEditionRequest {
     }
 
     public LocalDate getConferenceStartDate() {
-        return conferenceStartDate;
+        return conferenceStartDate.plusDays(1);
     }
 
     public LocalDate getConferenceEndDate() {
-        return conferenceEndDate;
+        return conferenceEndDate.plusDays(1);
     }
 
     public LocalDate getAbstractsDeadline() {
-        return abstractsDeadline;
+        return abstractsDeadline.plusDays(1);
     }
 
     public LocalDate getFullPapersDeadline() {
-        return fullPapersDeadline;
+        return fullPapersDeadline.plusDays(1);
     }
 
     public LocalDate getBiddingDeadline() {
-        return biddingDeadline;
+        return biddingDeadline.plusDays(1);
     }
 
     public LocalDate getEvaluationDeadline() {
-        return evaluationDeadline;
+        return evaluationDeadline.plusDays(1);
     }
 
     public Conference getConference() {

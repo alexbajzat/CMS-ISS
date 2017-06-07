@@ -48,4 +48,5 @@ public class UserValidatorTest  extends BaseTestClass{
                 .setPassword("123")
                 .build());
     }
+
 }

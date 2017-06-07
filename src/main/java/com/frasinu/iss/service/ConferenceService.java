@@ -4,10 +4,7 @@ import com.frasinu.iss.exception.InexistentException;
 import com.frasinu.iss.persistance.model.Conference;
 import com.frasinu.iss.persistance.model.ConferenceEdition;
 import com.frasinu.iss.persistance.repository.ConferenceRepository;
-import com.frasinu.iss.service.service_requests.conference.CreateConferenceRequest;
-import com.frasinu.iss.service.service_requests.conference.DeleteConferenceRequest;
-import com.frasinu.iss.service.service_requests.conference.FindConferenceEditionsByConferenceIdRequest;
-import com.frasinu.iss.service.service_requests.conference.UpdateConferenceRequest;
+import com.frasinu.iss.service.service_requests.conference.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -55,5 +52,9 @@ public class ConferenceService {
     }
     public void deleteConference(DeleteConferenceRequest deleteConferenceRequest){
         conferenceRepository.delete(deleteConferenceRequest.getId());
+    }
+
+    public Conference getConferenceById(ConferenceByIdRequest conferenceByIdRequest) {
+        return conferenceRepository.findByConferenceId(conferenceByIdRequest.getId());
     }
 }

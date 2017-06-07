@@ -85,6 +85,7 @@ public class UserService {
         userValidator.validate(user);
 
         user = User.builder()
+                .setId(id)
                 .setName(name)
                 .setUsername(username)
                 .setPassword(encoder.encodePassword(password, null))
@@ -154,13 +155,13 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public Reviewer findIfUserIsPC(int idUser, int idEdition) {
-        User user=userRepository.findById(idUser);
+    public Reviewer findIfUserIsPC(FindIfUserIsPCRequest findIfUserIsPCRequest) {
+        User user=userRepository.findById(findIfUserIsPCRequest.getIdUser());
         for(Reviewer r:user.getReviewers()){
             System.out.println("/n");
-            System.out.println(idEdition);
+            System.out.println(findIfUserIsPCRequest.getIdEdition());
             System.out.println(r.getConferenceEdition().getId());
-            if(r.getConferenceEdition().getId()==idEdition)
+            if(r.getConferenceEdition().getId()==findIfUserIsPCRequest.getIdEdition())
                 return r;
         }
         return null;
