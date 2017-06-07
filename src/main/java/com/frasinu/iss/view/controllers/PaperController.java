@@ -1,5 +1,6 @@
 package com.frasinu.iss.view.controllers;
 
+import com.frasinu.iss.exception.InexistentException;
 import com.frasinu.iss.persistance.model.Author;
 import com.frasinu.iss.persistance.model.ConferenceEdition;
 import com.frasinu.iss.service.AuthorService;
@@ -20,6 +21,7 @@ import javafx.scene.control.TextField;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import javax.xml.bind.ValidationException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -102,7 +104,7 @@ public class PaperController extends BaseController {
         }
     }
 
-    public void upload(ActionEvent ac) {
+    public void upload(ActionEvent ac) throws InexistentException {
         if (titleTxt.getText().equals("")) {
             showDialog("Sorry, you have to give a title to your paper!", "Ooops!");
             return;
@@ -130,21 +132,25 @@ public class PaperController extends BaseController {
         ConferenceEdition conferenceEdition = conferenceEditionService
                 .findByConferenceEditionId(new FindByConferenceEditionIdRequest(editionId));
 
+        try {
+            proposalService.createProposalForAuthors(CreateProposalRequest
+                    .builder()
+                    .setAuthorsId(authorsId)
+                    .setAbstractPaper(abstractPaper)
+                    .setFullPaper(fullPaper)
+                    .setTitle(title)
+                    .setKeywords(keywordsList)
+                    .setTopics(topicsList)
+                    .setConferenceEdition(conferenceEdition)
+                    .build()
+            );
+            showDialog("Paper uploaded successfully!", "Uploaded");
+            resetFields();
+        }
+        catch (InexistentException e){
+            showDialog(e.getMessage(),"Ooops!");
+        }
 
-        proposalService.createProposalForAuthors(CreateProposalRequest
-                .builder()
-                .setAuthorsId(authorsId)
-                .setAbstractPaper(abstractPaper)
-                .setFullPaper(fullPaper)
-                .setTitle(title)
-                .setKeywords(keywordsList)
-                .setTopics(topicsList)
-                .setConferenceEdition(conferenceEdition)
-                .build()
-        );
-
-        showDialog("Paper uploaded successfully!", "Uploaded");
-        resetFields();
     }
 
     private void resetFields() {
