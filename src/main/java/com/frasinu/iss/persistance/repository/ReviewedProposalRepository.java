@@ -18,7 +18,12 @@ public interface ReviewedProposalRepository extends JpaRepository<ReviewedPropos
     ReviewedProposal findByReviewerAndProposal(@Param("id_reviewer") Integer idReviewer, @Param("id_proposal") Integer idProposal);
 
     @Query(value = "select * from reviewed_proposal rp where rp.reviewer = :id_reviewer " , nativeQuery = true)
-    List<ReviewedProposal> findAllReviewedProposals(@Param("id_reviewer") Integer idReviewer);
+    List<ReviewedProposal> findAllReviewedProposalsByReviewer(@Param("id_reviewer") Integer idReviewer);
+
+
+    @Query(value = "select * from reviewed_proposal rp where rp.proposal = :id_proposal " , nativeQuery = true)
+    List<ReviewedProposal> findAllReviewedProposalsByProposal(@Param("id_proposal") Integer idPaper);
+
 
     @Transactional
     @Modifying

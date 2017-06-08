@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -7,16 +10,16 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="background" stylesheets="@stylelayout.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="background" stylesheets="@stylelayout.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TableView layoutX="39.0" layoutY="19.0" prefHeight="327.0" prefWidth="337.0">
+      <TableView fx:id="tableReviewedProposal" layoutX="39.0" layoutY="19.0" prefHeight="327.0" prefWidth="313.0">
         <columns>
-          <TableColumn prefWidth="192.0" text="Reviewer name:" />
-          <TableColumn minWidth="0.0" prefWidth="219.0" text="Qualifier:" />
+          <TableColumn fx:id="reviewerColumn" prefWidth="194.0" text="Reviewer name:" />
+          <TableColumn fx:id="resultColumn" minWidth="0.0" prefWidth="114.0" text="Qualifier:" />
         </columns>
       </TableView>
       <Button layoutX="479.0" layoutY="298.0" mnemonicParsing="false" onAction="#back" text="Back" />
-      <TextArea layoutX="379.0" layoutY="66.0" prefHeight="200.0" prefWidth="200.0" />
-      <Label layoutX="379.0" layoutY="35.0" text="Recomandations" />
+      <TextArea fx:id="textRecommendation" editable="false" layoutX="379.0" layoutY="66.0" prefHeight="200.0" prefWidth="200.0" />
+      <Label layoutX="379.0" layoutY="35.0" text="Recommendations" />
    </children>
 </AnchorPane>

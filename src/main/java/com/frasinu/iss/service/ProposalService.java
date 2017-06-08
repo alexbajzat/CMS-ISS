@@ -2,16 +2,15 @@ package com.frasinu.iss.service;
 
 import com.frasinu.iss.exception.InexistentException;
 import com.frasinu.iss.persistance.model.Keyword;
+import com.frasinu.iss.persistance.model.ReviewedProposal;
 import com.frasinu.iss.persistance.model.Topic;
 import com.frasinu.iss.persistance.repository.KeywordRepository;
 import com.frasinu.iss.persistance.repository.ProposalRepository;
+import com.frasinu.iss.persistance.repository.ReviewedProposalRepository;
 import com.frasinu.iss.persistance.repository.TopicRepository;
-import com.frasinu.iss.service.service_requests.proposal.CreateProposalRequest;
+import com.frasinu.iss.service.service_requests.proposal.*;
 import com.frasinu.iss.persistance.model.Proposal;
-import com.frasinu.iss.service.service_requests.proposal.FindByConferenceEdition;
-import com.frasinu.iss.service.service_requests.proposal.FindByPaperIdRequest;
 import com.frasinu.iss.validator.ProposalValidator;
-import com.frasinu.iss.service.service_requests.proposal.UpdateProposalRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,12 +26,12 @@ public class ProposalService {
     private ProposalValidator proposalValidator;
     @Autowired
     private ProposalRepository proposalRepository;
-
     @Autowired
     private KeywordRepository keywordRepository;
-
     @Autowired
     private TopicRepository topicRepository;
+    @Autowired
+    private ReviewedProposalRepository reviewedProposalRepository;
 
     public List<Proposal> getAll() {
         return proposalRepository.findAll();
@@ -127,5 +126,9 @@ public class ProposalService {
 
     public Proposal findById(FindByPaperIdRequest findByIdRequest) {
         return proposalRepository.findOne(findByIdRequest.getId());
+    }
+
+    public List<ReviewedProposal> getAllReviewed(GetAllReviewedByProposalIdRequest getAllReviewedByProposalIdRequest) {
+        return reviewedProposalRepository.findAllReviewedProposalsByProposal(getAllReviewedByProposalIdRequest.getIdPaper());
     }
 }

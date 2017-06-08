@@ -65,9 +65,9 @@ public class MakeReviewController extends BaseController {
         boolean added = reviewerService.makeReview(
                 new MakeReviewRequest(idReviewer,idPaper,cbQualifier.getValue(),textRecommandation.getText()));
         if (added)
-            showDialog("Review was made!", "Success!");
+            showDialog("Thank you for review!", "Success!");
         else
-            showDialog("Sorry, seems like you can't review it.", "Error!");
+            showDialog("Sorry, seems like you can't review this.", "Error!");
     }
 
     public void back(ActionEvent ae)
